@@ -1,0 +1,2738 @@
+{
+"zoeng2daai6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.464
+},
+"meaning_zh": {
+"start": 6.336,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.208,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.08,
+"duration": 2.088
+},
+"meaning_ur": {
+"start": 12.168,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.04,
+"duration": 3.936
+},
+"extrans_ko": {
+"start": 17.976,
+"duration": 4.2
+},
+"extrans_ur": {
+"start": 22.176,
+"duration": 4.104
+}
+},
+"ngoi6po4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.872
+},
+"meaning_zh": {
+"start": 6.744,
+"duration": 2.328
+},
+"meaning_en": {
+"start": 9.072,
+"duration": 2.472
+},
+"meaning_ko": {
+"start": 11.544,
+"duration": 1.92
+},
+"meaning_ur": {
+"start": 13.464,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 15.336,
+"duration": 3.984
+},
+"extrans_ko": {
+"start": 19.32,
+"duration": 4.488
+},
+"extrans_ur": {
+"start": 23.808,
+"duration": 4.032
+}
+},
+"hei2cong4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.36
+},
+"meaning_zh": {
+"start": 5.232,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 7.512,
+"duration": 2.304
+},
+"meaning_ko": {
+"start": 9.816,
+"duration": 2.088
+},
+"meaning_ur": {
+"start": 11.904,
+"duration": 2.16
+},
+"extrans_en": {
+"start": 14.064,
+"duration": 3.528
+},
+"extrans_ko": {
+"start": 17.592,
+"duration": 4.176
+},
+"extrans_ur": {
+"start": 21.768,
+"duration": 4.2
+}
+},
+"pei1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.848
+},
+"meaning_zh": {
+"start": 6.72,
+"duration": 2.832
+},
+"meaning_en": {
+"start": 9.552,
+"duration": 2.736
+},
+"meaning_ko": {
+"start": 12.288,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 14.448,
+"duration": 2.136
+},
+"extrans_en": {
+"start": 16.584,
+"duration": 4.32
+},
+"extrans_ko": {
+"start": 20.904,
+"duration": 5.136
+},
+"extrans_ur": {
+"start": 26.04,
+"duration": 4.536
+}
+},
+"wai4gan1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 5.136
+},
+"meaning_zh": {
+"start": 7.008,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.88,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.752,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.624,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.496,
+"duration": 4.08
+},
+"extrans_ko": {
+"start": 18.576,
+"duration": 4.176
+},
+"extrans_ur": {
+"start": 22.752,
+"duration": 4.368
+}
+},
+"hong6lin2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.008
+},
+"meaning_zh": {
+"start": 5.88,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.752,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.624,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.496,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.368,
+"duration": 3.288
+},
+"extrans_ko": {
+"start": 16.656,
+"duration": 3.36
+},
+"extrans_ur": {
+"start": 20.016,
+"duration": 3.264
+}
+},
+"gou1sing1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 5.064
+},
+"meaning_zh": {
+"start": 6.936,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.808,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.68,
+"duration": 1.92
+},
+"meaning_ur": {
+"start": 12.6,
+"duration": 2.16
+},
+"extrans_en": {
+"start": 14.76,
+"duration": 4.056
+},
+"extrans_ko": {
+"start": 18.816,
+"duration": 5.4
+},
+"extrans_ur": {
+"start": 24.216,
+"duration": 4.536
+}
+},
+"wu4naau6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.792
+},
+"meaning_zh": {
+"start": 5.664,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.536,
+"duration": 1.992
+},
+"meaning_ko": {
+"start": 9.528,
+"duration": 2.352
+},
+"meaning_ur": {
+"start": 11.88,
+"duration": 2.112
+},
+"extrans_en": {
+"start": 13.992,
+"duration": 3.216
+},
+"extrans_ko": {
+"start": 17.208,
+"duration": 3.672
+},
+"extrans_ur": {
+"start": 20.88,
+"duration": 3.552
+}
+},
+"wun2faai3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.696
+},
+"meaning_zh": {
+"start": 5.568,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.44,
+"duration": 2.472
+},
+"meaning_ko": {
+"start": 9.912,
+"duration": 2.28
+},
+"meaning_ur": {
+"start": 12.192,
+"duration": 2.592
+},
+"extrans_en": {
+"start": 14.784,
+"duration": 4.008
+},
+"extrans_ko": {
+"start": 18.792,
+"duration": 4.584
+},
+"extrans_ur": {
+"start": 23.376,
+"duration": 4.704
+}
+},
+"zaak6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 5.832,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.704,
+"duration": 2.904
+},
+"meaning_ko": {
+"start": 10.608,
+"duration": 1.992
+},
+"meaning_ur": {
+"start": 12.6,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.472,
+"duration": 3.672
+},
+"extrans_ko": {
+"start": 18.144,
+"duration": 3.96
+},
+"extrans_ur": {
+"start": 22.104,
+"duration": 3.192
+}
+},
+"fui1can4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.144
+},
+"meaning_zh": {
+"start": 5.016,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.888,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 8.76,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 10.632,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 12.504,
+"duration": 2.952
+},
+"extrans_ko": {
+"start": 15.456,
+"duration": 3.216
+},
+"extrans_ur": {
+"start": 18.672,
+"duration": 3.24
+}
+},
+"ging1hei2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.512
+},
+"meaning_zh": {
+"start": 6.384,
+"duration": 2.304
+},
+"meaning_en": {
+"start": 8.688,
+"duration": 2.208
+},
+"meaning_ko": {
+"start": 10.896,
+"duration": 2.376
+},
+"meaning_ur": {
+"start": 13.272,
+"duration": 2.208
+},
+"extrans_en": {
+"start": 15.48,
+"duration": 3.816
+},
+"extrans_ko": {
+"start": 19.296,
+"duration": 4.512
+},
+"extrans_ur": {
+"start": 23.808,
+"duration": 4.032
+}
+},
+"cau2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 5.064
+},
+"meaning_zh": {
+"start": 6.936,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.808,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.68,
+"duration": 2.04
+},
+"meaning_ur": {
+"start": 12.72,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.592,
+"duration": 4.32
+},
+"extrans_ko": {
+"start": 18.912,
+"duration": 4.92
+},
+"extrans_ur": {
+"start": 23.832,
+"duration": 3.888
+}
+},
+"gwai3lai6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.32
+},
+"meaning_zh": {
+"start": 6.192,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 8.472,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.344,
+"duration": 2.688
+},
+"meaning_ur": {
+"start": 13.032,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.904,
+"duration": 3.528
+},
+"extrans_ko": {
+"start": 18.432,
+"duration": 4.584
+},
+"extrans_ur": {
+"start": 23.016,
+"duration": 4.176
+}
+},
+"waan6soeng2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.696
+},
+"meaning_zh": {
+"start": 5.568,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.44,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.312,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 11.544,
+"duration": 2.016
+},
+"extrans_en": {
+"start": 13.56,
+"duration": 3.168
+},
+"extrans_ko": {
+"start": 16.728,
+"duration": 4.368
+},
+"extrans_ur": {
+"start": 21.096,
+"duration": 3.936
+}
+},
+"liu4tin1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.68
+},
+"meaning_zh": {
+"start": 6.552,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.424,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.296,
+"duration": 2.28
+},
+"meaning_ur": {
+"start": 12.576,
+"duration": 2.04
+},
+"extrans_en": {
+"start": 14.616,
+"duration": 3.168
+},
+"extrans_ko": {
+"start": 17.784,
+"duration": 5.136
+},
+"extrans_ur": {
+"start": 22.92,
+"duration": 3.936
+}
+},
+"diu1ze6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.528
+},
+"meaning_zh": {
+"start": 5.4,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.272,
+"duration": 2.304
+},
+"meaning_ko": {
+"start": 9.576,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 11.76,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.632,
+"duration": 3.072
+},
+"extrans_ko": {
+"start": 16.704,
+"duration": 2.856
+},
+"extrans_ur": {
+"start": 19.56,
+"duration": 2.688
+}
+},
+"pin1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.44
+},
+"meaning_zh": {
+"start": 6.312,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.184,
+"duration": 2.352
+},
+"meaning_ko": {
+"start": 10.536,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.408,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.28,
+"duration": 3.12
+},
+"extrans_ko": {
+"start": 17.4,
+"duration": 3.528
+},
+"extrans_ur": {
+"start": 20.928,
+"duration": 3.672
+}
+},
+"geoi2baan6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.032
+},
+"meaning_zh": {
+"start": 5.904,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.776,
+"duration": 2.232
+},
+"meaning_ko": {
+"start": 10.008,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 12.168,
+"duration": 2.04
+},
+"extrans_en": {
+"start": 14.208,
+"duration": 3.504
+},
+"extrans_ko": {
+"start": 17.712,
+"duration": 3.288
+},
+"extrans_ur": {
+"start": 21.0,
+"duration": 4.056
+}
+},
+"kai2faat3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.68
+},
+"meaning_zh": {
+"start": 6.552,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.424,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.296,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 12.528,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.4,
+"duration": 3.552
+},
+"extrans_ko": {
+"start": 17.952,
+"duration": 4.584
+},
+"extrans_ur": {
+"start": 22.536,
+"duration": 3.792
+}
+},
+"fun1lok6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.816
+},
+"meaning_zh": {
+"start": 5.688,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.56,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.432,
+"duration": 1.896
+},
+"meaning_ur": {
+"start": 11.328,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.2,
+"duration": 2.928
+},
+"extrans_ko": {
+"start": 16.128,
+"duration": 3.312
+},
+"extrans_ur": {
+"start": 19.44,
+"duration": 3.072
+}
+},
+"cong3zok3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.392
+},
+"meaning_zh": {
+"start": 6.264,
+"duration": 2.136
+},
+"meaning_en": {
+"start": 8.4,
+"duration": 2.976
+},
+"meaning_ko": {
+"start": 11.376,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 13.608,
+"duration": 1.992
+},
+"extrans_en": {
+"start": 15.6,
+"duration": 3.216
+},
+"extrans_ko": {
+"start": 18.816,
+"duration": 4.44
+},
+"extrans_ur": {
+"start": 23.256,
+"duration": 3.504
+}
+},
+"jau1mei5": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.056
+},
+"meaning_zh": {
+"start": 5.928,
+"duration": 2.184
+},
+"meaning_en": {
+"start": 8.112,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.984,
+"duration": 2.688
+},
+"meaning_ur": {
+"start": 12.672,
+"duration": 2.544
+},
+"extrans_en": {
+"start": 15.216,
+"duration": 3.552
+},
+"extrans_ko": {
+"start": 18.768,
+"duration": 4.176
+},
+"extrans_ur": {
+"start": 22.944,
+"duration": 4.104
+}
+},
+"zyun1ging3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.0
+},
+"meaning_zh": {
+"start": 4.872,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.744,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 8.616,
+"duration": 2.208
+},
+"meaning_ur": {
+"start": 10.824,
+"duration": 2.112
+},
+"extrans_en": {
+"start": 12.936,
+"duration": 2.688
+},
+"extrans_ko": {
+"start": 15.624,
+"duration": 3.384
+},
+"extrans_ur": {
+"start": 19.008,
+"duration": 3.216
+}
+},
+"wan1zaap6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.576
+},
+"meaning_zh": {
+"start": 5.448,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.32,
+"duration": 2.808
+},
+"meaning_ko": {
+"start": 10.128,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 12.36,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.232,
+"duration": 3.912
+},
+"extrans_ko": {
+"start": 18.144,
+"duration": 4.32
+},
+"extrans_ur": {
+"start": 22.464,
+"duration": 3.672
+}
+},
+"jim4sou3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.84
+},
+"meaning_zh": {
+"start": 5.712,
+"duration": 2.304
+},
+"meaning_en": {
+"start": 8.016,
+"duration": 1.896
+},
+"meaning_ko": {
+"start": 9.912,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 12.096,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.968,
+"duration": 3.744
+},
+"extrans_ko": {
+"start": 17.712,
+"duration": 3.96
+},
+"extrans_ur": {
+"start": 21.672,
+"duration": 3.576
+}
+},
+"goi2kei4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 5.832,
+"duration": 1.896
+},
+"meaning_en": {
+"start": 7.728,
+"duration": 1.968
+},
+"meaning_ko": {
+"start": 9.696,
+"duration": 2.568
+},
+"meaning_ur": {
+"start": 12.264,
+"duration": 2.4
+},
+"extrans_en": {
+"start": 14.664,
+"duration": 3.384
+},
+"extrans_ko": {
+"start": 18.048,
+"duration": 3.72
+},
+"extrans_ur": {
+"start": 21.768,
+"duration": 4.104
+}
+},
+"nim6nim6jau5ci4": {
+"word": {
+"start": 0.0,
+"duration": 2.28
+},
+"example": {
+"start": 2.28,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 6.24,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 8.52,
+"duration": 2.376
+},
+"meaning_ko": {
+"start": 10.896,
+"duration": 2.448
+},
+"meaning_ur": {
+"start": 13.344,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 15.216,
+"duration": 3.768
+},
+"extrans_ko": {
+"start": 18.984,
+"duration": 3.864
+},
+"extrans_ur": {
+"start": 22.848,
+"duration": 3.816
+}
+},
+"gei3jik1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.176
+},
+"meaning_zh": {
+"start": 6.048,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.92,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.792,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.664,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.536,
+"duration": 3.072
+},
+"extrans_ko": {
+"start": 16.608,
+"duration": 4.32
+},
+"extrans_ur": {
+"start": 20.928,
+"duration": 3.12
+}
+},
+"cing2gaa3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.464
+},
+"meaning_zh": {
+"start": 6.336,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.208,
+"duration": 2.064
+},
+"meaning_ko": {
+"start": 10.272,
+"duration": 1.992
+},
+"meaning_ur": {
+"start": 12.264,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.136,
+"duration": 3.264
+},
+"extrans_ko": {
+"start": 17.4,
+"duration": 4.848
+},
+"extrans_ur": {
+"start": 22.248,
+"duration": 3.744
+}
+},
+"paau1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 2.904
+},
+"meaning_zh": {
+"start": 4.776,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.648,
+"duration": 2.16
+},
+"meaning_ko": {
+"start": 8.808,
+"duration": 2.064
+},
+"meaning_ur": {
+"start": 10.872,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 12.744,
+"duration": 2.592
+},
+"extrans_ko": {
+"start": 15.336,
+"duration": 3.264
+},
+"extrans_ur": {
+"start": 18.6,
+"duration": 2.784
+}
+},
+"haau1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 2.448
+},
+"meaning_zh": {
+"start": 4.32,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.192,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 8.064,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 10.224,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 12.096,
+"duration": 2.736
+},
+"extrans_ko": {
+"start": 14.832,
+"duration": 3.096
+},
+"extrans_ur": {
+"start": 17.928,
+"duration": 2.856
+}
+},
+"sau3joek6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 5.832,
+"duration": 2.184
+},
+"meaning_en": {
+"start": 8.016,
+"duration": 1.92
+},
+"meaning_ko": {
+"start": 9.936,
+"duration": 2.304
+},
+"meaning_ur": {
+"start": 12.24,
+"duration": 2.304
+},
+"extrans_en": {
+"start": 14.544,
+"duration": 3.432
+},
+"extrans_ko": {
+"start": 17.976,
+"duration": 4.056
+},
+"extrans_ur": {
+"start": 22.032,
+"duration": 3.816
+}
+},
+"jat1sing1bat1hoeng2": {
+"word": {
+"start": 0.0,
+"duration": 2.088
+},
+"example": {
+"start": 2.088,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 6.048,
+"duration": 2.592
+},
+"meaning_en": {
+"start": 8.64,
+"duration": 2.4
+},
+"meaning_ko": {
+"start": 11.04,
+"duration": 2.256
+},
+"meaning_ur": {
+"start": 13.296,
+"duration": 2.04
+},
+"extrans_en": {
+"start": 15.336,
+"duration": 3.408
+},
+"extrans_ko": {
+"start": 18.744,
+"duration": 3.936
+},
+"extrans_ur": {
+"start": 22.68,
+"duration": 3.624
+}
+},
+"tung1hung4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.768
+},
+"meaning_zh": {
+"start": 5.64,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.512,
+"duration": 1.944
+},
+"meaning_ko": {
+"start": 9.456,
+"duration": 2.04
+},
+"meaning_ur": {
+"start": 11.496,
+"duration": 2.088
+},
+"extrans_en": {
+"start": 13.584,
+"duration": 3.888
+},
+"extrans_ko": {
+"start": 17.472,
+"duration": 3.936
+},
+"extrans_ur": {
+"start": 21.408,
+"duration": 3.6
+}
+},
+"soeng1seon3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.384
+},
+"meaning_zh": {
+"start": 5.256,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.128,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.0,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 10.872,
+"duration": 2.016
+},
+"extrans_en": {
+"start": 12.888,
+"duration": 2.976
+},
+"extrans_ko": {
+"start": 15.864,
+"duration": 4.2
+},
+"extrans_ur": {
+"start": 20.064,
+"duration": 3.432
+}
+},
+"cung1zuk1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.344
+},
+"meaning_zh": {
+"start": 6.216,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.088,
+"duration": 1.896
+},
+"meaning_ko": {
+"start": 9.984,
+"duration": 2.208
+},
+"meaning_ur": {
+"start": 12.192,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.064,
+"duration": 4.992
+},
+"extrans_ko": {
+"start": 19.056,
+"duration": 4.704
+},
+"extrans_ur": {
+"start": 23.76,
+"duration": 4.872
+}
+},
+"mau6sing6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.176
+},
+"meaning_zh": {
+"start": 6.048,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.92,
+"duration": 2.328
+},
+"meaning_ko": {
+"start": 10.248,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 12.432,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.304,
+"duration": 3.312
+},
+"extrans_ko": {
+"start": 17.616,
+"duration": 3.936
+},
+"extrans_ur": {
+"start": 21.552,
+"duration": 3.648
+}
+},
+"sik1hap6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.408
+},
+"meaning_zh": {
+"start": 5.28,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.152,
+"duration": 2.376
+},
+"meaning_ko": {
+"start": 9.528,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.4,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.272,
+"duration": 3.552
+},
+"extrans_ko": {
+"start": 16.824,
+"duration": 3.432
+},
+"extrans_ur": {
+"start": 20.256,
+"duration": 3.12
+}
+},
+"zeoi6wui6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.128
+},
+"meaning_zh": {
+"start": 6.0,
+"duration": 2.256
+},
+"meaning_en": {
+"start": 8.256,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.128,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.0,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.872,
+"duration": 3.84
+},
+"extrans_ko": {
+"start": 17.712,
+"duration": 4.44
+},
+"extrans_ur": {
+"start": 22.152,
+"duration": 4.296
+}
+},
+"ming4mei6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.464
+},
+"meaning_zh": {
+"start": 6.336,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 8.616,
+"duration": 2.808
+},
+"meaning_ko": {
+"start": 11.424,
+"duration": 2.136
+},
+"meaning_ur": {
+"start": 13.56,
+"duration": 2.496
+},
+"extrans_en": {
+"start": 16.056,
+"duration": 4.464
+},
+"extrans_ko": {
+"start": 20.52,
+"duration": 4.512
+},
+"extrans_ur": {
+"start": 25.032,
+"duration": 4.584
+}
+},
+"ziu3jiu6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.432
+},
+"meaning_zh": {
+"start": 5.304,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.176,
+"duration": 2.232
+},
+"meaning_ko": {
+"start": 9.408,
+"duration": 2.256
+},
+"meaning_ur": {
+"start": 11.664,
+"duration": 2.016
+},
+"extrans_en": {
+"start": 13.68,
+"duration": 3.144
+},
+"extrans_ko": {
+"start": 16.824,
+"duration": 3.36
+},
+"extrans_ur": {
+"start": 20.184,
+"duration": 3.936
+}
+},
+"pin1pin1hei2mou5": {
+"word": {
+"start": 0.0,
+"duration": 2.184
+},
+"example": {
+"start": 2.184,
+"duration": 3.744
+},
+"meaning_zh": {
+"start": 5.928,
+"duration": 2.424
+},
+"meaning_en": {
+"start": 8.352,
+"duration": 2.184
+},
+"meaning_ko": {
+"start": 10.536,
+"duration": 2.808
+},
+"meaning_ur": {
+"start": 13.344,
+"duration": 2.712
+},
+"extrans_en": {
+"start": 16.056,
+"duration": 3.84
+},
+"extrans_ko": {
+"start": 19.896,
+"duration": 4.224
+},
+"extrans_ur": {
+"start": 24.12,
+"duration": 4.272
+}
+},
+"sik1coi2baan1laan4": {
+"word": {
+"start": 0.0,
+"duration": 2.256
+},
+"example": {
+"start": 2.256,
+"duration": 3.864
+},
+"meaning_zh": {
+"start": 6.12,
+"duration": 2.184
+},
+"meaning_en": {
+"start": 8.304,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.176,
+"duration": 2.544
+},
+"meaning_ur": {
+"start": 12.72,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.592,
+"duration": 3.84
+},
+"extrans_ko": {
+"start": 18.432,
+"duration": 4.368
+},
+"extrans_ur": {
+"start": 22.8,
+"duration": 3.408
+}
+},
+"kap1syun2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.672
+},
+"meaning_zh": {
+"start": 5.544,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.416,
+"duration": 2.496
+},
+"meaning_ko": {
+"start": 9.912,
+"duration": 2.016
+},
+"meaning_ur": {
+"start": 11.928,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.8,
+"duration": 3.216
+},
+"extrans_ko": {
+"start": 17.016,
+"duration": 3.336
+},
+"extrans_ur": {
+"start": 20.352,
+"duration": 3.408
+}
+},
+"gun1soeng2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.504
+},
+"meaning_zh": {
+"start": 5.376,
+"duration": 2.304
+},
+"meaning_en": {
+"start": 7.68,
+"duration": 2.112
+},
+"meaning_ko": {
+"start": 9.792,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 12.024,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.896,
+"duration": 4.104
+},
+"extrans_ko": {
+"start": 18.0,
+"duration": 4.68
+},
+"extrans_ur": {
+"start": 22.68,
+"duration": 3.576
+}
+},
+"jan3zoeng6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.608
+},
+"meaning_zh": {
+"start": 6.48,
+"duration": 2.256
+},
+"meaning_en": {
+"start": 8.736,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.608,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.48,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.352,
+"duration": 3.288
+},
+"extrans_ko": {
+"start": 17.64,
+"duration": 4.2
+},
+"extrans_ur": {
+"start": 21.84,
+"duration": 3.336
+}
+},
+"naan4mong4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.432
+},
+"meaning_zh": {
+"start": 5.304,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.176,
+"duration": 2.04
+},
+"meaning_ko": {
+"start": 9.216,
+"duration": 2.208
+},
+"meaning_ur": {
+"start": 11.424,
+"duration": 2.328
+},
+"extrans_en": {
+"start": 13.752,
+"duration": 2.952
+},
+"extrans_ko": {
+"start": 16.704,
+"duration": 3.432
+},
+"extrans_ur": {
+"start": 20.136,
+"duration": 3.168
+}
+},
+"wo4haai4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.416
+},
+"meaning_zh": {
+"start": 6.288,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.16,
+"duration": 1.992
+},
+"meaning_ko": {
+"start": 10.152,
+"duration": 2.016
+},
+"meaning_ur": {
+"start": 12.168,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.04,
+"duration": 4.224
+},
+"extrans_ko": {
+"start": 18.264,
+"duration": 4.824
+},
+"extrans_ur": {
+"start": 23.088,
+"duration": 4.008
+}
+},
+"jim6lai6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.84
+},
+"meaning_zh": {
+"start": 5.712,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 7.992,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.864,
+"duration": 2.088
+},
+"meaning_ur": {
+"start": 11.952,
+"duration": 2.4
+},
+"extrans_en": {
+"start": 14.352,
+"duration": 3.696
+},
+"extrans_ko": {
+"start": 18.048,
+"duration": 3.696
+},
+"extrans_ur": {
+"start": 21.744,
+"duration": 3.72
+}
+},
+"zi1zoeng2": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.488
+},
+"meaning_zh": {
+"start": 6.36,
+"duration": 2.28
+},
+"meaning_en": {
+"start": 8.64,
+"duration": 3.024
+},
+"meaning_ko": {
+"start": 11.664,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 13.824,
+"duration": 1.92
+},
+"extrans_en": {
+"start": 15.744,
+"duration": 3.24
+},
+"extrans_ko": {
+"start": 18.984,
+"duration": 4.584
+},
+"extrans_ur": {
+"start": 23.568,
+"duration": 4.032
+}
+},
+"wai3laam4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.216
+},
+"meaning_zh": {
+"start": 5.088,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.96,
+"duration": 1.944
+},
+"meaning_ko": {
+"start": 8.904,
+"duration": 2.016
+},
+"meaning_ur": {
+"start": 10.92,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 12.792,
+"duration": 3.24
+},
+"extrans_ko": {
+"start": 16.032,
+"duration": 3.168
+},
+"extrans_ur": {
+"start": 19.2,
+"duration": 2.808
+}
+},
+"king1sou3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.464
+},
+"meaning_zh": {
+"start": 6.336,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.208,
+"duration": 2.784
+},
+"meaning_ko": {
+"start": 10.992,
+"duration": 1.896
+},
+"meaning_ur": {
+"start": 12.888,
+"duration": 2.208
+},
+"extrans_en": {
+"start": 15.096,
+"duration": 3.432
+},
+"extrans_ko": {
+"start": 18.528,
+"duration": 4.656
+},
+"extrans_ur": {
+"start": 23.184,
+"duration": 4.368
+}
+},
+"sou3zou6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.84
+},
+"meaning_zh": {
+"start": 5.712,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.584,
+"duration": 2.16
+},
+"meaning_ko": {
+"start": 9.744,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.616,
+"duration": 1.944
+},
+"extrans_en": {
+"start": 13.56,
+"duration": 3.96
+},
+"extrans_ko": {
+"start": 17.52,
+"duration": 3.672
+},
+"extrans_ur": {
+"start": 21.192,
+"duration": 3.624
+}
+},
+"jing4zoeng6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.728
+},
+"meaning_zh": {
+"start": 6.6,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.472,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.344,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.216,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.088,
+"duration": 4.536
+},
+"extrans_ko": {
+"start": 18.624,
+"duration": 5.472
+},
+"extrans_ur": {
+"start": 24.096,
+"duration": 3.912
+}
+},
+"jiu6muk6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.176
+},
+"meaning_zh": {
+"start": 6.048,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.92,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.792,
+"duration": 2.112
+},
+"meaning_ur": {
+"start": 11.904,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.776,
+"duration": 4.368
+},
+"extrans_ko": {
+"start": 18.144,
+"duration": 3.816
+},
+"extrans_ur": {
+"start": 21.96,
+"duration": 3.984
+}
+},
+"hyun3laan6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.984
+},
+"meaning_zh": {
+"start": 5.856,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.728,
+"duration": 2.4
+},
+"meaning_ko": {
+"start": 10.128,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 12.312,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 14.184,
+"duration": 4.296
+},
+"extrans_ko": {
+"start": 18.48,
+"duration": 3.888
+},
+"extrans_ur": {
+"start": 22.368,
+"duration": 4.32
+}
+},
+"dim2zeoi6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.224
+},
+"meaning_zh": {
+"start": 6.096,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.968,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.84,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 12.0,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.872,
+"duration": 3.552
+},
+"extrans_ko": {
+"start": 17.424,
+"duration": 4.392
+},
+"extrans_ur": {
+"start": 21.816,
+"duration": 3.864
+}
+},
+"cat1hak1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 2.88
+},
+"meaning_zh": {
+"start": 4.752,
+"duration": 2.16
+},
+"meaning_en": {
+"start": 6.912,
+"duration": 1.92
+},
+"meaning_ko": {
+"start": 8.832,
+"duration": 2.16
+},
+"meaning_ur": {
+"start": 10.992,
+"duration": 1.92
+},
+"extrans_en": {
+"start": 12.912,
+"duration": 3.072
+},
+"extrans_ko": {
+"start": 15.984,
+"duration": 3.096
+},
+"extrans_ur": {
+"start": 19.08,
+"duration": 3.216
+}
+},
+"saan3faat3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.432
+},
+"meaning_zh": {
+"start": 5.304,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.176,
+"duration": 2.304
+},
+"meaning_ko": {
+"start": 9.48,
+"duration": 2.112
+},
+"meaning_ur": {
+"start": 11.592,
+"duration": 2.112
+},
+"extrans_en": {
+"start": 13.704,
+"duration": 3.432
+},
+"extrans_ko": {
+"start": 17.136,
+"duration": 3.216
+},
+"extrans_ur": {
+"start": 20.352,
+"duration": 3.144
+}
+},
+"fun1fut3": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.744
+},
+"meaning_zh": {
+"start": 5.616,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.488,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.36,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.232,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.104,
+"duration": 3.312
+},
+"extrans_ko": {
+"start": 16.416,
+"duration": 3.504
+},
+"extrans_ur": {
+"start": 19.92,
+"duration": 3.72
+}
+},
+"caang1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.384
+},
+"meaning_zh": {
+"start": 5.256,
+"duration": 2.16
+},
+"meaning_en": {
+"start": 7.416,
+"duration": 2.112
+},
+"meaning_ko": {
+"start": 9.528,
+"duration": 2.568
+},
+"meaning_ur": {
+"start": 12.096,
+"duration": 2.16
+},
+"extrans_en": {
+"start": 14.256,
+"duration": 3.888
+},
+"extrans_ko": {
+"start": 18.144,
+"duration": 4.272
+},
+"extrans_ur": {
+"start": 22.416,
+"duration": 4.464
+}
+},
+"seon6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.512
+},
+"meaning_zh": {
+"start": 6.384,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.256,
+"duration": 2.568
+},
+"meaning_ko": {
+"start": 10.824,
+"duration": 2.04
+},
+"meaning_ur": {
+"start": 12.864,
+"duration": 2.088
+},
+"extrans_en": {
+"start": 14.952,
+"duration": 4.368
+},
+"extrans_ko": {
+"start": 19.32,
+"duration": 4.584
+},
+"extrans_ur": {
+"start": 23.904,
+"duration": 4.536
+}
+},
+"mou4nang4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 5.472
+},
+"meaning_zh": {
+"start": 7.344,
+"duration": 1.968
+},
+"meaning_en": {
+"start": 9.312,
+"duration": 1.92
+},
+"meaning_ko": {
+"start": 11.232,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 13.416,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 15.288,
+"duration": 4.44
+},
+"extrans_ko": {
+"start": 19.728,
+"duration": 5.616
+},
+"extrans_ur": {
+"start": 25.344,
+"duration": 5.664
+}
+},
+"laan5do6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.912
+},
+"meaning_zh": {
+"start": 5.784,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.656,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.528,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 11.4,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.272,
+"duration": 3.408
+},
+"extrans_ko": {
+"start": 16.68,
+"duration": 3.84
+},
+"extrans_ur": {
+"start": 20.52,
+"duration": 3.576
+}
+},
+"jat1sing1bat1hang1": {
+"word": {
+"start": 0.0,
+"duration": 2.112
+},
+"example": {
+"start": 2.112,
+"duration": 4.32
+},
+"meaning_zh": {
+"start": 6.432,
+"duration": 2.472
+},
+"meaning_en": {
+"start": 8.904,
+"duration": 2.4
+},
+"meaning_ko": {
+"start": 11.304,
+"duration": 2.544
+},
+"meaning_ur": {
+"start": 13.848,
+"duration": 2.352
+},
+"extrans_en": {
+"start": 16.2,
+"duration": 3.768
+},
+"extrans_ko": {
+"start": 19.968,
+"duration": 4.32
+},
+"extrans_ur": {
+"start": 24.288,
+"duration": 4.296
+}
+},
+"faan2hong4": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.696
+},
+"meaning_zh": {
+"start": 5.568,
+"duration": 2.208
+},
+"meaning_en": {
+"start": 7.776,
+"duration": 2.976
+},
+"meaning_ko": {
+"start": 10.752,
+"duration": 2.232
+},
+"meaning_ur": {
+"start": 12.984,
+"duration": 2.328
+},
+"extrans_en": {
+"start": 15.312,
+"duration": 3.768
+},
+"extrans_ko": {
+"start": 19.08,
+"duration": 3.72
+},
+"extrans_ur": {
+"start": 22.8,
+"duration": 4.464
+}
+},
+"gaai2hoi1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 2.976
+},
+"meaning_zh": {
+"start": 4.848,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.72,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 8.592,
+"duration": 1.968
+},
+"meaning_ur": {
+"start": 10.56,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 12.432,
+"duration": 3.216
+},
+"extrans_ko": {
+"start": 15.648,
+"duration": 3.336
+},
+"extrans_ur": {
+"start": 18.984,
+"duration": 3.504
+}
+},
+"waa1dung6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.0
+},
+"meaning_zh": {
+"start": 4.872,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 6.744,
+"duration": 2.304
+},
+"meaning_ko": {
+"start": 9.048,
+"duration": 1.992
+},
+"meaning_ur": {
+"start": 11.04,
+"duration": 2.04
+},
+"extrans_en": {
+"start": 13.08,
+"duration": 3.24
+},
+"extrans_ko": {
+"start": 16.32,
+"duration": 3.024
+},
+"extrans_ur": {
+"start": 19.344,
+"duration": 3.552
+}
+},
+"ziu1gap1": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 4.056
+},
+"meaning_zh": {
+"start": 5.928,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.8,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 9.672,
+"duration": 2.112
+},
+"meaning_ur": {
+"start": 11.784,
+"duration": 1.872
+},
+"extrans_en": {
+"start": 13.656,
+"duration": 3.528
+},
+"extrans_ko": {
+"start": 17.184,
+"duration": 4.728
+},
+"extrans_ur": {
+"start": 21.912,
+"duration": 4.752
+}
+},
+"bun2si6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 5.184
+},
+"meaning_zh": {
+"start": 7.056,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 8.928,
+"duration": 1.872
+},
+"meaning_ko": {
+"start": 10.8,
+"duration": 1.872
+},
+"meaning_ur": {
+"start": 12.672,
+"duration": 1.896
+},
+"extrans_en": {
+"start": 14.568,
+"duration": 4.224
+},
+"extrans_ko": {
+"start": 18.792,
+"duration": 5.208
+},
+"extrans_ur": {
+"start": 24.0,
+"duration": 5.064
+}
+},
+"jik6": {
+"word": {
+"start": 0.0,
+"duration": 1.872
+},
+"example": {
+"start": 1.872,
+"duration": 3.96
+},
+"meaning_zh": {
+"start": 5.832,
+"duration": 1.872
+},
+"meaning_en": {
+"start": 7.704,
+"duration": 2.544
+},
+"meaning_ko": {
+"start": 10.248,
+"duration": 2.184
+},
+"meaning_ur": {
+"start": 12.432,
+"duration": 2.472
+},
+"extrans_en": {
+"start": 14.904,
+"duration": 4.176
+},
+"extrans_ko": {
+"start": 19.08,
+"duration": 4.224
+},
+"extrans_ur": {
+"start": 23.304,
+"duration": 4.8
+}
+}
+}
