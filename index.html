@@ -1,0 +1,1615 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>詞語温習室</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
+<style>
+  html { color-scheme: light; box-sizing: border-box; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  :root {
+    --paper: #FAF6EC;
+    --surface: #FFFFFF;
+    --paper-line: #DCD3BE;
+    --ink: #2B2A28;
+    --ink-soft: #6E6A5F;
+    --ink-faint: #A39D8C;
+    --brand: #2F4C7A;
+    --brand-strong: #223A5E;
+    --brand-soft: #E4ECF7;
+    --accent: #B8433A;
+    --accent-soft: #F6E4DF;
+    --success: #3F8F5F;
+    --mark-red: #D6362B;
+    --shadow: 0 10px 30px -12px rgba(43, 42, 40, 0.28);
+    font-family: "Noto Sans TC", "Noto Serif TC", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1E1C18;
+      --surface: #2A2721;
+      --paper-line: #3C382E;
+      --ink: #EDE8DC;
+      --ink-soft: #B4AC9C;
+      --ink-faint: #766F5F;
+      --brand: #8CADE0;
+      --brand-strong: #AFC7EC;
+      --brand-soft: #2A3B54;
+      --accent: #E28B80;
+      --accent-soft: #40302B;
+      --success: #6FBE8C;
+      --mark-red: #FF7A6E;
+      --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1E1C18;
+    --surface: #2A2721;
+    --paper-line: #3C382E;
+    --ink: #EDE8DC;
+    --ink-soft: #B4AC9C;
+    --ink-faint: #766F5F;
+    --brand: #8CADE0;
+    --brand-strong: #AFC7EC;
+    --brand-soft: #2A3B54;
+    --accent: #E28B80;
+    --accent-soft: #40302B;
+    --success: #6FBE8C;
+    --mark-red: #FF7A6E;
+    --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", sans-serif;
+    line-height: 1.5;
+  }
+  h1, h2, h3 { font-family: "Noto Serif TC", serif; margin: 0; text-wrap: balance; }
+  button { font-family: inherit; }
+  [hidden] { display: none !important; }
+
+  .app {
+    max-width: 880px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 20px 56px;
+  }
+
+  .topbar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 16px;
+    margin-inline: -16px;
+    margin-bottom: 20px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .topbar-titles { flex: 1 1 auto; min-width: 0; }
+  .lang-switch { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+  .lang-btn {
+    border: 1px solid var(--paper-line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .lang-btn:hover { border-color: var(--brand); color: var(--brand-strong); }
+  .lang-btn[aria-pressed="true"] {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--surface);
+  }
+  .lang-btn[lang="ur"] { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; font-size: 14px; }
+  .topbar .mark {
+    width: 34px; height: 34px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: var(--surface);
+    display: grid; place-items: center;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 17px;
+    flex: none;
+    box-shadow: var(--shadow);
+  }
+  .topbar h1 { font-size: 19px; font-weight: 700; color: var(--ink); }
+  .topbar .tagline { font-size: 12px; color: var(--ink-soft); }
+
+  /* ---- Accordion steps ---- */
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--paper-line);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  .step[data-state="done"] { border-color: var(--paper-line); }
+  .step[data-state="active"] { border-color: var(--brand); box-shadow: var(--shadow); }
+  .step[data-state="locked"] { opacity: .55; }
+
+  .step-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .step[data-state="locked"] .step-head { cursor: default; }
+  .step-badge {
+    flex: none;
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 13px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    background-image:
+      linear-gradient(to right, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px)),
+      linear-gradient(to bottom, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .step[data-state="done"] .step-badge { background: var(--success); color: var(--surface); background-image:none; }
+  .step-titles { flex: 1; min-width: 0; }
+  .step-eyebrow { font-size: 11px; letter-spacing: .06em; color: var(--ink-faint); text-transform: uppercase; }
+  .step-value { font-size: 15px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .step-value.placeholder { color: var(--ink-faint); font-weight: 500; }
+  .step-chevron { flex: none; color: var(--ink-faint); font-size: 13px; }
+
+  .step-body { padding: 4px 16px 18px; }
+  .option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  .option-btn {
+    border: 1px solid var(--paper-line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 12px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  }
+  .option-btn:hover { background: var(--brand-soft); border-color: var(--brand); transform: translateY(-1px); }
+  .option-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  /* ---- Book cover cards ---- */
+  .option-grid--books {
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    gap: 14px;
+  }
+  .book-card {
+    border: 1px solid var(--paper-line);
+    background: var(--surface);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    display: flex; flex-direction: column;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .book-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--brand); }
+  .book-card:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .book-cover {
+    aspect-ratio: 3 / 4;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .book-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .book-fallback {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    padding: 14px;
+    text-align: center;
+    background: linear-gradient(160deg, var(--brand), var(--brand-strong));
+    color: var(--paper);
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .book-title {
+    padding: 8px 10px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ---- Word grid (田字格 tiles) ---- */
+  .lesson-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 22px 0 12px;
+  }
+  .lesson-heading h2 { font-size: 17px; color: var(--ink-soft); font-weight: 600; }
+  .lesson-count { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-faint); }
+
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 14px;
+  }
+  .word-tile {
+    background: var(--surface);
+    border: 1px solid var(--paper-line);
+    border-radius: 10px;
+    padding: 14px 10px 12px;
+    cursor: pointer;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .word-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--brand); }
+  .word-tile:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .word-tile .glyph {
+    width: 74px; height: 74px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(to right, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px)),
+      linear-gradient(to bottom, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .word-tile .en {
+    font-size: 12px;
+    color: var(--ink-soft);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;
+  }
+  .word-tile .en[dir="rtl"] {
+    font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+    font-size: 13px;
+  }
+
+  .empty-note {
+    font-size: 13px;
+    color: var(--ink-faint);
+    padding: 6px 2px 2px;
+  }
+
+  /* ---- Modal ---- */
+  .scrim {
+    position: fixed; inset: 0;
+    background: rgba(20, 18, 14, 0.5);
+    display: flex; align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+    padding: 0;
+  }
+  @media (min-width: 640px) {
+    .scrim { align-items: center; padding: 20px; }
+  }
+  .modal {
+    --img-h: 160px;
+    --gap-panel: 8px;
+    --ex-pad: 9px 11px;
+    --ex-font: 14px;
+    --ex-font-en: 13px;
+    --stroke-mt: 10px;
+    --info-mt: 12px;
+    --rtl-lh: 2;
+    background: var(--surface);
+    width: 100%;
+    max-width: 620px;
+    max-height: 92vh;
+    max-height: 92dvh;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    box-shadow: var(--shadow);
+    position: relative;
+    padding: 16px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  @media (min-width: 640px) and (min-height: 480px) {
+    .modal { --img-h: 190px; border-radius: 16px; max-height: 88vh; max-height: 88dvh; padding: 22px 22px 24px; }
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--paper-line);
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-size: 16px;
+    cursor: pointer;
+    display: grid; place-items: center;
+  }
+  .modal-close:hover { color: var(--ink); border-color: var(--brand); }
+
+  .word-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-right: 40px;
+  }
+  .word-title { font-size: 22px; font-weight: 700; }
+  @media (min-width: 640px) {
+    .word-title { font-size: 26px; }
+  }
+  .word-subtitle {
+    margin-top: 2px;
+    font-size: 13px;
+  }
+  .word-subtitle.jyutping { font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); }
+  .say-btn {
+    flex: none;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    font-size: 16px;
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: background .12s ease, transform .12s ease;
+  }
+  .say-btn:hover { background: var(--brand); color: var(--surface); }
+  .say-btn:active { transform: scale(.92); }
+  .say-status {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 3px;
+  }
+
+  .stroke-panel { margin-top: var(--stroke-mt); }
+  .stroke-boxes { display: flex; flex-wrap: nowrap; justify-content: center; gap: 8px; }
+  .char-box { display: flex; flex-direction: column; align-items: center; gap: 3px; flex: none; }
+  .char-canvas {
+    width: 72px; height: 72px;
+    border-radius: 8px;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(to right, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px)),
+      linear-gradient(to bottom, transparent calc(50% - 1px), var(--paper-line) calc(50% - 1px), var(--paper-line) calc(50% + 1px), transparent calc(50% + 1px));
+    border: 1px solid var(--paper-line);
+  }
+  .char-syll {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .char-syll .tone { color: var(--accent); font-weight: 600; }
+
+  .replay-btn {
+    margin-top: 8px;
+    border: 1px solid var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .replay-btn:hover { background: var(--brand); color: var(--surface); }
+
+  .info-panel { margin-top: var(--info-mt); display: flex; flex-direction: column; gap: var(--gap-panel); }
+  .info-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .info-label {
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-faint); width: 60px; flex: none;
+  }
+  .info-value { font-size: 15px; font-weight: 500; }
+  .jyutping .tone { color: var(--accent); font-weight: 600; }
+  .pos-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand-strong);
+    background: var(--brand-soft);
+    border-radius: 999px;
+    padding: 2px 10px;
+    flex: none;
+  }
+
+  .example {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    border-radius: 8px;
+    padding: var(--ex-pad);
+  }
+  .example--en { background: var(--brand-soft); }
+  .example-text {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: var(--ex-font);
+    color: var(--ink);
+    padding-top: 1px;
+  }
+  .example-text--en {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: var(--ex-font-en);
+  }
+  .example-text--en mark { font-style: normal; }
+  .example-text mark {
+    background: none;
+    color: var(--mark-red);
+    font-weight: 700;
+    padding: 0;
+  }
+  #modal-english[dir="rtl"],
+  .example-text--en[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+    font-style: normal;
+    font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+    line-height: var(--rtl-lh);
+  }
+  .info-value[dir="rtl"] { font-size: 1.05em; }
+  .say-btn--sm { width: 28px; height: 28px; font-size: 12px; }
+
+  .image-wrap {
+    margin-top: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--paper-line);
+    background: var(--paper);
+    height: var(--img-h);
+    display: grid; place-items: center;
+  }
+  .image-wrap img, .image-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .image-fallback {
+    color: var(--ink-faint);
+    font-size: 11px;
+    text-align: center;
+    padding: 6px;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .option-btn, .word-tile, * { transition: none !important; }
+  }
+
+  /* ---- 錄音載入中嘅全螢幕遮罩：擋晒所有掣，等用戶知道仲未播到 ---- */
+  .audio-loading-overlay {
+    position: fixed; inset: 0;
+    background: rgba(20, 18, 14, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+    cursor: wait;
+  }
+  .audio-loading-overlay .spinner {
+    width: 46px; height: 46px;
+    border: 4px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: audio-spin 0.8s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .audio-loading-overlay .spinner { animation-duration: 1.6s; }
+  }
+  @keyframes audio-spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="topbar">
+    <div class="mark">語</div>
+    <div class="topbar-titles">
+      <h1>詞語温習室</h1>
+      <div class="tagline">揀年級 → 揀課本 → 揀課次 → 溫習詞語</div>
+    </div>
+    <div class="lang-switch" id="lang-switch" role="group" aria-label="揀意思／例句翻譯語言">
+      <button type="button" class="lang-btn" data-lang="zh">中文</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ko">한국어</button>
+      <button type="button" class="lang-btn" data-lang="ur" lang="ur">اردو</button>
+    </div>
+  </header>
+
+  <section class="step" id="step-grade" data-state="active">
+    <button class="step-head" id="head-grade" aria-expanded="true">
+      <span class="step-badge">1</span>
+      <span class="step-titles">
+        <span class="step-eyebrow">Step 1 · 年級</span>
+        <span class="step-value placeholder" id="value-grade">請選擇你的年級</span>
+      </span>
+      <span class="step-chevron" id="chevron-grade">▾</span>
+    </button>
+    <div class="step-body" id="body-grade">
+      <div class="option-grid" id="grid-grade"></div>
+    </div>
+  </section>
+
+  <section class="step" id="step-book" data-state="locked">
+    <button class="step-head" id="head-book" aria-expanded="false" disabled>
+      <span class="step-badge">2</span>
+      <span class="step-titles">
+        <span class="step-eyebrow">Step 2 · 課本</span>
+        <span class="step-value placeholder" id="value-book">請先選擇年級</span>
+      </span>
+      <span class="step-chevron" id="chevron-book">▾</span>
+    </button>
+    <div class="step-body" id="body-book" hidden>
+      <div class="option-grid option-grid--books" id="grid-book"></div>
+    </div>
+  </section>
+
+  <section class="step" id="step-lesson" data-state="locked">
+    <button class="step-head" id="head-lesson" aria-expanded="false" disabled>
+      <span class="step-badge">3</span>
+      <span class="step-titles">
+        <span class="step-eyebrow">Step 3 · 課次</span>
+        <span class="step-value placeholder" id="value-lesson">請先選擇課本</span>
+      </span>
+      <span class="step-chevron" id="chevron-lesson">▾</span>
+    </button>
+    <div class="step-body" id="body-lesson" hidden>
+      <div class="option-grid" id="grid-lesson"></div>
+    </div>
+  </section>
+
+  <div id="words-wrap" hidden>
+    <div class="lesson-heading">
+      <h2 id="lesson-heading-text"></h2>
+      <span class="lesson-count" id="word-count"></span>
+    </div>
+    <div class="word-grid" id="word-grid"></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-word-title">
+    <button class="modal-close" id="modal-close" aria-label="關閉">✕</button>
+    <div class="word-title-row">
+      <h3 class="word-title" id="modal-word-title"></h3>
+      <span class="pos-badge" id="modal-pos" hidden></span>
+      <button class="say-btn" id="say-btn" type="button" aria-label="播放讀音">🔊</button>
+    </div>
+    <div class="word-subtitle jyutping" id="modal-jyutping"></div>
+    <span class="say-status" id="say-status" hidden></span>
+
+    <div class="stroke-panel" id="stroke-panel">
+      <div class="stroke-boxes" id="stroke-boxes"></div>
+      <button class="replay-btn" id="replay-btn">🔁 重播筆順</button>
+    </div>
+
+    <div class="info-panel">
+      <div class="info-row">
+        <span class="info-label" id="label-english">英文意思</span>
+        <span class="info-value" id="modal-english"></span>
+        <button class="say-btn say-btn--sm" id="say-english-btn" type="button" aria-label="播放讀音">🔊</button>
+      </div>
+      <span class="say-status" id="say-status-english" hidden></span>
+
+      <div class="example">
+        <p class="example-text" id="modal-example"></p>
+        <button class="say-btn say-btn--sm" id="say-example-btn" type="button" aria-label="播放例句讀音">🔊</button>
+      </div>
+      <span class="say-status" id="say-status-example" hidden></span>
+
+      <div class="example example--en" id="example-en-wrap" hidden>
+        <p class="example-text example-text--en" id="modal-example-en"></p>
+        <button class="say-btn say-btn--sm" id="say-example-en-btn" type="button" aria-label="播放例句英文翻譯讀音">🔊</button>
+      </div>
+
+      <div class="image-wrap" id="modal-image-wrap">
+        <img id="modal-image" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="audio-loading-overlay" id="audio-loading-overlay" hidden aria-live="polite" aria-label="錄音載入緊">
+  <div class="spinner" aria-hidden="true"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var DATA = null;
+  var STROKES = null;
+  var audioManifest = {};
+  var state = { grade: null, book: null, lesson: null };
+  var lastFocused = null;
+  var activeWriters = [];
+
+  function el(id) { return document.getElementById(id); }
+
+  function toneify(syllable) {
+    // "hok6" -> "hok<sup class=tone>6</sup>"
+    return syllable.replace(/([a-zA-Z]+)([1-6])$/, '$1<sup class="tone">$2</sup>');
+  }
+
+  function jyutpingHtml(jp) {
+    if (!jp) return "";
+    return jp.split(/\s+/).filter(Boolean).map(toneify).join(" ");
+  }
+
+  function highlightExample(example, word) {
+    if (!example) return "";
+    if (!word) return example;
+    var parts = example.split(word);
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      out.push(escapeHtml(parts[i]));
+      if (i < parts.length - 1) out.push("<mark>" + escapeHtml(word) + "</mark>");
+    }
+    return out.join("");
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  var EN_STOPWORDS = { a: 1, an: 1, the: 1, to: 1, is: 1, are: 1, of: 1, and: 1, or: 1 };
+
+  // 常見不規則動詞（原形 -> 過去式/過去分詞），幫手配對例句入面唔跟一般規則變化嘅字
+  var EN_IRREGULAR = {
+    write: ["wrote", "written"], hold: ["held"], get: ["got"], put: ["put"],
+    give: ["gave", "given"], take: ["took", "taken"], make: ["made"], go: ["went", "gone"],
+    come: ["came"], see: ["saw", "seen"], eat: ["ate", "eaten"], buy: ["bought"],
+    bring: ["brought"], catch: ["caught"], teach: ["taught"], think: ["thought"],
+    feel: ["felt"], keep: ["kept"], sleep: ["slept"], meet: ["met"], tell: ["told"],
+    sell: ["sold"], find: ["found"], have: ["had"], do: ["did"], say: ["said"],
+    know: ["knew", "known"], grow: ["grew", "grown"], throw: ["threw", "thrown"],
+    fly: ["flew", "flown"], draw: ["drew", "drawn"], speak: ["spoke", "spoken"],
+    break: ["broke", "broken"], choose: ["chose", "chosen"], wear: ["wore", "worn"],
+    begin: ["began", "begun"], drink: ["drank", "drunk"], sing: ["sang", "sung"],
+    swim: ["swam", "swum"], run: ["ran"], sit: ["sat"], stand: ["stood"],
+    understand: ["understood"], fall: ["fell", "fallen"], hear: ["heard"],
+    lose: ["lost"], leave: ["left"], build: ["built"], spend: ["spent"],
+    send: ["sent"], win: ["won"]
+  };
+
+  function wordAlternatives(wd) {
+    var alts = [escapeRegex(wd)];
+    if (wd.length >= 4 && /e$/i.test(wd)) alts.push(escapeRegex(wd.slice(0, -1))); // create -> creat(ing)
+    var irr = EN_IRREGULAR[wd.toLowerCase()];
+    if (irr) irr.forEach(function (f) { alts.push(escapeRegex(f)); });
+    return alts;
+  }
+
+  function highlightEnglishTranslation(exampleEn, englishGloss) {
+    if (!exampleEn) return "";
+    var clean = (englishGloss || "").replace(/\([^)]*\)/g, "").trim();
+    if (!clean) return escapeHtml(exampleEn);
+
+    // 1) 先試下成個英文意思係咪照字照樣出現喺例句入面（唔理大小階）
+    var exactMatch = exampleEn.match(new RegExp(escapeRegex(clean), "i"));
+    var ranges = [];
+    if (exactMatch) {
+      ranges.push([exactMatch.index, exactMatch.index + exactMatch[0].length]);
+    } else {
+      // 2) 揾唔到就逐個字試（容許時態/單複數變化，例如 grow -> grown，或者常見不規則動詞；
+      //    亦都用逗號/斜線切開多個同義字，例如「decorate, adorn」會分開試 decorate 同 adorn）
+      clean.split(/[\s,;\/]+/).map(function (wd) { return wd.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, ""); }).filter(Boolean).forEach(function (wd) {
+        var lower = wd.toLowerCase();
+        if (EN_STOPWORDS[lower]) return;
+        var alts = wordAlternatives(wd);
+        var pattern = wd.length >= 4
+          ? "\\b(?:" + alts.join("|") + ")\\w*"
+          : "\\b" + escapeRegex(wd) + "\\b";
+        var m = exampleEn.match(new RegExp(pattern, "i"));
+        if (m) ranges.push([m.index, m.index + m[0].length]);
+      });
+    }
+
+    if (!ranges.length) return escapeHtml(exampleEn);
+
+    ranges.sort(function (a, b) { return a[0] - b[0]; });
+    var merged = [ranges[0]];
+    for (var i = 1; i < ranges.length; i++) {
+      var last = merged[merged.length - 1];
+      if (ranges[i][0] <= last[1] + 1) {
+        last[1] = Math.max(last[1], ranges[i][1]);
+      } else {
+        merged.push(ranges[i]);
+      }
+    }
+
+    var out = [];
+    var pos = 0;
+    merged.forEach(function (r) {
+      out.push(escapeHtml(exampleEn.slice(pos, r[0])));
+      out.push("<mark>" + escapeHtml(exampleEn.slice(r[0], r[1])) + "</mark>");
+      pos = r[1];
+    });
+    out.push(escapeHtml(exampleEn.slice(pos)));
+    return out.join("");
+  }
+
+  // 韓文（或者其他非英文）意思冇英文嗰套時態/不規則變化邏輯可以用，
+  // 淨係試下個詞義（去咗括號註解）係咪照字出現喺翻譯句入面，揾到先highlight。
+  function highlightPlainTranslation(exampleText, gloss) {
+    if (!exampleText) return "";
+    var clean = (gloss || "").replace(/[（(][^）)]*[）)]/g, "").trim();
+    if (!clean) return escapeHtml(exampleText);
+    var idx = exampleText.indexOf(clean);
+    if (idx === -1) return escapeHtml(exampleText);
+    return escapeHtml(exampleText.slice(0, idx)) +
+      "<mark>" + escapeHtml(exampleText.slice(idx, idx + clean.length)) + "</mark>" +
+      escapeHtml(exampleText.slice(idx + clean.length));
+  }
+
+  // 老師／Claude 可以喺「例句翻譯」入面用 **文字** 手動標明想highlight嗰部分
+  // （唔理係邊種語言都work，因為唔靠自動配對）；有嘅話優先用呢個。
+  function applyMarkupHighlight(text) {
+    if (!/\*\*[^*]+\*\*/.test(text)) return null;
+    var out = [];
+    var lastIndex = 0;
+    var re = /\*\*([^*]+)\*\*/g;
+    var m;
+    while ((m = re.exec(text))) {
+      out.push(escapeHtml(text.slice(lastIndex, m.index)));
+      out.push("<mark>" + escapeHtml(m[1]) + "</mark>");
+      lastIndex = re.lastIndex;
+    }
+    out.push(escapeHtml(text.slice(lastIndex)));
+    return out.join("");
+  }
+
+  function highlightExampleTranslation(exampleText, gloss, lang) {
+    var marked = applyMarkupHighlight(exampleText);
+    if (marked !== null) return marked;
+    // 冇手動標記先至試自動配對（English 有時態/同義字邏輯；其他語言就淨係試下整個詞義照字出現）
+    return lang === "en"
+      ? highlightEnglishTranslation(exampleText, gloss)
+      : highlightPlainTranslation(exampleText, gloss);
+  }
+
+  function wordKey(g, b, l) { return g + "|||" + b + "|||" + l; }
+
+  function bookFallbackHtml(title) {
+    return '<div class="book-fallback"><span>' + escapeHtml(title) + "</span></div>";
+  }
+
+  /* ---------------- Step rendering ---------------- */
+
+  function renderGrades() {
+    var grid = el("grid-grade");
+    grid.innerHTML = "";
+    DATA.grades.forEach(function (g) {
+      var btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.type = "button";
+      btn.textContent = g;
+      btn.addEventListener("click", function () { chooseGrade(g); });
+      grid.appendChild(btn);
+    });
+  }
+
+  function chooseGrade(g) {
+    state.grade = g;
+    state.book = null;
+    state.lesson = null;
+    el("value-grade").textContent = g;
+    el("value-grade").classList.remove("placeholder");
+    setStepState("step-grade", "done");
+    collapse("grade");
+
+    var books = DATA.structure[g].books;
+    var grid = el("grid-book");
+    grid.innerHTML = "";
+    books.forEach(function (b) {
+      var card = document.createElement("button");
+      card.className = "book-card";
+      card.type = "button";
+
+      var coverWrap = document.createElement("div");
+      coverWrap.className = "book-cover";
+      var coverPath = (DATA.bookCovers || {})[g + "|||" + b];
+      if (coverPath) {
+        var img = document.createElement("img");
+        img.src = coverPath;
+        img.alt = b + " 封面";
+        img.onerror = function () { coverWrap.innerHTML = bookFallbackHtml(b); };
+        coverWrap.appendChild(img);
+      } else {
+        coverWrap.innerHTML = bookFallbackHtml(b);
+      }
+      card.appendChild(coverWrap);
+
+      var title = document.createElement("div");
+      title.className = "book-title";
+      title.textContent = b;
+      card.appendChild(title);
+
+      card.addEventListener("click", function () { chooseBook(b); });
+      grid.appendChild(card);
+    });
+
+    el("value-book").textContent = "請選擇課本";
+    el("value-book").classList.add("placeholder");
+    el("value-lesson").textContent = "請先選擇課本";
+    el("value-lesson").classList.add("placeholder");
+    setStepState("step-book", "active");
+    setStepState("step-lesson", "locked");
+    el("head-book").disabled = false;
+    el("head-lesson").disabled = true;
+    expand("book");
+    collapse("lesson");
+    el("words-wrap").hidden = true;
+  }
+
+  function chooseBook(b) {
+    state.book = b;
+    state.lesson = null;
+    el("value-book").textContent = b;
+    el("value-book").classList.remove("placeholder");
+    setStepState("step-book", "done");
+    collapse("book");
+
+    var lessons = DATA.structure[state.grade].lessons[b];
+    var grid = el("grid-lesson");
+    grid.innerHTML = "";
+    lessons.forEach(function (l) {
+      var btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.type = "button";
+      btn.textContent = l;
+      btn.addEventListener("click", function () { chooseLesson(l); });
+      grid.appendChild(btn);
+    });
+
+    el("value-lesson").textContent = "請選擇課次";
+    el("value-lesson").classList.add("placeholder");
+    setStepState("step-lesson", "active");
+    el("head-lesson").disabled = false;
+    expand("lesson");
+    el("words-wrap").hidden = true;
+  }
+
+  function chooseLesson(l) {
+    state.lesson = l;
+    el("value-lesson").textContent = l;
+    el("value-lesson").classList.remove("placeholder");
+    setStepState("step-lesson", "done");
+    collapse("lesson");
+
+    renderWords();
+  }
+
+  function tileMeaning(w) {
+    if (!w.meanings) return "";
+    return w.meanings[uiLang] || w.meanings.zh || w.meanings.en || w.meanings.ko || w.meanings.ur || "";
+  }
+
+  function renderWords() {
+    var key = wordKey(state.grade, state.book, state.lesson);
+    var words = (DATA.words[key] || []);
+    el("lesson-heading-text").textContent = state.lesson;
+    el("word-count").textContent = words.length + " 個詞語";
+
+    var grid = el("word-grid");
+    grid.innerHTML = "";
+    if (words.length === 0) {
+      var note = document.createElement("p");
+      note.className = "empty-note";
+      note.textContent = "呢一課仲未有詞語資料。";
+      grid.appendChild(note);
+    } else {
+      words.forEach(function (w) {
+        var tile = document.createElement("button");
+        tile.className = "word-tile";
+        tile.type = "button";
+
+        var glyph = document.createElement("span");
+        glyph.className = "glyph";
+        glyph.textContent = w.word;
+        tile.appendChild(glyph);
+
+        var en = document.createElement("span");
+        en.className = "en";
+        en.textContent = tileMeaning(w);
+        setRtl(en, (LANGS[uiLang] || LANGS.zh).rtl);
+        tile.appendChild(en);
+
+        tile.addEventListener("click", function () { openModal(w); });
+        grid.appendChild(tile);
+      });
+    }
+    el("words-wrap").hidden = false;
+    el("words-wrap").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  /* ---------------- Accordion open/close ---------------- */
+
+  function setStepState(stepId, s) {
+    el(stepId).setAttribute("data-state", s);
+  }
+
+  function expand(name) {
+    el("body-" + name).hidden = false;
+    el("head-" + name).setAttribute("aria-expanded", "true");
+    el("chevron-" + name).textContent = "▴";
+    setStepState("step-" + name, "active");
+  }
+
+  function collapse(name) {
+    el("body-" + name).hidden = true;
+    el("head-" + name).setAttribute("aria-expanded", "false");
+    el("chevron-" + name).textContent = "▾";
+  }
+
+  function toggleStep(name) {
+    var body = el("body-" + name);
+    if (body.hidden) {
+      expand(name);
+    } else if (el("step-" + name).getAttribute("data-state") === "done") {
+      collapse(name);
+    }
+  }
+
+  el("head-grade").addEventListener("click", function () { toggleStep("grade"); });
+  el("head-book").addEventListener("click", function () { if (!el("head-book").disabled) toggleStep("book"); });
+  el("head-lesson").addEventListener("click", function () { if (!el("head-lesson").disabled) toggleStep("lesson"); });
+
+  /* ---------------- Modal + stroke animation ---------------- */
+
+  function cleanupWriters() {
+    activeWriters = [];
+  }
+
+  function css(varName, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return v || fallback;
+  }
+
+  function buildStrokeBoxes(word, jyutping, maxCanvas) {
+    maxCanvas = maxCanvas || 72;
+    var wrap = el("stroke-boxes");
+    wrap.innerHTML = "";
+    cleanupWriters();
+
+    var syllables = (jyutping || "").split(/\s+/).filter(Boolean);
+    var chars = word.split("");
+    var ink = css("--ink", "#2b2a28");
+    var accent = css("--accent", "#b8433a");
+    var line = css("--paper-line", "#ccc");
+
+    var gap = 8;
+    var containerWidth = wrap.clientWidth || (el("modal").clientWidth - 40) || 300;
+    var computed = Math.floor((containerWidth - gap * (chars.length - 1)) / chars.length);
+    var size = Math.max(36, Math.min(maxCanvas, computed));
+
+    chars.forEach(function (ch, i) {
+      var box = document.createElement("div");
+      box.className = "char-box";
+
+      var canvas = document.createElement("div");
+      canvas.className = "char-canvas";
+      canvas.id = "char-canvas-" + i;
+      canvas.style.width = size + "px";
+      canvas.style.height = size + "px";
+      box.appendChild(canvas);
+
+      var syll = document.createElement("span");
+      syll.className = "char-syll";
+      syll.innerHTML = syllables[i] ? toneify(syllables[i]) : "";
+      box.appendChild(syll);
+
+      wrap.appendChild(box);
+
+      var writer = null;
+      if (window.HanziWriter && STROKES[ch]) {
+        writer = HanziWriter.create(canvas, ch, {
+          width: size,
+          height: size,
+          padding: Math.max(4, Math.round(size * 0.06)),
+          showOutline: true,
+          showCharacter: false,
+          strokeColor: ink,
+          radicalColor: accent,
+          outlineColor: line,
+          strokeAnimationSpeed: 1,
+          delayBetweenStrokes: 150,
+          charDataLoader: function (c, onLoad, onError) {
+            if (STROKES[c]) onLoad(STROKES[c]); else onError();
+          }
+        });
+      } else {
+        canvas.innerHTML = '<div style="display:grid;place-items:center;height:100%;font-family:\'Noto Serif TC\',serif;font-size:' + Math.round(size * 0.35) + 'px;color:' + ink + '">' + ch + "</div>";
+      }
+      activeWriters.push(writer);
+    });
+  }
+
+  var playToken = 0;
+
+  function playSequenceOnce(onDone) {
+    var i = 0;
+    function next() {
+      if (i >= activeWriters.length) { if (onDone) onDone(); return; }
+      var w = activeWriters[i];
+      if (!w) { i++; next(); return; }
+      w.hideCharacter();
+      w.animateCharacter({
+        onComplete: function () {
+          i++;
+          setTimeout(next, 250);
+        }
+      });
+    }
+    next();
+  }
+
+  function startLoop() {
+    playToken++;
+    var myToken = playToken;
+    function runOnce() {
+      if (myToken !== playToken) return;
+      playSequenceOnce(function () {
+        if (myToken !== playToken) return;
+        setTimeout(function () {
+          if (myToken === playToken) runOnce();
+        }, 900);
+      });
+    }
+    runOnce();
+  }
+
+  function stopLoop() {
+    playToken++;
+  }
+
+  var currentWord = null;
+  var currentMeaningText = "";
+  var currentMeaningLang = "zh";
+  var currentExampleTranslationText = "";
+  var currentExampleLang = "zh";
+
+  function loadUiLang() {
+    try {
+      var v = localStorage.getItem("vocabUiLang");
+      if (v && LANGS[v]) return v;
+    } catch (e) {}
+    return "zh";
+  }
+  function saveUiLang(v) {
+    try { localStorage.setItem("vocabUiLang", v); } catch (e) {}
+  }
+  var uiLang = "zh"; // 真正嘅初始值喺 LANGS 定義好之後、boot 之前設定（見底下）
+
+  function setRtl(elm, isRtl) {
+    if (isRtl) {
+      elm.setAttribute("dir", "rtl");
+      elm.setAttribute("lang", "ur");
+    } else {
+      elm.removeAttribute("dir");
+      elm.removeAttribute("lang");
+    }
+  }
+
+  function fallbackMeaning(w) {
+    var order = ["en", "zh", "ko", "ur"];
+    for (var i = 0; i < order.length; i++) {
+      if (w.meanings && w.meanings[order[i]]) return { text: w.meanings[order[i]], lang: order[i] };
+    }
+    return { text: "", lang: uiLang };
+  }
+
+  function fallbackExampleTranslation(w) {
+    var order = ["en", "ko", "ur"];
+    for (var i = 0; i < order.length; i++) {
+      if (w.exampleTranslations && w.exampleTranslations[order[i]]) return { text: w.exampleTranslations[order[i]], lang: order[i] };
+    }
+    return null;
+  }
+
+  // 讀音掣淨係讀返個意思／例句翻譯嘅內容，`**` 標記係畀highlight用嘅，唔應該讀埋出嚟
+  function stripMarkup(text) {
+    return (text || "").replace(/\*\*/g, "");
+  }
+
+  function renderModalMeaning(w) {
+    var directMeaning = w.meanings && w.meanings[uiLang];
+    var meaningInfo = directMeaning ? { text: directMeaning, lang: uiLang } : fallbackMeaning(w);
+    var meaningCfg = LANGS[meaningInfo.lang] || LANGS.zh;
+
+    el("label-english").textContent = meaningCfg.labelMeaning;
+    el("say-english-btn").setAttribute("aria-label", "播放" + meaningCfg.dispName + "讀音");
+    el("modal-english").textContent = meaningInfo.text || "—";
+    setRtl(el("modal-english"), meaningCfg.rtl);
+    currentMeaningText = stripMarkup(meaningInfo.text);
+    currentMeaningLang = meaningInfo.lang;
+
+    el("modal-example").innerHTML = w.example ? highlightExample(w.example, w.word) : "（未有例句）";
+
+    var exInfo = uiLang === "zh"
+      ? null
+      : ((w.exampleTranslations && w.exampleTranslations[uiLang]) ? { text: w.exampleTranslations[uiLang], lang: uiLang } : fallbackExampleTranslation(w));
+
+    if (exInfo && exInfo.text) {
+      var exCfg = LANGS[exInfo.lang] || LANGS.zh;
+      el("say-example-en-btn").setAttribute("aria-label", "播放" + exCfg.dispName + "翻譯讀音");
+      el("modal-example-en").innerHTML = highlightExampleTranslation(exInfo.text, meaningInfo.text, exInfo.lang);
+      setRtl(el("modal-example-en"), exCfg.rtl);
+      el("example-en-wrap").hidden = false;
+      currentExampleTranslationText = stripMarkup(exInfo.text);
+      currentExampleLang = exInfo.lang;
+    } else {
+      el("example-en-wrap").hidden = true;
+      currentExampleTranslationText = "";
+      currentExampleLang = meaningInfo.lang;
+    }
+
+    el("say-english-btn").hidden = !meaningInfo.text;
+    el("say-example-en-btn").hidden = !(exInfo && exInfo.text);
+  }
+
+  function refreshModalForLanguage() {
+    if (!currentWord) return;
+    var w = currentWord;
+    stopLoop();
+    resetFit();
+    renderModalMeaning(w);
+    el("say-status").hidden = true;
+    el("say-status-example").hidden = true;
+    el("say-status-english").hidden = true;
+    el("modal-image-wrap").hidden = false;
+    buildStrokeBoxes(w.word, w.jyutping, 72);
+    fitModal(w);
+    setTimeout(startLoop, 350);
+  }
+
+  /* ---- Shrink-to-fit: modal never scrolls, so if content is taller than
+     the available space we progressively tighten spacing/sizes and, as a
+     last resort, hide the picture (least essential part). ---- */
+  var FIT_TIERS = [
+    { img: 110, gap: 7, exPad: "8px 10px", exFont: 13.5, exFontEn: 12.5, strokeMt: 9, infoMt: 10, canvas: 64, rtlLh: 1.85, hideImage: false, hideStroke: false },
+    { img: 60, gap: 6, exPad: "7px 9px", exFont: 13, exFontEn: 12, strokeMt: 8, infoMt: 9, canvas: 58, rtlLh: 1.7, hideImage: false, hideStroke: false },
+    { img: 0, gap: 5, exPad: "6px 8px", exFont: 12.5, exFontEn: 11.5, strokeMt: 6, infoMt: 7, canvas: 48, rtlLh: 1.55, hideImage: true, hideStroke: false },
+    { img: 0, gap: 4, exPad: "5px 7px", exFont: 12, exFontEn: 11, strokeMt: 4, infoMt: 5, canvas: 40, rtlLh: 1.4, hideImage: true, hideStroke: false },
+    { img: 0, gap: 3, exPad: "4px 6px", exFont: 11.5, exFontEn: 10.5, strokeMt: 0, infoMt: 3, canvas: 34, rtlLh: 1.3, hideImage: true, hideStroke: true },
+    { img: 0, gap: 2, exPad: "3px 5px", exFont: 11, exFontEn: 10, strokeMt: 0, infoMt: 2, canvas: 30, rtlLh: 1.2, hideImage: true, hideStroke: true }
+  ];
+
+  function resetFit() {
+    var m = el("modal");
+    m.style.removeProperty("--img-h");
+    m.style.removeProperty("--gap-panel");
+    m.style.removeProperty("--ex-pad");
+    m.style.removeProperty("--ex-font");
+    m.style.removeProperty("--ex-font-en");
+    m.style.removeProperty("--stroke-mt");
+    m.style.removeProperty("--info-mt");
+    m.style.removeProperty("--rtl-lh");
+    el("stroke-panel").hidden = false;
+  }
+
+  function applyFitTier(tier) {
+    var m = el("modal");
+    m.style.setProperty("--img-h", tier.img + "px");
+    m.style.setProperty("--gap-panel", tier.gap + "px");
+    m.style.setProperty("--ex-pad", tier.exPad);
+    m.style.setProperty("--ex-font", tier.exFont + "px");
+    m.style.setProperty("--ex-font-en", tier.exFontEn + "px");
+    m.style.setProperty("--stroke-mt", tier.strokeMt + "px");
+    m.style.setProperty("--info-mt", tier.infoMt + "px");
+    m.style.setProperty("--rtl-lh", tier.rtlLh);
+    el("stroke-panel").hidden = !!tier.hideStroke;
+  }
+
+  function fitModal(w) {
+    var m = el("modal");
+    var wrapImg = el("modal-image-wrap");
+    if (m.scrollHeight <= m.clientHeight + 1) return;
+    for (var i = 0; i < FIT_TIERS.length; i++) {
+      applyFitTier(FIT_TIERS[i]);
+      wrapImg.hidden = FIT_TIERS[i].hideImage;
+      if (!FIT_TIERS[i].hideStroke) {
+        buildStrokeBoxes(w.word, w.jyutping, FIT_TIERS[i].canvas);
+      }
+      if (m.scrollHeight <= m.clientHeight + 1) return;
+    }
+  }
+
+  function openModal(w) {
+    currentWord = w;
+    lastFocused = document.activeElement;
+    resetFit();
+    el("modal-word-title").textContent = w.word;
+
+    if (w.pos) {
+      el("modal-pos").textContent = w.pos;
+      el("modal-pos").hidden = false;
+    } else {
+      el("modal-pos").hidden = true;
+    }
+
+    el("modal-jyutping").innerHTML = jyutpingHtml(w.jyutping) || "";
+    renderModalMeaning(w);
+
+    el("say-btn").hidden = false;
+    el("say-example-btn").hidden = !w.example;
+    el("say-status").hidden = true;
+    el("say-status-example").hidden = true;
+    el("say-status-english").hidden = true;
+
+    var wrapImg = el("modal-image-wrap");
+    wrapImg.hidden = false;
+    renderModalMedia(w, wrapImg);
+
+    el("scrim").hidden = false;
+    document.body.style.overflow = "hidden";
+
+    buildStrokeBoxes(w.word, w.jyutping, 72);
+    fitModal(w);
+
+    el("modal-close").focus();
+
+    setTimeout(startLoop, 350);
+  }
+
+  function showImageFallback(wrapEl) {
+    wrapEl.innerHTML = '<div class="image-fallback">📷 呢個詞語仲未有圖畫<br>（老師可以之後上載）</div>';
+  }
+
+  var VIDEO_EXT_RE = /\.(mp4|webm|mov|m4v)$/i;
+
+  // 每次開新詞語都由頭砌返個圖片/GIF/影片嘅DOM，唔好靠住舊嗰個<img>／<video>
+  // 節點一直留喺度——如果上一個詞語冇圖（觸發咗fallback文字），嗰個節點會
+  // 俾fallback嘅innerHTML洗咗，跟住嗰個有圖嘅詞語就會搵唔返個元素。
+  function renderModalMedia(w, wrapImg) {
+    var url = w.image;
+    if (!url) {
+      showImageFallback(wrapImg);
+      return;
+    }
+    if (VIDEO_EXT_RE.test(url)) {
+      wrapImg.innerHTML = '<video id="modal-image" autoplay muted loop playsinline controls></video>';
+      var vid = el("modal-image");
+      vid.onerror = function () { showImageFallback(wrapImg); };
+      vid.src = url;
+    } else {
+      wrapImg.innerHTML = '<img id="modal-image" alt="">';
+      var img = el("modal-image");
+      img.onerror = function () { showImageFallback(wrapImg); };
+      img.src = url;
+      img.alt = w.word + " 嘅圖畫";
+    }
+  }
+
+  function closeModal() {
+    stopLoop();
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+    el("scrim").hidden = true;
+    document.body.style.overflow = "";
+    cleanupWriters();
+    currentWord = null;
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  el("modal-close").addEventListener("click", closeModal);
+  el("scrim").addEventListener("click", function (e) {
+    if (e.target === el("scrim")) closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !el("scrim").hidden) closeModal();
+  });
+  el("replay-btn").addEventListener("click", startLoop);
+
+  /* ---------------- Pronunciation ---------------- */
+
+  var cachedVoices = [];
+  function refreshVoices() {
+    cachedVoices = ("speechSynthesis" in window) ? speechSynthesis.getVoices() : [];
+  }
+  if ("speechSynthesis" in window) {
+    refreshVoices();
+    speechSynthesis.onvoiceschanged = refreshVoices;
+  }
+
+  function pickCantoneseVoice() {
+    return cachedVoices.find(function (v) { return /^zh-HK/i.test(v.lang) || /yue/i.test(v.lang); }) ||
+      cachedVoices.find(function (v) { return /^zh/i.test(v.lang); }) ||
+      null;
+  }
+
+  var LANGS = {
+    zh: { label: "中文", dispName: "中文", labelMeaning: "中文意思", rtl: false,
+          tts: { tag: "zh-HK", prefix: /^zh/i, preferred: /^zh-HK/i, rate: 0.85 } },
+    en: { label: "EN", dispName: "英文", labelMeaning: "英文意思", rtl: false,
+          tts: { tag: "en-US", prefix: /^en/i, preferred: /^en-US/i, rate: 0.9 } },
+    ko: { label: "한국어", dispName: "韓文", labelMeaning: "韓文意思", rtl: false,
+          tts: { tag: "ko-KR", prefix: /^ko/i, preferred: /^ko-KR/i, rate: 0.85 } },
+    ur: { label: "اردو", dispName: "烏都文", labelMeaning: "烏都文意思", rtl: true,
+          tts: { tag: "ur-PK", prefix: /^ur/i, preferred: /^ur-PK/i, rate: 0.85 } }
+  };
+
+  function pickVoiceForLang(prefix, preferred) {
+    if (preferred) {
+      var pv = cachedVoices.find(function (v) { return preferred.test(v.lang); });
+      if (pv) return pv;
+    }
+    return cachedVoices.find(function (v) { return prefix.test(v.lang); }) || null;
+  }
+
+  // 裝置搵唔到某種語言嘅朗讀聲音時，畀返實際可以點做嘅步驟（唔同裝置設定位置唔同）
+  function platformHint() {
+    var ua = navigator.userAgent || "";
+    var platform = navigator.platform || "";
+    if (/iPhone|iPad|iPod/i.test(ua)) {
+      return "可以去「設定→輔助使用→朗讀內容→聲音」揀多幾種語言落嚟。";
+    }
+    if (/Android/i.test(ua)) {
+      return "可以去手機「設定→系統→語言與輸入→文字轉語音輸出」安裝多種語言。";
+    }
+    if (/Mac/i.test(platform) || /Macintosh/i.test(ua)) {
+      return "可以去「系統設定→輔助使用→朗讀內容」加多幾種聲音。";
+    }
+    if (/Win/i.test(platform) || /Windows/i.test(ua)) {
+      return "可以去「設定→時間與語言→語音」安裝多種語言朗讀聲音。";
+    }
+    return "可以去裝置嘅語音／朗讀設定入面安裝返呢種語言。";
+  }
+
+  function setStatus(statusEl, text) {
+    if (text) {
+      statusEl.textContent = text;
+      statusEl.hidden = false;
+      refitModalIfNeeded(); // 提示文字有時會令個modal變高，即刻check多次確保仍然唔使scroll
+    } else {
+      statusEl.textContent = "";
+      statusEl.hidden = true;
+    }
+  }
+
+  function refitModalIfNeeded() {
+    if (!currentWord) return;
+    var w = currentWord;
+    requestAnimationFrame(function () {
+      var m = el("modal");
+      if (m && m.scrollHeight > m.clientHeight + 1) {
+        resetFit();
+        buildStrokeBoxes(w.word, w.jyutping, 72);
+        fitModal(w);
+      }
+    });
+  }
+
+  function speakText(text, statusEl) {
+    if (!("speechSynthesis" in window)) {
+      setStatus(statusEl, "呢部裝置未支援語音朗讀");
+      return;
+    }
+    refreshVoices(); // 手機嘅語音清單有時遲啲先載好，撳掣嗰刻重新check一次先準確
+    var voice = pickCantoneseVoice();
+    setStatus(statusEl, voice && /^zh-HK/i.test(voice.lang) ? "" : "未搵到粵語發音，改用附近嘅中文聲音");
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "zh-HK";
+    if (voice) u.voice = voice;
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }
+
+  function speakGloss(text, langKey, statusEl) {
+    var langCfg = LANGS[langKey] || LANGS.zh;
+    var cfg = langCfg.tts;
+    if (!("speechSynthesis" in window)) {
+      if (statusEl) setStatus(statusEl, "呢部裝置未支援語音朗讀");
+      return;
+    }
+    refreshVoices();
+    var voice = pickVoiceForLang(cfg.prefix, cfg.preferred);
+    // 英文喺絕大部分裝置都穩定有得讀，唔使特登提示；其他語言就唔一定人人部機都有，搵唔到先提示
+    if (statusEl) setStatus(statusEl, (!voice && langKey !== "en") ? ("呢部裝置搵唔到" + langCfg.dispName + "發音。" + platformHint()) : "");
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = cfg.tag;
+    if (voice) u.voice = voice;
+    u.rate = cfg.rate;
+    speechSynthesis.speak(u);
+  }
+
+  // 粵語拼音 -> 錄音檔slug（同批量生成錄音嗰個script用緊嘅規則一致）。
+  function jyutpingSlug(jyutping) {
+    return (jyutping || "").replace(/\s+/g, "").replace(/[^A-Za-z0-9]/g, "");
+  }
+
+  // 撳咗🔊掣之後，如果要等錄音檔從網絡load返嚟，就show返個轉圈圈遮罩，
+  // 同時擋晒成個畫面唔俾人撳其他嘢，等用戶知道仲未播到、唔好以為冇反應。
+  // 用token機制：如果用戶手快連續撳幾下，淨係最新嗰次先有權收返個遮罩，
+  // 咁就唔會俾舊嗰次嘅完成事件搶住收咗、but個新請求其實都仲未load完。
+  var audioLoadToken = 0;
+  function showAudioLoading() {
+    audioLoadToken++;
+    var token = audioLoadToken;
+    var overlay = el("audio-loading-overlay");
+    if (overlay) overlay.hidden = false;
+    // 保險網：萬一啲事件（playing/error）冇一個觸發到（好罕見），都唔好一直擋住個畫面
+    setTimeout(function () { hideAudioLoading(token); }, 6000);
+    return token;
+  }
+  function hideAudioLoading(token) {
+    if (token !== audioLoadToken) return;
+    var overlay = el("audio-loading-overlay");
+    if (overlay) overlay.hidden = true;
+  }
+
+  // batch生成嘅錄音其實係「每個詞語一個合併mp3」（唔係逐句一個檔案，因為
+  // 一個artifact最多得幾百個檔案，648個獨立mp3放唔晒），靠manifest.json
+  // 記低每一句喺個合併檔入面嘅開始時間同長度，播嘅時候seek過去嗰段。
+  var activeClipAudio = null;
+  function playClip(slug, clipKey, fallbackFn) {
+    var entry = audioManifest && audioManifest[slug] && audioManifest[slug][clipKey];
+    if (!entry) { fallbackFn(); return; }
+    if (activeClipAudio) {
+      try { activeClipAudio.pause(); } catch (e) {}
+      activeClipAudio = null;
+    }
+    var loadToken = showAudioLoading();
+    var audio = new Audio("audio/combined/" + slug + ".mp3");
+    activeClipAudio = audio;
+    var start = entry.start;
+    var started = false;
+    // 用timeupdate嚟判斷幾時停係唔準嘅：個事件通常每250毫秒先至觸發一次，
+    // 一停慢咗就會漏咗少少下一段錄音出嚟，聽落好似播完之後多咗一下怪聲。
+    // 改用setTimeout（喺真正開始播嗰刻先計時），準確好多，仲刻意早少少停，
+    // 確保唔會播埋去下一段嘅開頭。
+    function schedulePause() {
+      var stopMs = Math.max(0, entry.duration * 1000 - 60);
+      setTimeout(function () {
+        if (activeClipAudio === audio) {
+          try { audio.pause(); } catch (e) {}
+        }
+      }, stopMs);
+    }
+    function begin() {
+      if (started) return;
+      started = true;
+      try { audio.currentTime = start; } catch (e) {}
+      audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
+      audio.addEventListener("playing", schedulePause, { once: true });
+      audio.play().catch(function () { hideAudioLoading(loadToken); fallbackFn(); });
+    }
+    audio.addEventListener("error", function () { hideAudioLoading(loadToken); fallbackFn(); });
+    if (audio.readyState >= 1) {
+      begin();
+    } else {
+      audio.addEventListener("loadedmetadata", begin);
+    }
+  }
+
+  // 優先播老師手動指定嘅錄音檔（如果有），搵唔到就play合併錄音入面嗰一段，
+  // 兩樣都搵唔到（例如老師仲未做呢個功能）先至用返裝置內置朗讀頂住。
+  function playWithFallbacks(explicitPath, slug, clipKey, ttsFn) {
+    function tryClip() { playClip(slug, clipKey, ttsFn); }
+    if (explicitPath) {
+      var loadToken = showAudioLoading();
+      var audio = new Audio(explicitPath);
+      var moved = false;
+      function next() { if (moved) return; moved = true; hideAudioLoading(loadToken); tryClip(); }
+      audio.addEventListener("error", next);
+      audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
+      audio.play().catch(next);
+    } else {
+      tryClip();
+    }
+  }
+
+  el("say-btn").addEventListener("click", function () {
+    if (!currentWord) return;
+    setStatus(el("say-status"), "");
+    var slug = jyutpingSlug(currentWord.jyutping);
+    playWithFallbacks(currentWord.audio, slug, "word", function () {
+      speakText(currentWord.word, el("say-status"));
+    });
+  });
+
+  el("say-example-btn").addEventListener("click", function () {
+    if (!currentWord || !currentWord.example) return;
+    setStatus(el("say-status-example"), "");
+    var slug = jyutpingSlug(currentWord.jyutping);
+    playWithFallbacks(currentWord.exampleAudio, slug, "example", function () {
+      speakText(currentWord.example, el("say-status-example"));
+    });
+  });
+
+  el("say-english-btn").addEventListener("click", function () {
+    if (!currentWord || !currentMeaningText) return;
+    setStatus(el("say-status-english"), "");
+    var slug = jyutpingSlug(currentWord.jyutping);
+    playWithFallbacks(null, slug, "meaning_" + currentMeaningLang, function () {
+      speakGloss(currentMeaningText, currentMeaningLang, el("say-status-english"));
+    });
+  });
+
+  el("say-example-en-btn").addEventListener("click", function () {
+    if (!currentWord || !currentExampleTranslationText) return;
+    var slug = jyutpingSlug(currentWord.jyutping);
+    playWithFallbacks(null, slug, "extrans_" + currentExampleLang, function () {
+      speakGloss(currentExampleTranslationText, currentExampleLang, null);
+    });
+  });
+
+  /* ---------------- Language switcher ---------------- */
+
+  uiLang = loadUiLang();
+
+  function renderLangSwitch() {
+    Object.keys(LANGS).forEach(function (code) {
+      var btn = document.querySelector('.lang-btn[data-lang="' + code + '"]');
+      if (btn) btn.setAttribute("aria-pressed", code === uiLang ? "true" : "false");
+    });
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var code = btn.getAttribute("data-lang");
+      if (!LANGS[code] || code === uiLang) return;
+      uiLang = code;
+      saveUiLang(uiLang);
+      renderLangSwitch();
+      if (state.lesson) renderWords();
+      refreshModalForLanguage();
+    });
+  });
+
+  renderLangSwitch();
+
+  /* ---------------- Boot ---------------- */
+
+  function boot(data, strokes, manifest) {
+    DATA = data;
+    STROKES = strokes;
+    audioManifest = manifest || {};
+    renderGrades();
+  }
+
+  Promise.all([
+    fetch("data.json").then(function (r) { return r.json(); }),
+    fetch("strokes.json").then(function (r) { return r.json(); }),
+    fetch("audio/combined/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+  ]).then(function (results) {
+    boot(results[0], results[1], results[2]);
+  }).catch(function (err) {
+    el("grid-grade").innerHTML = '<p class="empty-note">資料載入失敗，請重新整理頁面。</p>';
+    console.error(err);
+  });
+})();
+</script>
+</body>
+</html>
