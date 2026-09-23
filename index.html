@@ -473,6 +473,15 @@
   .info-value[dir="rtl"] { font-size: 1.05em; }
   .say-btn--sm { width: 28px; height: 28px; font-size: 12px; }
 
+  /* ---- 讀音跟色（karaoke）：讀緊嗰陣，讀到嘅字／詞會逐個著色，等學生睇住跟讀 ---- */
+  .ro-tok { transition: background-color .12s ease; border-radius: 3px; }
+  .ro-tok.ro-read { background: var(--brand-soft); }
+  .example-text .ro-mark, .word-title .ro-mark, .info-value .ro-mark {
+    color: var(--mark-red);
+    font-weight: 700;
+  }
+  .example-text--en .ro-mark { font-style: normal; }
+
   .image-wrap {
     margin-top: 2px;
     border-radius: 10px;
@@ -482,7 +491,7 @@
     height: var(--img-h);
     display: grid; place-items: center;
   }
-  .image-wrap img, .image-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .image-wrap img, .image-wrap video { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; display: block; }
   .image-fallback {
     color: var(--ink-faint);
     font-size: 11px;
@@ -660,16 +669,24 @@
     return jp.split(/\s+/).filter(Boolean).map(toneify).join(" ");
   }
 
-  function highlightExample(example, word) {
-    if (!example) return "";
-    if (!word) return example;
-    var parts = example.split(word);
-    var out = [];
-    for (var i = 0; i < parts.length; i++) {
-      out.push(escapeHtml(parts[i]));
-      if (i < parts.length - 1) out.push("<mark>" + escapeHtml(word) + "</mark>");
+  // 呢度嘅 find*Ranges／find*Range 函數同以前嘅 highlight* 函數做緊同一件事
+  // （揾出應該用<mark>顏色標示嘅一段文字），但而家唔再直接砌HTML字串，
+  // 淨係返回喺原文入面嘅字元範圍 [start,end)。呢啲範圍會同下面嘅
+  // renderKaraoke 一齊用：讀住個字嗰陣要逐字／逐詞著色（跟讀效果），
+  // 呢個效果一定要砌返個一個個字嘅<span>先做得到，所以要離開返
+  // 「直接輸出HTML字串」呢種寫法，改用範圍(range)嚟表達邊段字要標紅、
+  // 等renderKaraoke可以將範圍同span位置對應返埋一齊。
+  function findWordRanges(example, word) {
+    if (!example || !word) return [];
+    var ranges = [];
+    var idx = 0;
+    while (true) {
+      var i = example.indexOf(word, idx);
+      if (i === -1) break;
+      ranges.push([i, i + word.length]);
+      idx = i + word.length;
     }
-    return out.join("");
+    return ranges;
   }
 
   function escapeHtml(s) {
@@ -708,10 +725,10 @@
     return alts;
   }
 
-  function highlightEnglishTranslation(exampleEn, englishGloss) {
-    if (!exampleEn) return "";
+  function findEnglishGlossRanges(exampleEn, englishGloss) {
+    if (!exampleEn) return [];
     var clean = (englishGloss || "").replace(/\([^)]*\)/g, "").trim();
-    if (!clean) return escapeHtml(exampleEn);
+    if (!clean) return [];
 
     // 1) 先試下成個英文意思係咪照字照樣出現喺例句入面（唔理大小階）
     var exactMatch = exampleEn.match(new RegExp(escapeRegex(clean), "i"));
@@ -733,7 +750,7 @@
       });
     }
 
-    if (!ranges.length) return escapeHtml(exampleEn);
+    if (!ranges.length) return [];
 
     ranges.sort(function (a, b) { return a[0] - b[0]; });
     var merged = [ranges[0]];
@@ -745,55 +762,119 @@
         merged.push(ranges[i]);
       }
     }
-
-    var out = [];
-    var pos = 0;
-    merged.forEach(function (r) {
-      out.push(escapeHtml(exampleEn.slice(pos, r[0])));
-      out.push("<mark>" + escapeHtml(exampleEn.slice(r[0], r[1])) + "</mark>");
-      pos = r[1];
-    });
-    out.push(escapeHtml(exampleEn.slice(pos)));
-    return out.join("");
+    return merged;
   }
 
   // 韓文（或者其他非英文）意思冇英文嗰套時態/不規則變化邏輯可以用，
   // 淨係試下個詞義（去咗括號註解）係咪照字出現喺翻譯句入面，揾到先highlight。
-  function highlightPlainTranslation(exampleText, gloss) {
-    if (!exampleText) return "";
+  function findPlainGlossRange(exampleText, gloss) {
+    if (!exampleText) return [];
     var clean = (gloss || "").replace(/[（(][^）)]*[）)]/g, "").trim();
-    if (!clean) return escapeHtml(exampleText);
+    if (!clean) return [];
     var idx = exampleText.indexOf(clean);
-    if (idx === -1) return escapeHtml(exampleText);
-    return escapeHtml(exampleText.slice(0, idx)) +
-      "<mark>" + escapeHtml(exampleText.slice(idx, idx + clean.length)) + "</mark>" +
-      escapeHtml(exampleText.slice(idx + clean.length));
+    if (idx === -1) return [];
+    return [[idx, idx + clean.length]];
   }
 
   // 老師／Claude 可以喺「例句翻譯」入面用 **文字** 手動標明想highlight嗰部分
-  // （唔理係邊種語言都work，因為唔靠自動配對）；有嘅話優先用呢個。
-  function applyMarkupHighlight(text) {
-    if (!/\*\*[^*]+\*\*/.test(text)) return null;
-    var out = [];
-    var lastIndex = 0;
+  // （唔理係邊種語言都work，因為唔靠自動配對）；有嘅話優先用呢個。返返個
+  // 去咗**標記嘅乾淨文字，同埋喺嗰段乾淨文字入面嘅範圍（唔係原文範圍，
+  // 因為去馬克之後啲index會偏移咗）。
+  function stripMarkupRanges(text) {
     var re = /\*\*([^*]+)\*\*/g;
+    var clean = "";
+    var ranges = [];
+    var lastIndex = 0;
     var m;
     while ((m = re.exec(text))) {
-      out.push(escapeHtml(text.slice(lastIndex, m.index)));
-      out.push("<mark>" + escapeHtml(m[1]) + "</mark>");
+      clean += text.slice(lastIndex, m.index);
+      var start = clean.length;
+      clean += m[1];
+      ranges.push([start, clean.length]);
       lastIndex = re.lastIndex;
     }
-    out.push(escapeHtml(text.slice(lastIndex)));
-    return out.join("");
+    clean += text.slice(lastIndex);
+    return { text: clean, ranges: ranges };
   }
 
-  function highlightExampleTranslation(exampleText, gloss, lang) {
-    var marked = applyMarkupHighlight(exampleText);
-    if (marked !== null) return marked;
-    // 冇手動標記先至試自動配對（English 有時態/同義字邏輯；其他語言就淨係試下整個詞義照字出現）
-    return lang === "en"
-      ? highlightEnglishTranslation(exampleText, gloss)
-      : highlightPlainTranslation(exampleText, gloss);
+  // 揾出呢句「例句翻譯」入面應該著色（對應返個詞語）嘅一段，連同去咗**
+  // 標記之後嘅乾淨文字一齊返；有手動**標記就優先用嗰個，冇先至試自動配對
+  // （English 有時態/同義字邏輯；其他語言就淨係試下整個詞義照字出現）。
+  function exampleTranslationMarkInfo(exampleText, gloss, lang) {
+    if (/\*\*[^*]+\*\*/.test(exampleText || "")) {
+      return stripMarkupRanges(exampleText);
+    }
+    var ranges = lang === "en"
+      ? findEnglishGlossRanges(exampleText, gloss)
+      : findPlainGlossRange(exampleText, gloss);
+    return { text: exampleText || "", ranges: ranges };
+  }
+
+  /* ---- 讀音跟色（karaoke）：將文字拆做一個個<span>，讀到邊個就著色到邊個 ----
+     中文冇分字距，要逐個字先睇到跟色效果；英文／韓文／烏都文就要逐個「詞」（用
+     空白隔開嗰段）先包一個span，唔可以逐個字母咁散——尤其烏都文（阿拉伯字母），
+     啲字母一定要連住寫先會夾成正確嘅字形，散開晒個span會整到啲字之間斷開、
+     顯示錯晒形。 */
+  function granularityForLang(langKey) {
+    return langKey === "zh" ? "char" : "word";
+  }
+
+  function tokenizeWithOffsets(text, granularity) {
+    var tokens = [];
+    if (granularity === "char") {
+      var pos = 0;
+      Array.from(text).forEach(function (ch) {
+        tokens.push({ text: ch, start: pos, end: pos + ch.length, isSpace: false });
+        pos += ch.length;
+      });
+    } else {
+      var re = /\S+|\s+/g;
+      var m;
+      while ((m = re.exec(text))) {
+        tokens.push({ text: m[0], start: m.index, end: m.index + m[0].length, isSpace: /^\s+$/.test(m[0]) });
+      }
+    }
+    return tokens;
+  }
+
+  // 起返個containerEl入面嘅內容，逐個token包一個<span class="ro-tok">；同marks
+  // 範圍有重疊嗰啲token加多個ro-mark class（代替以前嘅<mark>）。返返嗰啲span
+  // 連埋佢哋喺原文入面嘅位置，畀播音嗰陣update顏色用。
+  function renderKaraoke(containerEl, text, ranges, granularity) {
+    containerEl.innerHTML = "";
+    if (!text) return [];
+    var tokens = tokenizeWithOffsets(text, granularity);
+    var spans = [];
+    var frag = document.createDocumentFragment();
+    tokens.forEach(function (tok) {
+      var span = document.createElement("span");
+      span.className = "ro-tok";
+      span.textContent = tok.text;
+      var marked = (ranges || []).some(function (r) { return tok.start < r[1] && tok.end > r[0]; });
+      if (marked) span.classList.add("ro-mark");
+      frag.appendChild(span);
+      if (!tok.isSpace) spans.push({ el: span, start: tok.start, end: tok.end });
+    });
+    containerEl.appendChild(frag);
+    return spans;
+  }
+
+  function karaokeReset(spans) {
+    if (!spans) return;
+    spans.forEach(function (s) { s.el.classList.remove("ro-read"); });
+  }
+
+  function karaokeSetProgress(spans, charIndex) {
+    if (!spans) return;
+    spans.forEach(function (s) {
+      if (s.start < charIndex) s.el.classList.add("ro-read");
+      else s.el.classList.remove("ro-read");
+    });
+  }
+
+  function karaokeComplete(spans) {
+    if (!spans) return;
+    spans.forEach(function (s) { s.el.classList.add("ro-read"); });
   }
 
   function wordKey(g, b, l) { return g + "|||" + b + "|||" + l; }
@@ -1096,6 +1177,9 @@
   var currentMeaningLang = "zh";
   var currentExampleTranslationText = "";
   var currentExampleLang = "zh";
+  // 每個彈出視窗入面、可以跟讀色嘅四段文字，各自對應嘅<span>清單（畀播音
+  // 嗰陣update顏色用）。冇內容或者仲未render過嘅就係null。
+  var karaoke = { word: null, example: null, meaning: null, exampleEn: null };
 
   function loadUiLang() {
     try {
@@ -1147,12 +1231,22 @@
 
     el("label-english").textContent = meaningCfg.labelMeaning;
     el("say-english-btn").setAttribute("aria-label", "播放" + meaningCfg.dispName + "讀音");
-    el("modal-english").textContent = meaningInfo.text || "—";
     setRtl(el("modal-english"), meaningCfg.rtl);
     currentMeaningText = stripMarkup(meaningInfo.text);
     currentMeaningLang = meaningInfo.lang;
+    if (meaningInfo.text) {
+      karaoke.meaning = renderKaraoke(el("modal-english"), currentMeaningText, [], granularityForLang(meaningInfo.lang));
+    } else {
+      el("modal-english").textContent = "—";
+      karaoke.meaning = null;
+    }
 
-    el("modal-example").innerHTML = w.example ? highlightExample(w.example, w.word) : "（未有例句）";
+    if (w.example) {
+      karaoke.example = renderKaraoke(el("modal-example"), w.example, findWordRanges(w.example, w.word), "char");
+    } else {
+      el("modal-example").textContent = "（未有例句）";
+      karaoke.example = null;
+    }
 
     var exInfo = uiLang === "zh"
       ? null
@@ -1161,15 +1255,17 @@
     if (exInfo && exInfo.text) {
       var exCfg = LANGS[exInfo.lang] || LANGS.zh;
       el("say-example-en-btn").setAttribute("aria-label", "播放" + exCfg.dispName + "翻譯讀音");
-      el("modal-example-en").innerHTML = highlightExampleTranslation(exInfo.text, meaningInfo.text, exInfo.lang);
+      var markInfo = exampleTranslationMarkInfo(exInfo.text, meaningInfo.text, exInfo.lang);
+      karaoke.exampleEn = renderKaraoke(el("modal-example-en"), markInfo.text, markInfo.ranges, granularityForLang(exInfo.lang));
       setRtl(el("modal-example-en"), exCfg.rtl);
       el("example-en-wrap").hidden = false;
-      currentExampleTranslationText = stripMarkup(exInfo.text);
+      currentExampleTranslationText = markInfo.text;
       currentExampleLang = exInfo.lang;
     } else {
       el("example-en-wrap").hidden = true;
       currentExampleTranslationText = "";
       currentExampleLang = meaningInfo.lang;
+      karaoke.exampleEn = null;
     }
 
     el("say-english-btn").hidden = !meaningInfo.text;
@@ -1247,7 +1343,7 @@
     currentWord = w;
     lastFocused = document.activeElement;
     resetFit();
-    el("modal-word-title").textContent = w.word;
+    karaoke.word = renderKaraoke(el("modal-word-title"), w.word, [], "char");
 
     if (w.pos) {
       el("modal-pos").textContent = w.pos;
@@ -1312,6 +1408,8 @@
   function closeModal() {
     stopLoop();
     if ("speechSynthesis" in window) speechSynthesis.cancel();
+    if (activeClipAudio) { try { activeClipAudio.pause(); } catch (e) {} activeClipAudio = null; }
+    stopClipKaraoke();
     el("scrim").hidden = true;
     document.body.style.overflow = "";
     cleanupWriters();
@@ -1407,7 +1505,21 @@
     });
   }
 
-  function speakText(text, statusEl) {
+  // 幫TTS嘅utterance掛返karaoke跟色事件：onboundary通常會逐個詞報返讀到
+  // 邊個字元（charIndex），用嚟即時update；唔係每個瀏覽器/聲音都支援
+  // onboundary（例如部分手機），所以一定要有onend/onerror做保險，確保
+  // 就算冇一個word boundary事件都好，播完最少都會著晒色，唔會一直半桶水。
+  function attachKaraoke(utterance, spans) {
+    if (!spans) return;
+    karaokeReset(spans);
+    utterance.onboundary = function (e) {
+      if (typeof e.charIndex === "number") karaokeSetProgress(spans, e.charIndex);
+    };
+    utterance.onend = function () { karaokeComplete(spans); };
+    utterance.onerror = function () { karaokeComplete(spans); };
+  }
+
+  function speakText(text, statusEl, spans) {
     if (!("speechSynthesis" in window)) {
       setStatus(statusEl, "呢部裝置未支援語音朗讀");
       return;
@@ -1420,10 +1532,11 @@
     u.lang = "zh-HK";
     if (voice) u.voice = voice;
     u.rate = 0.85;
+    attachKaraoke(u, spans);
     speechSynthesis.speak(u);
   }
 
-  function speakGloss(text, langKey, statusEl) {
+  function speakGloss(text, langKey, statusEl, spans) {
     var langCfg = LANGS[langKey] || LANGS.zh;
     var cfg = langCfg.tts;
     if (!("speechSynthesis" in window)) {
@@ -1439,6 +1552,7 @@
     u.lang = cfg.tag;
     if (voice) u.voice = voice;
     u.rate = cfg.rate;
+    attachKaraoke(u, spans);
     speechSynthesis.speak(u);
   }
 
@@ -1475,7 +1589,35 @@
   // manifest.json 記低每個詞語屬於邊個bundle，同埋每一句喺個bundle入面嘅
   // 開始時間同長度，播嘅時候seek過去嗰段。
   var activeClipAudio = null;
-  function playClip(slug, clipKey, fallbackFn) {
+  var activeClipRaf = null;
+  function stopClipKaraoke() {
+    if (activeClipRaf) { cancelAnimationFrame(activeClipRaf); activeClipRaf = null; }
+  }
+
+  // 預錄嘅mp3冇逐字時間標記，只可以按「播咗幾多秒 / 成段幾長」嘅比例，
+  // 粗略估計而家讀緊個文字入面第幾個字，唔會100%貼準，但好過完全冇跟色。
+  function runClipKaraoke(audio, duration, spans, totalLen) {
+    if (!spans || !totalLen) return;
+    karaokeReset(spans);
+    // audio.currentTime唔會即刻準確反映一個深入大檔案嘅seek位置，
+    // 所以改用「由playing事件觸發嗰刻開始計」嘅牆鐘時間嚟估計進度，
+    // 同schedulePause() 一直以嚟嘅計時假設一致。
+    var playStart = performance.now();
+    function tick() {
+      if (activeClipAudio !== audio) return;
+      var elapsed = (performance.now() - playStart) / 1000;
+      var frac = duration > 0 ? Math.min(1, Math.max(0, elapsed / duration)) : 1;
+      karaokeSetProgress(spans, Math.round(frac * totalLen));
+      if (frac < 1) {
+        activeClipRaf = requestAnimationFrame(tick);
+      } else {
+        karaokeComplete(spans);
+      }
+    }
+    activeClipRaf = requestAnimationFrame(tick);
+  }
+
+  function playClip(slug, clipKey, fallbackFn, spans, totalLen) {
     var wordEntry = audioManifest && audioManifest[slug];
     var entry = wordEntry && wordEntry.clips && wordEntry.clips[clipKey];
     if (!entry || !wordEntry.bundle) { fallbackFn(); return; }
@@ -1483,6 +1625,7 @@
       try { activeClipAudio.pause(); } catch (e) {}
       activeClipAudio = null;
     }
+    stopClipKaraoke();
     var loadToken = showAudioLoading();
     var audio = new Audio("audio/bundles/" + wordEntry.bundle + ".mp3");
     activeClipAudio = audio;
@@ -1497,6 +1640,8 @@
       setTimeout(function () {
         if (activeClipAudio === audio) {
           try { audio.pause(); } catch (e) {}
+          stopClipKaraoke();
+          karaokeComplete(spans);
         }
       }, stopMs);
     }
@@ -1506,6 +1651,7 @@
       try { audio.currentTime = start; } catch (e) {}
       audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
       audio.addEventListener("playing", schedulePause, { once: true });
+      audio.addEventListener("playing", function () { runClipKaraoke(audio, entry.duration, spans, totalLen); }, { once: true });
       audio.play().catch(function () { hideAudioLoading(loadToken); fallbackFn(); });
     }
     audio.addEventListener("error", function () { hideAudioLoading(loadToken); fallbackFn(); });
@@ -1518,15 +1664,25 @@
 
   // 優先播老師手動指定嘅錄音檔（如果有），搵唔到就play合併錄音入面嗰一段，
   // 兩樣都搵唔到（例如老師仲未做呢個功能）先至用返裝置內置朗讀頂住。
-  function playWithFallbacks(explicitPath, slug, clipKey, ttsFn) {
-    function tryClip() { playClip(slug, clipKey, ttsFn); }
+  function playWithFallbacks(explicitPath, slug, clipKey, ttsFn, spans, totalLen) {
+    function tryClip() { playClip(slug, clipKey, ttsFn, spans, totalLen); }
     if (explicitPath) {
       var loadToken = showAudioLoading();
       var audio = new Audio(explicitPath);
       var moved = false;
       function next() { if (moved) return; moved = true; hideAudioLoading(loadToken); tryClip(); }
       audio.addEventListener("error", next);
-      audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
+      audio.addEventListener("playing", function () {
+        hideAudioLoading(loadToken);
+        if (spans && totalLen) {
+          activeClipAudio = audio;
+          audio.addEventListener("timeupdate", function () {
+            if (activeClipAudio !== audio || !audio.duration) return;
+            karaokeSetProgress(spans, Math.round(Math.min(1, audio.currentTime / audio.duration) * totalLen));
+          });
+          audio.addEventListener("ended", function () { karaokeComplete(spans); }, { once: true });
+        }
+      }, { once: true });
       audio.play().catch(next);
     } else {
       tryClip();
@@ -1538,8 +1694,8 @@
     setStatus(el("say-status"), "");
     var slug = currentWord.audioId || jyutpingSlug(currentWord.jyutping);
     playWithFallbacks(currentWord.audio, slug, "word", function () {
-      speakText(currentWord.word, el("say-status"));
-    });
+      speakText(currentWord.word, el("say-status"), karaoke.word);
+    }, karaoke.word, currentWord.word.length);
   });
 
   el("say-example-btn").addEventListener("click", function () {
@@ -1547,8 +1703,8 @@
     setStatus(el("say-status-example"), "");
     var slug = currentWord.audioId || jyutpingSlug(currentWord.jyutping);
     playWithFallbacks(currentWord.exampleAudio, slug, "example", function () {
-      speakText(currentWord.example, el("say-status-example"));
-    });
+      speakText(currentWord.example, el("say-status-example"), karaoke.example);
+    }, karaoke.example, currentWord.example.length);
   });
 
   el("say-english-btn").addEventListener("click", function () {
@@ -1556,16 +1712,16 @@
     setStatus(el("say-status-english"), "");
     var slug = currentWord.audioId || jyutpingSlug(currentWord.jyutping);
     playWithFallbacks(null, slug, "meaning_" + currentMeaningLang, function () {
-      speakGloss(currentMeaningText, currentMeaningLang, el("say-status-english"));
-    });
+      speakGloss(currentMeaningText, currentMeaningLang, el("say-status-english"), karaoke.meaning);
+    }, karaoke.meaning, currentMeaningText.length);
   });
 
   el("say-example-en-btn").addEventListener("click", function () {
     if (!currentWord || !currentExampleTranslationText) return;
     var slug = currentWord.audioId || jyutpingSlug(currentWord.jyutping);
     playWithFallbacks(null, slug, "extrans_" + currentExampleLang, function () {
-      speakGloss(currentExampleTranslationText, currentExampleLang, null);
-    });
+      speakGloss(currentExampleTranslationText, currentExampleLang, null, karaoke.exampleEn);
+    }, karaoke.exampleEn, currentExampleTranslationText.length);
   });
 
   /* ---------------- Language switcher ---------------- */
