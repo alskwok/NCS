@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>詞語温習室</title>
+<link rel="manifest" href="site.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="theme-color" content="#2F4C7A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="詞語温習室">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
 <style>
   :root {
@@ -93,6 +101,7 @@
   }
   .topbar-titles { flex: 1 1 auto; min-width: 0; }
   .lang-switch { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+  .lang-switch--modal { margin: 0 40px 10px 0; justify-content: flex-start; }
   .lang-btn {
     border: 1px solid var(--paper-line);
     background: var(--surface);
@@ -111,6 +120,33 @@
     color: var(--surface);
   }
   .lang-btn[lang="ur"] { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; font-size: 14px; }
+
+  /* ---- 加到主畫面（PWA安裝）掣：擺喺右上角，等學生一撳就可以將個網站
+     當做App咁裝落手機主畫面，唔使成日開瀏覽器揾返個網址。 ---- */
+  .install-btn {
+    margin-left: auto;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .install-btn:hover { background: var(--brand); color: var(--surface); }
+  .install-btn-icon { font-size: 14px; line-height: 1; }
+  .install-modal { max-width: 380px; padding: 20px 20px calc(18px + env(safe-area-inset-bottom, 0px)); }
+  .install-modal-title { font-size: 18px; font-weight: 700; padding-right: 34px; margin-bottom: 4px; }
+  .install-steps { margin: 12px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .install-steps li { font-size: 14px; line-height: 1.5; color: var(--ink); }
+  .install-steps .key { display: inline-block; border: 1px solid var(--paper-line); background: var(--paper); border-radius: 6px; padding: 1px 7px; font-family: "IBM Plex Mono", monospace; font-size: 12px; margin: 0 1px; }
+
   .topbar .mark {
     width: 34px; height: 34px;
     border-radius: 6px;
@@ -546,12 +582,10 @@
       <h1>詞語温習室</h1>
       <div class="tagline">揀年級 → 揀課本 → 揀課次 → 溫習詞語</div>
     </div>
-    <div class="lang-switch" id="lang-switch" role="group" aria-label="揀意思／例句翻譯語言">
-      <button type="button" class="lang-btn" data-lang="zh">中文</button>
-      <button type="button" class="lang-btn" data-lang="en">EN</button>
-      <button type="button" class="lang-btn" data-lang="ko">한국어</button>
-      <button type="button" class="lang-btn" data-lang="ur" lang="ur">اردو</button>
-    </div>
+    <button type="button" class="install-btn" id="install-btn" hidden>
+      <span class="install-btn-icon" aria-hidden="true">⊕</span>
+      <span>加到主畫面</span>
+    </button>
   </header>
 
   <section class="step" id="step-grade" data-state="active">
@@ -608,6 +642,12 @@
 <div class="scrim" id="scrim" hidden>
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-word-title">
     <button class="modal-close" id="modal-close" aria-label="關閉">✕</button>
+    <div class="lang-switch lang-switch--modal" id="lang-switch" role="group" aria-label="揀意思／例句翻譯語言">
+      <button type="button" class="lang-btn" data-lang="zh">中文</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ko">한국어</button>
+      <button type="button" class="lang-btn" data-lang="ur" lang="ur">اردو</button>
+    </div>
     <div class="word-title-row">
       <h3 class="word-title" id="modal-word-title"></h3>
       <span class="pos-badge" id="modal-pos" hidden></span>
@@ -649,6 +689,14 @@
 
 <div class="audio-loading-overlay" id="audio-loading-overlay" hidden aria-live="polite" aria-label="錄音載入緊">
   <div class="spinner" aria-hidden="true"></div>
+</div>
+
+<div class="scrim" id="install-scrim" hidden>
+  <div class="modal install-modal" id="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+    <button class="modal-close" id="install-modal-close" aria-label="關閉">✕</button>
+    <h3 class="install-modal-title" id="install-modal-title">加到主畫面</h3>
+    <ol class="install-steps" id="install-steps"></ol>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
@@ -1846,6 +1894,77 @@
   });
 
   renderLangSwitch();
+
+  /* ---------------- 加到主畫面（PWA安裝） ----------------
+     Android／桌面Chrome呢類支援 beforeinstallprompt 嘅瀏覽器，撳掣會直接
+     彈出瀏覽器原生嘅安裝提示；iOS Safari同其他唔支援呢個API嘅瀏覽器，
+     冇辦法用程式自動觸發安裝（呢個係iOS本身嘅限制，網站做唔到），
+     所以退返用一個簡單教學（分享→加入主畫面）畀學生跟住做。 ---- */
+  (function () {
+    var installBtn = el("install-btn");
+    var installScrim = el("install-scrim");
+    var installStepsEl = el("install-steps");
+    var deferredPrompt = null;
+
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isStandalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+      window.navigator.standalone === true;
+
+    // 已經加咗落主畫面、用緊「App模式」開緊嘅話，就唔使再show呢個掣。
+    if (!isStandalone) installBtn.hidden = false;
+
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    window.addEventListener("appinstalled", function () {
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+
+    function installStepsHtml() {
+      if (isIOS) {
+        return [
+          "喺Safari最底（部分機型喺頂部）搵到 <span class=\"key\">⬆️ 分享</span> 圖示，撳佢",
+          "向下滑揾到「加入主畫面」，撳佢",
+          "撳右上角「新增」就完成喇！"
+        ];
+      }
+      return [
+        "撳瀏覽器右上角嘅選單掣（通常係 <span class=\"key\">⋮</span> 三點或者三橫）",
+        "揾「新增至主畫面」或者「安裝應用程式」，撳佢",
+        "跟住畫面指示完成安裝就得喇！"
+      ];
+    }
+
+    function openInstallInstructions() {
+      installStepsEl.innerHTML = installStepsHtml().map(function (s) { return "<li>" + s + "</li>"; }).join("");
+      installScrim.hidden = false;
+    }
+    function closeInstallInstructions() { installScrim.hidden = true; }
+
+    installBtn.addEventListener("click", function () {
+      if (deferredPrompt) {
+        var promptEvent = deferredPrompt;
+        deferredPrompt = null;
+        promptEvent.prompt();
+      } else {
+        openInstallInstructions();
+      }
+    });
+
+    el("install-modal-close").addEventListener("click", closeInstallInstructions);
+    installScrim.addEventListener("click", function (e) { if (e.target === installScrim) closeInstallInstructions(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !installScrim.hidden) closeInstallInstructions(); });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  })();
 
   /* ---------------- Boot ---------------- */
 
