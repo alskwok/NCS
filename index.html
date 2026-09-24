@@ -476,9 +476,12 @@
   /* ---- 讀音跟色（karaoke）：讀緊嗰陣，讀到嘅字／詞會逐個著色，等學生睇住跟讀 ----
      唔用背景方格highlight，淨係change文字本身嘅透明度：未讀到嘅字（不論本身係
      一般顏色定係.ro-mark紅色）用淡色顯示，讀到嗰陣先變返實色，等啲字好似逐個
-     「亮」返起咁。 */
-  .ro-tok { opacity: .32; transition: opacity .12s ease; }
-  .ro-tok.ro-read { opacity: 1; }
+     「亮」返起咁。平時（未撳掣播放之前，或者播完之後）文字要實色，淨係播緊
+     嗰陣先至將未讀到嗰啲字變淡——所以「淡」係靠.ro-unread呢個class單獨加落去，
+     底色（.ro-tok本身）一定係實色。冇用transition：直接跳轉，唔加任何淡入淡出
+     嘅延遲，等個亮燈位盡量貼實際讀音，減少睇落「唔同步」嘅感覺。 */
+  .ro-tok { opacity: 1; }
+  .ro-tok.ro-unread { opacity: .32; }
   .example-text .ro-mark, .word-title .ro-mark, .info-value .ro-mark {
     color: var(--mark-red);
     font-weight: 700;
@@ -862,22 +865,25 @@
     return spans;
   }
 
+  // 呢三個函數控制「未讀到」嗰陣要淡色（.ro-unread），一讀到就變返實色（冇呢個
+  // class）。平時（仲未播放）啲span一開始起好嗰陣本身就冇.ro-unread，所以自然
+  // 係實色；karaokeReset淨係喺「即刻要開始播」嗰一刻先至將全部字轉做淡色底。
   function karaokeReset(spans) {
     if (!spans) return;
-    spans.forEach(function (s) { s.el.classList.remove("ro-read"); });
+    spans.forEach(function (s) { s.el.classList.add("ro-unread"); });
   }
 
   function karaokeSetProgress(spans, charIndex) {
     if (!spans) return;
     spans.forEach(function (s) {
-      if (s.start < charIndex) s.el.classList.add("ro-read");
-      else s.el.classList.remove("ro-read");
+      if (s.start < charIndex) s.el.classList.remove("ro-unread");
+      else s.el.classList.add("ro-unread");
     });
   }
 
   function karaokeComplete(spans) {
     if (!spans) return;
-    spans.forEach(function (s) { s.el.classList.add("ro-read"); });
+    spans.forEach(function (s) { s.el.classList.remove("ro-unread"); });
   }
 
   function wordKey(g, b, l) { return g + "|||" + b + "|||" + l; }
@@ -1602,6 +1608,72 @@
   // 自己吐返嚟嘅WordBoundary事件計出嚟，所以幾時highlight到邊個字都好準；
   // 冇嘅（例如仲未重新生成過嘅舊錄音）就退返用「播咗幾多秒/成段幾長」嘅
   // 比例粗略估計，唔會100%貼準，但好過完全冇跟色。
+  //
+  // TTS有時會將幾個中文字一齊當一個「detection unit」報一個WordBoundary
+  // （例如「每天」兩個字得返一個mark），如果照直用就會嗰兩個字一齊跳出嚟，
+  // 而唔係一個跟住一個咁着色。呢度將「呢個mark到下一個mark之間嗰段時間」
+  // 平均攤分落佢涵蓋嘅每一個字度，估計返每個字自己嘅開始時間，等中文都
+  // 可以做到真正逐字（而唔係逐個detection unit）咁跟色。
+  //
+  // 最尾一個mark冇「下一個mark」可以攤分（成句嘢讀晒之後就冇再有boundary
+  // 事件）。第一版諗住用「成段clip嘅實際長度」（duration）當終點，但實測
+  // 發現好多錄音喺最尾一個字讀完之後，其實仲拖多咗一截靜音／停頓先至真正
+  // 結束（平均成0.79秒，有啲仲成1.2秒以上），如果照用duration做終點，個
+  // 攤分就會將呢截靜音都計埋落最尾幾個字度，害到佢哋著色比實際讀音慢咗
+  // 成成半秒甚至更耐——呢個先係「最尾幾個字成日都有延遲」嘅真正原因。
+  //
+  // 修法：唔靠duration，改用返呢個clip自己前面已經量到嘅語速（其他有真正
+  // 「下一個mark」夾住嘅組別，平均每個字要幾多秒）嚟推算最尾呢組大約會
+  // 喺幾時讀完，先合理咁貼近實際讀音；淨係喺完全冇語速資料可以參考嗰陣
+  // （好罕見）先退返去用duration做保險。
+  function expandMarksPerChar(marks, totalLen, duration) {
+    if (!marks || marks.length < 2) return marks;
+
+    var paceTime = 0, paceChars = 0;
+    for (var j = 0; j < marks.length - 1; j++) {
+      var dt = marks[j + 1][1] - marks[j][1];
+      var dc = marks[j + 1][0] - marks[j][0];
+      if (dc > 0 && dt > 0) { paceTime += dt; paceChars += dc; }
+    }
+    var avgSecPerChar = paceChars > 0 ? (paceTime / paceChars) : null;
+
+    var expanded = [];
+    for (var i = 0; i < marks.length; i++) {
+      var startIdx = marks[i][0];
+      var startTime = marks[i][1];
+      var isLast = i === marks.length - 1;
+      var endIdx = isLast ? totalLen : marks[i + 1][0];
+      var span = endIdx - startIdx;
+      var endTime;
+      if (!isLast) {
+        endTime = marks[i + 1][1];
+      } else if (avgSecPerChar != null) {
+        endTime = startTime + avgSecPerChar * span;
+        if (!(endTime > startTime) || endTime > duration) endTime = duration;
+      } else {
+        endTime = duration;
+      }
+      if (span <= 1 || !(endTime > startTime)) {
+        expanded.push([startIdx, startTime]);
+      } else {
+        for (var c = 0; c < span; c++) {
+          expanded.push([startIdx + c, startTime + (endTime - startTime) * (c / span)]);
+        }
+      }
+      // 最尾一組冇「下一個mark」嚟話畀karaokeSetProgress聽「呢組字讀完喇」，
+      // 結果就算逐個字咁攤分咗開始時間，個組入面最後嗰一個字都因為冇更後
+      // 嘅mark去反映佢「讀完」，永遠都要等到karaokeComplete（成段clip完全
+      // 播完，即係連埋尾巴嗰截靜音）先至著色——即係話唔理點攤分，最尾一個
+      // 字實際上都係跟住成段clip嘅duration嚟著色，唔係跟返估計嘅讀音時間。
+      // 所以呢度加多一個「終點」標記（[totalLen, endTime]），等最尾一個字
+      // 都可以喺估計佢讀完嗰一刻（而唔係成段clip完全播完嗰一刻）就著色。
+      if (isLast) {
+        expanded.push([endIdx, endTime]);
+      }
+    }
+    return expanded;
+  }
+
   function charIndexFromMarks(marks, elapsed) {
     var idx = 0;
     for (var i = 0; i < marks.length; i++) {
@@ -1623,11 +1695,12 @@
     // 都停響同一個位置，跟色會「卡住－然後成句一齊跳晒」，仲差過粗略估計，
     // 所以呢種情況照舊退返用比例估計，要至少兩個mark先當有意義嘅精準資料。
     var hasMarks = marks && marks.length > 1;
+    var expandedMarks = hasMarks ? expandMarksPerChar(marks, totalLen, duration) : null;
     function tick() {
       if (activeClipAudio !== audio) return;
       var elapsed = (performance.now() - playStart) / 1000;
       if (hasMarks) {
-        karaokeSetProgress(spans, charIndexFromMarks(marks, elapsed));
+        karaokeSetProgress(spans, charIndexFromMarks(expandedMarks, elapsed));
       } else {
         var frac = duration > 0 ? Math.min(1, Math.max(0, elapsed / duration)) : 1;
         karaokeSetProgress(spans, Math.round(frac * totalLen));
@@ -1700,6 +1773,7 @@
         hideAudioLoading(loadToken);
         if (spans && totalLen) {
           activeClipAudio = audio;
+          karaokeReset(spans);
           audio.addEventListener("timeupdate", function () {
             if (activeClipAudio !== audio || !audio.duration) return;
             karaokeSetProgress(spans, Math.round(Math.min(1, audio.currentTime / audio.duration) * totalLen));
