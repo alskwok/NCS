@@ -1674,16 +1674,24 @@
   // 「下一個mark」夾住嘅組別，平均每個字要幾多秒）嚟推算最尾呢組大約會
   // 喺幾時讀完，先合理咁貼近實際讀音；淨係喺完全冇語速資料可以參考嗰陣
   // （好罕見）先退返去用duration做保險。
-  function expandMarksPerChar(marks, totalLen, duration) {
-    if (!marks || marks.length < 2) return marks;
-
+  // 攞返一組marks入面「有真正下一個mark夾住」嘅組別，計返平均每個字要幾多
+  // 秒——呢個就係呢段錄音（呢個講者、呢個語速）大約嘅「語速」，其他函數
+  // 攞嚟推算冇足夠marks資料嗰啲位置大約幾時先讀完。
+  function estimatePaceFromMarks(marks) {
+    if (!marks || marks.length < 2) return null;
     var paceTime = 0, paceChars = 0;
     for (var j = 0; j < marks.length - 1; j++) {
       var dt = marks[j + 1][1] - marks[j][1];
       var dc = marks[j + 1][0] - marks[j][0];
       if (dc > 0 && dt > 0) { paceTime += dt; paceChars += dc; }
     }
-    var avgSecPerChar = paceChars > 0 ? (paceTime / paceChars) : null;
+    return paceChars > 0 ? (paceTime / paceChars) : null;
+  }
+
+  function expandMarksPerChar(marks, totalLen, duration) {
+    if (!marks || marks.length < 2) return marks;
+
+    var avgSecPerChar = estimatePaceFromMarks(marks);
 
     var expanded = [];
     for (var i = 0; i < marks.length; i++) {
@@ -1731,7 +1739,15 @@
     return idx;
   }
 
-  function runClipKaraoke(audio, duration, spans, totalLen, marks) {
+  // 好短嘅clip（例如淨係得個詞語本身，得2-4個字）成日會俾TTS當成一個
+  // 整體，得返0-1個mark，唔夠資料做逐字marks-driven highlight，要退返
+  // 用「比例估計」。但如果純粹用「播咗幾多秒 / 成段clip幾長」嚟做比例，
+  // 個clip自己個duration好多時都包埋讀完之後嗰截尾巴靜音（同expandMarksPerChar
+  // 上面段註解講嗰個問題一樣），比例估計會愈估愈慢，成個詞都會覺得慢咗
+  // 先著色。呢度嘅refPace係嚟自呢個詞語「例句」clip（幾乎100%都有齊足夠
+  // marks）量到嘅語速，攞嚟推算呢個短clip大概幾多秒先讀完（而唔係盲目
+  // 用成段duration），令到冇精準marks嘅短word clip都可以估得準啲。
+  function runClipKaraoke(audio, duration, spans, totalLen, marks, refPace) {
     if (!spans || !totalLen) return;
     karaokeReset(spans);
     // audio.currentTime唔會即刻準確反映一個深入大檔案嘅seek位置，
@@ -1744,14 +1760,27 @@
     // 所以呢種情況照舊退返用比例估計，要至少兩個mark先當有意義嘅精準資料。
     var hasMarks = marks && marks.length > 1;
     var expandedMarks = hasMarks ? expandMarksPerChar(marks, totalLen, duration) : null;
+
+    // 比例估計用嘅「終點」：有得參考語速就用「開始offset + 語速×字數」估計，
+    // 冇（好罕見）先退返用成段duration。
+    var fallbackStart = (!hasMarks && marks && marks.length) ? marks[0][1] : 0;
+    var fallbackEnd = duration;
+    if (!hasMarks && refPace != null) {
+      var est = fallbackStart + refPace * totalLen;
+      if (est > fallbackStart && est <= duration) fallbackEnd = est;
+    }
+
     function tick() {
       if (activeClipAudio !== audio) return;
       var elapsed = (performance.now() - playStart) / 1000;
       if (hasMarks) {
         karaokeSetProgress(spans, charIndexFromMarks(expandedMarks, elapsed));
-      } else {
-        var frac = duration > 0 ? Math.min(1, Math.max(0, elapsed / duration)) : 1;
+      } else if (fallbackEnd > fallbackStart) {
+        var frac = Math.min(1, Math.max(0, (elapsed - fallbackStart) / (fallbackEnd - fallbackStart)));
         karaokeSetProgress(spans, Math.round(frac * totalLen));
+      } else {
+        var frac2 = duration > 0 ? Math.min(1, Math.max(0, elapsed / duration)) : 1;
+        karaokeSetProgress(spans, Math.round(frac2 * totalLen));
       }
       if (elapsed < duration) {
         activeClipRaf = requestAnimationFrame(tick);
@@ -1766,6 +1795,12 @@
     var wordEntry = audioManifest && audioManifest[slug];
     var entry = wordEntry && wordEntry.clips && wordEntry.clips[clipKey];
     if (!entry || !wordEntry.bundle) { fallbackFn(); return; }
+    // 呢個clip自己（例如成日淨係得幾個字嘅「詞語」clip）如果得返0-1個mark，
+    // 就借返呢個詞語「例句」clip量到嘅語速（幾乎一定有齊足夠marks）嚟推算
+    // 比例估計嘅終點，好過盲目跟成段duration（詳見runClipKaraoke嘅註解）。
+    var hasOwnMarks = entry.marks && entry.marks.length > 1;
+    var refClip = !hasOwnMarks && wordEntry.clips && clipKey !== "example" ? wordEntry.clips.example : null;
+    var refPace = refClip ? estimatePaceFromMarks(refClip.marks) : null;
     if (activeClipAudio) {
       try { activeClipAudio.pause(); } catch (e) {}
       activeClipAudio = null;
@@ -1796,7 +1831,7 @@
       try { audio.currentTime = start; } catch (e) {}
       audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
       audio.addEventListener("playing", schedulePause, { once: true });
-      audio.addEventListener("playing", function () { runClipKaraoke(audio, entry.duration, spans, totalLen, entry.marks); }, { once: true });
+      audio.addEventListener("playing", function () { runClipKaraoke(audio, entry.duration, spans, totalLen, entry.marks, refPace); }, { once: true });
       audio.play().catch(function () { hideAudioLoading(loadToken); fallbackFn(); });
     }
     audio.addEventListener("error", function () { hideAudioLoading(loadToken); fallbackFn(); });
