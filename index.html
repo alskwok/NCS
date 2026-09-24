@@ -473,9 +473,12 @@
   .info-value[dir="rtl"] { font-size: 1.05em; }
   .say-btn--sm { width: 28px; height: 28px; font-size: 12px; }
 
-  /* ---- 讀音跟色（karaoke）：讀緊嗰陣，讀到嘅字／詞會逐個著色，等學生睇住跟讀 ---- */
-  .ro-tok { transition: background-color .12s ease; border-radius: 3px; }
-  .ro-tok.ro-read { background: var(--brand-soft); }
+  /* ---- 讀音跟色（karaoke）：讀緊嗰陣，讀到嘅字／詞會逐個著色，等學生睇住跟讀 ----
+     唔用背景方格highlight，淨係change文字本身嘅透明度：未讀到嘅字（不論本身係
+     一般顏色定係.ro-mark紅色）用淡色顯示，讀到嗰陣先變返實色，等啲字好似逐個
+     「亮」返起咁。 */
+  .ro-tok { opacity: .32; transition: opacity .12s ease; }
+  .ro-tok.ro-read { opacity: 1; }
   .example-text .ro-mark, .word-title .ro-mark, .info-value .ro-mark {
     color: var(--mark-red);
     font-weight: 700;
