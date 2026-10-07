@@ -571,6 +571,172 @@
   @keyframes audio-spin {
     to { transform: rotate(360deg); }
   }
+
+  /* ---- 朗讀默書 ---- */
+  .dict-entry {
+    width: 100%;
+    display: flex; align-items: center; gap: 12px;
+    text-align: left;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border: 1.5px solid var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .dict-entry:hover { background: var(--surface); }
+  .dict-entry:active { transform: scale(0.99); }
+  .dict-entry-icon { font-size: 26px; line-height: 1; flex: none; }
+  .dict-entry-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .dict-entry-text strong { font-size: 16px; }
+  .dict-entry-text small { font-size: 12px; color: var(--ink-soft); }
+  .dict-entry-chev { flex: none; font-size: 20px; color: var(--ink-faint); }
+
+  .dict-modal {
+    display: flex; flex-direction: column;
+    max-width: 640px;
+    padding: 0;
+    max-height: 92vh; max-height: 92dvh;
+  }
+  .dict-modal[data-mode="setup"] { height: 92vh; height: 92dvh; max-height: 760px; }
+  .dict-head {
+    flex: none;
+    padding: 14px 56px 10px 18px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .dict-head h3 { font-size: 19px; }
+  .dict-sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .dict-modal .modal-close { top: 10px; right: 12px; }
+  .dict-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 18px 14px; -webkit-overflow-scrolling: touch; }
+  .dict-status { flex: none; margin: 0; padding: 6px 18px; font-size: 12px; color: var(--accent); background: var(--accent-soft); }
+  .dict-label { font-size: 12px; font-weight: 700; color: var(--ink-soft); margin: 10px 0 6px; letter-spacing: .04em; }
+  .dict-label:first-child { margin-top: 0; }
+  .dict-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dict-chip {
+    border: 1px solid var(--paper-line);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
+  }
+  .dict-chip:hover { border-color: var(--brand); }
+  .dict-chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--surface); }
+  .dict-chip--word { font-size: 15px; padding: 5px 11px; }
+  .dict-toolbar { display: flex; gap: 8px; margin: 12px 0 6px; align-items: center; }
+  .dict-toolbar .dict-label { margin: 0; flex: 1 1 auto; }
+  .dict-link {
+    white-space: nowrap;
+    border: 0; background: none; padding: 4px 6px;
+    color: var(--brand-strong); font-size: 13px; font-weight: 600; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .dict-lesson { border: 1px solid var(--paper-line); background: var(--surface); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+  .dict-lesson-head { display: flex; align-items: center; gap: 4px; padding: 4px 6px 4px 8px; }
+  .dict-check {
+    flex: none; width: 36px; height: 36px; display: grid; place-items: center;
+    border: 0; background: none; cursor: pointer; padding: 0;
+  }
+  .dict-check-box {
+    width: 22px; height: 22px; border-radius: 6px;
+    border: 2px solid var(--ink-faint); background: var(--surface);
+    display: grid; place-items: center; font-size: 14px; font-weight: 700; line-height: 1; color: var(--surface);
+  }
+  .dict-check[aria-checked="true"] .dict-check-box,
+  .dict-check[aria-checked="mixed"] .dict-check-box { background: var(--brand); border-color: var(--brand); }
+  .dict-check[aria-checked="true"] .dict-check-box::after { content: "✓"; }
+  .dict-check[aria-checked="mixed"] .dict-check-box::after { content: "–"; }
+  .dict-lesson-name {
+    flex: 1 1 auto; min-width: 0; text-align: left;
+    border: 0; background: none; cursor: pointer;
+    padding: 8px 4px; color: var(--ink);
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .dict-lesson-title { font-size: 15px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dict-lesson-count { font-size: 12px; color: var(--ink-faint); }
+  .dict-lesson-count.has { color: var(--brand-strong); font-weight: 600; }
+  .dict-expand {
+    flex: none; border: 1px solid var(--paper-line); background: var(--paper); color: var(--ink-soft);
+    font-size: 12px; padding: 5px 9px; border-radius: 999px; cursor: pointer;
+  }
+  .dict-expand:hover { border-color: var(--brand); color: var(--brand-strong); }
+  .dict-lesson-words { padding: 4px 10px 12px 12px; border-top: 1px dashed var(--paper-line); background: var(--paper); }
+  .dict-lesson-words .dict-chips { padding-top: 8px; }
+  .dict-foot {
+    flex: none; display: flex; align-items: center; gap: 12px;
+    padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--paper-line);
+    background: var(--surface);
+  }
+  .dict-count { flex: 1 1 auto; font-size: 14px; color: var(--ink-soft); }
+  .dict-count b { color: var(--brand-strong); font-size: 18px; }
+  .dict-btn {
+    border: 1.5px solid var(--brand);
+    background: var(--surface);
+    color: var(--brand-strong);
+    font-size: 15px; font-weight: 700;
+    padding: 10px 18px; border-radius: 999px; cursor: pointer;
+    transition: background .12s ease, color .12s ease, opacity .12s ease;
+  }
+  .dict-btn:hover { background: var(--brand-soft); }
+  .dict-btn--primary { background: var(--brand); color: var(--surface); }
+  .dict-btn--primary:hover { background: var(--brand-strong); }
+  .dict-btn[disabled] { opacity: .4; cursor: not-allowed; }
+  .dict-btn--big { width: 100%; font-size: 20px; padding: 14px 18px; }
+
+  .dict-play { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding-top: 6px; }
+  .dict-progress-text { font-size: 15px; color: var(--ink-soft); }
+  .dict-progress-text b { font-size: 26px; color: var(--ink); font-family: "IBM Plex Mono", monospace; }
+  .dict-bar { width: 100%; height: 8px; border-radius: 999px; background: var(--paper-line); overflow: hidden; }
+  .dict-bar > span { display: block; height: 100%; width: 0; background: var(--brand); border-radius: 999px; transition: width .25s ease; }
+  .dict-replay {
+    width: 112px; height: 112px; border-radius: 50%;
+    border: 3px solid var(--brand); background: var(--brand-soft); color: var(--brand-strong);
+    font-size: 44px; cursor: pointer; display: grid; place-items: center;
+    transition: transform .1s ease, background .12s ease;
+  }
+  .dict-replay:hover { background: var(--surface); }
+  .dict-replay:active { transform: scale(0.95); }
+  .dict-replay-hint { font-size: 13px; color: var(--ink-soft); margin-top: -4px; }
+  .dict-play-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .dict-exit-row { font-size: 13px; color: var(--ink-soft); min-height: 30px; display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+  .dict-done { display: flex; flex-direction: column; gap: 12px; text-align: center; align-items: stretch; }
+  .dict-done-icon { font-size: 44px; line-height: 1; }
+  .dict-done h4 { margin: 0; font-family: "Noto Serif TC", serif; font-size: 24px; }
+  .dict-reminder-row { display: flex; align-items: center; gap: 8px; text-align: left; }
+  .dict-reminder-row .dict-reminder { flex: 1 1 auto; min-width: 0; }
+  .dict-reminder {
+    background: var(--accent-soft); border: 1.5px solid var(--accent); color: var(--ink);
+    border-radius: 12px; padding: 12px 14px; font-size: 16px; line-height: 1.6; font-weight: 600;
+  }
+  .dict-done-actions { display: flex; flex-direction: column; gap: 8px; }
+  .dict-answers { text-align: left; border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+  .dict-answer { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-bottom: 1px solid var(--paper-line); }
+  .dict-answer:last-child { border-bottom: 0; }
+  .dict-answer-no { flex: none; width: 28px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-faint); text-align: right; }
+  .dict-answer-word { font-family: "Noto Serif TC", serif; font-size: 20px; font-weight: 700; }
+  .dict-answer-jp { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-soft); flex: 1 1 auto; min-width: 0; }
+  .dict-answer .say-btn { flex: none; }
+
+  @media (max-height: 480px) {
+    .dict-head { padding-top: 8px; padding-bottom: 6px; }
+    .dict-play { gap: 6px; padding-top: 0; }
+    .dict-replay { width: 68px; height: 68px; font-size: 28px; border-width: 2px; }
+    .dict-progress-text b { font-size: 20px; }
+    .dict-btn--big { font-size: 17px; padding: 9px 14px; }
+    .dict-replay-hint { display: none; }
+    .dict-done { gap: 8px; }
+    .dict-done-icon { font-size: 28px; }
+    .dict-done h4 { font-size: 19px; }
+    .dict-reminder { font-size: 14px; padding: 8px 10px; }
+    .dict-done-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .dict-done-actions .dict-btn { padding: 8px 12px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
@@ -587,6 +753,15 @@
       <span>加到主畫面</span>
     </button>
   </header>
+
+  <button type="button" class="dict-entry" id="dict-open">
+    <span class="dict-entry-icon" aria-hidden="true">✍️</span>
+    <span class="dict-entry-text">
+      <strong>朗讀默書</strong>
+      <small>揀課或詞語，逐個朗讀，你自己寫</small>
+    </span>
+    <span class="dict-entry-chev" aria-hidden="true">›</span>
+  </button>
 
   <section class="step" id="step-grade" data-state="active">
     <button class="step-head" id="head-grade" aria-expanded="true">
@@ -696,6 +871,55 @@
     <button class="modal-close" id="install-modal-close" aria-label="關閉">✕</button>
     <h3 class="install-modal-title" id="install-modal-title">加到主畫面</h3>
     <ol class="install-steps" id="install-steps"></ol>
+  </div>
+</div>
+
+<div class="scrim" id="dict-scrim" hidden>
+  <div class="modal dict-modal" id="dict-modal" data-mode="setup" role="dialog" aria-modal="true" aria-labelledby="dict-title">
+    <button class="modal-close" id="dict-close" aria-label="關閉">✕</button>
+    <div class="dict-head">
+      <h3 id="dict-title">✍️ 朗讀默書</h3>
+      <div class="dict-sub" id="dict-sub">剔課次，或撳「揀詞語」揀個別詞語；次序會隨機</div>
+    </div>
+    <p class="dict-status" id="dict-status" hidden></p>
+
+    <div class="dict-body" id="dict-body">
+      <div id="dict-setup"></div>
+
+      <div class="dict-play" id="dict-play" hidden>
+        <div class="dict-progress-text" id="dict-progress-text" aria-live="polite"></div>
+        <div class="dict-bar" aria-hidden="true"><span id="dict-bar-fill"></span></div>
+        <button type="button" class="dict-replay" id="dict-replay" aria-label="再聽一次">🔊</button>
+        <div class="dict-replay-hint">撳一下再聽一次</div>
+        <div class="dict-play-row">
+          <button type="button" class="dict-btn" id="dict-example">📖 聽例句</button>
+        </div>
+        <button type="button" class="dict-btn dict-btn--primary dict-btn--big" id="dict-next">下一個 ▶</button>
+        <div class="dict-exit-row" id="dict-exit-row">
+          <button type="button" class="dict-link" id="dict-exit">退出默書</button>
+        </div>
+      </div>
+
+      <div class="dict-done" id="dict-done" hidden>
+        <div class="dict-done-icon" aria-hidden="true">📝</div>
+        <h4>默書已經結束</h4>
+        <div class="dict-reminder-row">
+          <div class="dict-reminder" id="dict-reminder" role="status"></div>
+          <button type="button" class="say-btn" id="dict-end-say" aria-label="再聽一次完結提示">🔊</button>
+        </div>
+        <div class="dict-done-actions">
+          <button type="button" class="dict-btn dict-btn--primary" id="dict-show-answers" aria-expanded="false">顯示答案</button>
+          <button type="button" class="dict-btn" id="dict-again">再默一次（重新隨機）</button>
+          <button type="button" class="dict-btn" id="dict-back">返回揀詞語</button>
+        </div>
+        <div class="dict-answers" id="dict-answers" hidden></div>
+      </div>
+    </div>
+
+    <div class="dict-foot" id="dict-foot">
+      <div class="dict-count" id="dict-count"></div>
+      <button type="button" class="dict-btn dict-btn--primary" id="dict-start" disabled>開始默書</button>
+    </div>
   </div>
 </div>
 
@@ -1828,6 +2052,8 @@
     function begin() {
       if (started) return;
       started = true;
+      // 如果載入嘅期間用戶已經撳咗下一個／關咗畫面，呢段錄音就唔好再播
+      if (activeClipAudio !== audio) { hideAudioLoading(loadToken); return; }
       try { audio.currentTime = start; } catch (e) {}
       audio.addEventListener("playing", function () { hideAudioLoading(loadToken); }, { once: true });
       audio.addEventListener("playing", schedulePause, { once: true });
@@ -1999,6 +2225,423 @@
         navigator.serviceWorker.register("sw.js").catch(function () {});
       });
     }
+  })();
+
+  /* ---------------- 朗讀默書 ---------------- */
+  // 流程：揀年級／課本 → 剔課次（成課）或者展開再揀個別詞語 → 開始默書。
+  // 詞語次序隨機，一次讀一個，要學生自己撳「下一個」先會讀下一個；
+  // 最後一個撳完就顯示「默書已經結束，請自己檢查」。
+  (function () {
+    var dict = { grade: null, book: null, sel: {}, expanded: {}, queue: [], idx: 0,
+                 lastNextAt: 0, mode: "setup", gen: 0 };
+    var scrim = el("dict-scrim");
+
+    function shuffle(a) {
+      var r = a.slice();
+      for (var i = r.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = r[i]; r[i] = r[j]; r[j] = t;
+      }
+      return r;
+    }
+
+    function stopAllAudio() {
+      dict.gen++; // 令仲未播嘅TTS後備唔會遲啲先彈出嚟
+      if ("speechSynthesis" in window) speechSynthesis.cancel();
+      if (activeClipAudio) { try { activeClipAudio.pause(); } catch (e) {} activeClipAudio = null; }
+      stopClipKaraoke();
+      audioLoadToken++;
+      var ov = el("audio-loading-overlay");
+      if (ov) ov.hidden = true;
+    }
+
+    function showMode(m) {
+      dict.mode = m;
+      el("dict-modal").setAttribute("data-mode", m);
+      el("dict-setup").hidden = m !== "setup";
+      el("dict-foot").hidden = m !== "setup";
+      el("dict-play").hidden = m !== "play";
+      el("dict-done").hidden = m !== "done";
+      el("dict-sub").textContent =
+        m === "setup" ? "剔課次，或撳「揀詞語」揀個別詞語；次序會隨機" :
+        m === "play" ? "聽到讀音就寫喺紙上，寫好再撳「下一個」" : "全部讀晒喇";
+      setStatus(el("dict-status"), "");
+      el("dict-body").scrollTop = 0;
+    }
+
+    /* ----- 揀詞語畫面 ----- */
+
+    function chip(label, active, onClick, cls) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "dict-chip" + (cls ? " " + cls : "");
+      b.textContent = label;
+      b.setAttribute("aria-pressed", active ? "true" : "false");
+      b.addEventListener("click", onClick);
+      return b;
+    }
+
+    function selCount(key) { return dict.sel[key] ? Object.keys(dict.sel[key]).length : 0; }
+
+    function collectSelected() {
+      var seen = {}, out = [];
+      Object.keys(dict.sel).forEach(function (key) {
+        var words = DATA.words[key] || [];
+        Object.keys(dict.sel[key]).map(Number).sort(function (a, b) { return a - b; }).forEach(function (i) {
+          var w = words[i];
+          if (w && !seen[w.word]) { seen[w.word] = true; out.push(w); }
+        });
+      });
+      return out;
+    }
+
+    function updateFooter() {
+      var n = collectSelected().length;
+      el("dict-count").innerHTML = n ? "已揀 <b>" + n + "</b> 個詞語" : "未揀詞語";
+      el("dict-start").disabled = n === 0;
+    }
+
+    function buildLessonRow(ls) {
+      var key = wordKey(dict.grade, dict.book, ls);
+      var words = DATA.words[key] || [];
+      var row = document.createElement("div");
+      row.className = "dict-lesson";
+
+      var head = document.createElement("div");
+      head.className = "dict-lesson-head";
+      var check = document.createElement("button");
+      check.type = "button";
+      check.className = "dict-check";
+      check.setAttribute("role", "checkbox");
+      check.setAttribute("aria-label", "揀成課：" + ls);
+      check.innerHTML = '<span class="dict-check-box"></span>';
+      var name = document.createElement("button");
+      name.type = "button";
+      name.className = "dict-lesson-name";
+      var title = document.createElement("span");
+      title.className = "dict-lesson-title";
+      title.textContent = ls;
+      var count = document.createElement("span");
+      count.className = "dict-lesson-count";
+      name.appendChild(title);
+      name.appendChild(count);
+      var expand = document.createElement("button");
+      expand.type = "button";
+      expand.className = "dict-expand";
+      head.appendChild(check);
+      head.appendChild(name);
+      head.appendChild(expand);
+      row.appendChild(head);
+
+      var wordsBox = null, chipEls = [];
+
+      function refresh() {
+        var n = selCount(key);
+        check.setAttribute("aria-checked", n === 0 ? "false" : (n === words.length ? "true" : "mixed"));
+        count.textContent = n ? "已揀 " + n + " / " + words.length + " 個" : words.length + " 個詞語";
+        count.className = "dict-lesson-count" + (n ? " has" : "");
+        chipEls.forEach(function (c, i) {
+          c.setAttribute("aria-pressed", dict.sel[key] && dict.sel[key][i] ? "true" : "false");
+        });
+        var open = !!dict.expanded[key];
+        expand.textContent = open ? "收埋 ▴" : "揀詞語 ▾";
+        expand.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      function toggleAll() {
+        if (selCount(key) === words.length) delete dict.sel[key];
+        else { dict.sel[key] = {}; words.forEach(function (w, i) { dict.sel[key][i] = true; }); }
+        refresh(); updateFooter();
+      }
+
+      function buildWords() {
+        wordsBox = document.createElement("div");
+        wordsBox.className = "dict-lesson-words";
+        var chips = document.createElement("div");
+        chips.className = "dict-chips";
+        words.forEach(function (w, i) {
+          var c = chip(w.word, false, function () {
+            if (!dict.sel[key]) dict.sel[key] = {};
+            if (dict.sel[key][i]) { delete dict.sel[key][i]; if (!selCount(key)) delete dict.sel[key]; }
+            else dict.sel[key][i] = true;
+            refresh(); updateFooter();
+          }, "dict-chip--word");
+          chipEls.push(c);
+          chips.appendChild(c);
+        });
+        wordsBox.appendChild(chips);
+        row.appendChild(wordsBox);
+      }
+
+      function setOpen(open) {
+        dict.expanded[key] = open;
+        if (open && !wordsBox) buildWords();
+        if (wordsBox) wordsBox.hidden = !open;
+        refresh();
+      }
+
+      if (!words.length) {
+        check.disabled = true; name.disabled = true; expand.hidden = true;
+        count.textContent = "未有詞語";
+      } else {
+        check.addEventListener("click", toggleAll);
+        name.addEventListener("click", toggleAll);
+        expand.addEventListener("click", function () { setOpen(!dict.expanded[key]); });
+      }
+      if (dict.expanded[key]) setOpen(true); else refresh();
+      return row;
+    }
+
+    function bulkBook(on) {
+      var lessons = DATA.structure[dict.grade].lessons[dict.book] || [];
+      lessons.forEach(function (ls) {
+        var key = wordKey(dict.grade, dict.book, ls);
+        var words = DATA.words[key] || [];
+        if (on && words.length) { dict.sel[key] = {}; words.forEach(function (w, i) { dict.sel[key][i] = true; }); }
+        else delete dict.sel[key];
+      });
+      var top = el("dict-body").scrollTop;
+      renderSetup();
+      el("dict-body").scrollTop = top;
+    }
+
+    function renderSetup() {
+      var box = el("dict-setup");
+      box.innerHTML = "";
+      var lbl = document.createElement("div");
+      lbl.className = "dict-label"; lbl.textContent = "年級";
+      box.appendChild(lbl);
+      var gr = document.createElement("div");
+      gr.className = "dict-chips";
+      DATA.grades.forEach(function (g) {
+        gr.appendChild(chip(g, g === dict.grade, function () {
+          dict.grade = g;
+          dict.book = DATA.structure[g].books[0];
+          renderSetup();
+        }));
+      });
+      box.appendChild(gr);
+
+      var lbl2 = document.createElement("div");
+      lbl2.className = "dict-label"; lbl2.textContent = "課本";
+      box.appendChild(lbl2);
+      var bk = document.createElement("div");
+      bk.className = "dict-chips";
+      DATA.structure[dict.grade].books.forEach(function (b) {
+        bk.appendChild(chip(b, b === dict.book, function () { dict.book = b; renderSetup(); }));
+      });
+      box.appendChild(bk);
+
+      var bar = document.createElement("div");
+      bar.className = "dict-toolbar";
+      var l3 = document.createElement("div");
+      l3.className = "dict-label"; l3.textContent = "課次";
+      var all = document.createElement("button");
+      all.type = "button"; all.className = "dict-link"; all.textContent = "全選本冊";
+      all.addEventListener("click", function () { bulkBook(true); });
+      var none = document.createElement("button");
+      none.type = "button"; none.className = "dict-link"; none.textContent = "清除本冊";
+      none.addEventListener("click", function () { bulkBook(false); });
+      bar.appendChild(l3); bar.appendChild(all); bar.appendChild(none);
+      box.appendChild(bar);
+
+      (DATA.structure[dict.grade].lessons[dict.book] || []).forEach(function (ls) {
+        box.appendChild(buildLessonRow(ls));
+      });
+
+      var tip = document.createElement("p");
+      tip.className = "empty-note";
+      tip.textContent = "提示：轉去其他課本都會記住你揀過嘅詞語，可以跨課本一齊默。";
+      box.appendChild(tip);
+      updateFooter();
+    }
+
+    /* ----- 開關 ----- */
+
+    function openDict() {
+      if (!DATA) return;
+      if (!dict.grade || !DATA.structure[dict.grade]) dict.grade = state.grade || DATA.grades[0];
+      var books = DATA.structure[dict.grade].books;
+      if (!dict.book || books.indexOf(dict.book) < 0) {
+        dict.book = (state.grade === dict.grade && state.book && books.indexOf(state.book) >= 0) ? state.book : books[0];
+      }
+      lastFocusedBeforeDict = document.activeElement;
+      showMode("setup");
+      renderSetup();
+      scrim.hidden = false;
+      document.body.style.overflow = "hidden";
+      el("dict-close").focus();
+    }
+    var lastFocusedBeforeDict = null;
+
+    function closeDict() {
+      stopAllAudio();
+      scrim.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocusedBeforeDict && lastFocusedBeforeDict.focus) lastFocusedBeforeDict.focus();
+    }
+
+    // 默緊書嗰陣撳×／Esc／退出：唔好一撳就走，行內問多一次，免得手滑冇咗進度。
+    function requestExit() {
+      if (dict.mode !== "play") { closeDict(); return; }
+      var row = el("dict-exit-row");
+      row.innerHTML = '<span>確定退出默書？</span>' +
+        '<button type="button" class="dict-link" id="dict-exit-yes">退出</button>' +
+        '<button type="button" class="dict-link" id="dict-exit-no">繼續默書</button>';
+      el("dict-exit-yes").addEventListener("click", closeDict);
+      el("dict-exit-no").addEventListener("click", resetExitRow);
+      el("dict-exit-no").focus();
+    }
+    function resetExitRow() {
+      el("dict-exit-row").innerHTML = '<button type="button" class="dict-link" id="dict-exit">退出默書</button>';
+      el("dict-exit").addEventListener("click", requestExit);
+    }
+
+    /* ----- 默書 ----- */
+
+    function playWord(w, kind) {
+      var gen = ++dict.gen;
+      var statusEl = el("dict-status");
+      setStatus(statusEl, "");
+      function guard(fn) { return function () { if (dict.gen === gen && !scrim.hidden) fn(); }; }
+      var slug = w.audioId || jyutpingSlug(w.jyutping);
+      if (kind === "example" && w.example) {
+        playWithFallbacks(w.exampleAudio, slug, "example",
+          guard(function () { speakText(w.example, statusEl, null); }), null, 0);
+      } else {
+        playWithFallbacks(w.audio, slug, "word",
+          guard(function () { speakText(w.word, statusEl, null); }), null, 0);
+      }
+    }
+
+    function renderItem() {
+      var total = dict.queue.length;
+      var w = dict.queue[dict.idx];
+      el("dict-progress-text").innerHTML = "第 <b>" + (dict.idx + 1) + "</b> / " + total + " 個";
+      el("dict-bar-fill").style.width = (dict.idx / total * 100) + "%";
+      el("dict-example").hidden = !w.example;
+      el("dict-next").textContent = dict.idx === total - 1 ? "完成默書 ✓" : "下一個 ▶";
+      resetExitRow();
+    }
+
+    function startDictation() {
+      var list = collectSelected();
+      if (!list.length) return;
+      stopAllAudio();
+      dict.queue = shuffle(list);
+      dict.idx = 0;
+      dict.lastNextAt = Date.now();
+      showMode("play");
+      renderItem();
+      playWord(dict.queue[0], "word");
+      el("dict-next").focus();
+    }
+
+    function nextItem() {
+      if (dict.mode !== "play") return;
+      var now = Date.now();
+      if (now - dict.lastNextAt < 450) return; // 防止連撳兩下跳咗一個
+      dict.lastNextAt = now;
+      if (dict.idx >= dict.queue.length - 1) { finishDictation(); return; }
+      dict.idx++;
+      renderItem();
+      playWord(dict.queue[dict.idx], "word");
+    }
+
+    // 完結提示用語音讀出嚟：優先播audio/dictation_end.mp3（同其他詞語一樣用
+    // generate_audio.py嗰個粵語聲音生成），冇呢個檔或者播唔到，就用裝置內置
+    // 粵語朗讀頂住。
+    var END_TEXT = "默書結束喇，請自己檢查寫得啱唔啱。";
+    function speakEnd() {
+      stopAllAudio();
+      var gen = dict.gen;
+      var statusEl = el("dict-status");
+      var fell = false;
+      function fallback() {
+        if (fell || dict.gen !== gen || scrim.hidden) return;
+        fell = true;
+        speakText(END_TEXT, statusEl, null);
+      }
+      var audio = new Audio("audio/dictation_end.mp3");
+      activeClipAudio = audio;
+      audio.addEventListener("error", fallback);
+      audio.play().catch(fallback);
+    }
+
+    function finishDictation() {
+      stopAllAudio();
+      var n = dict.queue.length;
+      el("dict-bar-fill").style.width = "100%";
+      el("dict-reminder").textContent = "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 " + n + " 個詞語）";
+      el("dict-answers").hidden = true;
+      el("dict-answers").innerHTML = "";
+      el("dict-show-answers").textContent = "顯示答案";
+      el("dict-show-answers").setAttribute("aria-expanded", "false");
+      showMode("done");
+      el("dict-show-answers").focus();
+      speakEnd();
+    }
+
+    function toggleAnswers() {
+      var box = el("dict-answers");
+      var open = box.hidden;
+      if (open && !box.childNodes.length) {
+        dict.queue.forEach(function (w, i) {
+          var r = document.createElement("div");
+          r.className = "dict-answer";
+          var no = document.createElement("span"); no.className = "dict-answer-no"; no.textContent = (i + 1) + ".";
+          var wd = document.createElement("span"); wd.className = "dict-answer-word"; wd.textContent = w.word;
+          var jp = document.createElement("span"); jp.className = "dict-answer-jp"; jp.textContent = w.jyutping || "";
+          var sb = document.createElement("button");
+          sb.type = "button"; sb.className = "say-btn say-btn--sm"; sb.textContent = "🔊";
+          sb.setAttribute("aria-label", "播放 " + w.word);
+          sb.addEventListener("click", function () { playWord(w, "word"); });
+          r.appendChild(no); r.appendChild(wd); r.appendChild(jp); r.appendChild(sb);
+          box.appendChild(r);
+        });
+      }
+      box.hidden = !open;
+      el("dict-show-answers").textContent = open ? "收埋答案" : "顯示答案";
+      el("dict-show-answers").setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+
+    /* ----- 事件 ----- */
+
+    el("dict-open").addEventListener("click", openDict);
+    el("dict-close").addEventListener("click", requestExit);
+    scrim.addEventListener("click", function (e) { if (e.target === scrim) requestExit(); });
+    el("dict-start").addEventListener("click", startDictation);
+    el("dict-replay").addEventListener("click", function () {
+      if (dict.mode === "play") playWord(dict.queue[dict.idx], "word");
+    });
+    el("dict-example").addEventListener("click", function () {
+      if (dict.mode === "play") playWord(dict.queue[dict.idx], "example");
+    });
+    el("dict-next").addEventListener("click", nextItem);
+    el("dict-exit").addEventListener("click", requestExit);
+    el("dict-show-answers").addEventListener("click", toggleAnswers);
+    el("dict-end-say").addEventListener("click", speakEnd);
+    el("dict-again").addEventListener("click", function () {
+      stopAllAudio();
+      dict.queue = shuffle(dict.queue);
+      dict.idx = 0;
+      dict.lastNextAt = Date.now();
+      showMode("play");
+      renderItem();
+      playWord(dict.queue[0], "word");
+      el("dict-next").focus();
+    });
+    el("dict-back").addEventListener("click", function () {
+      stopAllAudio();
+      showMode("setup");
+      renderSetup();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (scrim.hidden) return;
+      if (e.key === "Escape") { requestExit(); return; }
+      if (dict.mode === "play" && e.key === "ArrowRight") { e.preventDefault(); nextItem(); }
+    });
   })();
 
   /* ---------------- Boot ---------------- */
