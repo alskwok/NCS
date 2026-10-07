@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="詞語温習室">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&display=swap">
 <style>
   :root {
     --paper: #FAF6EC;
@@ -29,7 +29,18 @@
     --success: #3F8F5F;
     --mark-red: #D6362B;
     --shadow: 0 10px 30px -12px rgba(43, 42, 40, 0.28);
-    font-family: "Noto Sans TC", "Noto Serif TC", sans-serif;
+    /* 全站中文字用「標楷體」風格：裝置自己有標楷體（Windows 嘅標楷體／DFKai-SB、
+       Mac 嘅 BiauKai／楷體-繁）就用裝置嘅，冇嘅（手機、Chromebook 等）就用網上字體
+       「霞鶩文楷 TC」（LXGW WenKai TC，楷書風格）頂上。KaiLocal 淨係管中日韓漢字
+       範圍，英文／數字唔會被標楷體攞走。 */
+    --font-kai: "KaiLocal", "LXGW WenKai TC", "Noto Serif TC", "Noto Sans TC", serif;
+    font-family: var(--font-kai);
+  }
+  @font-face {
+    font-family: "KaiLocal";
+    src: local("標楷體"), local("DFKai-SB"), local("BiauKai"), local("Kaiti TC"), local("Kaiti SC"),
+         local("STKaiti"), local("KaiTi"), local("Kai");
+    unicode-range: U+2E80-2FDF, U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -71,10 +82,10 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: var(--font-kai);
     line-height: 1.5;
   }
-  h1, h2, h3 { font-family: "Noto Serif TC", serif; margin: 0; text-wrap: balance; }
+  h1, h2, h3 { font-family: var(--font-kai); margin: 0; text-wrap: balance; }
   button { font-family: inherit; }
   [hidden] { display: none !important; }
 
@@ -162,7 +173,7 @@
     background: var(--brand);
     color: var(--surface);
     display: grid; place-items: center;
-    font-family: "Noto Serif TC", serif;
+    font-family: var(--font-kai);
     font-weight: 700;
     font-size: 17px;
     flex: none;
@@ -271,7 +282,7 @@
     text-align: center;
     background: linear-gradient(160deg, var(--brand), var(--brand-strong));
     color: var(--paper);
-    font-family: "Noto Serif TC", serif;
+    font-family: var(--font-kai);
     font-weight: 700;
     font-size: 15px;
     line-height: 1.4;
@@ -316,7 +327,7 @@
     width: 74px; height: 74px;
     border-radius: 6px;
     display: grid; place-items: center;
-    font-family: "Noto Serif TC", serif;
+    font-family: var(--font-kai);
     font-weight: 700;
     font-size: 30px;
     color: var(--ink);
@@ -716,7 +727,7 @@
 
   .dict-done { display: flex; flex-direction: column; gap: 12px; text-align: center; align-items: stretch; }
   .dict-done-icon { font-size: 44px; line-height: 1; }
-  .dict-done h4 { margin: 0; font-family: "Noto Serif TC", serif; font-size: 24px; }
+  .dict-done h4 { margin: 0; font-family: var(--font-kai); font-size: 24px; }
   .dict-reminder-row { display: flex; align-items: center; gap: 8px; text-align: left; }
   .dict-reminder-row .dict-reminder { flex: 1 1 auto; min-width: 0; }
   .dict-reminder {
@@ -728,7 +739,7 @@
   .dict-answer { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-bottom: 1px solid var(--paper-line); }
   .dict-answer:last-child { border-bottom: 0; }
   .dict-answer-no { flex: none; width: 28px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-faint); text-align: right; }
-  .dict-answer-word { font-family: "Noto Serif TC", serif; font-size: 20px; font-weight: 700; }
+  .dict-answer-word { font-family: var(--font-kai); font-size: 20px; font-weight: 700; }
   .dict-answer-jp { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-soft); flex: 1 1 auto; min-width: 0; }
   .dict-answer .say-btn { flex: none; }
 
@@ -1547,7 +1558,7 @@
           }
         });
       } else {
-        canvas.innerHTML = '<div style="display:grid;place-items:center;height:100%;font-family:\'Noto Serif TC\',serif;font-size:' + Math.round(size * 0.35) + 'px;color:' + ink + '">' + ch + "</div>";
+        canvas.innerHTML = '<div style="display:grid;place-items:center;height:100%;font-family:\'KaiLocal\',\'LXGW WenKai TC\',\'Noto Serif TC\',serif;font-size:' + Math.round(size * 0.35) + 'px;color:' + ink + '">' + ch + "</div>";
       }
       activeWriters.push(writer);
     });
