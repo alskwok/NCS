@@ -29,12 +29,24 @@
     --success: #3F8F5F;
     --mark-red: #D6362B;
     --shadow: 0 10px 30px -12px rgba(43, 42, 40, 0.28);
-    /* 全站中文字用「標楷體」風格：裝置自己有標楷體（Windows 嘅標楷體／DFKai-SB、
-       Mac 嘅 BiauKai／楷體-繁）就用裝置嘅，冇嘅（手機、Chromebook 等）就用網上字體
-       「霞鶩文楷 TC」（LXGW WenKai TC，楷書風格）頂上。KaiLocal 淨係管中日韓漢字
-       範圍，英文／數字唔會被標楷體攞走。 */
-    --font-kai: "KaiLocal", "LXGW WenKai TC", "Noto Serif TC", "Noto Sans TC", serif;
+    /* 全站中文字用楷體風格：首選「大萌秀楷」（自家字體檔，所有裝置一樣）；
+       罕用字唔喺縮細版入面，就用裝置自己嘅標楷體（Windows 嘅標楷體／DFKai-SB、
+       Mac 嘅 BiauKai／楷體-繁），再冇就用網上字體「霞鶩文楷 TC」頂上。字體只管
+       中日韓漢字範圍，英文／數字唔會被攞走。 */
+    --font-kai: "DaMengXiuKai", "KaiLocal", "LXGW WenKai TC", "Noto Serif TC", "Noto Sans TC", serif;
     font-family: var(--font-kai);
+    /* 大萌秀楷只有一個字重（本身已經幾粗），唔好由瀏覽器再加粗，否則筆畫會糊成一團 */
+    font-synthesis-weight: none;
+  }
+  /* 主字體：大萌秀楷（完整字體檔，所有字都有）。fonts/DaMengXiuKai.woff2 係同一隻
+     字體壓縮咗嘅格式（下載細啲、字形完全一樣）；原檔 fonts/DaMengXiuKai-Regular-2.ttf
+     做後備同備份。字體入面冇嘅字（例如「衞」）會自動用下面嗰啲楷體頂上。 */
+  @font-face {
+    font-family: "DaMengXiuKai";
+    src: url("fonts/DaMengXiuKai.woff2") format("woff2"),
+         url("fonts/DaMengXiuKai-Regular-2.ttf") format("truetype");
+    font-display: swap;
+    unicode-range: U+2E80-2FDF, U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
   }
   @font-face {
     font-family: "KaiLocal";
@@ -1558,7 +1570,7 @@
           }
         });
       } else {
-        canvas.innerHTML = '<div style="display:grid;place-items:center;height:100%;font-family:\'KaiLocal\',\'LXGW WenKai TC\',\'Noto Serif TC\',serif;font-size:' + Math.round(size * 0.35) + 'px;color:' + ink + '">' + ch + "</div>";
+        canvas.innerHTML = '<div style="display:grid;place-items:center;height:100%;font-family:\'DaMengXiuKai\',\'KaiLocal\',\'LXGW WenKai TC\',\'Noto Serif TC\',serif;font-size:' + Math.round(size * 0.35) + 'px;color:' + ink + '">' + ch + "</div>";
       }
       activeWriters.push(writer);
     });
