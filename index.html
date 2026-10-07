@@ -123,6 +123,15 @@
 
   /* ---- 加到主畫面（PWA安裝）掣：擺喺右上角，等學生一撳就可以將個網站
      當做App咁裝落手機主畫面，唔使成日開瀏覽器揾返個網址。 ---- */
+  .site-lang { display: flex; gap: 2px; margin-left: auto; flex: none; padding: 2px; border: 1px solid var(--paper-line); border-radius: 999px; background: var(--surface); }
+  .site-lang + .install-btn { margin-left: 0; }
+  .site-lang-btn {
+    border: 0; background: none; color: var(--ink-soft);
+    font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .site-lang-btn:hover { color: var(--brand-strong); }
+  .site-lang-btn[aria-pressed="true"] { background: var(--brand); color: var(--surface); }
   .install-btn {
     margin-left: auto;
     flex: none;
@@ -745,20 +754,24 @@
   <header class="topbar">
     <div class="mark">語</div>
     <div class="topbar-titles">
-      <h1>詞語温習室</h1>
-      <div class="tagline">揀年級 → 揀課本 → 揀課次 → 溫習詞語</div>
+      <h1 data-i18n="app_title">詞語温習室</h1>
+      <div class="tagline" data-i18n="tagline">揀年級 → 揀課本 → 揀課次 → 溫習詞語</div>
+    </div>
+    <div class="site-lang" id="site-lang" role="group" data-i18n-label="aria_site_lang" aria-label="介面語言 Interface language">
+      <button type="button" class="site-lang-btn" data-site-lang="zh" lang="zh-Hant">中文</button>
+      <button type="button" class="site-lang-btn" data-site-lang="en" lang="en">EN</button>
     </div>
     <button type="button" class="install-btn" id="install-btn" hidden>
       <span class="install-btn-icon" aria-hidden="true">⊕</span>
-      <span>加到主畫面</span>
+      <span data-i18n="install">加到主畫面</span>
     </button>
   </header>
 
   <button type="button" class="dict-entry" id="dict-open">
     <span class="dict-entry-icon" aria-hidden="true">✍️</span>
     <span class="dict-entry-text">
-      <strong>朗讀默書</strong>
-      <small>揀課或詞語，逐個朗讀，你自己寫</small>
+      <strong data-i18n="dict_entry_title">朗讀默書</strong>
+      <small data-i18n="dict_entry_sub">揀課或詞語，逐個朗讀，你自己寫</small>
     </span>
     <span class="dict-entry-chev" aria-hidden="true">›</span>
   </button>
@@ -767,7 +780,7 @@
     <button class="step-head" id="head-grade" aria-expanded="true">
       <span class="step-badge">1</span>
       <span class="step-titles">
-        <span class="step-eyebrow">Step 1 · 年級</span>
+        <span class="step-eyebrow" data-i18n="eyebrow_grade">Step 1 · 年級</span>
         <span class="step-value placeholder" id="value-grade">請選擇你的年級</span>
       </span>
       <span class="step-chevron" id="chevron-grade">▾</span>
@@ -781,7 +794,7 @@
     <button class="step-head" id="head-book" aria-expanded="false" disabled>
       <span class="step-badge">2</span>
       <span class="step-titles">
-        <span class="step-eyebrow">Step 2 · 課本</span>
+        <span class="step-eyebrow" data-i18n="eyebrow_book">Step 2 · 課本</span>
         <span class="step-value placeholder" id="value-book">請先選擇年級</span>
       </span>
       <span class="step-chevron" id="chevron-book">▾</span>
@@ -795,7 +808,7 @@
     <button class="step-head" id="head-lesson" aria-expanded="false" disabled>
       <span class="step-badge">3</span>
       <span class="step-titles">
-        <span class="step-eyebrow">Step 3 · 課次</span>
+        <span class="step-eyebrow" data-i18n="eyebrow_lesson">Step 3 · 課次</span>
         <span class="step-value placeholder" id="value-lesson">請先選擇課本</span>
       </span>
       <span class="step-chevron" id="chevron-lesson">▾</span>
@@ -816,8 +829,8 @@
 
 <div class="scrim" id="scrim" hidden>
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-word-title">
-    <button class="modal-close" id="modal-close" aria-label="關閉">✕</button>
-    <div class="lang-switch lang-switch--modal" id="lang-switch" role="group" aria-label="揀意思／例句翻譯語言">
+    <button class="modal-close" id="modal-close" data-i18n-label="close" aria-label="關閉">✕</button>
+    <div class="lang-switch lang-switch--modal" id="lang-switch" role="group" data-i18n-label="aria_meaning_lang" aria-label="揀意思／例句翻譯語言">
       <button type="button" class="lang-btn" data-lang="zh">中文</button>
       <button type="button" class="lang-btn" data-lang="en">EN</button>
       <button type="button" class="lang-btn" data-lang="ko">한국어</button>
@@ -826,33 +839,33 @@
     <div class="word-title-row">
       <h3 class="word-title" id="modal-word-title"></h3>
       <span class="pos-badge" id="modal-pos" hidden></span>
-      <button class="say-btn" id="say-btn" type="button" aria-label="播放讀音">🔊</button>
+      <button class="say-btn" id="say-btn" type="button" data-i18n-label="aria_say" aria-label="播放讀音">🔊</button>
     </div>
     <div class="word-subtitle jyutping" id="modal-jyutping"></div>
     <span class="say-status" id="say-status" hidden></span>
 
     <div class="stroke-panel" id="stroke-panel">
       <div class="stroke-boxes" id="stroke-boxes"></div>
-      <button class="replay-btn" id="replay-btn">🔁 重播筆順</button>
+      <button class="replay-btn" id="replay-btn" data-i18n="replay_stroke">🔁 重播筆順</button>
     </div>
 
     <div class="info-panel">
       <div class="info-row">
         <span class="info-label" id="label-english">英文意思</span>
         <span class="info-value" id="modal-english"></span>
-        <button class="say-btn say-btn--sm" id="say-english-btn" type="button" aria-label="播放讀音">🔊</button>
+        <button class="say-btn say-btn--sm" id="say-english-btn" type="button" data-i18n-label="aria_say" aria-label="播放讀音">🔊</button>
       </div>
       <span class="say-status" id="say-status-english" hidden></span>
 
       <div class="example">
         <p class="example-text" id="modal-example"></p>
-        <button class="say-btn say-btn--sm" id="say-example-btn" type="button" aria-label="播放例句讀音">🔊</button>
+        <button class="say-btn say-btn--sm" id="say-example-btn" type="button" data-i18n-label="aria_say_example" aria-label="播放例句讀音">🔊</button>
       </div>
       <span class="say-status" id="say-status-example" hidden></span>
 
       <div class="example example--en" id="example-en-wrap" hidden>
         <p class="example-text example-text--en" id="modal-example-en"></p>
-        <button class="say-btn say-btn--sm" id="say-example-en-btn" type="button" aria-label="播放例句英文翻譯讀音">🔊</button>
+        <button class="say-btn say-btn--sm" id="say-example-en-btn" type="button" data-i18n-label="aria_say_example_tr" aria-label="播放例句英文翻譯讀音">🔊</button>
       </div>
 
       <div class="image-wrap" id="modal-image-wrap">
@@ -862,23 +875,23 @@
   </div>
 </div>
 
-<div class="audio-loading-overlay" id="audio-loading-overlay" hidden aria-live="polite" aria-label="錄音載入緊">
+<div class="audio-loading-overlay" id="audio-loading-overlay" hidden aria-live="polite" data-i18n-label="aria_loading" aria-label="錄音載入緊">
   <div class="spinner" aria-hidden="true"></div>
 </div>
 
 <div class="scrim" id="install-scrim" hidden>
   <div class="modal install-modal" id="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
-    <button class="modal-close" id="install-modal-close" aria-label="關閉">✕</button>
-    <h3 class="install-modal-title" id="install-modal-title">加到主畫面</h3>
+    <button class="modal-close" id="install-modal-close" data-i18n-label="close" aria-label="關閉">✕</button>
+    <h3 class="install-modal-title" id="install-modal-title" data-i18n="install">加到主畫面</h3>
     <ol class="install-steps" id="install-steps"></ol>
   </div>
 </div>
 
 <div class="scrim" id="dict-scrim" hidden>
   <div class="modal dict-modal" id="dict-modal" data-mode="setup" role="dialog" aria-modal="true" aria-labelledby="dict-title">
-    <button class="modal-close" id="dict-close" aria-label="關閉">✕</button>
+    <button class="modal-close" id="dict-close" data-i18n-label="close" aria-label="關閉">✕</button>
     <div class="dict-head">
-      <h3 id="dict-title">✍️ 朗讀默書</h3>
+      <h3 id="dict-title" data-i18n="dict_title">✍️ 朗讀默書</h3>
       <div class="dict-sub" id="dict-sub">剔課次，或撳「揀詞語」揀個別詞語；次序會隨機</div>
     </div>
     <p class="dict-status" id="dict-status" hidden></p>
@@ -889,10 +902,10 @@
       <div class="dict-play" id="dict-play" hidden>
         <div class="dict-progress-text" id="dict-progress-text" aria-live="polite"></div>
         <div class="dict-bar" aria-hidden="true"><span id="dict-bar-fill"></span></div>
-        <button type="button" class="dict-replay" id="dict-replay" aria-label="再聽一次">🔊</button>
-        <div class="dict-replay-hint">撳一下再聽一次</div>
+        <button type="button" class="dict-replay" id="dict-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次">🔊</button>
+        <div class="dict-replay-hint" data-i18n="dict_replay_hint">撳一下再聽一次</div>
         <div class="dict-play-row">
-          <button type="button" class="dict-btn" id="dict-example">📖 聽例句</button>
+          <button type="button" class="dict-btn" id="dict-example" data-i18n="dict_example">📖 聽例句</button>
         </div>
         <button type="button" class="dict-btn dict-btn--primary dict-btn--big" id="dict-next">下一個 ▶</button>
         <div class="dict-exit-row" id="dict-exit-row">
@@ -902,15 +915,15 @@
 
       <div class="dict-done" id="dict-done" hidden>
         <div class="dict-done-icon" aria-hidden="true">📝</div>
-        <h4>默書已經結束</h4>
+        <h4 data-i18n="dict_done_title">默書已經結束</h4>
         <div class="dict-reminder-row">
           <div class="dict-reminder" id="dict-reminder" role="status"></div>
-          <button type="button" class="say-btn" id="dict-end-say" aria-label="再聽一次完結提示">🔊</button>
+          <button type="button" class="say-btn" id="dict-end-say" data-i18n-label="dict_end_say_aria" aria-label="再聽一次完結提示">🔊</button>
         </div>
         <div class="dict-done-actions">
           <button type="button" class="dict-btn dict-btn--primary" id="dict-show-answers" aria-expanded="false">顯示答案</button>
-          <button type="button" class="dict-btn" id="dict-again">再默一次（重新隨機）</button>
-          <button type="button" class="dict-btn" id="dict-back">返回揀詞語</button>
+          <button type="button" class="dict-btn" id="dict-again" data-i18n="dict_again">再默一次（重新隨機）</button>
+          <button type="button" class="dict-btn" id="dict-back" data-i18n="dict_back">返回揀詞語</button>
         </div>
         <div class="dict-answers" id="dict-answers" hidden></div>
       </div>
@@ -918,7 +931,7 @@
 
     <div class="dict-foot" id="dict-foot">
       <div class="dict-count" id="dict-count"></div>
-      <button type="button" class="dict-btn dict-btn--primary" id="dict-start" disabled>開始默書</button>
+      <button type="button" class="dict-btn dict-btn--primary" id="dict-start" data-i18n="dict_start" disabled>開始默書</button>
     </div>
   </div>
 </div>
@@ -936,6 +949,131 @@
   var activeWriters = [];
 
   function el(id) { return document.getElementById(id); }
+
+  /* ---------------- 介面語言（中文／English） ----------------
+     只轉「介面文字」（掣、標題、提示、錯誤訊息）；課本名、課次名、詞語、例句
+     係教材原文，保持中文。「意思語言」（中文／EN／한국어／اردو）係另一個獨立
+     設定，唔受影響。 */
+  var I18N = {
+    app_title: { zh: "詞語温習室", en: "Vocabulary Review Room" },
+    tagline: { zh: "揀年級 → 揀課本 → 揀課次 → 溫習詞語", en: "Choose grade → book → lesson → review words" },
+    aria_site_lang: { zh: "介面語言 Interface language", en: "Interface language 介面語言" },
+    install: { zh: "加到主畫面", en: "Add to Home Screen" },
+    dict_entry_title: { zh: "朗讀默書", en: "Read-Aloud Dictation" },
+    dict_entry_sub: { zh: "揀課或詞語，逐個朗讀，你自己寫", en: "Pick lessons or words. They are read aloud one by one and you write them down." },
+    eyebrow_grade: { zh: "Step 1 · 年級", en: "Step 1 · Grade" },
+    eyebrow_book: { zh: "Step 2 · 課本", en: "Step 2 · Book" },
+    eyebrow_lesson: { zh: "Step 3 · 課次", en: "Step 3 · Lesson" },
+    ph_grade: { zh: "請選擇你的年級", en: "Choose your grade" },
+    ph_book_locked: { zh: "請先選擇年級", en: "Choose a grade first" },
+    ph_book: { zh: "請選擇課本", en: "Choose a book" },
+    ph_lesson_locked: { zh: "請先選擇課本", en: "Choose a book first" },
+    ph_lesson: { zh: "請選擇課次", en: "Choose a lesson" },
+    close: { zh: "關閉", en: "Close" },
+    aria_meaning_lang: { zh: "揀意思／例句翻譯語言", en: "Meaning and example translation language" },
+    aria_say: { zh: "播放讀音", en: "Play pronunciation" },
+    aria_say_example: { zh: "播放例句讀音", en: "Play example sentence" },
+    aria_say_example_tr: { zh: "播放例句翻譯讀音", en: "Play example translation" },
+    aria_say_meaning: { zh: "播放{lang}讀音", en: "Play {lang} pronunciation" },
+    aria_say_extrans: { zh: "播放例句{lang}翻譯讀音", en: "Play example {lang} translation" },
+    aria_loading: { zh: "錄音載入緊", en: "Loading audio" },
+    replay_stroke: { zh: "🔁 重播筆順", en: "🔁 Replay strokes" },
+    words_count: { zh: "{n} 個詞語", en: "{n} words" },
+    empty_lesson: { zh: "呢一課仲未有詞語資料。", en: "This lesson has no words yet." },
+    no_example: { zh: "（未有例句）", en: "(No example sentence)" },
+    no_image: { zh: "📷 呢個詞語仲未有圖畫<br>（老師可以之後上載）", en: "📷 No picture for this word yet<br>(the teacher can add one later)" },
+    alt_cover: { zh: "{b} 封面", en: "{b} cover" },
+    alt_word: { zh: "{w} 嘅圖畫", en: "Picture for {w}" },
+    lang_name_zh: { zh: "中文", en: "Chinese" },
+    lang_name_en: { zh: "英文", en: "English" },
+    lang_name_ko: { zh: "韓文", en: "Korean" },
+    lang_name_ur: { zh: "烏都文", en: "Urdu" },
+    label_meaning: { zh: "{lang}意思", en: "{lang} meaning" },
+    tts_unsupported: { zh: "呢部裝置未支援語音朗讀", en: "This device doesn't support speech playback" },
+    tts_no_canto: { zh: "未搵到粵語發音，改用附近嘅中文聲音", en: "No Cantonese voice found; using a nearby Chinese voice" },
+    tts_no_voice: { zh: "呢部裝置搵唔到{lang}發音。", en: "This device has no {lang} voice. " },
+    hint_ios: { zh: "可以去「設定→輔助使用→朗讀內容→聲音」揀多幾種語言落嚟。", en: "Go to Settings → Accessibility → Spoken Content → Voices to download more languages." },
+    hint_android: { zh: "可以去手機「設定→系統→語言與輸入→文字轉語音輸出」安裝多種語言。", en: "Go to Settings → System → Language & input → Text-to-speech output to install more languages." },
+    hint_mac: { zh: "可以去「系統設定→輔助使用→朗讀內容」加多幾種聲音。", en: "Go to System Settings → Accessibility → Spoken Content to add more voices." },
+    hint_win: { zh: "可以去「設定→時間與語言→語音」安裝多種語言朗讀聲音。", en: "Go to Settings → Time & Language → Speech to install more voices." },
+    hint_other: { zh: "可以去裝置嘅語音／朗讀設定入面安裝返呢種語言。", en: "Check your device's speech settings to install this language." },
+    install_ios_1: { zh: "喺Safari最底（部分機型喺頂部）搵到 <span class=\"key\">⬆️ 分享</span> 圖示，撳佢", en: "In Safari, find the <span class=\"key\">⬆️ Share</span> icon at the bottom (top on some models) and tap it" },
+    install_ios_2: { zh: "向下滑揾到「加入主畫面」，撳佢", en: "Scroll down and tap \"Add to Home Screen\"" },
+    install_ios_3: { zh: "撳右上角「新增」就完成喇！", en: "Tap \"Add\" in the top right. Done!" },
+    install_other_1: { zh: "撳瀏覽器右上角嘅選單掣（通常係 <span class=\"key\">⋮</span> 三點或者三橫）", en: "Tap the browser menu button at the top right (usually <span class=\"key\">⋮</span> three dots or three lines)" },
+    install_other_2: { zh: "揾「新增至主畫面」或者「安裝應用程式」，撳佢", en: "Tap \"Add to Home screen\" or \"Install app\"" },
+    install_other_3: { zh: "跟住畫面指示完成安裝就得喇！", en: "Follow the on-screen instructions to finish!" },
+    load_fail: { zh: "資料載入失敗，請重新整理頁面。", en: "Failed to load data. Please refresh the page." },
+    dict_title: { zh: "✍️ 朗讀默書", en: "✍️ Read-Aloud Dictation" },
+    dict_sub_setup: { zh: "剔課次，或撳「揀詞語」揀個別詞語；次序會隨機", en: "Tick lessons, or tap \"Pick words\" to choose single words. The order is random." },
+    dict_sub_play: { zh: "聽到讀音就寫喺紙上，寫好再撳「下一個」", en: "Listen, write the word on paper, then tap \"Next\"." },
+    dict_sub_done: { zh: "全部讀晒喇", en: "All words have been read" },
+    dict_replay_aria: { zh: "再聽一次", en: "Listen again" },
+    dict_replay_hint: { zh: "撳一下再聽一次", en: "Tap to listen again" },
+    dict_example: { zh: "📖 聽例句", en: "📖 Hear example sentence" },
+    dict_next: { zh: "下一個 ▶", en: "Next ▶" },
+    dict_finish: { zh: "完成默書 ✓", en: "Finish ✓" },
+    dict_exit: { zh: "退出默書", en: "Quit dictation" },
+    dict_exit_confirm: { zh: "確定退出默書？", en: "Quit dictation?" },
+    dict_exit_yes: { zh: "退出", en: "Quit" },
+    dict_exit_no: { zh: "繼續默書", en: "Keep going" },
+    dict_progress: { zh: "第 <b>{i}</b> / {n} 個", en: "Word <b>{i}</b> of {n}" },
+    dict_done_title: { zh: "默書已經結束", en: "Dictation finished" },
+    dict_end_say_aria: { zh: "再聽一次完結提示", en: "Listen to the reminder again" },
+    dict_reminder: { zh: "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 {n} 個詞語）", en: "Dictation finished. Please check your answers. (You have done all {n} words.)" },
+    dict_end_speech: { zh: "默書結束喇，請自己檢查寫得啱唔啱。", en: "Dictation finished. Please check your answers." },
+    dict_show_answers: { zh: "顯示答案", en: "Show answers" },
+    dict_hide_answers: { zh: "收埋答案", en: "Hide answers" },
+    dict_again: { zh: "再默一次（重新隨機）", en: "Do it again (new random order)" },
+    dict_back: { zh: "返回揀詞語", en: "Back to selection" },
+    dict_start: { zh: "開始默書", en: "Start dictation" },
+    dict_count_n: { zh: "已揀 <b>{n}</b> 個詞語", en: "<b>{n}</b> words selected" },
+    dict_count_0: { zh: "未揀詞語", en: "No words selected" },
+    dict_grade: { zh: "年級", en: "Grade" },
+    dict_book: { zh: "課本", en: "Book" },
+    dict_lessons: { zh: "課次", en: "Lessons" },
+    dict_all_book: { zh: "全選本冊", en: "Select whole book" },
+    dict_clear_book: { zh: "清除本冊", en: "Clear book" },
+    dict_tip: { zh: "提示：轉去其他課本都會記住你揀過嘅詞語，可以跨課本一齊默。", en: "Tip: your selections are remembered when you switch books, so you can mix books in one dictation." },
+    dict_check_aria: { zh: "揀成課：{name}", en: "Select whole lesson: {name}" },
+    dict_lesson_sel: { zh: "已揀 {n} / {t} 個", en: "{n} / {t} selected" },
+    dict_no_words: { zh: "未有詞語", en: "No words" },
+    dict_expand: { zh: "揀詞語 ▾", en: "Pick words ▾" },
+    dict_collapse: { zh: "收埋 ▴", en: "Collapse ▴" },
+    dict_play_aria: { zh: "播放 {w}", en: "Play {w}" }
+  };
+
+  function loadSiteLang() {
+    try {
+      var v = localStorage.getItem("vocabSiteLang");
+      if (v === "zh" || v === "en") return v;
+    } catch (e) {}
+    return "zh";
+  }
+  var siteLang = loadSiteLang();
+
+  function t(key, params) {
+    var e = I18N[key];
+    var s = e ? (e[siteLang] || e.zh) : key;
+    if (params) s = s.replace(/\{(\w+)\}/g, function (m, k) { return params[k] != null ? params[k] : m; });
+    return s;
+  }
+
+  // 將靜態HTML入面有 data-i18n（文字）／data-i18n-label（aria-label）嘅元素轉做目前語言
+  function applyStaticI18n() {
+    document.documentElement.lang = siteLang === "en" ? "en" : "zh-Hant";
+    document.title = t("app_title");
+    document.querySelectorAll("[data-i18n]").forEach(function (n) {
+      var v = t(n.getAttribute("data-i18n"));
+      if (/<[a-z]/i.test(v)) n.innerHTML = v; else n.textContent = v;
+    });
+    document.querySelectorAll("[data-i18n-label]").forEach(function (n) {
+      n.setAttribute("aria-label", t(n.getAttribute("data-i18n-label")));
+    });
+    document.querySelectorAll(".site-lang-btn").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-site-lang") === siteLang ? "true" : "false");
+    });
+  }
 
   function toneify(syllable) {
     // "hok6" -> "hok<sup class=tone>6</sup>"
@@ -1202,7 +1340,7 @@
       if (coverPath) {
         var img = document.createElement("img");
         img.src = coverPath;
-        img.alt = b + " 封面";
+        img.alt = t("alt_cover", { b: b });
         img.onerror = function () { coverWrap.innerHTML = bookFallbackHtml(b); };
         coverWrap.appendChild(img);
       } else {
@@ -1219,9 +1357,9 @@
       grid.appendChild(card);
     });
 
-    el("value-book").textContent = "請選擇課本";
+    el("value-book").textContent = t("ph_book");
     el("value-book").classList.add("placeholder");
-    el("value-lesson").textContent = "請先選擇課本";
+    el("value-lesson").textContent = t("ph_lesson_locked");
     el("value-lesson").classList.add("placeholder");
     setStepState("step-book", "active");
     setStepState("step-lesson", "locked");
@@ -1252,7 +1390,7 @@
       grid.appendChild(btn);
     });
 
-    el("value-lesson").textContent = "請選擇課次";
+    el("value-lesson").textContent = t("ph_lesson");
     el("value-lesson").classList.add("placeholder");
     setStepState("step-lesson", "active");
     el("head-lesson").disabled = false;
@@ -1279,14 +1417,14 @@
     var key = wordKey(state.grade, state.book, state.lesson);
     var words = (DATA.words[key] || []);
     el("lesson-heading-text").textContent = state.lesson;
-    el("word-count").textContent = words.length + " 個詞語";
+    el("word-count").textContent = t("words_count", { n: words.length });
 
     var grid = el("word-grid");
     grid.innerHTML = "";
     if (words.length === 0) {
       var note = document.createElement("p");
       note.className = "empty-note";
-      note.textContent = "呢一課仲未有詞語資料。";
+      note.textContent = t("empty_lesson");
       grid.appendChild(note);
     } else {
       words.forEach(function (w) {
@@ -1510,8 +1648,8 @@
     var meaningInfo = directMeaning ? { text: directMeaning, lang: uiLang } : fallbackMeaning(w);
     var meaningCfg = LANGS[meaningInfo.lang] || LANGS.zh;
 
-    el("label-english").textContent = meaningCfg.labelMeaning;
-    el("say-english-btn").setAttribute("aria-label", "播放" + meaningCfg.dispName + "讀音");
+    el("label-english").textContent = t("label_meaning", { lang: t("lang_name_" + meaningInfo.lang) });
+    el("say-english-btn").setAttribute("aria-label", t("aria_say_meaning", { lang: t("lang_name_" + meaningInfo.lang) }));
     setRtl(el("modal-english"), meaningCfg.rtl);
     currentMeaningText = stripMarkup(meaningInfo.text);
     currentMeaningLang = meaningInfo.lang;
@@ -1525,7 +1663,7 @@
     if (w.example) {
       karaoke.example = renderKaraoke(el("modal-example"), w.example, findWordRanges(w.example, w.word), "char");
     } else {
-      el("modal-example").textContent = "（未有例句）";
+      el("modal-example").textContent = t("no_example");
       karaoke.example = null;
     }
 
@@ -1535,7 +1673,7 @@
 
     if (exInfo && exInfo.text) {
       var exCfg = LANGS[exInfo.lang] || LANGS.zh;
-      el("say-example-en-btn").setAttribute("aria-label", "播放" + exCfg.dispName + "翻譯讀音");
+      el("say-example-en-btn").setAttribute("aria-label", t("aria_say_extrans", { lang: t("lang_name_" + exInfo.lang) }));
       var markInfo = exampleTranslationMarkInfo(exInfo.text, meaningInfo.text, exInfo.lang);
       karaoke.exampleEn = renderKaraoke(el("modal-example-en"), markInfo.text, markInfo.ranges, granularityForLang(exInfo.lang));
       setRtl(el("modal-example-en"), exCfg.rtl);
@@ -1658,7 +1796,7 @@
   }
 
   function showImageFallback(wrapEl) {
-    wrapEl.innerHTML = '<div class="image-fallback">📷 呢個詞語仲未有圖畫<br>（老師可以之後上載）</div>';
+    wrapEl.innerHTML = '<div class="image-fallback">' + t("no_image") + '</div>';
   }
 
   var VIDEO_EXT_RE = /\.(mp4|webm|mov|m4v)$/i;
@@ -1682,7 +1820,7 @@
       var img = el("modal-image");
       img.onerror = function () { showImageFallback(wrapImg); };
       img.src = url;
-      img.alt = w.word + " 嘅圖畫";
+      img.alt = t("alt_word", { w: w.word });
     }
   }
 
@@ -1748,18 +1886,18 @@
     var ua = navigator.userAgent || "";
     var platform = navigator.platform || "";
     if (/iPhone|iPad|iPod/i.test(ua)) {
-      return "可以去「設定→輔助使用→朗讀內容→聲音」揀多幾種語言落嚟。";
+      return t("hint_ios");
     }
     if (/Android/i.test(ua)) {
-      return "可以去手機「設定→系統→語言與輸入→文字轉語音輸出」安裝多種語言。";
+      return t("hint_android");
     }
     if (/Mac/i.test(platform) || /Macintosh/i.test(ua)) {
-      return "可以去「系統設定→輔助使用→朗讀內容」加多幾種聲音。";
+      return t("hint_mac");
     }
     if (/Win/i.test(platform) || /Windows/i.test(ua)) {
-      return "可以去「設定→時間與語言→語音」安裝多種語言朗讀聲音。";
+      return t("hint_win");
     }
-    return "可以去裝置嘅語音／朗讀設定入面安裝返呢種語言。";
+    return t("hint_other");
   }
 
   function setStatus(statusEl, text) {
@@ -1802,12 +1940,12 @@
 
   function speakText(text, statusEl, spans) {
     if (!("speechSynthesis" in window)) {
-      setStatus(statusEl, "呢部裝置未支援語音朗讀");
+      setStatus(statusEl, t("tts_unsupported"));
       return;
     }
     refreshVoices(); // 手機嘅語音清單有時遲啲先載好，撳掣嗰刻重新check一次先準確
     var voice = pickCantoneseVoice();
-    setStatus(statusEl, voice && /^zh-HK/i.test(voice.lang) ? "" : "未搵到粵語發音，改用附近嘅中文聲音");
+    setStatus(statusEl, voice && /^zh-HK/i.test(voice.lang) ? "" : t("tts_no_canto"));
     speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(text);
     u.lang = "zh-HK";
@@ -1821,13 +1959,13 @@
     var langCfg = LANGS[langKey] || LANGS.zh;
     var cfg = langCfg.tts;
     if (!("speechSynthesis" in window)) {
-      if (statusEl) setStatus(statusEl, "呢部裝置未支援語音朗讀");
+      if (statusEl) setStatus(statusEl, t("tts_unsupported"));
       return;
     }
     refreshVoices();
     var voice = pickVoiceForLang(cfg.prefix, cfg.preferred);
     // 英文喺絕大部分裝置都穩定有得讀，唔使特登提示；其他語言就唔一定人人部機都有，搵唔到先提示
-    if (statusEl) setStatus(statusEl, (!voice && langKey !== "en") ? ("呢部裝置搵唔到" + langCfg.dispName + "發音。" + platformHint()) : "");
+    if (statusEl) setStatus(statusEl, (!voice && langKey !== "en") ? (t("tts_no_voice", { lang: t("lang_name_" + langKey) }) + platformHint()) : "");
     speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(text);
     u.lang = cfg.tag;
@@ -2156,6 +2294,37 @@
 
   renderLangSwitch();
 
+  /* ---------------- 介面語言切換（中文／English） ---------------- */
+
+  function updateStepPlaceholders() {
+    if (!state.grade) el("value-grade").textContent = t("ph_grade");
+    if (!state.grade) el("value-book").textContent = t("ph_book_locked");
+    else if (!state.book) el("value-book").textContent = t("ph_book");
+    if (!state.book) el("value-lesson").textContent = t("ph_lesson_locked");
+    else if (!state.lesson) el("value-lesson").textContent = t("ph_lesson");
+  }
+
+  function setSiteLang(code) {
+    if (code !== "zh" && code !== "en") return;
+    if (code === siteLang) return;
+    siteLang = code;
+    try { localStorage.setItem("vocabSiteLang", code); } catch (e) {}
+    applyStaticI18n();
+    updateStepPlaceholders();
+    if (state.lesson) {
+      var ws = DATA.words[wordKey(state.grade, state.book, state.lesson)] || [];
+      if (ws.length) el("word-count").textContent = t("words_count", { n: ws.length });
+      else renderWords();
+    }
+    if (currentWord) refreshModalForLanguage();
+  }
+
+  document.querySelectorAll(".site-lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { setSiteLang(btn.getAttribute("data-site-lang")); });
+  });
+
+  applyStaticI18n();
+
   /* ---------------- 加到主畫面（PWA安裝） ----------------
      Android／桌面Chrome呢類支援 beforeinstallprompt 嘅瀏覽器，撳掣會直接
      彈出瀏覽器原生嘅安裝提示；iOS Safari同其他唔支援呢個API嘅瀏覽器，
@@ -2188,15 +2357,15 @@
     function installStepsHtml() {
       if (isIOS) {
         return [
-          "喺Safari最底（部分機型喺頂部）搵到 <span class=\"key\">⬆️ 分享</span> 圖示，撳佢",
-          "向下滑揾到「加入主畫面」，撳佢",
-          "撳右上角「新增」就完成喇！"
+          t("install_ios_1"),
+          t("install_ios_2"),
+          t("install_ios_3")
         ];
       }
       return [
-        "撳瀏覽器右上角嘅選單掣（通常係 <span class=\"key\">⋮</span> 三點或者三橫）",
-        "揾「新增至主畫面」或者「安裝應用程式」，撳佢",
-        "跟住畫面指示完成安裝就得喇！"
+        t("install_other_1"),
+        t("install_other_2"),
+        t("install_other_3")
       ];
     }
 
@@ -2263,8 +2432,8 @@
       el("dict-play").hidden = m !== "play";
       el("dict-done").hidden = m !== "done";
       el("dict-sub").textContent =
-        m === "setup" ? "剔課次，或撳「揀詞語」揀個別詞語；次序會隨機" :
-        m === "play" ? "聽到讀音就寫喺紙上，寫好再撳「下一個」" : "全部讀晒喇";
+        m === "setup" ? t("dict_sub_setup") :
+        m === "play" ? t("dict_sub_play") : t("dict_sub_done");
       setStatus(el("dict-status"), "");
       el("dict-body").scrollTop = 0;
     }
@@ -2297,7 +2466,7 @@
 
     function updateFooter() {
       var n = collectSelected().length;
-      el("dict-count").innerHTML = n ? "已揀 <b>" + n + "</b> 個詞語" : "未揀詞語";
+      el("dict-count").innerHTML = n ? t("dict_count_n", { n: n }) : t("dict_count_0");
       el("dict-start").disabled = n === 0;
     }
 
@@ -2313,7 +2482,7 @@
       check.type = "button";
       check.className = "dict-check";
       check.setAttribute("role", "checkbox");
-      check.setAttribute("aria-label", "揀成課：" + ls);
+      check.setAttribute("aria-label", t("dict_check_aria", { name: ls }));
       check.innerHTML = '<span class="dict-check-box"></span>';
       var name = document.createElement("button");
       name.type = "button";
@@ -2338,13 +2507,13 @@
       function refresh() {
         var n = selCount(key);
         check.setAttribute("aria-checked", n === 0 ? "false" : (n === words.length ? "true" : "mixed"));
-        count.textContent = n ? "已揀 " + n + " / " + words.length + " 個" : words.length + " 個詞語";
+        count.textContent = n ? t("dict_lesson_sel", { n: n, t: words.length }) : t("words_count", { n: words.length });
         count.className = "dict-lesson-count" + (n ? " has" : "");
         chipEls.forEach(function (c, i) {
           c.setAttribute("aria-pressed", dict.sel[key] && dict.sel[key][i] ? "true" : "false");
         });
         var open = !!dict.expanded[key];
-        expand.textContent = open ? "收埋 ▴" : "揀詞語 ▾";
+        expand.textContent = open ? t("dict_collapse") : t("dict_expand");
         expand.setAttribute("aria-expanded", open ? "true" : "false");
       }
 
@@ -2382,7 +2551,7 @@
 
       if (!words.length) {
         check.disabled = true; name.disabled = true; expand.hidden = true;
-        count.textContent = "未有詞語";
+        count.textContent = t("dict_no_words");
       } else {
         check.addEventListener("click", toggleAll);
         name.addEventListener("click", toggleAll);
@@ -2409,7 +2578,7 @@
       var box = el("dict-setup");
       box.innerHTML = "";
       var lbl = document.createElement("div");
-      lbl.className = "dict-label"; lbl.textContent = "年級";
+      lbl.className = "dict-label"; lbl.textContent = t("dict_grade");
       box.appendChild(lbl);
       var gr = document.createElement("div");
       gr.className = "dict-chips";
@@ -2423,7 +2592,7 @@
       box.appendChild(gr);
 
       var lbl2 = document.createElement("div");
-      lbl2.className = "dict-label"; lbl2.textContent = "課本";
+      lbl2.className = "dict-label"; lbl2.textContent = t("dict_book");
       box.appendChild(lbl2);
       var bk = document.createElement("div");
       bk.className = "dict-chips";
@@ -2435,12 +2604,12 @@
       var bar = document.createElement("div");
       bar.className = "dict-toolbar";
       var l3 = document.createElement("div");
-      l3.className = "dict-label"; l3.textContent = "課次";
+      l3.className = "dict-label"; l3.textContent = t("dict_lessons");
       var all = document.createElement("button");
-      all.type = "button"; all.className = "dict-link"; all.textContent = "全選本冊";
+      all.type = "button"; all.className = "dict-link"; all.textContent = t("dict_all_book");
       all.addEventListener("click", function () { bulkBook(true); });
       var none = document.createElement("button");
-      none.type = "button"; none.className = "dict-link"; none.textContent = "清除本冊";
+      none.type = "button"; none.className = "dict-link"; none.textContent = t("dict_clear_book");
       none.addEventListener("click", function () { bulkBook(false); });
       bar.appendChild(l3); bar.appendChild(all); bar.appendChild(none);
       box.appendChild(bar);
@@ -2451,7 +2620,7 @@
 
       var tip = document.createElement("p");
       tip.className = "empty-note";
-      tip.textContent = "提示：轉去其他課本都會記住你揀過嘅詞語，可以跨課本一齊默。";
+      tip.textContent = t("dict_tip");
       box.appendChild(tip);
       updateFooter();
     }
@@ -2485,15 +2654,15 @@
     function requestExit() {
       if (dict.mode !== "play") { closeDict(); return; }
       var row = el("dict-exit-row");
-      row.innerHTML = '<span>確定退出默書？</span>' +
-        '<button type="button" class="dict-link" id="dict-exit-yes">退出</button>' +
-        '<button type="button" class="dict-link" id="dict-exit-no">繼續默書</button>';
+      row.innerHTML = '<span>' + t("dict_exit_confirm") + '</span>' +
+        '<button type="button" class="dict-link" id="dict-exit-yes">' + t("dict_exit_yes") + '</button>' +
+        '<button type="button" class="dict-link" id="dict-exit-no">' + t("dict_exit_no") + '</button>';
       el("dict-exit-yes").addEventListener("click", closeDict);
       el("dict-exit-no").addEventListener("click", resetExitRow);
       el("dict-exit-no").focus();
     }
     function resetExitRow() {
-      el("dict-exit-row").innerHTML = '<button type="button" class="dict-link" id="dict-exit">退出默書</button>';
+      el("dict-exit-row").innerHTML = '<button type="button" class="dict-link" id="dict-exit">' + t("dict_exit") + '</button>';
       el("dict-exit").addEventListener("click", requestExit);
     }
 
@@ -2517,10 +2686,10 @@
     function renderItem() {
       var total = dict.queue.length;
       var w = dict.queue[dict.idx];
-      el("dict-progress-text").innerHTML = "第 <b>" + (dict.idx + 1) + "</b> / " + total + " 個";
+      el("dict-progress-text").innerHTML = t("dict_progress", { i: dict.idx + 1, n: total });
       el("dict-bar-fill").style.width = (dict.idx / total * 100) + "%";
       el("dict-example").hidden = !w.example;
-      el("dict-next").textContent = dict.idx === total - 1 ? "完成默書 ✓" : "下一個 ▶";
+      el("dict-next").textContent = dict.idx === total - 1 ? t("dict_finish") : t("dict_next");
       resetExitRow();
     }
 
@@ -2548,21 +2717,23 @@
       playWord(dict.queue[dict.idx], "word");
     }
 
-    // 完結提示用語音讀出嚟：優先播audio/dictation_end.mp3（同其他詞語一樣用
-    // generate_audio.py嗰個粵語聲音生成），冇呢個檔或者播唔到，就用裝置內置
-    // 粵語朗讀頂住。
-    var END_TEXT = "默書結束喇，請自己檢查寫得啱唔啱。";
+    // 完結提示用語音讀出嚟：中文介面優先播audio/dictation_end.mp3（同其他詞語
+    // 一樣用generate_audio.py嗰個粵語聲音生成），英文介面優先播
+    // audio/dictation_end_en.mp3；冇呢個檔或者播唔到，就用裝置內置朗讀頂住
+    // （中文＝粵語，英文＝英文聲）。
     function speakEnd() {
       stopAllAudio();
       var gen = dict.gen;
       var statusEl = el("dict-status");
+      var en = siteLang === "en";
+      var text = t("dict_end_speech");
       var fell = false;
       function fallback() {
         if (fell || dict.gen !== gen || scrim.hidden) return;
         fell = true;
-        speakText(END_TEXT, statusEl, null);
+        if (en) speakGloss(text, "en", statusEl, null); else speakText(text, statusEl, null);
       }
-      var audio = new Audio("audio/dictation_end.mp3");
+      var audio = new Audio(en ? "audio/dictation_end_en.mp3" : "audio/dictation_end.mp3");
       activeClipAudio = audio;
       audio.addEventListener("error", fallback);
       audio.play().catch(fallback);
@@ -2572,10 +2743,10 @@
       stopAllAudio();
       var n = dict.queue.length;
       el("dict-bar-fill").style.width = "100%";
-      el("dict-reminder").textContent = "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 " + n + " 個詞語）";
+      el("dict-reminder").textContent = t("dict_reminder", { n: n });
       el("dict-answers").hidden = true;
       el("dict-answers").innerHTML = "";
-      el("dict-show-answers").textContent = "顯示答案";
+      el("dict-show-answers").textContent = t("dict_show_answers");
       el("dict-show-answers").setAttribute("aria-expanded", "false");
       showMode("done");
       el("dict-show-answers").focus();
@@ -2594,14 +2765,14 @@
           var jp = document.createElement("span"); jp.className = "dict-answer-jp"; jp.textContent = w.jyutping || "";
           var sb = document.createElement("button");
           sb.type = "button"; sb.className = "say-btn say-btn--sm"; sb.textContent = "🔊";
-          sb.setAttribute("aria-label", "播放 " + w.word);
+          sb.setAttribute("aria-label", t("dict_play_aria", { w: w.word }));
           sb.addEventListener("click", function () { playWord(w, "word"); });
           r.appendChild(no); r.appendChild(wd); r.appendChild(jp); r.appendChild(sb);
           box.appendChild(r);
         });
       }
       box.hidden = !open;
-      el("dict-show-answers").textContent = open ? "收埋答案" : "顯示答案";
+      el("dict-show-answers").textContent = open ? t("dict_hide_answers") : t("dict_show_answers");
       el("dict-show-answers").setAttribute("aria-expanded", open ? "true" : "false");
       if (open) box.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
@@ -2660,7 +2831,7 @@
   ]).then(function (results) {
     boot(results[0], results[1], results[2]);
   }).catch(function (err) {
-    el("grid-grade").innerHTML = '<p class="empty-note">資料載入失敗，請重新整理頁面。</p>';
+    el("grid-grade").innerHTML = '<p class="empty-note">' + t("load_fail") + '</p>';
     console.error(err);
   });
 })();
