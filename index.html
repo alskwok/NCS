@@ -835,6 +835,13 @@
   }
   .td-legend b { font-family: var(--font-kai); font-size: 16px; color: var(--brand-strong); }
   .td-legend i { font-style: normal; color: var(--ink-faint); font-size: 11.5px; }
+  .td-pick-box { border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); padding: 8px 12px; max-height: 34vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .td-pick-box .tr-par { font-size: 17px; line-height: 1.95; margin: 0 0 8px; text-indent: 0; }
+  .td-pick-box .tr-par:last-child { margin-bottom: 0; }
+  .td-ph { cursor: pointer; border-radius: 4px; padding: 1px 0; opacity: .55; }
+  .td-ph.in { opacity: 1; background: var(--brand-soft); }
+  .td-ph.edge { box-shadow: inset 0 -2px 0 var(--brand); }
+  .td-range-sum { font-size: 13px; color: var(--brand-strong); margin: 6px 0 0; min-height: 1.4em; }
   .td-start-row { margin-top: 14px; position: sticky; bottom: 0; background: var(--surface); padding: 8px 0 2px; }
   .td-answer-text { text-align: left; border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
   .td-answer-text .tr-par { font-size: 19px; margin-bottom: 8px; }
@@ -1229,7 +1236,7 @@
     td_sub_start: { zh: "逐個短語聽，連標點一齊寫", en: "Listen phrase by phrase and write it with its punctuation" },
     td_sub_play: { zh: "聽到就寫（標點都要寫），寫好再撳「下一個」", en: "Write what you hear (punctuation too), then tap \"Next\"." },
     td_sub_done: { zh: "全部讀晒喇", en: "All phrases have been read" },
-    td_info: { zh: "共 <b>{n}</b> 個短語。每個短語會連標點一齊讀出，標點會讀做標點名（例如「逗號」「上引號」），你要將標點一齊寫低。", en: "<b>{n}</b> phrases. Each one is read aloud and punctuation is spoken by name (in Cantonese, e.g. 逗號 = comma). Write the punctuation down too." },
+    td_info: { zh: "每個短語會連標點一齊讀出，標點會讀做標點名（例如「逗號」「開引號」），你要將標點一齊寫低。", en: "Each phrase is read aloud and punctuation is spoken by name (in Cantonese, e.g. 逗號 = comma). Write the punctuation down too." },
     td_legend: { zh: "今次會讀到嘅標點", en: "Punctuation you will hear" },
     td_reads: { zh: "每個短語讀幾多次", en: "Times each phrase is read" },
     td_reads_n: { zh: "{n} 次", en: "{n}×" },
@@ -1241,7 +1248,14 @@
     td_show_text: { zh: "顯示課文", en: "Show the text" },
     td_hide_text: { zh: "收埋課文", en: "Hide the text" },
     td_again: { zh: "再默一次", en: "Do it again" },
-    td_back: { zh: "返回開始畫面", en: "Back to start" }
+    td_back: { zh: "返回開始畫面", en: "Back to start" },
+    td_range: { zh: "默寫範圍", en: "Range to dictate" },
+    td_range_hint: { zh: "撳一個短語做開頭，再撳另一個做結尾；唔揀就默成課。", en: "Tap a phrase to start, then another to end. If you pick nothing, the whole text is used." },
+    td_range_all: { zh: "全部", en: "All" },
+    td_para: { zh: "第{n}段", en: "Para {n}" },
+    td_range_pick_end: { zh: "已揀開頭（第 {a} 個），再撳結尾；撳同一個就只默呢一個", en: "Start set (phrase {a}). Tap the end; tap the same phrase to use only that one." },
+    td_range_sel: { zh: "已揀第 {a}–{b} 個短語（共 {c} 個，全文 {n} 個）", en: "Phrases {a}–{b} selected ({c} of {n})" },
+    td_range_sel_all: { zh: "已揀全部 {n} 個短語", en: "All {n} phrases selected" }
   };
 
   function loadSiteLang() {
@@ -3136,10 +3150,10 @@
   var MARK_EN = {
     "逗號": "comma", "頓號": "enumeration comma", "分號": "semicolon", "冒號": "colon",
     "句號": "full stop", "問號": "question mark", "感嘆號": "exclamation mark",
-    "上引號": "opening quote", "下引號": "closing quote",
-    "上雙引號": "opening double quote", "下雙引號": "closing double quote",
-    "上書名號": "opening title mark", "下書名號": "closing title mark",
-    "上括號": "opening bracket", "下括號": "closing bracket",
+    "開引號": "opening quote", "閂引號": "closing quote",
+    "開雙引號": "opening double quote", "閂雙引號": "closing double quote",
+    "開書名號": "opening title mark", "閂書名號": "closing title mark",
+    "開括號": "opening bracket", "閂括號": "closing bracket",
     "破折號": "dash", "省略號": "ellipsis"
   };
 
@@ -3284,10 +3298,10 @@
 
   /* ---------------- 課文默書 ----------------
      逐個短語（用逗號、頓號、冒號、句號等標點切開）按課文次序讀出，標點讀做標點名
-     （「上引號」「逗號」…），學生要連標點一齊寫。撳「下一個」先讀下一個。 */
+     （「開引號」「逗號」…），學生要連標點一齊寫。撳「下一個」先讀下一個。 */
   (function () {
     var scrim = el("td-scrim");
-    var td = { entry: null, queue: [], idx: 0, reads: 1, mode: "start", lastNextAt: 0, gen: 0 };
+    var td = { entry: null, full: [], range: [0, 0], pend: null, queue: [], idx: 0, reads: 1, mode: "start", lastNextAt: 0, gen: 0 };
     var endAudio = null;
     var lastFocused = null;
 
@@ -3321,6 +3335,27 @@
       return out;
     }
 
+    function onPick(i) {
+      if (td.pend == null) { td.pend = i; td.range = [i, i]; }
+      else { td.range = [Math.min(td.pend, i), Math.max(td.pend, i)]; td.pend = null; }
+      refreshRange();
+    }
+
+    function refreshRange() {
+      var a = td.range[0], b = td.range[1], n = td.full.length;
+      (td.phEls || []).forEach(function (e, i) {
+        var inside = i >= a && i <= b;
+        e.classList.toggle("in", inside);
+        e.classList.toggle("edge", inside && (i === a || i === b));
+      });
+      var sum = el("td-range-sum");
+      if (sum) {
+        if (td.pend != null) sum.textContent = t("td_range_pick_end", { a: td.pend + 1 });
+        else if (a === 0 && b === n - 1) sum.textContent = t("td_range_sel_all", { n: n });
+        else sum.textContent = t("td_range_sel", { a: a + 1, b: b + 1, c: b - a + 1, n: n });
+      }
+    }
+
     function renderStart() {
       var box = el("td-setup");
       box.innerHTML = "";
@@ -3330,8 +3365,67 @@
       box.appendChild(nm);
       var info = document.createElement("p");
       info.className = "td-info";
-      info.innerHTML = t("td_info", { n: td.queue.length });
+      info.innerHTML = t("td_info");
       box.appendChild(info);
+
+      var lr = document.createElement("div");
+      lr.className = "dict-toolbar";
+      var rl = document.createElement("div");
+      rl.className = "dict-label"; rl.textContent = t("td_range");
+      var allb = document.createElement("button");
+      allb.type = "button"; allb.className = "dict-link"; allb.textContent = t("td_range_all");
+      allb.addEventListener("click", function () { td.range = [0, td.full.length - 1]; td.pend = null; refreshRange(); });
+      lr.appendChild(rl); lr.appendChild(allb);
+      box.appendChild(lr);
+      var paras = td.entry.paragraphs;
+      if (paras.length >= 2 && paras.length <= 10) {
+        var pc = document.createElement("div");
+        pc.className = "dict-chips";
+        pc.style.marginBottom = "8px";
+        var startAt = 0;
+        paras.forEach(function (p, pi) {
+          var cnt = 0;
+          p.sentences.forEach(function (s) { cnt += s.phrases.length; });
+          var a = startAt, b = startAt + cnt - 1;
+          startAt += cnt;
+          var c = document.createElement("button");
+          c.type = "button"; c.className = "dict-chip";
+          c.textContent = t("td_para", { n: pi + 1 });
+          c.setAttribute("aria-pressed", "false");
+          c.addEventListener("click", function () { td.range = [a, b]; td.pend = null; refreshRange(); });
+          pc.appendChild(c);
+        });
+        box.appendChild(pc);
+      }
+      var hint = document.createElement("p");
+      hint.className = "td-info"; hint.style.margin = "0 0 6px"; hint.style.fontSize = "12.5px";
+      hint.textContent = t("td_range_hint");
+      box.appendChild(hint);
+      var pick = document.createElement("div");
+      pick.className = "td-pick-box";
+      td.phEls = [];
+      var gi = 0;
+      td.entry.paragraphs.forEach(function (p) {
+        var pe = document.createElement("p");
+        pe.className = "tr-par";
+        p.sentences.forEach(function (s) {
+          s.phrases.forEach(function (ph) {
+            var idx = gi++;
+            var sp = document.createElement("span");
+            sp.className = "td-ph";
+            sp.textContent = ph.text;
+            sp.addEventListener("click", function () { onPick(idx); });
+            td.phEls.push(sp);
+            pe.appendChild(sp);
+          });
+        });
+        pick.appendChild(pe);
+      });
+      box.appendChild(pick);
+      var sum = document.createElement("div");
+      sum.className = "td-range-sum"; sum.id = "td-range-sum"; sum.setAttribute("aria-live", "polite");
+      box.appendChild(sum);
+      refreshRange();
 
       var marks = presentMarks(td.entry);
       if (marks.length) {
@@ -3374,7 +3468,7 @@
       var st = document.createElement("button");
       st.type = "button"; st.className = "dict-btn dict-btn--primary dict-btn--big";
       st.textContent = t("td_start");
-      st.disabled = !td.queue.length;
+      st.disabled = !td.full.length;
       st.addEventListener("click", start);
       row.appendChild(st);
       box.appendChild(row);
@@ -3422,6 +3516,9 @@
     }
 
     function start() {
+      if (!td.full.length) return;
+      td.pend = null;
+      td.queue = td.full.slice(td.range[0], td.range[1] + 1);
       if (!td.queue.length) return;
       stopAll();
       td.idx = 0;
@@ -3495,12 +3592,15 @@
       var entry = currentTextEntry();
       if (!entry) return;
       td.entry = entry;
-      td.queue = [];
+      td.full = [];
       entry.paragraphs.forEach(function (p) {
         p.sentences.forEach(function (s) {
-          s.phrases.forEach(function (ph) { td.queue.push(ph); });
+          s.phrases.forEach(function (ph) { td.full.push(ph); });
         });
       });
+      td.queue = [];
+      td.range = [0, td.full.length - 1];
+      td.pend = null;
       td.idx = 0;
       showMode("start");
       renderStart();
