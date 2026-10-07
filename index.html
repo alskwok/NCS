@@ -769,6 +769,76 @@
     .dict-done-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
     .dict-done-actions .dict-btn { padding: 8px 12px; font-size: 14px; }
   }
+
+  /* ---- 課文朗讀／課文默書 ---- */
+  .text-entry { display: flex; gap: 10px; margin: 0 0 14px; }
+  .text-entry-btn {
+    flex: 1 1 0; min-width: 0;
+    display: flex; align-items: center; gap: 10px;
+    text-align: left;
+    padding: 11px 12px;
+    border: 1.5px solid var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    border-radius: 14px;
+    cursor: pointer;
+    font: inherit;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .text-entry-btn:hover { background: var(--surface); }
+  .text-entry-btn:active { transform: scale(0.99); }
+  .text-entry-icon { font-size: 24px; line-height: 1; flex: none; }
+  .text-entry-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .text-entry-text strong { font-size: 15px; }
+  .text-entry-text small { font-size: 11.5px; color: var(--ink-soft); line-height: 1.35; }
+  @media (max-width: 340px) {
+    .text-entry { flex-direction: column; }
+  }
+
+  .tr-modal { height: 92vh; height: 92dvh; max-height: 760px; }
+  .tr-controls {
+    flex: none;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .tr-controls .dict-btn { padding: 8px 14px; font-size: 15px; }
+  .tr-speed { display: flex; gap: 6px; margin-left: auto; }
+  .tr-body { padding-top: 14px; }
+  .tr-par {
+    margin: 0 0 14px;
+    font-family: var(--font-kai);
+    font-size: 21px;
+    line-height: 2;
+    text-indent: 2em;
+    letter-spacing: .04em;
+  }
+  .tr-sent {
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 2px 0;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    transition: background .15s ease;
+  }
+  .tr-sent:hover { background: var(--brand-soft); }
+  .tr-sent:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+  .tr-sent.is-active { background: var(--brand-soft); }
+
+  .td-info { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 4px 0 4px; }
+  .td-lesson-name { font-family: var(--font-kai); font-size: 20px; font-weight: 700; margin: 2px 0 4px; }
+  .td-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+  .td-legend span {
+    display: inline-flex; align-items: baseline; gap: 5px;
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--paper-line); background: var(--surface);
+    font-size: 13px;
+  }
+  .td-legend b { font-family: var(--font-kai); font-size: 16px; color: var(--brand-strong); }
+  .td-legend i { font-style: normal; color: var(--ink-faint); font-size: 11.5px; }
+  .td-start-row { margin-top: 14px; position: sticky; bottom: 0; background: var(--surface); padding: 8px 0 2px; }
+  .td-answer-text { text-align: left; border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
+  .td-answer-text .tr-par { font-size: 19px; margin-bottom: 8px; }
+  .td-answer-text .tr-par:last-child { margin-bottom: 0; }
 </style>
 </head>
 <body>
@@ -845,6 +915,22 @@
     <div class="lesson-heading">
       <h2 id="lesson-heading-text"></h2>
       <span class="lesson-count" id="word-count"></span>
+    </div>
+    <div class="text-entry" id="text-entry" hidden>
+      <button type="button" class="text-entry-btn" id="text-read-open">
+        <span class="text-entry-icon" aria-hidden="true">📖</span>
+        <span class="text-entry-text">
+          <strong data-i18n="tr_entry_title">課文朗讀</strong>
+          <small data-i18n="tr_entry_sub">撳句子聽，或者成篇聽</small>
+        </span>
+      </button>
+      <button type="button" class="text-entry-btn" id="text-dict-open">
+        <span class="text-entry-icon" aria-hidden="true">✍️</span>
+        <span class="text-entry-text">
+          <strong data-i18n="td_entry_title">課文默書</strong>
+          <small data-i18n="td_entry_sub">逐個短語連標點默</small>
+        </span>
+      </button>
     </div>
     <div class="word-grid" id="word-grid"></div>
   </div>
@@ -959,6 +1045,69 @@
   </div>
 </div>
 
+<div class="scrim" id="tr-scrim" hidden>
+  <div class="modal dict-modal tr-modal" id="tr-modal" role="dialog" aria-modal="true" aria-labelledby="tr-title">
+    <button class="modal-close" id="tr-close" data-i18n-label="close" aria-label="關閉">✕</button>
+    <div class="dict-head">
+      <h3 id="tr-title"></h3>
+      <div class="dict-sub" data-i18n="tr_sub">撳任何一句就會讀出嚟，讀到邊度就著色到邊度</div>
+    </div>
+    <p class="dict-status" id="tr-status" hidden></p>
+    <div class="tr-controls">
+      <button type="button" class="dict-btn dict-btn--primary" id="tr-playall" data-i18n="tr_playall">▶ 成篇朗讀</button>
+      <div class="tr-speed" id="tr-speed" role="group" data-i18n-label="tr_speed_aria" aria-label="朗讀速度">
+        <button type="button" class="dict-chip" data-speed="normal" aria-pressed="true" data-i18n="tr_speed_normal">正常速度</button>
+        <button type="button" class="dict-chip" data-speed="slow" aria-pressed="false" data-i18n="tr_speed_slow">🐢 慢速</button>
+      </div>
+    </div>
+    <div class="dict-body tr-body" id="tr-body"></div>
+  </div>
+</div>
+
+<div class="scrim" id="td-scrim" hidden>
+  <div class="modal dict-modal" id="td-modal" role="dialog" aria-modal="true" aria-labelledby="td-title">
+    <button class="modal-close" id="td-close" data-i18n-label="close" aria-label="關閉">✕</button>
+    <div class="dict-head">
+      <h3 id="td-title" data-i18n="td_title">✍️ 課文默書</h3>
+      <div class="dict-sub" id="td-sub"></div>
+    </div>
+    <p class="dict-status" id="td-status" hidden></p>
+
+    <div class="dict-body" id="td-body">
+      <div id="td-setup"></div>
+
+      <div class="dict-play" id="td-play" hidden>
+        <div class="dict-progress-text" id="td-progress-text" aria-live="polite"></div>
+        <div class="dict-bar" aria-hidden="true"><span id="td-bar-fill"></span></div>
+        <button type="button" class="dict-replay" id="td-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次">🔊</button>
+        <div class="dict-replay-hint" data-i18n="dict_replay_hint">撳一下再聽一次</div>
+        <div class="dict-play-row">
+          <button type="button" class="dict-btn" id="td-slow" data-i18n="td_slow">🐢 慢速再讀</button>
+        </div>
+        <button type="button" class="dict-btn dict-btn--primary dict-btn--big" id="td-next">下一個 ▶</button>
+        <div class="dict-exit-row" id="td-exit-row">
+          <button type="button" class="dict-link" id="td-exit">退出默書</button>
+        </div>
+      </div>
+
+      <div class="dict-done" id="td-done" hidden>
+        <div class="dict-done-icon" aria-hidden="true">📝</div>
+        <h4 data-i18n="dict_done_title">默書已經結束</h4>
+        <div class="dict-reminder-row">
+          <div class="dict-reminder" id="td-reminder" role="status"></div>
+          <button type="button" class="say-btn" id="td-end-say" data-i18n-label="dict_end_say_aria" aria-label="再聽一次完結提示">🔊</button>
+        </div>
+        <div class="dict-done-actions">
+          <button type="button" class="dict-btn dict-btn--primary" id="td-show-text" aria-expanded="false">顯示課文</button>
+          <button type="button" class="dict-btn" id="td-again" data-i18n="td_again">再默一次</button>
+          <button type="button" class="dict-btn" id="td-back" data-i18n="td_back">返回開始畫面</button>
+        </div>
+        <div class="td-answer-text" id="td-answer-text" hidden></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
 <script>
 (function () {
@@ -967,6 +1116,7 @@
   var DATA = null;
   var STROKES = null;
   var audioManifest = {};
+  var textManifest = {};
   var state = { grade: null, book: null, lesson: null };
   var lastFocused = null;
   var activeWriters = [];
@@ -1063,7 +1213,35 @@
     dict_no_words: { zh: "未有詞語", en: "No words" },
     dict_expand: { zh: "揀詞語 ▾", en: "Pick words ▾" },
     dict_collapse: { zh: "收埋 ▴", en: "Collapse ▴" },
-    dict_play_aria: { zh: "播放 {w}", en: "Play {w}" }
+    dict_play_aria: { zh: "播放 {w}", en: "Play {w}" },
+    tr_entry_title: { zh: "課文朗讀", en: "Read the Text Aloud" },
+    tr_entry_sub: { zh: "撳句子聽，或者成篇聽", en: "Tap a sentence, or play it all" },
+    td_entry_title: { zh: "課文默書", en: "Text Dictation" },
+    td_entry_sub: { zh: "逐個短語連標點默", en: "Phrase by phrase, with punctuation" },
+    tr_sub: { zh: "撳任何一句就會讀出嚟，讀到邊度就著色到邊度", en: "Tap any sentence to hear it. The text lights up as it is read." },
+    tr_playall: { zh: "▶ 成篇朗讀", en: "▶ Play whole text" },
+    tr_pause: { zh: "⏸ 暫停", en: "⏸ Pause" },
+    tr_speed_aria: { zh: "朗讀速度", en: "Reading speed" },
+    tr_speed_normal: { zh: "正常速度", en: "Normal speed" },
+    tr_speed_slow: { zh: "🐢 慢速", en: "🐢 Slow" },
+    tr_no_audio: { zh: "呢課課文未有錄音，暫時用裝置內置朗讀。", en: "No recording for this text yet, so your device's voice is used." },
+    td_title: { zh: "✍️ 課文默書", en: "✍️ Text Dictation" },
+    td_sub_start: { zh: "逐個短語聽，連標點一齊寫", en: "Listen phrase by phrase and write it with its punctuation" },
+    td_sub_play: { zh: "聽到就寫（標點都要寫），寫好再撳「下一個」", en: "Write what you hear (punctuation too), then tap \"Next\"." },
+    td_sub_done: { zh: "全部讀晒喇", en: "All phrases have been read" },
+    td_info: { zh: "共 <b>{n}</b> 個短語。每個短語會連標點一齊讀出，標點會讀做標點名（例如「逗號」「上引號」），你要將標點一齊寫低。", en: "<b>{n}</b> phrases. Each one is read aloud and punctuation is spoken by name (in Cantonese, e.g. 逗號 = comma). Write the punctuation down too." },
+    td_legend: { zh: "今次會讀到嘅標點", en: "Punctuation you will hear" },
+    td_reads: { zh: "每個短語讀幾多次", en: "Times each phrase is read" },
+    td_reads_n: { zh: "{n} 次", en: "{n}×" },
+    td_start: { zh: "開始默書", en: "Start dictation" },
+    td_no_text: { zh: "呢課未有課文。", en: "This lesson has no text yet." },
+    td_progress: { zh: "第 <b>{i}</b> / {n} 個短語", en: "Phrase <b>{i}</b> of {n}" },
+    td_slow: { zh: "🐢 慢速再讀", en: "🐢 Read slowly" },
+    td_reminder: { zh: "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 {n} 個短語）", en: "Dictation finished. Please check your answers. (You have done all {n} phrases.)" },
+    td_show_text: { zh: "顯示課文", en: "Show the text" },
+    td_hide_text: { zh: "收埋課文", en: "Hide the text" },
+    td_again: { zh: "再默一次", en: "Do it again" },
+    td_back: { zh: "返回開始畫面", en: "Back to start" }
   };
 
   function loadSiteLang() {
@@ -1470,8 +1648,9 @@
         grid.appendChild(tile);
       });
     }
+    updateTextEntry();
     el("words-wrap").hidden = false;
-    el("words-wrap").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    el("words-wrap").scrollIntoView({ behavior: "smooth", block: currentTextEntry() ? "start" : "nearest" });
   }
 
   /* ---------------- Accordion open/close ---------------- */
@@ -2132,7 +2311,7 @@
   // 先著色。呢度嘅refPace係嚟自呢個詞語「例句」clip（幾乎100%都有齊足夠
   // marks）量到嘅語速，攞嚟推算呢個短clip大概幾多秒先讀完（而唔係盲目
   // 用成段duration），令到冇精準marks嘅短word clip都可以估得準啲。
-  function runClipKaraoke(audio, duration, spans, totalLen, marks, refPace) {
+  function runClipKaraoke(audio, duration, spans, totalLen, marks, refPace, rate) {
     if (!spans || !totalLen) return;
     karaokeReset(spans);
     // audio.currentTime唔會即刻準確反映一個深入大檔案嘅seek位置，
@@ -2157,7 +2336,7 @@
 
     function tick() {
       if (activeClipAudio !== audio) return;
-      var elapsed = (performance.now() - playStart) / 1000;
+      var elapsed = (performance.now() - playStart) / 1000 * (rate || 1);
       if (hasMarks) {
         karaokeSetProgress(spans, charIndexFromMarks(expandedMarks, elapsed));
       } else if (fallbackEnd > fallbackStart) {
@@ -2838,21 +3017,547 @@
     });
   })();
 
+
+  /* ---------------- 課文錄音播放（課文朗讀／課文默書共用） ----------------
+     課文錄音按「一課課文一個bundle」放喺 audio/text/<課文id>.mp3，
+     audio/text/manifest.json 記低每句（s0,s1…）同每個短語（p0,p1…）喺bundle入面
+     嘅開始時間、長度同逐字時間標記。同一課連續播多段錄音時，重用同一個
+     Audio物件（只係seek去另一段），所以連續朗讀唔會每句都重新下載／閃遮罩。
+     冇錄音（manifest冇呢段）或者播唔到，就用裝置內置粵語朗讀頂住。 */
+  var textAudio = null, textAudioSrc = "", textTok = 0;
+
+  function stopTextAudio() {
+    textTok++;
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+    if (textAudio) { try { textAudio.pause(); } catch (e) {} }
+    activeClipAudio = null;
+    stopClipKaraoke();
+    audioLoadToken++;
+    var ov = el("audio-loading-overlay");
+    if (ov) ov.hidden = true;
+  }
+
+  function speakTextEx(text, statusEl, spans, rate, onEnd) {
+    if (!("speechSynthesis" in window)) {
+      setStatus(statusEl, t("tts_unsupported"));
+      return;
+    }
+    refreshVoices();
+    var voice = pickCantoneseVoice();
+    setStatus(statusEl, voice && /^zh-HK/i.test(voice.lang) ? "" : t("tts_no_canto"));
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "zh-HK";
+    if (voice) u.voice = voice;
+    u.rate = rate || 0.85;
+    attachKaraoke(u, spans);
+    if (onEnd) {
+      var prevEnd = u.onend, prevErr = u.onerror;
+      u.onend = function () { if (prevEnd) prevEnd(); onEnd(); };
+      u.onerror = function (ev) {
+        if (prevErr) prevErr();
+        if (!ev || (ev.error !== "canceled" && ev.error !== "interrupted")) onEnd();
+      };
+    }
+    speechSynthesis.speak(u);
+  }
+
+  // o: { text（後備朗讀用）, spans, totalLen, rate（錄音播放速度）, ttsRate（後備朗讀速度）,
+  //      statusEl, onEnd }。onEnd 只會喺「呢段自然播完」先會call（被打斷唔會）。
+  function playTextClip(tid, clipKey, o) {
+    stopTextAudio();
+    var tok = textTok;
+    var finished = false;
+    function alive() { return tok === textTok; }
+    function finish() { if (finished || !alive()) return; finished = true; if (o.onEnd) o.onEnd(); }
+    function viaTts() {
+      if (!alive() || finished) return;
+      activeClipAudio = null;
+      stopClipKaraoke();
+      speakTextEx(o.text, o.statusEl, o.spans, o.ttsRate, finish);
+    }
+    var ent = textManifest && textManifest[tid];
+    var entry = ent && ent.clips && ent.clips[clipKey];
+    if (!entry || !ent.bundle) { viaTts(); return; }
+
+    var src = "audio/text/" + ent.bundle + ".mp3";
+    if (!textAudio || textAudioSrc !== src || textAudio.error) {
+      textAudio = new Audio(src);
+      textAudio.preload = "auto";
+      textAudioSrc = src;
+    }
+    var audio = textAudio;
+    var rate = o.rate || 1;
+    var loadTok = audio.readyState < 2 ? showAudioLoading() : null;
+    var timer = null;
+
+    function cleanup() {
+      audio.removeEventListener("error", onErr);
+      audio.removeEventListener("playing", onPlaying);
+      audio.removeEventListener("loadedmetadata", begin);
+    }
+    function onErr() {
+      cleanup();
+      if (loadTok != null) hideAudioLoading(loadTok);
+      if (timer) clearTimeout(timer);
+      try { audio.pause(); } catch (e) {}
+      viaTts();
+    }
+    function onPlaying() {
+      audio.removeEventListener("playing", onPlaying);
+      if (loadTok != null) hideAudioLoading(loadTok);
+      if (!alive()) { try { audio.pause(); } catch (e) {} return; }
+      activeClipAudio = audio;
+      runClipKaraoke(audio, entry.duration, o.spans, o.totalLen, entry.marks, null, rate);
+      timer = setTimeout(function () {
+        if (!alive()) return;
+        try { audio.pause(); } catch (e) {}
+        stopClipKaraoke();
+        activeClipAudio = null;
+        cleanup();
+        if (o.spans) karaokeComplete(o.spans);
+        finish();
+      }, Math.max(0, entry.duration * 1000 / rate - 60));
+    }
+    function begin() {
+      audio.removeEventListener("loadedmetadata", begin);
+      if (!alive()) { if (loadTok != null) hideAudioLoading(loadTok); return; }
+      try { audio.playbackRate = rate; } catch (e) {}
+      try { audio.currentTime = entry.start; } catch (e) {}
+      audio.addEventListener("playing", onPlaying);
+      var pr = audio.play();
+      if (pr && pr.catch) pr.catch(onErr);
+    }
+    audio.addEventListener("error", onErr);
+    if (audio.readyState >= 1) begin();
+    else audio.addEventListener("loadedmetadata", begin);
+  }
+
+  var MARK_EN = {
+    "逗號": "comma", "頓號": "enumeration comma", "分號": "semicolon", "冒號": "colon",
+    "句號": "full stop", "問號": "question mark", "感嘆號": "exclamation mark",
+    "上引號": "opening quote", "下引號": "closing quote",
+    "上雙引號": "opening double quote", "下雙引號": "closing double quote",
+    "上書名號": "opening title mark", "下書名號": "closing title mark",
+    "上括號": "opening bracket", "下括號": "closing bracket",
+    "破折號": "dash", "省略號": "ellipsis"
+  };
+
+  function currentTextEntry() {
+    if (!DATA || !DATA.texts || !state.lesson) return null;
+    return DATA.texts[wordKey(state.grade, state.book, state.lesson)] || null;
+  }
+
+  function updateTextEntry() {
+    var box = el("text-entry");
+    if (box) box.hidden = !currentTextEntry();
+  }
+
+  /* ---------------- 課文朗讀 ----------------
+     成篇課文分句顯示；撳邊句就讀邊句（跟住讀到嘅字著色）；亦可以「成篇朗讀」
+     由頭連續讀，或者暫停；慢速／正常速度兩種。 */
+  (function () {
+    var scrim = el("tr-scrim");
+    var tr = { entry: null, sents: [], speed: "normal", all: false, cur: -1, resumeAt: null, playing: false };
+    var lastFocused = null;
+
+    function rates() { return tr.speed === "slow" ? { audio: 0.75, tts: 0.6 } : { audio: 1, tts: 0.85 }; }
+
+    function setActive(i) {
+      tr.sents.forEach(function (s, j) { s.el.classList.toggle("is-active", j === i); });
+    }
+    function setPlayLabel() {
+      el("tr-playall").textContent = tr.all ? t("tr_pause") : t("tr_playall");
+    }
+
+    function build() {
+      var body = el("tr-body");
+      body.innerHTML = "";
+      tr.sents = [];
+      tr.entry.paragraphs.forEach(function (p) {
+        var pe = document.createElement("p");
+        pe.className = "tr-par";
+        p.sentences.forEach(function (s) {
+          var se = document.createElement("span");
+          se.className = "tr-sent";
+          se.tabIndex = 0;
+          se.setAttribute("role", "button");
+          var spans = renderKaraoke(se, s.text, [], "char");
+          var idx = tr.sents.length;
+          tr.sents.push({ id: s.id, text: s.text, el: se, spans: spans });
+          se.addEventListener("click", function () { onTap(idx); });
+          se.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTap(idx); }
+          });
+          pe.appendChild(se);
+        });
+        body.appendChild(pe);
+      });
+    }
+
+    function endAll() {
+      tr.all = false; tr.cur = -1; tr.resumeAt = null; tr.playing = false;
+      setActive(-1); setPlayLabel();
+    }
+
+    function playSent(i) {
+      var s = tr.sents[i];
+      if (!s) { endAll(); return; }
+      tr.cur = i; tr.playing = true;
+      // 其他句要變返實色（上一句如果被打斷，可能仲係淡色）
+      tr.sents.forEach(function (x) { karaokeComplete(x.spans); });
+      setActive(i);
+      s.el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      var r = rates();
+      playTextClip(tr.entry.id, s.id, {
+        text: s.text, spans: s.spans, totalLen: s.text.length,
+        rate: r.audio, ttsRate: r.tts, statusEl: el("tr-status"),
+        onEnd: function () {
+          tr.playing = false;
+          if (tr.all && i + 1 < tr.sents.length) playSent(i + 1);
+          else if (tr.all) endAll();
+          else setActive(-1);
+        }
+      });
+    }
+
+    function onTap(i) { playSent(i); }
+
+    function togglePlayAll() {
+      if (tr.all) {
+        tr.all = false;
+        tr.resumeAt = tr.cur;
+        tr.playing = false;
+        stopTextAudio();
+        tr.sents.forEach(function (x) { karaokeComplete(x.spans); });
+        setPlayLabel();
+      } else {
+        tr.all = true;
+        setPlayLabel();
+        playSent(tr.resumeAt != null && tr.resumeAt >= 0 ? tr.resumeAt : 0);
+        tr.resumeAt = null;
+      }
+    }
+
+    function setSpeed(sp) {
+      tr.speed = sp;
+      document.querySelectorAll("#tr-speed .dict-chip").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-speed") === sp ? "true" : "false");
+      });
+      if (tr.playing && tr.cur >= 0) playSent(tr.cur); // 讀緊嘅話，用新速度由呢句重讀
+    }
+
+    function open() {
+      var entry = currentTextEntry();
+      if (!entry) return;
+      tr.entry = entry; tr.all = false; tr.cur = -1; tr.resumeAt = null; tr.playing = false;
+      el("tr-title").textContent = state.lesson;
+      build();
+      setPlayLabel();
+      setStatus(el("tr-status"), textManifest && textManifest[entry.id] ? "" : t("tr_no_audio"));
+      lastFocused = document.activeElement;
+      scrim.hidden = false;
+      document.body.style.overflow = "hidden";
+      el("tr-body").scrollTop = 0;
+      el("tr-close").focus();
+    }
+
+    function close() {
+      stopTextAudio();
+      tr.all = false; tr.playing = false;
+      scrim.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    el("text-read-open").addEventListener("click", open);
+    el("tr-close").addEventListener("click", close);
+    scrim.addEventListener("click", function (e) { if (e.target === scrim) close(); });
+    el("tr-playall").addEventListener("click", togglePlayAll);
+    document.querySelectorAll("#tr-speed .dict-chip").forEach(function (b) {
+      b.addEventListener("click", function () { setSpeed(b.getAttribute("data-speed")); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!scrim.hidden && e.key === "Escape") close();
+    });
+  })();
+
+  /* ---------------- 課文默書 ----------------
+     逐個短語（用逗號、頓號、冒號、句號等標點切開）按課文次序讀出，標點讀做標點名
+     （「上引號」「逗號」…），學生要連標點一齊寫。撳「下一個」先讀下一個。 */
+  (function () {
+    var scrim = el("td-scrim");
+    var td = { entry: null, queue: [], idx: 0, reads: 1, mode: "start", lastNextAt: 0, gen: 0 };
+    var endAudio = null;
+    var lastFocused = null;
+
+    function stopAll() {
+      td.gen++;
+      stopTextAudio();
+      if (endAudio) { try { endAudio.pause(); } catch (e) {} endAudio = null; }
+    }
+
+    function showMode(m) {
+      td.mode = m;
+      el("td-setup").hidden = m !== "start";
+      el("td-play").hidden = m !== "play";
+      el("td-done").hidden = m !== "done";
+      el("td-sub").textContent = m === "start" ? t("td_sub_start") : m === "play" ? t("td_sub_play") : t("td_sub_done");
+      setStatus(el("td-status"), "");
+      el("td-body").scrollTop = 0;
+    }
+
+    function presentMarks(entry) {
+      var all = (DATA && DATA.markNames) || {};
+      var text = entry.paragraphs.map(function (p) { return p.sentences.map(function (s) { return s.text; }).join(""); }).join("");
+      var seenName = {}, out = [];
+      Object.keys(all).forEach(function (sym) {
+        if (text.indexOf(sym) < 0) return;
+        var name = all[sym];
+        if (seenName[name]) return;
+        seenName[name] = true;
+        out.push([sym.length > 1 ? sym : sym, name]);
+      });
+      return out;
+    }
+
+    function renderStart() {
+      var box = el("td-setup");
+      box.innerHTML = "";
+      var nm = document.createElement("div");
+      nm.className = "td-lesson-name";
+      nm.textContent = state.lesson;
+      box.appendChild(nm);
+      var info = document.createElement("p");
+      info.className = "td-info";
+      info.innerHTML = t("td_info", { n: td.queue.length });
+      box.appendChild(info);
+
+      var marks = presentMarks(td.entry);
+      if (marks.length) {
+        var l1 = document.createElement("div");
+        l1.className = "dict-label"; l1.textContent = t("td_legend");
+        box.appendChild(l1);
+        var lg = document.createElement("div");
+        lg.className = "td-legend";
+        marks.forEach(function (m) {
+          var sp = document.createElement("span");
+          var b = document.createElement("b"); b.textContent = m[0];
+          sp.appendChild(b);
+          sp.appendChild(document.createTextNode(m[1]));
+          if (siteLang === "en" && MARK_EN[m[1]]) {
+            var i = document.createElement("i"); i.textContent = MARK_EN[m[1]];
+            sp.appendChild(i);
+          }
+          lg.appendChild(sp);
+        });
+        box.appendChild(lg);
+      }
+
+      var l2 = document.createElement("div");
+      l2.className = "dict-label"; l2.textContent = t("td_reads");
+      box.appendChild(l2);
+      var rd = document.createElement("div");
+      rd.className = "dict-chips";
+      [1, 2].forEach(function (n) {
+        var c = document.createElement("button");
+        c.type = "button"; c.className = "dict-chip";
+        c.textContent = t("td_reads_n", { n: n });
+        c.setAttribute("aria-pressed", td.reads === n ? "true" : "false");
+        c.addEventListener("click", function () { td.reads = n; renderStart(); });
+        rd.appendChild(c);
+      });
+      box.appendChild(rd);
+
+      var row = document.createElement("div");
+      row.className = "td-start-row";
+      var st = document.createElement("button");
+      st.type = "button"; st.className = "dict-btn dict-btn--primary dict-btn--big";
+      st.textContent = t("td_start");
+      st.disabled = !td.queue.length;
+      st.addEventListener("click", start);
+      row.appendChild(st);
+      box.appendChild(row);
+    }
+
+    function playPhrase(slow) {
+      var p = td.queue[td.idx];
+      if (!p) return;
+      var gen = ++td.gen;
+      var n = 0;
+      var rate = slow ? 0.75 : 1, ttsRate = slow ? 0.55 : 0.75;
+      function once() {
+        playTextClip(td.entry.id, p.id, {
+          text: p.say, spans: null, totalLen: 0, rate: rate, ttsRate: ttsRate, statusEl: el("td-status"),
+          onEnd: function () {
+            n++;
+            if (n < td.reads) setTimeout(function () { if (gen === td.gen && !scrim.hidden) once(); }, 1600);
+          }
+        });
+      }
+      once();
+    }
+
+    function resetExitRow() {
+      el("td-exit-row").innerHTML = '<button type="button" class="dict-link" id="td-exit">' + t("dict_exit") + '</button>';
+      el("td-exit").addEventListener("click", requestExit);
+    }
+    function requestExit() {
+      if (td.mode !== "play") { close(); return; }
+      var row = el("td-exit-row");
+      row.innerHTML = '<span>' + t("dict_exit_confirm") + '</span>' +
+        '<button type="button" class="dict-link" id="td-exit-yes">' + t("dict_exit_yes") + '</button>' +
+        '<button type="button" class="dict-link" id="td-exit-no">' + t("dict_exit_no") + '</button>';
+      el("td-exit-yes").addEventListener("click", close);
+      el("td-exit-no").addEventListener("click", resetExitRow);
+      el("td-exit-no").focus();
+    }
+
+    function renderItem() {
+      var total = td.queue.length;
+      el("td-progress-text").innerHTML = t("td_progress", { i: td.idx + 1, n: total });
+      el("td-bar-fill").style.width = (td.idx / total * 100) + "%";
+      el("td-next").textContent = td.idx === total - 1 ? t("dict_finish") : t("dict_next");
+      resetExitRow();
+    }
+
+    function start() {
+      if (!td.queue.length) return;
+      stopAll();
+      td.idx = 0;
+      td.lastNextAt = Date.now();
+      showMode("play");
+      renderItem();
+      playPhrase(false);
+      el("td-next").focus();
+    }
+
+    function next() {
+      if (td.mode !== "play") return;
+      var now = Date.now();
+      if (now - td.lastNextAt < 450) return;
+      td.lastNextAt = now;
+      if (td.idx >= td.queue.length - 1) { finish(); return; }
+      td.idx++;
+      renderItem();
+      playPhrase(false);
+    }
+
+    function speakEnd() {
+      stopAll();
+      var gen = td.gen;
+      var statusEl = el("td-status");
+      var en = siteLang === "en";
+      var text = t("dict_end_speech");
+      var fell = false;
+      function fallback() {
+        if (fell || td.gen !== gen || scrim.hidden) return;
+        fell = true;
+        if (en) speakGloss(text, "en", statusEl, null); else speakText(text, statusEl, null);
+      }
+      var audio = new Audio(en ? "audio/dictation_end_en.mp3" : "audio/dictation_end.mp3");
+      endAudio = audio;
+      audio.addEventListener("error", fallback);
+      audio.play().catch(fallback);
+    }
+
+    function finish() {
+      stopAll();
+      el("td-bar-fill").style.width = "100%";
+      el("td-reminder").textContent = t("td_reminder", { n: td.queue.length });
+      var box = el("td-answer-text");
+      box.hidden = true; box.innerHTML = "";
+      el("td-show-text").textContent = t("td_show_text");
+      el("td-show-text").setAttribute("aria-expanded", "false");
+      showMode("done");
+      el("td-show-text").focus();
+      speakEnd();
+    }
+
+    function toggleText() {
+      var box = el("td-answer-text");
+      var open = box.hidden;
+      if (open && !box.childNodes.length) {
+        td.entry.paragraphs.forEach(function (p) {
+          var pe = document.createElement("p");
+          pe.className = "tr-par";
+          pe.textContent = p.sentences.map(function (s) { return s.text; }).join("");
+          box.appendChild(pe);
+        });
+      }
+      box.hidden = !open;
+      el("td-show-text").textContent = open ? t("td_hide_text") : t("td_show_text");
+      el("td-show-text").setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+
+    function open() {
+      var entry = currentTextEntry();
+      if (!entry) return;
+      td.entry = entry;
+      td.queue = [];
+      entry.paragraphs.forEach(function (p) {
+        p.sentences.forEach(function (s) {
+          s.phrases.forEach(function (ph) { td.queue.push(ph); });
+        });
+      });
+      td.idx = 0;
+      showMode("start");
+      renderStart();
+      setStatus(el("td-status"), textManifest && textManifest[entry.id] ? "" : t("tr_no_audio"));
+      lastFocused = document.activeElement;
+      scrim.hidden = false;
+      document.body.style.overflow = "hidden";
+      el("td-close").focus();
+    }
+
+    function close() {
+      stopAll();
+      scrim.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    el("text-dict-open").addEventListener("click", open);
+    el("td-close").addEventListener("click", requestExit);
+    scrim.addEventListener("click", function (e) { if (e.target === scrim) requestExit(); });
+    el("td-replay").addEventListener("click", function () { if (td.mode === "play") playPhrase(false); });
+    el("td-slow").addEventListener("click", function () { if (td.mode === "play") playPhrase(true); });
+    el("td-next").addEventListener("click", next);
+    el("td-exit").addEventListener("click", requestExit);
+    el("td-show-text").addEventListener("click", toggleText);
+    el("td-end-say").addEventListener("click", speakEnd);
+    el("td-again").addEventListener("click", start);
+    el("td-back").addEventListener("click", function () { stopAll(); showMode("start"); renderStart(); });
+    document.addEventListener("keydown", function (e) {
+      if (scrim.hidden) return;
+      if (e.key === "Escape") { requestExit(); return; }
+      if (td.mode === "play" && e.key === "ArrowRight") { e.preventDefault(); next(); }
+    });
+  })();
+
   /* ---------------- Boot ---------------- */
 
-  function boot(data, strokes, manifest) {
+  function boot(data, strokes, manifest, tManifest) {
     DATA = data;
     STROKES = strokes;
     audioManifest = manifest || {};
+    textManifest = tManifest || {};
     renderGrades();
   }
 
   Promise.all([
     fetch("data.json").then(function (r) { return r.json(); }),
     fetch("strokes.json").then(function (r) { return r.json(); }),
-    fetch("audio/bundles/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+    fetch("audio/bundles/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+    fetch("audio/text/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+    fetch("texts.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
   ]).then(function (results) {
-    boot(results[0], results[1], results[2]);
+    if (results[4] && results[4].texts) {
+      results[0].texts = results[4].texts;
+      results[0].markNames = results[4].markNames || {};
+    }
+    boot(results[0], results[1], results[2], results[3]);
   }).catch(function (err) {
     el("grid-grade").innerHTML = '<p class="empty-note">' + t("load_fail") + '</p>';
     console.error(err);
