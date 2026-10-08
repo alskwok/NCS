@@ -29,6 +29,14 @@
     --success: #3F8F5F;
     --mark-red: #D6362B;
     --shadow: 0 10px 30px -12px rgba(43, 42, 40, 0.28);
+    --font-ui: "Noto Sans TC", "Noto Sans HK", "PingFang HK", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --success-soft: #E3F1E8;
+    --hl-yellow: rgba(255, 214, 64, .55);
+    --hl-yellow-soft: rgba(255, 214, 64, .26);
+    --hl-green: rgba(112, 188, 124, .34);
+    --grid-line: rgba(184, 67, 58, .20);
+    --grid-border: rgba(184, 67, 58, .38);
+    --card-shadow: 0 6px 16px -8px rgba(122, 92, 40, .40);
     /* 全站中文字用楷體風格：首選「大萌秀楷」（自家字體檔，所有裝置一樣）；
        罕用字唔喺縮細版入面，就用裝置自己嘅標楷體（Windows 嘅標楷體／DFKai-SB、
        Mac 嘅 BiauKai／楷體-繁），再冇就用網上字體「霞鶩文楷 TC」頂上。字體只管
@@ -57,36 +65,50 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --paper: #1E1C18;
-      --surface: #2A2721;
-      --paper-line: #3C382E;
-      --ink: #EDE8DC;
-      --ink-soft: #B4AC9C;
-      --ink-faint: #766F5F;
+      --surface: #37332B;
+      --paper-line: #4D4739;
+      --ink: #F5F2EB;
+      --ink-soft: #D2CAB9;
+      --ink-faint: #A9A18E;
       --brand: #8CADE0;
       --brand-strong: #AFC7EC;
-      --brand-soft: #2A3B54;
+      --brand-soft: #2F425F;
       --accent: #E28B80;
       --accent-soft: #40302B;
       --success: #6FBE8C;
       --mark-red: #FF7A6E;
       --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+      --success-soft: #25392C;
+      --hl-yellow: rgba(255, 214, 64, .30);
+      --hl-yellow-soft: rgba(255, 214, 64, .14);
+      --hl-green: rgba(111, 190, 140, .30);
+      --grid-line: rgba(226, 139, 128, .30);
+      --grid-border: rgba(226, 139, 128, .50);
+      --card-shadow: 0 6px 16px -8px rgba(0, 0, 0, .65);
     }
   }
   :root[data-theme="dark"] {
     --paper: #1E1C18;
-    --surface: #2A2721;
-    --paper-line: #3C382E;
-    --ink: #EDE8DC;
-    --ink-soft: #B4AC9C;
-    --ink-faint: #766F5F;
+    --surface: #37332B;
+    --paper-line: #4D4739;
+    --ink: #F5F2EB;
+    --ink-soft: #D2CAB9;
+    --ink-faint: #A9A18E;
     --brand: #8CADE0;
     --brand-strong: #AFC7EC;
-    --brand-soft: #2A3B54;
+    --brand-soft: #2F425F;
     --accent: #E28B80;
     --accent-soft: #40302B;
     --success: #6FBE8C;
     --mark-red: #FF7A6E;
     --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+    --success-soft: #25392C;
+    --hl-yellow: rgba(255, 214, 64, .30);
+    --hl-yellow-soft: rgba(255, 214, 64, .14);
+    --hl-green: rgba(111, 190, 140, .30);
+    --grid-line: rgba(226, 139, 128, .30);
+    --grid-border: rgba(226, 139, 128, .50);
+    --card-shadow: 0 6px 16px -8px rgba(0, 0, 0, .65);
   }
 
   * { box-sizing: border-box; }
@@ -846,6 +868,615 @@
   .td-answer-text { text-align: left; border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); padding: 12px 14px; }
   .td-answer-text .tr-par { font-size: 19px; margin-bottom: 8px; }
   .td-answer-text .tr-par:last-child { margin-bottom: 0; }
+
+  /* =====================================================================
+     v2 版面（按設計師建議）：瘦身頂部、年級／課本／課次一眼睇晒、課次功能分頁、
+     卡牌感詞語卡、專注默書、完成獎勵卡、閱讀排版、UI 黑體分工、深色提亮
+     ===================================================================== */
+  .pos-n { --pb: #FDEBD3; --pf: #9A5200; }
+  .pos-v { --pb: #DCEAFB; --pf: #1F4F8F; }
+  .pos-a { --pb: #DFF1E4; --pf: #25683F; }
+  .pos-d { --pb: #EBE1F7; --pf: #5B3A8C; }
+  .pos-q { --pb: #DDEEEE; --pf: #2F6464; }
+  .pos-p { --pb: #DDEEEE; --pf: #2F6464; }
+  .pos-c { --pb: #DDEEEE; --pf: #2F6464; }
+  .pos-i { --pb: #F8DFDB; --pf: #8F2F27; }
+  .pos-e { --pb: #FBE0EC; --pf: #8C2E57; }
+  .pos-x { --pb: #ECE8DC; --pf: #6E6A5F; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .pos-n { --pb: #4A3320; --pf: #F6C48A; }
+    :root:not([data-theme="light"]) .pos-v { --pb: #243A57; --pf: #A9C9F2; }
+    :root:not([data-theme="light"]) .pos-a { --pb: #25402F; --pf: #9ADBB2; }
+    :root:not([data-theme="light"]) .pos-d { --pb: #3A2F52; --pf: #CDB5F0; }
+    :root:not([data-theme="light"]) .pos-q { --pb: #26403F; --pf: #9ED6D4; }
+    :root:not([data-theme="light"]) .pos-p { --pb: #26403F; --pf: #9ED6D4; }
+    :root:not([data-theme="light"]) .pos-c { --pb: #26403F; --pf: #9ED6D4; }
+    :root:not([data-theme="light"]) .pos-i { --pb: #4A2A27; --pf: #F2A49B; }
+    :root:not([data-theme="light"]) .pos-e { --pb: #4A2A3A; --pf: #F2A6C6; }
+    :root:not([data-theme="light"]) .pos-x { --pb: #403C33; --pf: #CFC7B6; }
+  }
+  :root[data-theme="dark"] .pos-n { --pb: #4A3320; --pf: #F6C48A; }
+  :root[data-theme="dark"] .pos-v { --pb: #243A57; --pf: #A9C9F2; }
+  :root[data-theme="dark"] .pos-a { --pb: #25402F; --pf: #9ADBB2; }
+  :root[data-theme="dark"] .pos-d { --pb: #3A2F52; --pf: #CDB5F0; }
+  :root[data-theme="dark"] .pos-q { --pb: #26403F; --pf: #9ED6D4; }
+  :root[data-theme="dark"] .pos-p { --pb: #26403F; --pf: #9ED6D4; }
+  :root[data-theme="dark"] .pos-c { --pb: #26403F; --pf: #9ED6D4; }
+  :root[data-theme="dark"] .pos-i { --pb: #4A2A27; --pf: #F2A49B; }
+  :root[data-theme="dark"] .pos-e { --pb: #4A2A3A; --pf: #F2A6C6; }
+  :root[data-theme="dark"] .pos-x { --pb: #403C33; --pf: #CFC7B6; }
+
+  /* ---- 字體分工：介面用黑體，課文／詞語主字保留楷體 ---- */
+  body, button, input, select, textarea { font-family: var(--font-ui); }
+  h1, h2, h3, h4 { font-family: var(--font-ui); }
+  .lesson-heading h2, .td-lesson-name, #tr-title, .word-title, .word-tile .glyph, .example-text,
+  .info-value, .tr-par, .tr-sent, .td-ph, .dict-answer-word, .dict-chip--word, .td-legend b,
+  .book-fallback, .td-answer-text, .tr-body { font-family: var(--font-kai); }
+  .lang-btn[lang="ur"] { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; }
+  .word-tile .en[dir="rtl"] { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; }
+
+  /* ---- 1. 頂部瘦身：單行 ---- */
+  .topbar { flex-wrap: nowrap; padding: 8px 16px; gap: 10px; margin-bottom: 12px; min-height: 56px; }
+  .topbar .mark { width: 36px; height: 36px; border-radius: 10px; font-size: 18px; }
+  .topbar-titles { flex: 1 1 auto; min-width: 0; }
+  .topbar h1 { font-size: 18px; line-height: 1.15; font-weight: 800; }
+  .topbar .tagline { display: none; }
+  .site-lang { margin-left: auto; }
+  .site-lang-btn { padding: 6px 11px; min-height: 32px; }
+  .install-btn { margin-left: 0; width: 36px; height: 36px; padding: 0; justify-content: center; border-radius: 50%; }
+  .install-btn > span[data-i18n] { display: none; }
+  .install-btn-icon { font-size: 18px; }
+  @media (max-width: 420px) { .topbar h1 { font-size: 16px; } }
+
+  /* ---- 2. 年級膠囊／課本輪播／課次 ---- */
+  .picker { margin-bottom: 8px; }
+  .grade-row { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .grade-row::-webkit-scrollbar, .book-row::-webkit-scrollbar { display: none; }
+  .grade-pill {
+    flex: 1 1 0; min-width: 48px; height: 44px; padding: 0 4px; border-radius: 999px;
+    border: 1.5px solid var(--paper-line); background: var(--surface); color: var(--ink-soft);
+    font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: var(--card-shadow);
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease;
+  }
+  .grade-pill:active { transform: scale(.96); }
+  .grade-pill[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--surface); box-shadow: 0 8px 16px -8px rgba(34, 58, 94, .65); }
+  .book-row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 2px 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .book-row .book-card {
+    flex: 0 0 auto; width: 96px; scroll-snap-align: start; border-radius: 14px; position: relative;
+    border: 2px solid transparent; box-shadow: var(--card-shadow); transition: width .2s ease, border-color .15s ease;
+  }
+  .book-row .book-card:hover { transform: none; }
+  .book-row .book-cover { aspect-ratio: auto; height: 128px; transition: height .2s ease; }
+  .book-row .book-title { padding: 6px 6px 8px; font-size: 12px; text-align: center; }
+  .book-row .book-card[aria-pressed="true"] { border-color: var(--brand); }
+  .book-row .book-card[aria-pressed="true"]::after {
+    content: "✓"; position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--brand); color: var(--surface); font-size: 13px; font-weight: 800; display: grid; place-items: center;
+  }
+  .book-row.compact .book-card { width: 64px; }
+  .book-row.compact .book-cover { height: 72px; }
+  .book-row.compact .book-title { font-size: 10.5px; padding: 4px 3px 5px; }
+  .book-row.compact .book-card[aria-pressed="true"]::after { width: 18px; height: 18px; font-size: 11px; top: 4px; right: 4px; }
+  .lesson-block-head { font-size: 12px; font-weight: 700; color: var(--ink-soft); letter-spacing: .06em; margin: 2px 2px 8px; }
+  .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  @media (min-width: 560px) { .lesson-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .lesson-grid .option-btn {
+    min-height: 48px; border-radius: 14px; background: var(--surface); font-size: 14px; font-weight: 600; line-height: 1.3;
+    box-shadow: var(--card-shadow); padding: 8px 10px; transform: none;
+  }
+  .lesson-grid .option-btn[aria-pressed="true"] { background: var(--brand-soft); border-color: var(--brand); color: var(--brand-strong); }
+  .lesson-current {
+    width: 100%; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 14px;
+    border-radius: 14px; border: 1.5px solid var(--brand); background: var(--brand-soft); color: var(--brand-strong); cursor: pointer;
+  }
+  .lesson-current-name { flex: 1 1 auto; min-width: 0; text-align: left; font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lesson-current-change { flex: none; font-size: 12.5px; font-weight: 700; }
+  .dict-entry { padding: 8px 14px; margin-bottom: 10px; border-radius: 14px; box-shadow: var(--card-shadow); border-width: 1px; }
+  .dict-entry-icon { font-size: 22px; }
+  .dict-entry-text strong { font-size: 15px; }
+  .dict-entry-text small { font-size: 11.5px; }
+
+  /* ---- 3. 課次功能分頁 ---- */
+  .lesson-heading { margin: 16px 0 10px; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; padding: 4px; background: var(--paper); border: 1px solid var(--paper-line); border-radius: 16px; margin: 0 0 14px; }
+  .seg-btn {
+    min-height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--ink-soft);
+    font-size: 13.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px;
+    cursor: pointer; padding: 0 6px; white-space: nowrap; transition: background .15s ease, color .15s ease;
+  }
+  .seg-btn[aria-pressed="true"] { background: var(--surface); color: var(--brand-strong); box-shadow: var(--card-shadow); }
+  .seg-ic { font-size: 16px; line-height: 1; }
+  .dictate-pane { display: flex; flex-direction: column; gap: 10px; }
+  .task-card {
+    display: flex; align-items: center; gap: 12px; min-height: 76px; padding: 12px 14px; border-radius: 18px;
+    border: 1.5px solid var(--paper-line); background: var(--surface); box-shadow: var(--card-shadow);
+    cursor: pointer; text-align: left; color: var(--ink);
+  }
+  .task-card:active { transform: scale(.99); }
+  .task-ic { flex: none; font-size: 26px; width: 48px; height: 48px; border-radius: 14px; background: var(--brand-soft); display: grid; place-items: center; }
+  .task-text { flex: 1 1 auto; min-width: 0; }
+  .task-text strong { display: block; font-size: 16px; }
+  .task-text small { display: block; font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+  .task-chev { flex: none; font-size: 24px; color: var(--ink-faint); }
+
+  /* ---- 4. 詞語卡牌感 ---- */
+  .word-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .word-tile { position: relative; border-radius: 18px; box-shadow: var(--card-shadow); padding: 30px 10px 12px; }
+  .word-tile:hover { box-shadow: var(--shadow); }
+  .word-tile .glyph { border-radius: 10px; }
+  .word-tile .en { font-family: var(--font-ui); font-size: 12.5px; }
+  .word-tile.has-thumb .en { padding-inline: 28px; box-sizing: border-box; }
+  .tile-pos {
+    position: absolute; top: 8px; right: 8px; font-size: 11px; font-weight: 700; line-height: 1.5;
+    padding: 1px 9px; border-radius: 999px; background: var(--pb, #ECE8DC); color: var(--pf, #6E6A5F);
+  }
+  .tile-thumb {
+    position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 10px; object-fit: cover;
+    border: 2px solid var(--surface); box-shadow: 0 2px 8px rgba(0, 0, 0, .28); background: var(--paper);
+  }
+
+  /* ---- 5. 詞語彈窗：單字圖卡 ---- */
+  .lang-switch--modal {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 3px; margin: 12px 0 0;
+    background: var(--paper); border: 1px solid var(--paper-line); border-radius: 999px; justify-content: stretch;
+  }
+  .lang-switch--modal .lang-btn { border: 0; background: transparent; padding: 6px 4px; font-size: 13px; min-height: 34px; }
+  .lang-switch--modal .lang-btn[aria-pressed="true"] { background: var(--brand); color: var(--surface); }
+  .word-title-row { padding-right: 44px; }
+  .say-btn { width: 44px; height: 44px; font-size: 20px; }
+  .say-btn--sm { width: 38px; height: 38px; font-size: 16px; }
+  .char-canvas {
+    border-radius: 10px; border: 1.5px solid var(--grid-border);
+    background-image:
+      linear-gradient(to right, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px)),
+      linear-gradient(to bottom, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px)),
+      linear-gradient(45deg, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px)),
+      linear-gradient(-45deg, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px));
+  }
+  .replay-btn { min-height: 44px; padding: 10px 20px; font-size: 14px; border-radius: 12px; }
+
+  @media (max-height: 640px) {
+    .say-btn { width: 40px; height: 40px; font-size: 18px; }
+    .say-btn--sm { width: 34px; height: 34px; font-size: 14px; }
+    .replay-btn { min-height: 38px; padding: 7px 16px; margin-top: 6px; }
+    .lang-switch--modal { margin-top: 8px; }
+    .lang-switch--modal .lang-btn { min-height: 30px; padding: 4px; }
+  }
+  @media (max-height: 480px) {
+    .say-btn { width: 34px; height: 34px; font-size: 16px; }
+    .say-btn--sm { width: 30px; height: 30px; font-size: 13px; }
+    .replay-btn { min-height: 32px; padding: 5px 12px; font-size: 13px; }
+    .lang-switch--modal { margin-top: 6px; }
+    .lang-switch--modal .lang-btn { min-height: 26px; font-size: 12px; }
+  }
+
+  /* ---- 6. 默書專注卡 ---- */
+  .dict-modal[data-mode="play"], #td-modal[data-mode="play"] { height: min(76dvh, 640px); }
+  .dict-modal[data-mode="play"] .dict-body, #td-modal[data-mode="play"] .dict-body { display: flex; flex-direction: column; justify-content: center; }
+  .dict-play { gap: 14px; padding-top: 0; }
+  .dict-replay {
+    position: relative; width: 136px; height: 136px; font-size: 54px;
+    box-shadow: 0 0 0 10px var(--brand-soft); margin: 6px 0;
+  }
+  .dict-replay::before, .dict-replay::after {
+    content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 3px solid var(--brand); opacity: 0; pointer-events: none;
+  }
+  .dict-replay.is-playing { animation: dict-breath 1.8s ease-in-out infinite; }
+  .dict-replay.is-playing::before { animation: dict-ripple 1.7s ease-out infinite; }
+  .dict-replay.is-playing::after { animation: dict-ripple 1.7s ease-out .85s infinite; }
+  @keyframes dict-ripple { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(1.7); opacity: 0; } }
+  @keyframes dict-breath {
+    0%, 100% { box-shadow: 0 0 0 10px var(--brand-soft), 0 0 0 0 rgba(47, 76, 122, 0); }
+    50% { box-shadow: 0 0 0 16px var(--brand-soft), 0 0 30px 10px rgba(47, 76, 122, .28); }
+  }
+  .dict-play-row { margin: 4px 0 18px; }
+  .dict-play-row .dict-btn { font-size: 14px; padding: 8px 16px; border-width: 1px; font-weight: 600; }
+  #dict-next, #td-next {
+    min-height: 58px; font-size: 21px; border-radius: 18px; box-shadow: 0 10px 20px -10px rgba(34, 58, 94, .7);
+  }
+  .dict-exit-row { margin-top: 18px; min-height: 36px; }
+
+  /* ---- 7. 完成獎勵卡 ---- */
+  .done-art { display: grid; place-items: center; padding-top: 2px; }
+  .done-art svg { width: 190px; height: auto; max-width: 70%; }
+  .done-art .da-star { transform-box: fill-box; transform-origin: center; animation: da-pop .7s cubic-bezier(.2, 1.6, .4, 1) both; }
+  .done-art .da-stamp { transform-box: fill-box; transform-origin: center; animation: da-stamp .55s .35s cubic-bezier(.2, 1.4, .4, 1) both; }
+  .done-art .da-sp { transform-box: fill-box; transform-origin: center; animation: da-twinkle 1.8s ease-in-out infinite; }
+  .done-art .da-sp2 { animation-delay: .6s; }
+  .done-art .da-sp3 { animation-delay: 1.1s; }
+  @keyframes da-pop { 0% { transform: scale(.2) rotate(-40deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+  @keyframes da-stamp { 0% { transform: scale(2.4); opacity: 0; } 70% { transform: scale(.92); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes da-twinkle { 0%, 100% { transform: scale(.6); opacity: .5; } 50% { transform: scale(1.1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .done-art .da-star, .done-art .da-stamp, .done-art .da-sp, .dict-replay.is-playing, .dict-replay.is-playing::before, .dict-replay.is-playing::after { animation: none !important; }
+  }
+  .dict-done h4 { font-size: 24px; font-weight: 800; color: var(--brand-strong); }
+  .dict-reminder { background: var(--success-soft); border-color: var(--success); font-size: 15px; font-weight: 600; }
+  .dict-done-actions .dict-btn { min-height: 48px; border-radius: 14px; }
+
+  /* ---- 8. 課文朗讀排版 ---- */
+  .tr-par { font-size: 22px; line-height: 2.15; letter-spacing: .08em; margin: 0 0 16px; }
+  .tr-sent { border-radius: 8px; padding: 3px 0; }
+  .tr-sent:hover { background: var(--hl-yellow-soft); }
+  .tr-sent.is-active { background: var(--hl-yellow); }
+  .tr-sent .ro-tok.ro-unread { opacity: .26; }
+
+  /* ---- 9. 課文默書選段 ---- */
+  .td-pick-box { max-height: 38vh; }
+  .td-ph.in { background: var(--hl-green); opacity: 1; }
+  .td-ph.edge { box-shadow: inset 0 -3px 0 var(--success); }
+  .td-fold { margin: 12px 0 4px; border: 1px solid var(--paper-line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+  .td-fold > summary {
+    list-style: none; cursor: pointer; padding: 10px 14px; font-size: 14px; font-weight: 700; color: var(--brand-strong);
+    display: flex; align-items: center; justify-content: space-between; min-height: 44px;
+  }
+  .td-fold > summary::-webkit-details-marker { display: none; }
+  .td-fold > summary::after { content: "▾"; color: var(--ink-faint); font-size: 12px; }
+  .td-fold[open] > summary::after { content: "▴"; }
+  .td-fold-body { padding: 0 14px 12px; }
+  .td-fold-body .td-info { margin-top: 0; }
+
+  /* =====================================================================
+     v3 版面（設計師第二輪）：冷白底＋科技藍、去灰線改柔和陰影、
+     元件造型分工（年級＝分段控制／課次功能＝按鍵卡／彈窗語言＝底線分頁／選項＝標籤）、
+     拍立得詞語卡、單字圖卡彈窗、聲波大喇叭、成就戰報卡、柔和跟讀、積木式選段、按壓手感
+     ===================================================================== */
+  :root {
+    --paper: #F6F8FB;
+    --surface: #FFFFFF;
+    --paper-line: #E3E8F0;
+    --ink: #1F2430;
+    --ink-strong: #000000;
+    --ink-soft: #586071;
+    --ink-faint: #737B8B;
+    --brand: #3B66F5;
+    --brand-strong: #2548C8;
+    --brand-soft: #E9EFFF;
+    --brand-edge: #2A4FC9;
+    --on-brand: #FFFFFF;
+    --accent: #C8483D;
+    --accent-soft: #FBE9E6;
+    --success: #2E9E5B;
+    --success-strong: #1B6E3C;
+    --success-soft: #E8F5E9;
+    --on-success: #FFFFFF;
+    --seg-track: #E8ECF3;
+    --edge: #D6DCE8;
+    --ghost-line: rgba(59, 102, 245, .38);
+    --canvas-bg: #FAFAFB;
+    --shadow: 0 14px 36px -14px rgba(20, 32, 70, .30);
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, .04), 0 1px 2px rgba(20, 32, 70, .05);
+    --hl-sent: rgba(52, 190, 140, .15);
+    --hl-green: rgba(59, 102, 245, .15);
+    --grid-line: rgba(196, 112, 108, .20);
+    --grid-border: rgba(196, 112, 108, .34);
+    --grad-a: #7C9BFF; --grad-b: #3B66F5; --grad-c: #2A4FD0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12151C;
+      --surface: #1C212B;
+      --paper-line: #2C3340;
+      --ink: #EEF1F7;
+      --ink-strong: #FFFFFF;
+      --ink-soft: #BEC5D3;
+      --ink-faint: #98A1B1;
+      --brand: #7A9BFF;
+      --brand-strong: #AEC0FF;
+      --brand-soft: #27325C;
+      --brand-edge: #4C6CD2;
+      --on-brand: #0F1420;
+      --accent: #F08E82;
+      --accent-soft: #3F2B2B;
+      --success: #58C288;
+      --success-strong: #8EDDB0;
+      --success-soft: #1F3A2A;
+      --on-success: #0F2418;
+      --seg-track: #0E1117;
+      --edge: #0B0D12;
+      --ghost-line: rgba(122, 155, 255, .45);
+      --canvas-bg: #161A22;
+      --shadow: 0 14px 36px -14px rgba(0, 0, 0, .75);
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .04);
+      --hl-sent: rgba(88, 194, 136, .17);
+      --hl-green: rgba(122, 155, 255, .28);
+      --grid-line: rgba(240, 142, 130, .28);
+      --grid-border: rgba(240, 142, 130, .46);
+      --grad-a: #A9BEFF; --grad-b: #7A9BFF; --grad-c: #5C7FEA;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12151C;
+    --surface: #1C212B;
+    --paper-line: #2C3340;
+    --ink: #EEF1F7;
+    --ink-strong: #FFFFFF;
+    --ink-soft: #BEC5D3;
+    --ink-faint: #98A1B1;
+    --brand: #7A9BFF;
+    --brand-strong: #AEC0FF;
+    --brand-soft: #27325C;
+    --brand-edge: #4C6CD2;
+    --on-brand: #0F1420;
+    --accent: #F08E82;
+    --accent-soft: #3F2B2B;
+    --success: #58C288;
+    --success-strong: #8EDDB0;
+    --success-soft: #1F3A2A;
+    --on-success: #0F2418;
+    --seg-track: #0E1117;
+    --edge: #0B0D12;
+    --ghost-line: rgba(122, 155, 255, .45);
+    --canvas-bg: #161A22;
+    --shadow: 0 14px 36px -14px rgba(0, 0, 0, .75);
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .04);
+    --hl-sent: rgba(88, 194, 136, .17);
+    --hl-green: rgba(122, 155, 255, .28);
+    --grid-line: rgba(240, 142, 130, .28);
+    --grid-border: rgba(240, 142, 130, .46);
+    --grad-a: #A9BEFF; --grad-b: #7A9BFF; --grad-c: #5C7FEA;
+  }
+
+  /* ---- 頂部：去底線，改輕陰影 ---- */
+  .topbar { border-bottom: 0; box-shadow: 0 6px 16px -12px rgba(20, 32, 70, .22); }
+  .topbar .mark { background: linear-gradient(145deg, var(--grad-a), var(--grad-b) 55%, var(--grad-c)); color: var(--on-brand); box-shadow: 0 4px 10px -4px rgba(59, 102, 245, .6); }
+  .site-lang { border: 0; background: var(--seg-track); }
+  .site-lang-btn[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); }
+  .install-btn { border: 0; background: var(--brand-soft); color: var(--brand-strong); }
+  .install-btn:hover { background: var(--brand); color: var(--on-brand); }
+
+  /* ---- 通用按壓手感（底邊厚度＋按落微沉） ---- */
+  .dict-btn.dict-btn--primary, .dict-btn.dict-btn--primary:hover {
+    border: 0; background: var(--brand); color: var(--on-brand);
+    box-shadow: 0 4px 0 var(--brand-edge), 0 10px 18px -10px rgba(59, 102, 245, .55);
+  }
+  .dict-btn {
+    border: 1.5px solid var(--ghost-line); background: transparent; color: var(--brand-strong);
+    border-radius: 14px; min-height: 44px; transition: transform .08s ease, box-shadow .08s ease, background .12s ease;
+  }
+  .dict-btn:hover { background: var(--brand-soft); }
+  .dict-btn.dict-btn--primary:hover { background: var(--brand); filter: brightness(1.04); }
+  .dict-btn.dict-btn--primary:active, .dict-btn.dict-btn--primary:active:hover { transform: translateY(3px); box-shadow: 0 1px 0 var(--brand-edge), 0 4px 8px -6px rgba(59, 102, 245, .5); }
+  .dict-btn.dict-btn--primary[disabled] { box-shadow: 0 4px 0 var(--edge); background: var(--seg-track); color: var(--ink-faint); opacity: 1; }
+  .dict-btn.dict-btn--primary[disabled]:active { transform: none; }
+  .dict-btn--big { border-radius: 16px; min-height: 52px; font-size: 19px; }
+
+  /* ---- 選課：年級＝分段控制（淺灰軌道＋白色浮起選中項） ---- */
+  .grade-row { gap: 2px; padding: 4px; background: var(--seg-track); border-radius: 14px; margin: 2px 0 12px; overflow: visible; }
+  .grade-pill, .grade-pill[aria-pressed="false"] {
+    height: 40px; border: 0; border-radius: 10px; background: transparent; color: var(--ink-soft); box-shadow: none; font-weight: 700;
+  }
+  .grade-pill[aria-pressed="true"] { background: var(--surface); color: var(--brand-strong); box-shadow: 0 2px 8px rgba(20, 32, 70, .16); border: 0; }
+  .grade-pill:active { transform: scale(.97); }
+
+  /* 書本封面照留，只去外框、改陰影／選中光環 */
+  .book-row .book-card { border: 0; border-radius: 12px; background: var(--surface); box-shadow: var(--card-shadow); }
+  .book-row .book-card:hover { box-shadow: 0 8px 20px -10px rgba(20, 32, 70, .3); }
+  .book-row .book-card[aria-pressed="true"] { box-shadow: 0 0 0 2.5px var(--brand), 0 8px 18px -10px rgba(59, 102, 245, .55); }
+  .book-row .book-card[aria-pressed="true"]::after { color: var(--on-brand); }
+  .book-row .book-cover { border-radius: 12px 12px 0 0; }
+
+  /* 課次卡：純白、8px 圓角、無框、柔和陰影 */
+  .lesson-block-head { color: var(--ink-soft); }
+  .lesson-grid .option-btn, .lesson-grid .option-btn:hover {
+    border: 0; border-radius: 8px; background: var(--surface); color: var(--ink); box-shadow: var(--card-shadow); transform: none;
+  }
+  .lesson-grid .option-btn:hover { box-shadow: 0 8px 20px -10px rgba(20, 32, 70, .28); }
+  .lesson-grid .option-btn:active { transform: scale(.98); }
+  .lesson-grid .option-btn[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-strong); box-shadow: 0 0 0 2px var(--brand); }
+  .lesson-current { border: 0; border-radius: 12px; background: var(--surface); color: var(--brand-strong); box-shadow: inset 4px 0 0 var(--brand), var(--card-shadow); }
+  .lesson-current-name { color: var(--ink); }
+
+  /* 朗讀默書入口：融入選課流程（白色任務卡，唔再似廣告橫額） */
+  .dict-entry {
+    border: 0; border-radius: 14px; background: var(--surface); color: var(--ink); margin: 14px 0 6px; padding: 10px 14px;
+    box-shadow: 0 3px 0 var(--edge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .dict-entry:hover { background: var(--surface); }
+  .dict-entry:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge), var(--card-shadow); }
+  .dict-entry-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--brand-soft); display: grid; place-items: center; font-size: 20px; }
+  .dict-entry-text strong { color: var(--ink); }
+
+  /* ---- 課次功能：按鍵卡（有厚度，同年級分段控制唔同款） ---- */
+  .lesson-heading h2 { font-size: 19px; color: var(--ink); font-weight: 700; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; padding: 0; background: transparent; border: 0; border-radius: 0; margin: 0 0 18px; }
+  .seg-btn {
+    flex-direction: column; gap: 3px; min-height: 66px; padding: 8px 4px; border-radius: 14px; border: 0;
+    background: var(--surface); color: var(--ink-soft); font-size: 13px; line-height: 1.25; white-space: normal; text-align: center;
+    box-shadow: 0 4px 0 var(--edge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease, background .12s ease;
+  }
+  .seg-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--edge), var(--card-shadow); }
+  .seg-btn[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-edge), 0 10px 18px -10px rgba(59, 102, 245, .6); }
+  .seg-btn[aria-pressed="true"]:active { box-shadow: 0 1px 0 var(--brand-edge); }
+  .seg-ic { font-size: 22px; }
+  .task-card { border: 0; border-radius: 16px; box-shadow: 0 4px 0 var(--edge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease; }
+  .task-card:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--edge), var(--card-shadow); }
+
+  /* ---- 詞語卡：有圖＝拍立得；冇圖＝田字格白卡＋詞性標籤 ---- */
+  .word-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; align-items: stretch; }
+  .word-tile {
+    border: 0; border-radius: 16px; background: var(--surface); box-shadow: var(--card-shadow);
+    padding: 30px 10px 14px; gap: 8px; justify-content: center; transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .word-tile:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(20, 32, 70, .3); }
+  .word-tile:active { transform: scale(.98); }
+  .word-tile .glyph { background-color: var(--canvas-bg); border-radius: 10px;
+    background-image:
+      linear-gradient(to right, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px)),
+      linear-gradient(to bottom, transparent calc(50% - .5px), var(--grid-line) calc(50% - .5px), var(--grid-line) calc(50% + .5px), transparent calc(50% + .5px));
+    box-shadow: inset 0 0 0 1px var(--grid-border);
+  }
+  .word-tile.polaroid { padding: 8px 8px 14px; justify-content: flex-start; }
+  .word-tile .tile-photo { display: block; width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: var(--paper); flex: none; }
+  .word-tile .tile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .word-tile.polaroid .glyph { margin-top: 2px; width: 66px; height: 66px; font-size: 26px; }
+  .word-tile.has-thumb .en { padding-inline: 0; }
+  .tile-pos { top: 8px; right: 8px; font-weight: 700; }
+  .word-tile.polaroid .tile-pos { top: 14px; right: 14px; box-shadow: 0 2px 6px rgba(0, 0, 0, .18); }
+
+  /* ---- 詞語彈窗：單字圖卡 ---- */
+  .modal-close { border: 0; background: var(--paper); }
+  .modal { border-radius: 24px 24px 0 0; }
+  @media (min-width: 640px) and (min-height: 480px) { .modal { border-radius: 24px; } }
+  .word-title-row { gap: 10px; flex-wrap: nowrap; align-items: center; }
+  .word-title { font-size: 34px; line-height: 1.15; }
+  @media (min-width: 640px) { .word-title { font-size: 40px; } }
+  .word-title-row .pos-badge { align-self: center; }
+  .word-title-row .say-btn { margin-left: auto; }
+  .word-subtitle.jyutping { font-size: 15px; margin-top: 0; }
+  .say-btn {
+    border: 0; background: var(--brand); color: var(--on-brand); font-size: 0 !important; width: 52px; height: 52px;
+    box-shadow: 0 3px 0 var(--brand-edge); transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .say-btn::before {
+    content: ""; display: block; width: var(--ic, 26px); height: var(--ic, 26px); background: currentColor;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
+  }
+  .say-btn:hover { background: var(--brand); color: var(--on-brand); filter: brightness(1.05); }
+  .say-btn:active { transform: translateY(2px) scale(.97); box-shadow: 0 1px 0 var(--brand-edge); }
+  .say-btn--sm { width: 36px; height: 36px; background: var(--surface); color: var(--brand-strong); box-shadow: 0 2px 6px rgba(20, 32, 70, .14); }
+  .say-btn--sm:hover { background: var(--surface); color: var(--brand-strong); }
+  .say-btn--sm:active { box-shadow: none; }
+  .say-btn { --ic: 26px; } .say-btn--sm { --ic: 18px; }
+  @media (max-height: 640px) { .say-btn { width: 44px; height: 44px; --ic: 22px; } .say-btn--sm { width: 32px; height: 32px; --ic: 16px; } .word-title { font-size: 28px; } }
+  @media (max-height: 480px) { .say-btn { width: 36px; height: 36px; --ic: 18px; } .say-btn--sm { width: 28px; height: 28px; --ic: 14px; } .word-title { font-size: 24px; } }
+
+  .word-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: var(--stroke-mt); }
+  .word-hero .stroke-panel {
+    margin-top: 0; background: var(--paper); border-radius: 16px; padding: 10px 8px 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .word-hero .stroke-boxes { max-width: 100%; }
+  .word-hero .image-wrap { margin-top: 0; border: 0; border-radius: 16px; background: var(--paper); }
+  .word-hero.no-img .image-wrap { display: none; }
+  @media (min-width: 520px) {
+    .word-hero:not(.no-img) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .word-hero:not(.no-img) .image-wrap { height: auto; min-height: 0; }
+    .word-hero:not(.no-img) .image-wrap img, .word-hero:not(.no-img) .image-wrap video { height: 100%; }
+  }
+  .char-canvas { background-color: var(--canvas-bg); border: 1.5px solid var(--grid-border); border-radius: 10px; }
+  .replay-btn {
+    border: 0; background: var(--surface); color: var(--brand-strong); border-radius: 999px; box-shadow: 0 2px 6px rgba(20, 32, 70, .14);
+    font-weight: 700;
+  }
+  .replay-btn:hover { background: var(--surface); color: var(--brand-strong); filter: brightness(.98); }
+  .replay-btn:active { transform: translateY(1px); box-shadow: none; }
+
+  /* 語言切換：底線分頁（同年級分段控制唔同款） */
+  .lang-switch--modal {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0; margin: 14px 0 0; border: 0; border-radius: 0; background: transparent;
+    box-shadow: inset 0 -2px 0 var(--seg-track);
+  }
+  .lang-switch--modal .lang-btn, .lang-switch--modal .lang-btn:hover {
+    border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); min-height: 38px; font-size: 14px; font-weight: 700; padding: 6px 4px;
+  }
+  .lang-switch--modal .lang-btn[aria-pressed="true"] { background: transparent; color: var(--brand-strong); box-shadow: inset 0 -3px 0 var(--brand); }
+
+  /* 釋義＋例句：對話氣泡 */
+  .info-row { background: var(--brand-soft); border-radius: 14px; padding: 8px 12px; align-items: center; }
+  .info-row .info-label { color: var(--brand-strong); opacity: .8; }
+  .example { border: 0; background: var(--paper); border-radius: 16px 16px 16px 4px; }
+  .example--en { background: var(--brand-soft); border-radius: 16px 16px 4px 16px; }
+
+  /* ---- 默書：播放畫面 ---- */
+  .dict-head { border-bottom: 0; box-shadow: 0 1px 0 var(--seg-track); }
+  .dict-foot { border-top: 0; box-shadow: 0 -8px 18px -14px rgba(20, 32, 70, .25); }
+  .dict-bar { background: var(--seg-track); height: 10px; }
+  .dict-bar > span { background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); }
+  .dict-replay-hint { display: none !important; }
+  .dict-replay {
+    width: 90px; height: 90px; border: 0; font-size: 0; color: var(--on-brand); margin: 14px 0 10px;
+    background: linear-gradient(145deg, var(--grad-a), var(--grad-b) 55%, var(--grad-c));
+    box-shadow: 0 6px 0 var(--brand-edge), 0 16px 26px -10px rgba(59, 102, 245, .6);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .dict-replay:hover { background: linear-gradient(145deg, var(--grad-a), var(--grad-b) 55%, var(--grad-c)); filter: brightness(1.05); }
+  .dict-replay:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--brand-edge), 0 8px 16px -10px rgba(59, 102, 245, .6); }
+  .dict-replay svg { width: 46px; height: 46px; display: block; }
+  .dict-replay::before, .dict-replay::after { inset: 0; border: 3px solid var(--brand); }
+  .dict-replay.is-playing { animation: dict-breath3 1.8s ease-in-out infinite; }
+  .dict-replay.is-playing::before { animation: dict-ripple3 1.7s ease-out infinite; }
+  .dict-replay.is-playing::after { animation: dict-ripple3 1.7s ease-out .85s infinite; }
+  @keyframes dict-ripple3 { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.9); opacity: 0; } }
+  @keyframes dict-breath3 {
+    0%, 100% { box-shadow: 0 6px 0 var(--brand-edge), 0 16px 26px -10px rgba(59, 102, 245, .6); }
+    50% { box-shadow: 0 6px 0 var(--brand-edge), 0 0 0 10px rgba(59, 102, 245, .14), 0 16px 34px -6px rgba(59, 102, 245, .65); }
+  }
+  .dict-play-row { margin: 6px 0 14px; }
+  .dict-play-row .dict-btn { font-size: 15px; min-height: 44px; padding: 8px 20px; border-width: 1.5px; font-weight: 700; }
+  #dict-next, #td-next { width: 100%; min-height: 52px; font-size: 19px; border-radius: 14px; }
+  .dict-exit-row { margin-top: 14px; }
+  .dict-link { color: var(--ink-soft); }
+  @media (max-height: 480px) { .dict-replay { width: 60px; height: 60px; margin: 4px 0; box-shadow: 0 4px 0 var(--brand-edge); } .dict-replay svg { width: 30px; height: 30px; } }
+  @media (prefers-reduced-motion: reduce) { .dict-replay.is-playing { animation: none !important; } }
+
+  /* 選項標籤：唔係藥丸，係圓角矩形標籤 */
+  .dict-chip, .dict-chip:hover {
+    border: 0; border-radius: 10px; background: var(--seg-track); color: var(--ink); min-height: 36px; padding: 6px 12px;
+  }
+  .dict-chip[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-strong); box-shadow: inset 0 0 0 2px var(--brand); font-weight: 700; }
+  .dict-lesson { border: 0; background: var(--paper); border-radius: 14px; }
+  .dict-lesson-words { border-top: 0; background: transparent; }
+  .dict-expand { border: 0; background: var(--surface); box-shadow: 0 1px 4px rgba(20, 32, 70, .12); border-radius: 10px; }
+  .dict-check-box { border-color: var(--ink-faint); }
+  .dict-check[aria-checked="true"] .dict-check-box, .dict-check[aria-checked="mixed"] .dict-check-box { color: var(--on-brand); }
+  .dict-answers { border: 0; background: var(--paper); border-radius: 14px; }
+  .dict-answer { border-bottom: 1px solid rgba(120, 130, 155, .16); }
+  .tr-controls { border-bottom: 0; box-shadow: 0 1px 0 var(--seg-track); }
+
+  /* ---- 完成頁：成就戰報卡（冇粉紅警告） ---- */
+  .dict-done { gap: 14px; }
+  .done-card {
+    display: flex; align-items: center; gap: 12px; text-align: left; background: var(--success-soft);
+    border-radius: 18px; padding: 14px 14px 14px 16px;
+  }
+  .done-check {
+    flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--success); color: var(--on-success);
+    display: grid; place-items: center; font-size: 22px; font-weight: 800; line-height: 1;
+  }
+  .done-card-text { flex: 1 1 auto; min-width: 0; }
+  .done-card-title.dict-reminder { background: none; border: 0; padding: 0; margin: 0; font-size: 17px; font-weight: 800; line-height: 1.35; color: var(--success-strong); }
+  .done-card-sub { font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
+  .done-card .say-btn { flex: none; width: 44px; height: 44px; }
+  #dict-show-answers, #td-show-text { min-height: 54px; font-size: 18px; border-radius: 16px; }
+  .dict-done-actions .dict-btn:not(.dict-btn--primary) { min-height: 46px; }
+  .done-art svg { width: 170px; }
+
+  /* ---- 課文朗讀：柔和高亮（薄荷）＋現讀嘅字加深加底線 ---- */
+  .tr-par { font-size: 22px; line-height: 1.95; letter-spacing: .06em; margin: 0 0 22px; }
+  .tr-sent { border-radius: 10px; padding: 4px 2px; margin: 0 -2px; }
+  .tr-sent:hover { background: var(--seg-track); }
+  .tr-sent.is-active { background: var(--hl-sent); }
+  .tr-sent .ro-tok.ro-unread { opacity: .3; }
+  .tr-sent .ro-tok.ro-cur:not(.ro-mark) { color: var(--ink-strong); }
+  .tr-sent .ro-tok.ro-cur { box-shadow: inset 0 -.34em 0 rgba(59, 102, 245, .24); border-radius: 3px; }
+  .tr-speed .dict-chip { min-height: 36px; }
+
+  /* ---- 課文默書：快捷預設＋積木式選段 ---- */
+  .td-presets { display: flex; flex-wrap: wrap; gap: 8px 8px; padding: 2px 2px 12px; }
+  .td-presets::-webkit-scrollbar { display: none; }
+  .td-preset {
+    flex: none; border: 0; border-radius: 12px; min-height: 40px; padding: 0 14px; background: var(--surface); color: var(--ink-soft);
+    font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 var(--edge), var(--card-shadow);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .td-preset:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge); }
+  .td-preset[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); box-shadow: 0 3px 0 var(--brand-edge); }
+  .td-pick-box { border: 0; background: var(--paper); border-radius: 16px; padding: 10px 12px; }
+  .td-pick-box .tr-par { line-height: 2.2; }
+  .td-ph { border-radius: 8px; padding: 3px 2px; margin: 0 1px; opacity: .62; transition: background .12s ease, opacity .12s ease; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .td-ph.in { background: var(--hl-green); opacity: 1; box-shadow: 0 2px 0 rgba(59, 102, 245, .35); }
+  .td-ph.edge { box-shadow: 0 2px 0 rgba(59, 102, 245, .35); }
+  .td-ph.edge-s::before { content: "▸"; color: var(--brand-strong); font-size: .62em; margin-right: 3px; vertical-align: .22em; font-family: var(--font-ui); }
+  .td-ph.edge-e::after { content: "◂"; color: var(--brand-strong); font-size: .62em; margin-left: 3px; vertical-align: .22em; font-family: var(--font-ui); }
+  .td-range-sum { color: var(--brand-strong); font-weight: 600; }
+  .td-fold { border: 0; background: var(--paper); border-radius: 14px; }
+  .td-legend span { border: 0; background: var(--paper); }
+  .td-fold-body .td-legend span { background: var(--surface); }
+  .td-answer-text { border: 0; background: var(--paper); border-radius: 14px; }
+  .td-start-row { background: var(--surface); }
 </style>
 </head>
 <body>
@@ -861,11 +1492,24 @@
       <button type="button" class="site-lang-btn" data-site-lang="zh" lang="zh-Hant">中文</button>
       <button type="button" class="site-lang-btn" data-site-lang="en" lang="en">EN</button>
     </div>
-    <button type="button" class="install-btn" id="install-btn" hidden>
+    <button type="button" class="install-btn" id="install-btn" hidden data-i18n-label="install" aria-label="加到主畫面" title="加到主畫面">
       <span class="install-btn-icon" aria-hidden="true">⊕</span>
       <span data-i18n="install">加到主畫面</span>
     </button>
   </header>
+
+  <nav class="picker" id="picker" aria-label="選課">
+    <div class="grade-row" id="grid-grade" role="group" data-i18n-label="dict_grade" aria-label="年級"></div>
+    <div class="book-row" id="grid-book" role="group" data-i18n-label="dict_book" aria-label="課本" hidden></div>
+    <div class="lesson-block" id="lesson-block" hidden>
+      <div class="lesson-block-head" id="lesson-block-head" data-i18n="dict_lessons">課次</div>
+      <div class="lesson-grid" id="grid-lesson"></div>
+      <button type="button" class="lesson-current" id="lesson-current" hidden>
+        <span class="lesson-current-name" id="value-lesson"></span>
+        <span class="lesson-current-change" data-i18n="lesson_change">換課次 ▾</span>
+      </button>
+    </div>
+  </nav>
 
   <button type="button" class="dict-entry" id="dict-open">
     <span class="dict-entry-icon" aria-hidden="true">✍️</span>
@@ -876,67 +1520,26 @@
     <span class="dict-entry-chev" aria-hidden="true">›</span>
   </button>
 
-  <section class="step" id="step-grade" data-state="active">
-    <button class="step-head" id="head-grade" aria-expanded="true">
-      <span class="step-badge">1</span>
-      <span class="step-titles">
-        <span class="step-eyebrow" data-i18n="eyebrow_grade">Step 1 · 年級</span>
-        <span class="step-value placeholder" id="value-grade">請選擇你的年級</span>
-      </span>
-      <span class="step-chevron" id="chevron-grade">▾</span>
-    </button>
-    <div class="step-body" id="body-grade">
-      <div class="option-grid" id="grid-grade"></div>
-    </div>
-  </section>
-
-  <section class="step" id="step-book" data-state="locked">
-    <button class="step-head" id="head-book" aria-expanded="false" disabled>
-      <span class="step-badge">2</span>
-      <span class="step-titles">
-        <span class="step-eyebrow" data-i18n="eyebrow_book">Step 2 · 課本</span>
-        <span class="step-value placeholder" id="value-book">請先選擇年級</span>
-      </span>
-      <span class="step-chevron" id="chevron-book">▾</span>
-    </button>
-    <div class="step-body" id="body-book" hidden>
-      <div class="option-grid option-grid--books" id="grid-book"></div>
-    </div>
-  </section>
-
-  <section class="step" id="step-lesson" data-state="locked">
-    <button class="step-head" id="head-lesson" aria-expanded="false" disabled>
-      <span class="step-badge">3</span>
-      <span class="step-titles">
-        <span class="step-eyebrow" data-i18n="eyebrow_lesson">Step 3 · 課次</span>
-        <span class="step-value placeholder" id="value-lesson">請先選擇課本</span>
-      </span>
-      <span class="step-chevron" id="chevron-lesson">▾</span>
-    </button>
-    <div class="step-body" id="body-lesson" hidden>
-      <div class="option-grid" id="grid-lesson"></div>
-    </div>
-  </section>
-
   <div id="words-wrap" hidden>
     <div class="lesson-heading">
       <h2 id="lesson-heading-text"></h2>
       <span class="lesson-count" id="word-count"></span>
     </div>
-    <div class="text-entry" id="text-entry" hidden>
-      <button type="button" class="text-entry-btn" id="text-read-open">
-        <span class="text-entry-icon" aria-hidden="true">📖</span>
-        <span class="text-entry-text">
-          <strong data-i18n="tr_entry_title">課文朗讀</strong>
-          <small data-i18n="tr_entry_sub">撳句子聽，或者成篇聽</small>
-        </span>
+    <div class="seg" id="lesson-tabs" role="tablist">
+      <button type="button" class="seg-btn" id="tab-words" data-tab="words" role="tab" aria-pressed="true"><span class="seg-ic" aria-hidden="true">🔤</span><span data-i18n="tab_words">詞語溫習</span></button>
+      <button type="button" class="seg-btn" id="text-read-open" data-tab="read" role="tab" aria-pressed="false" hidden><span class="seg-ic" aria-hidden="true">📖</span><span data-i18n="tab_read">課文朗讀</span></button>
+      <button type="button" class="seg-btn" id="tab-dictate" data-tab="dictate" role="tab" aria-pressed="false"><span class="seg-ic" aria-hidden="true">✍️</span><span data-i18n="tab_dictate">隨堂默書</span></button>
+    </div>
+    <div class="dictate-pane" id="dictate-pane" hidden>
+      <button type="button" class="task-card" id="word-dict-open">
+        <span class="task-ic" aria-hidden="true">🔤</span>
+        <span class="task-text"><strong data-i18n="task_word_dict_title">詞語默書</strong><small data-i18n="task_word_dict_sub">揀課或詞語，逐個朗讀，你自己寫</small></span>
+        <span class="task-chev" aria-hidden="true">›</span>
       </button>
-      <button type="button" class="text-entry-btn" id="text-dict-open">
-        <span class="text-entry-icon" aria-hidden="true">✍️</span>
-        <span class="text-entry-text">
-          <strong data-i18n="td_entry_title">課文默書</strong>
-          <small data-i18n="td_entry_sub">逐個短語連標點默</small>
-        </span>
+      <button type="button" class="task-card" id="text-dict-open" hidden>
+        <span class="task-ic" aria-hidden="true">📝</span>
+        <span class="task-text"><strong data-i18n="td_entry_title">課文默書</strong><small data-i18n="td_entry_sub">逐個短語連標點默</small></span>
+        <span class="task-chev" aria-hidden="true">›</span>
       </button>
     </div>
     <div class="word-grid" id="word-grid"></div>
@@ -946,12 +1549,6 @@
 <div class="scrim" id="scrim" hidden>
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-word-title">
     <button class="modal-close" id="modal-close" data-i18n-label="close" aria-label="關閉">✕</button>
-    <div class="lang-switch lang-switch--modal" id="lang-switch" role="group" data-i18n-label="aria_meaning_lang" aria-label="揀意思／例句翻譯語言">
-      <button type="button" class="lang-btn" data-lang="zh">中文</button>
-      <button type="button" class="lang-btn" data-lang="en">EN</button>
-      <button type="button" class="lang-btn" data-lang="ko">한국어</button>
-      <button type="button" class="lang-btn" data-lang="ur" lang="ur">اردو</button>
-    </div>
     <div class="word-title-row">
       <h3 class="word-title" id="modal-word-title"></h3>
       <span class="pos-badge" id="modal-pos" hidden></span>
@@ -960,11 +1557,22 @@
     <div class="word-subtitle jyutping" id="modal-jyutping"></div>
     <span class="say-status" id="say-status" hidden></span>
 
+    <div class="word-hero" id="word-hero">
     <div class="stroke-panel" id="stroke-panel">
       <div class="stroke-boxes" id="stroke-boxes"></div>
       <button class="replay-btn" id="replay-btn" data-i18n="replay_stroke">🔁 重播筆順</button>
     </div>
+      <div class="image-wrap" id="modal-image-wrap">
+        <img id="modal-image" alt="">
+      </div>
+    </div>
 
+    <div class="lang-switch lang-switch--modal" id="lang-switch" role="group" data-i18n-label="aria_meaning_lang" aria-label="揀意思／例句翻譯語言">
+      <button type="button" class="lang-btn" data-lang="zh">中文</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ko">한국어</button>
+      <button type="button" class="lang-btn" data-lang="ur" lang="ur">اردو</button>
+    </div>
     <div class="info-panel">
       <div class="info-row">
         <span class="info-label" id="label-english">英文意思</span>
@@ -984,9 +1592,6 @@
         <button class="say-btn say-btn--sm" id="say-example-en-btn" type="button" data-i18n-label="aria_say_example_tr" aria-label="播放例句英文翻譯讀音">🔊</button>
       </div>
 
-      <div class="image-wrap" id="modal-image-wrap">
-        <img id="modal-image" alt="">
-      </div>
     </div>
   </div>
 </div>
@@ -1018,8 +1623,7 @@
       <div class="dict-play" id="dict-play" hidden>
         <div class="dict-progress-text" id="dict-progress-text" aria-live="polite"></div>
         <div class="dict-bar" aria-hidden="true"><span id="dict-bar-fill"></span></div>
-        <button type="button" class="dict-replay" id="dict-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次">🔊</button>
-        <div class="dict-replay-hint" data-i18n="dict_replay_hint">撳一下再聽一次</div>
+        <button type="button" class="dict-replay" id="dict-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
         <div class="dict-play-row">
           <button type="button" class="dict-btn" id="dict-example" data-i18n="dict_example">📖 聽例句</button>
         </div>
@@ -1030,10 +1634,24 @@
       </div>
 
       <div class="dict-done" id="dict-done" hidden>
-        <div class="dict-done-icon" aria-hidden="true">📝</div>
-        <h4 data-i18n="dict_done_title">默書已經結束</h4>
-        <div class="dict-reminder-row">
-          <div class="dict-reminder" id="dict-reminder" role="status"></div>
+        <div class="done-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="82" r="64" style="fill:var(--brand-soft)"/>
+<ellipse cx="120" cy="138" rx="82" ry="7" fill="rgba(0,0,0,.10)"/>
+<path d="M44 96 Q82 84 120 96 L120 130 Q82 118 44 130 Z" fill="#fff" stroke="#3B66F5" stroke-width="3" stroke-linejoin="round"/>
+<path d="M196 96 Q158 84 120 96 L120 130 Q158 118 196 130 Z" fill="#F1F5FB" stroke="#3B66F5" stroke-width="3" stroke-linejoin="round"/>
+<path d="M58 104 Q82 98 106 105 M58 114 Q82 108 106 115 M134 105 Q158 98 182 104 M134 115 Q158 108 182 114" stroke="#B7C6DE" stroke-width="3" stroke-linecap="round" fill="none"/>
+<g class="da-star"><polygon points="120.0,13.0 126.8,30.7 145.7,31.7 130.9,43.6 135.9,61.8 120.0,51.5 104.1,61.8 109.1,43.6 94.3,31.7 113.2,30.7" fill="#F7C531" stroke="#E39A0D" stroke-width="3" stroke-linejoin="round"/><circle cx="111" cy="41" r="2.6" fill="#8A5A00"/><circle cx="129" cy="41" r="2.6" fill="#8A5A00"/><path d="M112 49 Q120 56 128 49" stroke="#8A5A00" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+<path class="da-sp" d="M44 42 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#F7C531"/>
+<path class="da-sp da-sp2" d="M196 38 l2.6 6 6 2.6 -6 2.6 -2.6 6 -2.6 -6 -6 -2.6 6 -2.6z" fill="#7FB8E8"/>
+<path class="da-sp da-sp3" d="M70 74 l2 4.6 4.6 2 -4.6 2 -2 4.6 -2 -4.6 -4.6 -2 4.6 -2z" fill="#F29C8E"/>
+<g transform="translate(190 96) rotate(-14)"><g class="da-stamp"><circle r="26" fill="#fff" fill-opacity=".85" stroke="#D6362B" stroke-width="3"/><circle r="21" fill="none" stroke="#D6362B" stroke-width="1.4"/><text y="9" text-anchor="middle" font-size="24" font-weight="700" fill="#D6362B" font-family="DaMengXiuKai, LXGW WenKai TC, serif">好棒</text></g></g>
+</svg></div>
+        <div class="done-card" role="status">
+          <span class="done-check" aria-hidden="true">✓</span>
+          <div class="done-card-text">
+            <div class="done-card-title dict-reminder" id="dict-reminder"></div>
+            <div class="done-card-sub" data-i18n="dict_done_sub">請自己檢查寫得啱唔啱</div>
+          </div>
           <button type="button" class="say-btn" id="dict-end-say" data-i18n-label="dict_end_say_aria" aria-label="再聽一次完結提示">🔊</button>
         </div>
         <div class="dict-done-actions">
@@ -1086,8 +1704,7 @@
       <div class="dict-play" id="td-play" hidden>
         <div class="dict-progress-text" id="td-progress-text" aria-live="polite"></div>
         <div class="dict-bar" aria-hidden="true"><span id="td-bar-fill"></span></div>
-        <button type="button" class="dict-replay" id="td-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次">🔊</button>
-        <div class="dict-replay-hint" data-i18n="dict_replay_hint">撳一下再聽一次</div>
+        <button type="button" class="dict-replay" id="td-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
         <div class="dict-play-row">
           <button type="button" class="dict-btn" id="td-slow" data-i18n="td_slow">🐢 慢速再讀</button>
         </div>
@@ -1098,10 +1715,24 @@
       </div>
 
       <div class="dict-done" id="td-done" hidden>
-        <div class="dict-done-icon" aria-hidden="true">📝</div>
-        <h4 data-i18n="dict_done_title">默書已經結束</h4>
-        <div class="dict-reminder-row">
-          <div class="dict-reminder" id="td-reminder" role="status"></div>
+        <div class="done-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="82" r="64" style="fill:var(--brand-soft)"/>
+<ellipse cx="120" cy="138" rx="82" ry="7" fill="rgba(0,0,0,.10)"/>
+<path d="M44 96 Q82 84 120 96 L120 130 Q82 118 44 130 Z" fill="#fff" stroke="#3B66F5" stroke-width="3" stroke-linejoin="round"/>
+<path d="M196 96 Q158 84 120 96 L120 130 Q158 118 196 130 Z" fill="#F1F5FB" stroke="#3B66F5" stroke-width="3" stroke-linejoin="round"/>
+<path d="M58 104 Q82 98 106 105 M58 114 Q82 108 106 115 M134 105 Q158 98 182 104 M134 115 Q158 108 182 114" stroke="#B7C6DE" stroke-width="3" stroke-linecap="round" fill="none"/>
+<g class="da-star"><polygon points="120.0,13.0 126.8,30.7 145.7,31.7 130.9,43.6 135.9,61.8 120.0,51.5 104.1,61.8 109.1,43.6 94.3,31.7 113.2,30.7" fill="#F7C531" stroke="#E39A0D" stroke-width="3" stroke-linejoin="round"/><circle cx="111" cy="41" r="2.6" fill="#8A5A00"/><circle cx="129" cy="41" r="2.6" fill="#8A5A00"/><path d="M112 49 Q120 56 128 49" stroke="#8A5A00" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+<path class="da-sp" d="M44 42 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#F7C531"/>
+<path class="da-sp da-sp2" d="M196 38 l2.6 6 6 2.6 -6 2.6 -2.6 6 -2.6 -6 -6 -2.6 6 -2.6z" fill="#7FB8E8"/>
+<path class="da-sp da-sp3" d="M70 74 l2 4.6 4.6 2 -4.6 2 -2 4.6 -2 -4.6 -4.6 -2 4.6 -2z" fill="#F29C8E"/>
+<g transform="translate(190 96) rotate(-14)"><g class="da-stamp"><circle r="26" fill="#fff" fill-opacity=".85" stroke="#D6362B" stroke-width="3"/><circle r="21" fill="none" stroke="#D6362B" stroke-width="1.4"/><text y="9" text-anchor="middle" font-size="24" font-weight="700" fill="#D6362B" font-family="DaMengXiuKai, LXGW WenKai TC, serif">好棒</text></g></g>
+</svg></div>
+        <div class="done-card" role="status">
+          <span class="done-check" aria-hidden="true">✓</span>
+          <div class="done-card-text">
+            <div class="done-card-title dict-reminder" id="td-reminder"></div>
+            <div class="done-card-sub" data-i18n="dict_done_sub">請自己檢查寫得啱唔啱</div>
+          </div>
           <button type="button" class="say-btn" id="td-end-say" data-i18n-label="dict_end_say_aria" aria-label="再聽一次完結提示">🔊</button>
         </div>
         <div class="dict-done-actions">
@@ -1136,6 +1767,12 @@
      設定，唔受影響。 */
   var I18N = {
     app_title: { zh: "詞語温習室", en: "Vocabulary Review Room" },
+    tab_read: { zh: "課文朗讀", en: "Read text" },
+    tab_words: { zh: "詞語溫習", en: "Words" },
+    tab_dictate: { zh: "隨堂默書", en: "Dictate" },
+    task_word_dict_title: { zh: "詞語默書", en: "Word dictation" },
+    task_word_dict_sub: { zh: "揀課或詞語，逐個朗讀，你自己寫", en: "Pick lessons or words. They are read aloud one by one." },
+    lesson_change: { zh: "換課次 ▾", en: "Change ▾" },
     tagline: { zh: "揀年級 → 揀課本 → 揀課次 → 溫習詞語", en: "Choose grade → book → lesson → review words" },
     aria_site_lang: { zh: "介面語言 Interface language", en: "Interface language 介面語言" },
     install: { zh: "加到主畫面", en: "Add to Home Screen" },
@@ -1198,9 +1835,11 @@
     dict_exit_yes: { zh: "退出", en: "Quit" },
     dict_exit_no: { zh: "繼續默書", en: "Keep going" },
     dict_progress: { zh: "第 <b>{i}</b> / {n} 個", en: "Word <b>{i}</b> of {n}" },
-    dict_done_title: { zh: "默書已經結束", en: "Dictation finished" },
+    dict_done_title: { zh: "好棒！默書完成", en: "Well done! All finished" },
+    td_fold: { zh: "ℹ️ 點擊查看標點讀法", en: "ℹ️ How punctuation is read" },
     dict_end_say_aria: { zh: "再聽一次完結提示", en: "Listen to the reminder again" },
-    dict_reminder: { zh: "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 {n} 個詞語）", en: "Dictation finished. Please check your answers. (You have done all {n} words.)" },
+    dict_reminder: { zh: "太棒了！已完成 {n}/{n} 個詞語", en: "Great job! You finished {n}/{n} words" },
+    dict_done_sub: { zh: "請自己檢查寫得啱唔啱", en: "Now check your own writing" },
     dict_end_speech: { zh: "默書結束喇，請自己檢查寫得啱唔啱。", en: "Dictation finished. Please check your answers." },
     dict_show_answers: { zh: "顯示答案", en: "Show answers" },
     dict_hide_answers: { zh: "收埋答案", en: "Hide answers" },
@@ -1244,13 +1883,16 @@
     td_no_text: { zh: "呢課未有課文。", en: "This lesson has no text yet." },
     td_progress: { zh: "第 <b>{i}</b> / {n} 個短語", en: "Phrase <b>{i}</b> of {n}" },
     td_slow: { zh: "🐢 慢速再讀", en: "🐢 Read slowly" },
-    td_reminder: { zh: "默書結束喇，請自己檢查寫得啱唔啱。（你已經默完全部 {n} 個短語）", en: "Dictation finished. Please check your answers. (You have done all {n} phrases.)" },
+    td_reminder: { zh: "太棒了！已完成 {n}/{n} 個短語", en: "Great job! You finished {n}/{n} phrases" },
+    td_preset_all: { zh: "默全篇", en: "Whole text" },
+    td_preset_para: { zh: "默第 {n} 段", en: "Paragraph {n}" },
+    td_preset_custom: { zh: "自選短語", en: "Pick phrases" },
     td_show_text: { zh: "顯示課文", en: "Show the text" },
     td_hide_text: { zh: "收埋課文", en: "Hide the text" },
     td_again: { zh: "再默一次", en: "Do it again" },
     td_back: { zh: "返回開始畫面", en: "Back to start" },
     td_range: { zh: "默寫範圍", en: "Range to dictate" },
-    td_range_hint: { zh: "撳一個短語做開頭，再撳另一個做結尾；想默成篇就撳「全部」。", en: "Tap a phrase to start, then another to end. To dictate the whole text, tap \"All\"." },
+    td_range_hint: { zh: "撳上面嘅快捷掣；想自己揀，就撳一個短語做開頭，再撳另一個做結尾。", en: "Use a shortcut above, or tap one phrase to start and another to end." },
     td_range_none: { zh: "未揀範圍：請撳一個短語做開頭", en: "No range yet: tap a phrase to begin" },
     td_range_all: { zh: "全部", en: "All" },
     td_para: { zh: "第{n}段", en: "Para {n}" },
@@ -1496,20 +2138,23 @@
   // 係實色；karaokeReset淨係喺「即刻要開始播」嗰一刻先至將全部字轉做淡色底。
   function karaokeReset(spans) {
     if (!spans) return;
-    spans.forEach(function (s) { s.el.classList.add("ro-unread"); });
+    spans.forEach(function (s) { s.el.classList.add("ro-unread"); s.el.classList.remove("ro-cur"); });
   }
 
   function karaokeSetProgress(spans, charIndex) {
     if (!spans) return;
-    spans.forEach(function (s) {
-      if (s.start < charIndex) s.el.classList.remove("ro-unread");
+    var cur = -1;
+    spans.forEach(function (s, i) {
+      if (s.start < charIndex) { s.el.classList.remove("ro-unread"); cur = i; }
       else s.el.classList.add("ro-unread");
+      s.el.classList.remove("ro-cur");
     });
+    if (cur >= 0) spans[cur].el.classList.add("ro-cur");
   }
 
   function karaokeComplete(spans) {
     if (!spans) return;
-    spans.forEach(function (s) { s.el.classList.remove("ro-unread"); });
+    spans.forEach(function (s) { s.el.classList.remove("ro-unread"); s.el.classList.remove("ro-cur"); });
   }
 
   function wordKey(g, b, l) { return g + "|||" + b + "|||" + l; }
@@ -1520,35 +2165,44 @@
 
   /* ---------------- Step rendering ---------------- */
 
+  function markPicked(containerId, value) {
+    Array.prototype.forEach.call(el(containerId).children, function (c) {
+      c.setAttribute("aria-pressed", c.getAttribute("data-v") === value ? "true" : "false");
+    });
+  }
+
   function renderGrades() {
     var grid = el("grid-grade");
     grid.innerHTML = "";
     DATA.grades.forEach(function (g) {
       var btn = document.createElement("button");
-      btn.className = "option-btn";
+      btn.className = "grade-pill";
       btn.type = "button";
       btn.textContent = g;
+      btn.setAttribute("data-v", g);
+      btn.setAttribute("aria-pressed", "false");
       btn.addEventListener("click", function () { chooseGrade(g); });
       grid.appendChild(btn);
     });
   }
 
   function chooseGrade(g) {
+    el("dict-open").hidden = false;
     state.grade = g;
     state.book = null;
     state.lesson = null;
-    el("value-grade").textContent = g;
-    el("value-grade").classList.remove("placeholder");
-    setStepState("step-grade", "done");
-    collapse("grade");
+    markPicked("grid-grade", g);
 
     var books = DATA.structure[g].books;
     var grid = el("grid-book");
     grid.innerHTML = "";
+    grid.classList.remove("compact");
     books.forEach(function (b) {
       var card = document.createElement("button");
       card.className = "book-card";
       card.type = "button";
+      card.setAttribute("data-v", b);
+      card.setAttribute("aria-pressed", "false");
 
       var coverWrap = document.createElement("div");
       coverWrap.className = "book-cover";
@@ -1572,27 +2226,19 @@
       card.addEventListener("click", function () { chooseBook(b); });
       grid.appendChild(card);
     });
-
-    el("value-book").textContent = t("ph_book");
-    el("value-book").classList.add("placeholder");
-    el("value-lesson").textContent = t("ph_lesson_locked");
-    el("value-lesson").classList.add("placeholder");
-    setStepState("step-book", "active");
-    setStepState("step-lesson", "locked");
-    el("head-book").disabled = false;
-    el("head-lesson").disabled = true;
-    expand("book");
-    collapse("lesson");
+    grid.hidden = false;
+    grid.scrollLeft = 0;
     el("words-wrap").hidden = true;
+    // 一揀年級就自動揀第一冊，直接見到課次，唔使再撳多一步。
+    chooseBook(books[0]);
   }
 
   function chooseBook(b) {
+    el("dict-open").hidden = false;
     state.book = b;
     state.lesson = null;
-    el("value-book").textContent = b;
-    el("value-book").classList.remove("placeholder");
-    setStepState("step-book", "done");
-    collapse("book");
+    markPicked("grid-book", b);
+    el("grid-book").classList.remove("compact");
 
     var lessons = DATA.structure[state.grade].lessons[b];
     var grid = el("grid-lesson");
@@ -1602,26 +2248,42 @@
       btn.className = "option-btn";
       btn.type = "button";
       btn.textContent = l;
+      btn.setAttribute("data-v", l);
+      btn.setAttribute("aria-pressed", "false");
       btn.addEventListener("click", function () { chooseLesson(l); });
       grid.appendChild(btn);
     });
-
-    el("value-lesson").textContent = t("ph_lesson");
-    el("value-lesson").classList.add("placeholder");
-    setStepState("step-lesson", "active");
-    el("head-lesson").disabled = false;
-    expand("lesson");
+    el("lesson-block").hidden = false;
+    grid.hidden = false;
+    el("lesson-current").hidden = true;
+    el("lesson-block-head").hidden = false;
     el("words-wrap").hidden = true;
   }
 
   function chooseLesson(l) {
+    el("dict-open").hidden = true;
     state.lesson = l;
+    markPicked("grid-lesson", l);
     el("value-lesson").textContent = l;
-    el("value-lesson").classList.remove("placeholder");
-    setStepState("step-lesson", "done");
-    collapse("lesson");
-
+    el("grid-lesson").hidden = true;
+    el("lesson-block-head").hidden = true;
+    el("lesson-current").hidden = false;
+    el("grid-book").classList.add("compact");
     renderWords();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  el("lesson-current").addEventListener("click", function () {
+    el("grid-lesson").hidden = false;
+    el("lesson-block-head").hidden = false;
+    el("lesson-current").hidden = true;
+    el("grid-book").classList.remove("compact");
+    el("lesson-block").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  function posClass(p) {
+    var map = { "名詞": "n", "動詞": "v", "形容詞": "a", "副詞": "d", "量詞": "q", "代詞": "p", "連詞": "c", "介詞": "c", "成語": "i", "感嘆詞": "e" };
+    return "pos-" + (map[p] || "x");
   }
 
   function tileMeaning(w) {
@@ -1645,8 +2307,26 @@
     } else {
       words.forEach(function (w) {
         var tile = document.createElement("button");
-        tile.className = "word-tile";
+        var hasImg = !!(w.image && !/\.(mp4|webm|mov|m4v)$/i.test(w.image));
+        tile.className = "word-tile " + (hasImg ? "polaroid" : "plain");
         tile.type = "button";
+
+        if (hasImg) {
+          var photo = document.createElement("span");
+          photo.className = "tile-photo";
+          var th = document.createElement("img");
+          th.loading = "lazy";
+          th.decoding = "async";
+          th.alt = "";
+          th.src = w.image;
+          th.onerror = function () {
+            photo.remove();
+            tile.classList.remove("polaroid");
+            tile.classList.add("plain");
+          };
+          photo.appendChild(th);
+          tile.appendChild(photo);
+        }
 
         var glyph = document.createElement("span");
         glyph.className = "glyph";
@@ -1659,49 +2339,21 @@
         setRtl(en, (LANGS[uiLang] || LANGS.zh).rtl);
         tile.appendChild(en);
 
+        if (w.pos) {
+          var pp = document.createElement("span");
+          pp.className = "tile-pos " + posClass(w.pos);
+          pp.textContent = w.pos;
+          tile.appendChild(pp);
+        }
         tile.addEventListener("click", function () { openModal(w); });
         grid.appendChild(tile);
       });
     }
     updateTextEntry();
+    setLessonTab("words");
     el("words-wrap").hidden = false;
-    // 頂部橫條係 sticky，要留返佢嘅高度，唔係課題標題同「課文朗讀／默書」掣會被橫條遮住。
-    var tb = document.querySelector(".topbar");
-    el("words-wrap").style.scrollMarginTop = ((tb ? tb.offsetHeight : 0) + 8) + "px";
-    el("words-wrap").scrollIntoView({ behavior: "smooth", block: currentTextEntry() ? "start" : "nearest" });
+    // 揀完課次後返到頁頂：年級／課本／課次摘要一眼睇到，下面就係分頁同詞語卡。
   }
-
-  /* ---------------- Accordion open/close ---------------- */
-
-  function setStepState(stepId, s) {
-    el(stepId).setAttribute("data-state", s);
-  }
-
-  function expand(name) {
-    el("body-" + name).hidden = false;
-    el("head-" + name).setAttribute("aria-expanded", "true");
-    el("chevron-" + name).textContent = "▴";
-    setStepState("step-" + name, "active");
-  }
-
-  function collapse(name) {
-    el("body-" + name).hidden = true;
-    el("head-" + name).setAttribute("aria-expanded", "false");
-    el("chevron-" + name).textContent = "▾";
-  }
-
-  function toggleStep(name) {
-    var body = el("body-" + name);
-    if (body.hidden) {
-      expand(name);
-    } else if (el("step-" + name).getAttribute("data-state") === "done") {
-      collapse(name);
-    }
-  }
-
-  el("head-grade").addEventListener("click", function () { toggleStep("grade"); });
-  el("head-book").addEventListener("click", function () { if (!el("head-book").disabled) toggleStep("book"); });
-  el("head-lesson").addEventListener("click", function () { if (!el("head-lesson").disabled) toggleStep("lesson"); });
 
   /* ---------------- Modal + stroke animation ---------------- */
 
@@ -2017,6 +2669,8 @@
 
   function showImageFallback(wrapEl) {
     wrapEl.innerHTML = '<div class="image-fallback">' + t("no_image") + '</div>';
+    var hero = el("word-hero");
+    if (hero) hero.classList.add("no-img");
   }
 
   var VIDEO_EXT_RE = /\.(mp4|webm|mov|m4v)$/i;
@@ -2026,6 +2680,8 @@
   // 俾fallback嘅innerHTML洗咗，跟住嗰個有圖嘅詞語就會搵唔返個元素。
   function renderModalMedia(w, wrapImg) {
     var url = w.image;
+    var hero = el("word-hero");
+    if (hero) hero.classList.remove("no-img");
     if (!url) {
       showImageFallback(wrapImg);
       return;
@@ -2516,13 +3172,7 @@
 
   /* ---------------- 介面語言切換（中文／English） ---------------- */
 
-  function updateStepPlaceholders() {
-    if (!state.grade) el("value-grade").textContent = t("ph_grade");
-    if (!state.grade) el("value-book").textContent = t("ph_book_locked");
-    else if (!state.book) el("value-book").textContent = t("ph_book");
-    if (!state.book) el("value-lesson").textContent = t("ph_lesson_locked");
-    else if (!state.lesson) el("value-lesson").textContent = t("ph_lesson");
-  }
+  function updateStepPlaceholders() {}
 
   function setSiteLang(code) {
     if (code !== "zh" && code !== "en") return;
@@ -3043,6 +3693,16 @@
      Audio物件（只係seek去另一段），所以連續朗讀唔會每句都重新下載／閃遮罩。
      冇錄音（manifest冇呢段）或者播唔到，就用裝置內置粵語朗讀頂住。 */
   var textAudio = null, textAudioSrc = "", textTok = 0;
+  // 默書播放緊嗰陣，大喇叭掣會有漣漪／呼吸光暈；停咗就靜返。
+  setInterval(function () {
+    var playing = !!((activeClipAudio && !activeClipAudio.paused && !activeClipAudio.ended) ||
+      (textAudio && !textAudio.paused && !textAudio.ended) ||
+      (window.speechSynthesis && speechSynthesis.speaking));
+    ["dict-replay", "td-replay"].forEach(function (id) {
+      var b = document.getElementById(id);
+      if (b) b.classList.toggle("is-playing", playing);
+    });
+  }, 250);
 
   function stopTextAudio() {
     textTok++;
@@ -3167,9 +3827,21 @@
   }
 
   function updateTextEntry() {
-    var box = el("text-entry");
-    if (box) box.hidden = !currentTextEntry();
+    var has = !!currentTextEntry();
+    el("text-read-open").hidden = !has;
+    el("text-dict-open").hidden = !has;
   }
+
+  function setLessonTab(name) {
+    var isDict = name === "dictate";
+    el("tab-words").setAttribute("aria-pressed", isDict ? "false" : "true");
+    el("tab-dictate").setAttribute("aria-pressed", isDict ? "true" : "false");
+    el("dictate-pane").hidden = !isDict;
+    el("word-grid").hidden = isDict;
+  }
+  el("tab-words").addEventListener("click", function () { setLessonTab("words"); });
+  el("tab-dictate").addEventListener("click", function () { setLessonTab("dictate"); });
+  el("word-dict-open").addEventListener("click", function () { el("dict-open").click(); });
 
   /* ---------------- 課文朗讀 ----------------
      成篇課文分句顯示；撳邊句就讀邊句（跟住讀到嘅字著色）；亦可以「成篇朗讀」
@@ -3317,6 +3989,7 @@
 
     function showMode(m) {
       td.mode = m;
+      el("td-modal").setAttribute("data-mode", m);
       el("td-setup").hidden = m !== "start";
       el("td-play").hidden = m !== "play";
       el("td-done").hidden = m !== "done";
@@ -3340,6 +4013,7 @@
     }
 
     function onPick(i) {
+      td.preset = "custom";
       if (td.pend == null) { td.pend = i; td.range = [i, i]; }
       else { td.range = [Math.min(td.pend, i), Math.max(td.pend, i)]; td.pend = null; }
       refreshRange();
@@ -3354,6 +4028,11 @@
         var inside = i >= a && i <= b;
         e.classList.toggle("in", inside);
         e.classList.toggle("edge", inside && (i === a || i === b));
+        e.classList.toggle("edge-s", inside && i === a);
+        e.classList.toggle("edge-e", inside && i === b);
+      });
+      Object.keys(td.presetEls || {}).forEach(function (k) {
+        td.presetEls[k].setAttribute("aria-pressed", td.preset === k ? "true" : "false");
       });
       var sum = el("td-range-sum");
       if (sum) {
@@ -3374,37 +4053,36 @@
       var info = document.createElement("p");
       info.className = "td-info";
       info.innerHTML = t("td_info");
-      box.appendChild(info);
 
-      var lr = document.createElement("div");
-      lr.className = "dict-toolbar";
       var rl = document.createElement("div");
       rl.className = "dict-label"; rl.textContent = t("td_range");
-      var allb = document.createElement("button");
-      allb.type = "button"; allb.className = "dict-link"; allb.textContent = t("td_range_all");
-      allb.addEventListener("click", function () { td.range = [0, td.full.length - 1]; td.pend = null; refreshRange(); });
-      lr.appendChild(rl); lr.appendChild(allb);
-      box.appendChild(lr);
+      box.appendChild(rl);
+      var pc = document.createElement("div");
+      pc.className = "td-presets";
+      td.presetEls = {};
+      function addPreset(key, label, fn) {
+        var c = document.createElement("button");
+        c.type = "button"; c.className = "td-preset";
+        c.textContent = label;
+        c.setAttribute("aria-pressed", "false");
+        c.addEventListener("click", function () { td.preset = key; fn(); td.pend = null; refreshRange(); });
+        td.presetEls[key] = c;
+        pc.appendChild(c);
+      }
+      addPreset("all", t("td_preset_all"), function () { td.range = [0, td.full.length - 1]; });
       var paras = td.entry.paragraphs;
       if (paras.length >= 2 && paras.length <= 10) {
-        var pc = document.createElement("div");
-        pc.className = "dict-chips";
-        pc.style.marginBottom = "8px";
         var startAt = 0;
         paras.forEach(function (p, pi) {
           var cnt = 0;
-          p.sentences.forEach(function (s) { cnt += s.phrases.length; });
+          p.sentences.forEach(function (s2) { cnt += s2.phrases.length; });
           var a = startAt, b = startAt + cnt - 1;
           startAt += cnt;
-          var c = document.createElement("button");
-          c.type = "button"; c.className = "dict-chip";
-          c.textContent = t("td_para", { n: pi + 1 });
-          c.setAttribute("aria-pressed", "false");
-          c.addEventListener("click", function () { td.range = [a, b]; td.pend = null; refreshRange(); });
-          pc.appendChild(c);
+          addPreset("p" + pi, t("td_preset_para", { n: pi + 1 }), function () { td.range = [a, b]; });
         });
-        box.appendChild(pc);
       }
+      addPreset("custom", t("td_preset_custom"), function () { td.range = null; });
+      box.appendChild(pc);
       var hint = document.createElement("p");
       hint.className = "td-info"; hint.style.margin = "0 0 6px"; hint.style.fontSize = "12.5px";
       hint.textContent = t("td_range_hint");
@@ -3435,11 +4113,22 @@
       box.appendChild(sum);
       refreshRange();
 
+      var fold = document.createElement("details");
+      fold.className = "td-fold";
+      var fsum = document.createElement("summary");
+      fsum.textContent = t("td_fold");
+      fold.appendChild(fsum);
+      var fbody = document.createElement("div");
+      fbody.className = "td-fold-body";
+      fbody.appendChild(info);
+      fold.appendChild(fbody);
+      box.appendChild(fold);
+
       var marks = presentMarks(td.entry);
       if (marks.length) {
         var l1 = document.createElement("div");
         l1.className = "dict-label"; l1.textContent = t("td_legend");
-        box.appendChild(l1);
+        fbody.appendChild(l1);
         var lg = document.createElement("div");
         lg.className = "td-legend";
         marks.forEach(function (m) {
@@ -3453,7 +4142,7 @@
           }
           lg.appendChild(sp);
         });
-        box.appendChild(lg);
+        fbody.appendChild(lg);
       }
 
       var l2 = document.createElement("div");
@@ -3609,6 +4298,7 @@
       });
       td.queue = [];
       td.range = null;
+      td.preset = null;
       td.pend = null;
       td.idx = 0;
       showMode("start");
