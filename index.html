@@ -1250,7 +1250,8 @@
     td_again: { zh: "再默一次", en: "Do it again" },
     td_back: { zh: "返回開始畫面", en: "Back to start" },
     td_range: { zh: "默寫範圍", en: "Range to dictate" },
-    td_range_hint: { zh: "撳一個短語做開頭，再撳另一個做結尾；唔揀就默成課。", en: "Tap a phrase to start, then another to end. If you pick nothing, the whole text is used." },
+    td_range_hint: { zh: "撳一個短語做開頭，再撳另一個做結尾；想默成篇就撳「全部」。", en: "Tap a phrase to start, then another to end. To dictate the whole text, tap \"All\"." },
+    td_range_none: { zh: "未揀範圍：請撳一個短語做開頭", en: "No range yet: tap a phrase to begin" },
     td_range_all: { zh: "全部", en: "All" },
     td_para: { zh: "第{n}段", en: "Para {n}" },
     td_range_pick_end: { zh: "已揀開頭（第 {a} 個），再撳結尾；撳同一個就只默呢一個", en: "Start set (phrase {a}). Tap the end; tap the same phrase to use only that one." },
@@ -3342,7 +3343,10 @@
     }
 
     function refreshRange() {
-      var a = td.range[0], b = td.range[1], n = td.full.length;
+      var n = td.full.length;
+      var a = td.range ? td.range[0] : -1, b = td.range ? td.range[1] : -2;
+      var stb = el("td-start-btn");
+      if (stb) stb.disabled = !td.full.length || !td.range;
       (td.phEls || []).forEach(function (e, i) {
         var inside = i >= a && i <= b;
         e.classList.toggle("in", inside);
@@ -3350,7 +3354,8 @@
       });
       var sum = el("td-range-sum");
       if (sum) {
-        if (td.pend != null) sum.textContent = t("td_range_pick_end", { a: td.pend + 1 });
+        if (!td.range) sum.textContent = t("td_range_none");
+        else if (td.pend != null) sum.textContent = t("td_range_pick_end", { a: td.pend + 1 });
         else if (a === 0 && b === n - 1) sum.textContent = t("td_range_sel_all", { n: n });
         else sum.textContent = t("td_range_sel", { a: a + 1, b: b + 1, c: b - a + 1, n: n });
       }
@@ -3468,7 +3473,8 @@
       var st = document.createElement("button");
       st.type = "button"; st.className = "dict-btn dict-btn--primary dict-btn--big";
       st.textContent = t("td_start");
-      st.disabled = !td.full.length;
+      st.id = "td-start-btn";
+      st.disabled = !td.full.length || !td.range;
       st.addEventListener("click", start);
       row.appendChild(st);
       box.appendChild(row);
@@ -3516,7 +3522,7 @@
     }
 
     function start() {
-      if (!td.full.length) return;
+      if (!td.full.length || !td.range) return;
       td.pend = null;
       td.queue = td.full.slice(td.range[0], td.range[1] + 1);
       if (!td.queue.length) return;
@@ -3599,7 +3605,7 @@
         });
       });
       td.queue = [];
-      td.range = [0, td.full.length - 1];
+      td.range = null;
       td.pend = null;
       td.idx = 0;
       showMode("start");
