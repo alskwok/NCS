@@ -4549,10 +4549,20 @@
       var box = el("td-answer-text");
       var open = box.hidden;
       if (open && !box.childNodes.length) {
+        // 只顯示今次要默嘅範圍（td.range），唔係成篇課文。
+        var gi = 0, ra = td.range ? td.range[0] : 0, rb = td.range ? td.range[1] : Infinity;
         td.entry.paragraphs.forEach(function (p) {
+          var txt = "";
+          p.sentences.forEach(function (s) {
+            s.phrases.forEach(function (ph) {
+              if (gi >= ra && gi <= rb) txt += ph.text;
+              gi++;
+            });
+          });
+          if (!txt) return;
           var pe = document.createElement("p");
           pe.className = "tr-par";
-          pe.textContent = p.sentences.map(function (s) { return s.text; }).join("");
+          pe.textContent = txt;
           box.appendChild(pe);
         });
       }
