@@ -1665,6 +1665,9 @@
     }
     updateTextEntry();
     el("words-wrap").hidden = false;
+    // 頂部橫條係 sticky，要留返佢嘅高度，唔係課題標題同「課文朗讀／默書」掣會被橫條遮住。
+    var tb = document.querySelector(".topbar");
+    el("words-wrap").style.scrollMarginTop = ((tb ? tb.offsetHeight : 0) + 8) + "px";
     el("words-wrap").scrollIntoView({ behavior: "smooth", block: currentTextEntry() ? "start" : "nearest" });
   }
 
