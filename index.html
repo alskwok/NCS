@@ -402,8 +402,8 @@
     --img-h: 160px;
     --gap-panel: 8px;
     --ex-pad: 9px 11px;
-    --ex-font: 14px;
-    --ex-font-en: 13px;
+    --ex-font: 18px;
+    --ex-font-en: 16px;
     --stroke-mt: 10px;
     --info-mt: 12px;
     --rtl-lh: 2;
@@ -1331,8 +1331,8 @@
   }
   .say-btn::before {
     content: ""; display: block; width: var(--ic, 26px); height: var(--ic, 26px); background: currentColor;
-    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
-            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.6 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.6 0 24 24'><path d='M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z' fill='black'/><path d='M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6' stroke='black' stroke-width='2' stroke-linecap='round' fill='none'/></svg>") center / contain no-repeat;
   }
   .say-btn:hover { background: var(--brand); color: var(--on-brand); filter: brightness(1.05); }
   .say-btn:active { transform: translateY(2px) scale(.97); box-shadow: 0 1px 0 var(--brand-edge); }
@@ -1477,6 +1477,98 @@
   .td-fold-body .td-legend span { background: var(--surface); }
   .td-answer-text { border: 0; background: var(--paper); border-radius: 14px; }
   .td-start-row { background: var(--surface); }
+
+  /* ---- 修正：喇叭置中、例句／答案字體加大、退出確認視窗 ---- */
+  .say-btn { display: flex; align-items: center; justify-content: center; }
+  .info-value { font-size: 18px; }
+  .example-text { line-height: 1.6; }
+  .example-text--en { line-height: 1.55; }
+  .dict-answer { padding: 12px 12px; gap: 12px; }
+  .dict-answer-no { font-size: 14px; width: 30px; }
+  .dict-answer-word { font-size: 32px; line-height: 1.25; }
+  .dict-answer-jp { font-size: 15px; }
+  .td-answer-text .tr-par { font-size: 26px; line-height: 2; margin-bottom: 12px; }
+  .exit-dialog {
+    position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; padding: 20px;
+    background: rgba(10, 14, 24, .5); border-radius: inherit; animation: exit-fade .15s ease-out;
+  }
+  .exit-card {
+    width: min(100%, 320px); background: var(--surface); border-radius: 22px; padding: 22px 18px 18px;
+    box-shadow: var(--shadow); text-align: center; display: flex; flex-direction: column; gap: 10px;
+  }
+  .exit-title { font-size: 21px; font-weight: 800; color: var(--ink); }
+  .exit-sub { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 6px; }
+  .exit-quit { min-height: 48px; font-size: 16px; border-color: var(--accent); color: var(--accent); }
+  .exit-quit:hover { background: var(--accent-soft); }
+  @keyframes exit-fade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* =====================================================================
+     新導覽：首頁 2×3 年級大格 → 2 個功能大格（課文及詞語／默書）
+     ===================================================================== */
+  .screen[hidden] { display: none !important; }
+  .screen-lead { font-family: var(--font-ui); font-size: 20px; font-weight: 800; color: var(--ink); margin: 6px 2px 14px; }
+  .screen-head {
+    display: flex; align-items: center; gap: 12px; margin: 0 -16px 12px; padding: 8px 16px;
+    position: sticky; top: calc(var(--topbar-h, 56px) + env(safe-area-inset-top, 0px)); z-index: 15;
+    background: var(--paper); box-shadow: 0 10px 12px -12px rgba(20, 32, 70, .22);
+  }
+  .screen-title { font-family: var(--font-ui); font-size: 22px; font-weight: 800; color: var(--ink); min-width: 0; }
+  .back-btn {
+    flex: none; display: inline-flex; align-items: center; gap: 4px; min-height: 42px; padding: 0 16px 0 12px; border: 0; border-radius: 999px;
+    background: var(--surface); color: var(--brand-strong); font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 3px 0 var(--edge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .back-btn > span:first-child { font-size: 24px; line-height: 1; margin-top: -2px; }
+  .back-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge), var(--card-shadow); }
+
+  .grade-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .grade-card {
+    min-height: clamp(118px, calc((100dvh - 200px) / 3), 230px);
+    border: 0; border-radius: 24px; background: var(--gb); color: var(--gf); cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 6px 0 var(--ge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .grade-card:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ge), var(--card-shadow); }
+  .gc-num { font-family: var(--font-kai); font-size: 48px; font-weight: 700; line-height: 1.1; }
+  .gc-cap { font-family: var(--font-ui); font-size: 15px; font-weight: 700; opacity: .8; }
+  .grade-card.gc-1 { --gb: #FFE6D2; --gf: #8A3F0D; --ge: #EFC9A8; }
+  .grade-card.gc-2 { --gb: #FFF1BF; --gf: #6E5200; --ge: #E8D58B; }
+  .grade-card.gc-3 { --gb: #D9F2E2; --gf: #1F6B3F; --ge: #B1DBC1; }
+  .grade-card.gc-4 { --gb: #D6ECF8; --gf: #1B5C86; --ge: #ACD2E7; }
+  .grade-card.gc-5 { --gb: #E4E0FA; --gf: #4B3C9A; --ge: #C5BEE9; }
+  .grade-card.gc-6 { --gb: #FBDCE6; --gf: #8B2E52; --ge: #ECB8CA; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .grade-card.gc-1 { --gb: #4A3320; --gf: #F6C48A; --ge: #2F2013; }
+    :root:not([data-theme="light"]) .grade-card.gc-2 { --gb: #4A4220; --gf: #F2DD8A; --ge: #302B13; }
+    :root:not([data-theme="light"]) .grade-card.gc-3 { --gb: #25402F; --gf: #9ADBB2; --ge: #172A1F; }
+    :root:not([data-theme="light"]) .grade-card.gc-4 { --gb: #243A57; --gf: #A9C9F2; --ge: #172539; }
+    :root:not([data-theme="light"]) .grade-card.gc-5 { --gb: #3A2F52; --gf: #CDB5F0; --ge: #251D36; }
+    :root:not([data-theme="light"]) .grade-card.gc-6 { --gb: #4A2A3A; --gf: #F2A6C6; --ge: #301B26; }
+  }
+  :root[data-theme="dark"] .grade-card.gc-1 { --gb: #4A3320; --gf: #F6C48A; --ge: #2F2013; }
+  :root[data-theme="dark"] .grade-card.gc-2 { --gb: #4A4220; --gf: #F2DD8A; --ge: #302B13; }
+  :root[data-theme="dark"] .grade-card.gc-3 { --gb: #25402F; --gf: #9ADBB2; --ge: #172A1F; }
+  :root[data-theme="dark"] .grade-card.gc-4 { --gb: #243A57; --gf: #A9C9F2; --ge: #172539; }
+  :root[data-theme="dark"] .grade-card.gc-5 { --gb: #3A2F52; --gf: #CDB5F0; --ge: #251D36; }
+  :root[data-theme="dark"] .grade-card.gc-6 { --gb: #4A2A3A; --gf: #F2A6C6; --ge: #301B26; }
+
+  .mode-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  @media (min-width: 600px) { .mode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .mode-card {
+    min-height: clamp(150px, calc((100dvh - 230px) / 2), 280px); border: 0; border-radius: 26px; background: var(--surface); color: var(--ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px 16px; text-align: center; cursor: pointer;
+    box-shadow: 0 6px 0 var(--edge), var(--card-shadow); transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .mode-grid--b .mode-card { min-height: clamp(130px, calc((100dvh - 260px) / 3), 200px); }
+  .mode-card:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--edge), var(--card-shadow); }
+  .mode-ic { width: 72px; height: 72px; border-radius: 22px; display: grid; place-items: center; font-size: 38px; background: var(--brand-soft); }
+  .mode-card--b .mode-ic { background: var(--accent-soft); }
+  .mode-card strong { font-family: var(--font-ui); font-size: 24px; font-weight: 800; }
+  .mode-card small { font-family: var(--font-ui); font-size: 14px; color: var(--ink-soft); line-height: 1.4; }
+  .mode-card[aria-expanded="true"] { box-shadow: 0 0 0 3px var(--brand), 0 6px 0 var(--edge), var(--card-shadow); }
+  .b-picker { margin-top: 20px; }
+  .b-picker-hint { font-size: 14px; color: var(--ink-soft); margin: 0 2px 10px; line-height: 1.5; }
+  .lesson-grid .option-btn:disabled { opacity: .4; box-shadow: none; background: var(--seg-track); cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -1498,27 +1590,51 @@
     </button>
   </header>
 
-  <nav class="picker" id="picker" aria-label="選課">
-    <div class="grade-row" id="grid-grade" role="group" data-i18n-label="dict_grade" aria-label="年級"></div>
-    <div class="book-row" id="grid-book" role="group" data-i18n-label="dict_book" aria-label="課本" hidden></div>
-    <div class="lesson-block" id="lesson-block" hidden>
-      <div class="lesson-block-head" id="lesson-block-head" data-i18n="dict_lessons">課次</div>
-      <div class="lesson-grid" id="grid-lesson"></div>
-      <button type="button" class="lesson-current" id="lesson-current" hidden>
-        <span class="lesson-current-name" id="value-lesson"></span>
-        <span class="lesson-current-change" data-i18n="lesson_change">換課次 ▾</span>
+  <!-- 畫面 1：揀年級（2×3 大格） -->
+  <section class="screen" id="screen-home">
+    <h2 class="screen-lead" data-i18n="home_pick_grade">揀年級</h2>
+    <div class="grade-grid" id="grid-grade" role="group" data-i18n-label="dict_grade" aria-label="年級"></div>
+  </section>
+
+  <!-- 畫面 2：揀功能（課文及詞語／默書） -->
+  <section class="screen" id="screen-mode" hidden>
+    <div class="screen-head">
+      <button type="button" class="back-btn" data-back="home"><span aria-hidden="true">‹</span><span data-i18n="back">返回</span></button>
+      <h2 class="screen-title" id="mode-title"></h2>
+    </div>
+    <div class="mode-grid">
+      <button type="button" class="mode-card mode-card--a" id="mode-a">
+        <span class="mode-ic" aria-hidden="true">📖</span>
+        <strong data-i18n="mode_a_title">課文及詞語</strong>
+        <small data-i18n="mode_a_sub">溫習詞語、課文朗讀</small>
+      </button>
+      <button type="button" class="mode-card mode-card--b" id="mode-b">
+        <span class="mode-ic" aria-hidden="true">✍️</span>
+        <strong data-i18n="mode_b_title">默書</strong>
+        <small data-i18n="mode_b_sub">詞語默書、課文默書</small>
       </button>
     </div>
-  </nav>
+  </section>
 
-  <button type="button" class="dict-entry" id="dict-open">
-    <span class="dict-entry-icon" aria-hidden="true">✍️</span>
-    <span class="dict-entry-text">
-      <strong data-i18n="dict_entry_title">朗讀默書</strong>
-      <small data-i18n="dict_entry_sub">揀課或詞語，逐個朗讀，你自己寫</small>
-    </span>
-    <span class="dict-entry-chev" aria-hidden="true">›</span>
-  </button>
+  <!-- 畫面 3a：課文及詞語 -->
+  <section class="screen" id="screen-a" hidden>
+    <div class="screen-head">
+      <button type="button" class="back-btn" data-back="mode"><span aria-hidden="true">‹</span><span data-i18n="back">返回</span></button>
+      <h2 class="screen-title" id="a-title"></h2>
+    </div>
+    <nav class="picker" id="picker-a" aria-label="選課">
+      <div id="picker-body">
+        <div class="book-row" id="grid-book" role="group" data-i18n-label="dict_book" aria-label="課本" hidden></div>
+        <div class="lesson-block" id="lesson-block" hidden>
+          <div class="lesson-block-head" id="lesson-block-head" data-i18n="dict_lessons">課次</div>
+          <div class="lesson-grid" id="grid-lesson"></div>
+          <button type="button" class="lesson-current" id="lesson-current" hidden>
+            <span class="lesson-current-name" id="value-lesson"></span>
+            <span class="lesson-current-change" data-i18n="lesson_change">換課次 ▾</span>
+          </button>
+        </div>
+      </div>
+    </nav>
 
   <div id="words-wrap" hidden>
     <div class="lesson-heading">
@@ -1528,21 +1644,40 @@
     <div class="seg" id="lesson-tabs" role="tablist">
       <button type="button" class="seg-btn" id="tab-words" data-tab="words" role="tab" aria-pressed="true"><span class="seg-ic" aria-hidden="true">🔤</span><span data-i18n="tab_words">詞語溫習</span></button>
       <button type="button" class="seg-btn" id="text-read-open" data-tab="read" role="tab" aria-pressed="false" hidden><span class="seg-ic" aria-hidden="true">📖</span><span data-i18n="tab_read">課文朗讀</span></button>
-      <button type="button" class="seg-btn" id="tab-dictate" data-tab="dictate" role="tab" aria-pressed="false"><span class="seg-ic" aria-hidden="true">✍️</span><span data-i18n="tab_dictate">隨堂默書</span></button>
-    </div>
-    <div class="dictate-pane" id="dictate-pane" hidden>
-      <button type="button" class="task-card" id="word-dict-open">
-        <span class="task-ic" aria-hidden="true">🔤</span>
-        <span class="task-text"><strong data-i18n="task_word_dict_title">詞語默書</strong><small data-i18n="task_word_dict_sub">揀課或詞語，逐個朗讀，你自己寫</small></span>
-        <span class="task-chev" aria-hidden="true">›</span>
-      </button>
-      <button type="button" class="task-card" id="text-dict-open" hidden>
-        <span class="task-ic" aria-hidden="true">📝</span>
-        <span class="task-text"><strong data-i18n="td_entry_title">課文默書</strong><small data-i18n="td_entry_sub">逐個短語連標點默</small></span>
-        <span class="task-chev" aria-hidden="true">›</span>
-      </button>
     </div>
     <div class="word-grid" id="word-grid"></div>
+  </div>
+  </section>
+
+  <!-- 畫面 3b：默書 -->
+  <section class="screen" id="screen-b" hidden>
+    <div class="screen-head">
+      <button type="button" class="back-btn" data-back="mode"><span aria-hidden="true">‹</span><span data-i18n="back">返回</span></button>
+      <h2 class="screen-title" id="b-title"></h2>
+    </div>
+    <div class="mode-grid mode-grid--b">
+      <button type="button" class="mode-card mode-card--a" id="b-word">
+        <span class="mode-ic" aria-hidden="true">🔤</span>
+        <strong data-i18n="task_word_dict_title">詞語默書</strong>
+        <small data-i18n="task_word_dict_sub">揀課或詞語，逐個朗讀，你自己寫</small>
+      </button>
+      <button type="button" class="mode-card mode-card--b" id="b-text" aria-expanded="false">
+        <span class="mode-ic" aria-hidden="true">📝</span>
+        <strong data-i18n="td_entry_title">課文默書</strong>
+        <small data-i18n="td_entry_sub">逐個短語連標點默</small>
+      </button>
+    </div>
+    <div class="b-picker" id="b-picker" hidden>
+      <p class="b-picker-hint" data-i18n="b_pick_hint">揀課本同課次，就會開始課文默書（灰色嘅課次未有課文）</p>
+      <div id="b-picker-slot"></div>
+    </div>
+  </section>
+
+  <div hidden aria-hidden="true">
+    <button type="button" class="dict-entry" id="dict-open" tabindex="-1">
+      <span class="dict-entry-text"><strong data-i18n="dict_entry_title">朗讀默書</strong></span>
+    </button>
+    <button type="button" id="text-dict-open" tabindex="-1" data-i18n="td_entry_title">課文默書</button>
   </div>
 </div>
 
@@ -1623,7 +1758,7 @@
       <div class="dict-play" id="dict-play" hidden>
         <div class="dict-progress-text" id="dict-progress-text" aria-live="polite"></div>
         <div class="dict-bar" aria-hidden="true"><span id="dict-bar-fill"></span></div>
-        <button type="button" class="dict-replay" id="dict-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
+        <button type="button" class="dict-replay" id="dict-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0.6 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
         <div class="dict-play-row">
           <button type="button" class="dict-btn" id="dict-example" data-i18n="dict_example">📖 聽例句</button>
         </div>
@@ -1704,7 +1839,7 @@
       <div class="dict-play" id="td-play" hidden>
         <div class="dict-progress-text" id="td-progress-text" aria-live="polite"></div>
         <div class="dict-bar" aria-hidden="true"><span id="td-bar-fill"></span></div>
-        <button type="button" class="dict-replay" id="td-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
+        <button type="button" class="dict-replay" id="td-replay" data-i18n-label="dict_replay_aria" aria-label="再聽一次"><svg viewBox="0.6 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5H4z" fill="currentColor"/><path d="M15.2 8.6a4.6 4.6 0 0 1 0 6.8M17.7 6.2a8 8 0 0 1 0 11.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
         <div class="dict-play-row">
           <button type="button" class="dict-btn" id="td-slow" data-i18n="td_slow">🐢 慢速再讀</button>
         </div>
@@ -1755,7 +1890,7 @@
   var STROKES = null;
   var audioManifest = {};
   var textManifest = {};
-  var state = { grade: null, book: null, lesson: null };
+  var state = { grade: null, book: null, lesson: null, mode: null, screen: "home" };
   var lastFocused = null;
   var activeWriters = [];
 
@@ -1768,6 +1903,13 @@
   var I18N = {
     app_title: { zh: "詞語温習室", en: "Vocabulary Review Room" },
     tab_read: { zh: "課文朗讀", en: "Read text" },
+    home_pick_grade: { zh: "揀年級", en: "Choose your grade" },
+    back: { zh: "返回", en: "Back" },
+    mode_a_title: { zh: "課文及詞語", en: "Texts & Words" },
+    mode_a_sub: { zh: "溫習詞語、課文朗讀", en: "Review words, read texts aloud" },
+    mode_b_title: { zh: "默書", en: "Dictation" },
+    mode_b_sub: { zh: "詞語默書、課文默書", en: "Word dictation, text dictation" },
+    b_pick_hint: { zh: "揀課本同課次，就會開始課文默書（灰色嘅課次未有課文）", en: "Pick a book and a lesson to start text dictation (greyed-out lessons have no text yet)" },
     tab_words: { zh: "詞語溫習", en: "Words" },
     tab_dictate: { zh: "隨堂默書", en: "Dictate" },
     task_word_dict_title: { zh: "詞語默書", en: "Word dictation" },
@@ -1833,6 +1975,7 @@
     dict_exit: { zh: "退出默書", en: "Quit dictation" },
     dict_exit_confirm: { zh: "確定退出默書？", en: "Quit dictation?" },
     dict_exit_yes: { zh: "退出", en: "Quit" },
+    dict_exit_sub: { zh: "退出後今次默書會結束，要再默就要重新開始。", en: "Your dictation will end. You will need to start again." },
     dict_exit_no: { zh: "繼續默書", en: "Keep going" },
     dict_progress: { zh: "第 <b>{i}</b> / {n} 個", en: "Word <b>{i}</b> of {n}" },
     dict_done_title: { zh: "好棒！默書完成", en: "Well done! All finished" },
@@ -2171,28 +2314,113 @@
     });
   }
 
+  var GRADE_CAP = {
+    zh: ["一年級", "二年級", "三年級", "四年級", "五年級", "六年級"],
+    en: ["Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6"]
+  };
+  function gradeCap(g) {
+    var idx = DATA.grades.indexOf(g);
+    var arr = GRADE_CAP[siteLang === "en" ? "en" : "zh"];
+    return idx >= 0 && arr[idx] ? arr[idx] : "";
+  }
+
   function renderGrades() {
     var grid = el("grid-grade");
     grid.innerHTML = "";
-    DATA.grades.forEach(function (g) {
+    DATA.grades.forEach(function (g, gi) {
       var btn = document.createElement("button");
-      btn.className = "grade-pill";
+      btn.className = "grade-card gc-" + ((gi % 6) + 1);
       btn.type = "button";
-      btn.textContent = g;
       btn.setAttribute("data-v", g);
-      btn.setAttribute("aria-pressed", "false");
-      btn.addEventListener("click", function () { chooseGrade(g); });
+      var num = document.createElement("span");
+      num.className = "gc-num"; num.textContent = g;
+      var cap = document.createElement("span");
+      cap.className = "gc-cap"; cap.textContent = gradeCap(g);
+      btn.appendChild(num); btn.appendChild(cap);
+      btn.addEventListener("click", function () { selectGrade(g); });
       grid.appendChild(btn);
     });
   }
 
-  function chooseGrade(g) {
-    el("dict-open").hidden = false;
+  function refreshScreens() {
+    if (!DATA) return;
+    renderGrades();
+    if (state.grade) {
+      var cap = gradeCap(state.grade);
+      el("mode-title").textContent = state.grade + (cap ? " · " + cap : "");
+      el("a-title").textContent = state.grade + " · " + t("mode_a_title");
+      el("b-title").textContent = state.grade + " · " + t("mode_b_title");
+    }
+  }
+
+  function syncTopbarH() {
+    var tb = document.querySelector(".topbar");
+    if (tb) document.documentElement.style.setProperty("--topbar-h", tb.offsetHeight + "px");
+  }
+  window.addEventListener("resize", syncTopbarH);
+
+  function showScreen(name) {
+    state.screen = name;
+    syncTopbarH();
+    ["home", "mode", "a", "b"].forEach(function (n) { el("screen-" + n).hidden = n !== name; });
+    if (name === "a") el("picker-a").appendChild(el("picker-body"));
+    refreshScreens();
+    window.scrollTo({ top: 0 });
+  }
+
+  function selectGrade(g) {
     state.grade = g;
     state.book = null;
     state.lesson = null;
-    markPicked("grid-grade", g);
+    state.mode = null;
+    el("words-wrap").hidden = true;
+    el("b-picker").hidden = true;
+    el("b-text").setAttribute("aria-expanded", "false");
+    showScreen("mode");
+  }
 
+  function goBack(to) {
+    state.book = null;
+    state.lesson = null;
+    el("words-wrap").hidden = true;
+    el("b-picker").hidden = true;
+    el("b-text").setAttribute("aria-expanded", "false");
+    if (to === "home") { state.grade = null; state.mode = null; }
+    showScreen(to);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".back-btn"), function (b) {
+    b.addEventListener("click", function () { goBack(b.getAttribute("data-back")); });
+  });
+
+  el("mode-a").addEventListener("click", function () {
+    state.mode = "a";
+    buildBooks();
+    showScreen("a");
+  });
+  el("mode-b").addEventListener("click", function () {
+    state.mode = "b";
+    state.book = null;
+    state.lesson = null;
+    showScreen("b");
+  });
+  el("b-word").addEventListener("click", function () { el("dict-open").click(); });
+  el("b-text").addEventListener("click", function () {
+    state.mode = "b";
+    buildBooks();
+    el("b-picker-slot").appendChild(el("picker-body"));
+    el("b-picker").hidden = false;
+    el("b-text").setAttribute("aria-expanded", "true");
+    el("b-picker").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  function hasTextFor(g, b, l) {
+    return !!(DATA.texts && DATA.texts[wordKey(g, b, l)]);
+  }
+
+  function buildBooks() {
+    var g = state.grade;
+    state.book = null;
+    state.lesson = null;
     var books = DATA.structure[g].books;
     var grid = el("grid-book");
     grid.innerHTML = "";
@@ -2229,12 +2457,11 @@
     grid.hidden = false;
     grid.scrollLeft = 0;
     el("words-wrap").hidden = true;
-    // 一揀年級就自動揀第一冊，直接見到課次，唔使再撳多一步。
+    // 一入嚟就自動揀第一冊，直接見到課次，唔使再撳多一步。
     chooseBook(books[0]);
   }
 
   function chooseBook(b) {
-    el("dict-open").hidden = false;
     state.book = b;
     state.lesson = null;
     markPicked("grid-book", b);
@@ -2243,6 +2470,7 @@
     var lessons = DATA.structure[state.grade].lessons[b];
     var grid = el("grid-lesson");
     grid.innerHTML = "";
+    var enabled = 0;
     lessons.forEach(function (l) {
       var btn = document.createElement("button");
       btn.className = "option-btn";
@@ -2250,9 +2478,18 @@
       btn.textContent = l;
       btn.setAttribute("data-v", l);
       btn.setAttribute("aria-pressed", "false");
+      if (state.mode === "b" && !hasTextFor(state.grade, b, l)) btn.disabled = true;
+      else enabled++;
       btn.addEventListener("click", function () { chooseLesson(l); });
       grid.appendChild(btn);
     });
+    if (state.mode === "b" && !enabled) {
+      var note = document.createElement("p");
+      note.className = "empty-note";
+      note.style.gridColumn = "1 / -1";
+      note.textContent = t("empty_lesson");
+      grid.appendChild(note);
+    }
     el("lesson-block").hidden = false;
     grid.hidden = false;
     el("lesson-current").hidden = true;
@@ -2261,9 +2498,10 @@
   }
 
   function chooseLesson(l) {
-    el("dict-open").hidden = true;
     state.lesson = l;
     markPicked("grid-lesson", l);
+    // 默書模式：揀完課次就直接開課文默書（揀完仍然留喺選課畫面，可以再揀第但課）。
+    if (state.mode === "b") { el("text-dict-open").click(); return; }
     el("value-lesson").textContent = l;
     el("grid-lesson").hidden = true;
     el("lesson-block-head").hidden = true;
@@ -2353,6 +2591,37 @@
     setLessonTab("words");
     el("words-wrap").hidden = false;
     // 揀完課次後返到頁頂：年級／課本／課次摘要一眼睇到，下面就係分頁同詞語卡。
+  }
+
+  // 默緊書撳×／退出／Esc：彈出確認視窗（預設掣係「繼續默書」，免得手滑）。
+  function showExitDialog(modalEl, onYes) {
+    if (modalEl.querySelector(".exit-dialog")) return;
+    var dlg = document.createElement("div");
+    dlg.className = "exit-dialog";
+    dlg.setAttribute("role", "alertdialog");
+    dlg.setAttribute("aria-modal", "true");
+    dlg.innerHTML = '<div class="exit-card">' +
+      '<div class="exit-title"></div><div class="exit-sub"></div>' +
+      '<button type="button" class="dict-btn dict-btn--primary dict-btn--big exit-keep"></button>' +
+      '<button type="button" class="dict-btn exit-quit"></button></div>';
+    dlg.querySelector(".exit-title").textContent = t("dict_exit_confirm");
+    dlg.querySelector(".exit-sub").textContent = t("dict_exit_sub");
+    var keep = dlg.querySelector(".exit-keep"), quit = dlg.querySelector(".exit-quit");
+    keep.textContent = t("dict_exit_no");
+    quit.textContent = t("dict_exit_yes");
+    function dismiss() {
+      document.removeEventListener("keydown", onKey, true);
+      if (dlg.parentNode) dlg.parentNode.removeChild(dlg);
+    }
+    function onKey(e) {
+      if (e.key === "Escape") { e.stopPropagation(); e.preventDefault(); dismiss(); }
+    }
+    document.addEventListener("keydown", onKey, true);
+    keep.addEventListener("click", dismiss);
+    quit.addEventListener("click", function () { dismiss(); onYes(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dismiss(); });
+    modalEl.appendChild(dlg);
+    keep.focus();
   }
 
   /* ---------------- Modal + stroke animation ---------------- */
@@ -2582,12 +2851,12 @@
      the available space we progressively tighten spacing/sizes and, as a
      last resort, hide the picture (least essential part). ---- */
   var FIT_TIERS = [
-    { img: 110, gap: 7, exPad: "8px 10px", exFont: 13.5, exFontEn: 12.5, strokeMt: 9, infoMt: 10, canvas: 64, rtlLh: 1.85, hideImage: false, hideStroke: false },
-    { img: 60, gap: 6, exPad: "7px 9px", exFont: 13, exFontEn: 12, strokeMt: 8, infoMt: 9, canvas: 58, rtlLh: 1.7, hideImage: false, hideStroke: false },
-    { img: 0, gap: 5, exPad: "6px 8px", exFont: 12.5, exFontEn: 11.5, strokeMt: 6, infoMt: 7, canvas: 48, rtlLh: 1.55, hideImage: true, hideStroke: false },
-    { img: 0, gap: 4, exPad: "5px 7px", exFont: 12, exFontEn: 11, strokeMt: 4, infoMt: 5, canvas: 40, rtlLh: 1.4, hideImage: true, hideStroke: false },
-    { img: 0, gap: 3, exPad: "4px 6px", exFont: 11.5, exFontEn: 10.5, strokeMt: 0, infoMt: 3, canvas: 34, rtlLh: 1.3, hideImage: true, hideStroke: true },
-    { img: 0, gap: 2, exPad: "3px 5px", exFont: 11, exFontEn: 10, strokeMt: 0, infoMt: 2, canvas: 30, rtlLh: 1.2, hideImage: true, hideStroke: true }
+    { img: 110, gap: 7, exPad: "8px 10px", exFont: 17, exFontEn: 15, strokeMt: 9, infoMt: 10, canvas: 64, rtlLh: 1.85, hideImage: false, hideStroke: false },
+    { img: 60, gap: 6, exPad: "7px 9px", exFont: 16.5, exFontEn: 14.5, strokeMt: 8, infoMt: 9, canvas: 58, rtlLh: 1.7, hideImage: false, hideStroke: false },
+    { img: 0, gap: 5, exPad: "6px 8px", exFont: 16, exFontEn: 14, strokeMt: 6, infoMt: 7, canvas: 48, rtlLh: 1.55, hideImage: true, hideStroke: false },
+    { img: 0, gap: 4, exPad: "5px 7px", exFont: 15, exFontEn: 13.5, strokeMt: 4, infoMt: 5, canvas: 40, rtlLh: 1.4, hideImage: true, hideStroke: false },
+    { img: 0, gap: 3, exPad: "4px 6px", exFont: 14, exFontEn: 13, strokeMt: 0, infoMt: 3, canvas: 34, rtlLh: 1.3, hideImage: true, hideStroke: true },
+    { img: 0, gap: 2, exPad: "3px 5px", exFont: 13, exFontEn: 12, strokeMt: 0, infoMt: 2, canvas: 30, rtlLh: 1.2, hideImage: true, hideStroke: true }
   ];
 
   function resetFit() {
@@ -3172,7 +3441,7 @@
 
   /* ---------------- 介面語言切換（中文／English） ---------------- */
 
-  function updateStepPlaceholders() {}
+  function updateStepPlaceholders() { refreshScreens(); }
 
   function setSiteLang(code) {
     if (code !== "zh" && code !== "en") return;
@@ -3181,7 +3450,7 @@
     try { localStorage.setItem("vocabSiteLang", code); } catch (e) {}
     applyStaticI18n();
     updateStepPlaceholders();
-    if (state.lesson) {
+    if (state.lesson && state.mode === "a") {
       var ws = DATA.words[wordKey(state.grade, state.book, state.lesson)] || [];
       if (ws.length) el("word-count").textContent = t("words_count", { n: ws.length });
       else renderWords();
@@ -3499,6 +3768,7 @@
 
     function openDict() {
       if (!DATA) return;
+      if (state.grade && DATA.structure[state.grade] && dict.grade !== state.grade) { dict.grade = state.grade; dict.book = null; }
       if (!dict.grade || !DATA.structure[dict.grade]) dict.grade = state.grade || DATA.grades[0];
       var books = DATA.structure[dict.grade].books;
       if (!dict.book || books.indexOf(dict.book) < 0) {
@@ -3520,16 +3790,10 @@
       if (lastFocusedBeforeDict && lastFocusedBeforeDict.focus) lastFocusedBeforeDict.focus();
     }
 
-    // 默緊書嗰陣撳×／Esc／退出：唔好一撳就走，行內問多一次，免得手滑冇咗進度。
+    // 默緊書嗰陣撳×／Esc／退出：彈視窗確認，免得手滑冇咗進度。
     function requestExit() {
       if (dict.mode !== "play") { closeDict(); return; }
-      var row = el("dict-exit-row");
-      row.innerHTML = '<span>' + t("dict_exit_confirm") + '</span>' +
-        '<button type="button" class="dict-link" id="dict-exit-yes">' + t("dict_exit_yes") + '</button>' +
-        '<button type="button" class="dict-link" id="dict-exit-no">' + t("dict_exit_no") + '</button>';
-      el("dict-exit-yes").addEventListener("click", closeDict);
-      el("dict-exit-no").addEventListener("click", resetExitRow);
-      el("dict-exit-no").focus();
+      showExitDialog(el("dict-modal"), closeDict);
     }
     function resetExitRow() {
       el("dict-exit-row").innerHTML = '<button type="button" class="dict-link" id="dict-exit">' + t("dict_exit") + '</button>';
@@ -3832,16 +4096,11 @@
     el("text-dict-open").hidden = !has;
   }
 
-  function setLessonTab(name) {
-    var isDict = name === "dictate";
-    el("tab-words").setAttribute("aria-pressed", isDict ? "false" : "true");
-    el("tab-dictate").setAttribute("aria-pressed", isDict ? "true" : "false");
-    el("dictate-pane").hidden = !isDict;
-    el("word-grid").hidden = isDict;
+  function setLessonTab() {
+    el("tab-words").setAttribute("aria-pressed", "true");
+    el("word-grid").hidden = false;
   }
   el("tab-words").addEventListener("click", function () { setLessonTab("words"); });
-  el("tab-dictate").addEventListener("click", function () { setLessonTab("dictate"); });
-  el("word-dict-open").addEventListener("click", function () { el("dict-open").click(); });
 
   /* ---------------- 課文朗讀 ----------------
      成篇課文分句顯示；撳邊句就讀邊句（跟住讀到嘅字著色）；亦可以「成篇朗讀」
@@ -4196,13 +4455,7 @@
     }
     function requestExit() {
       if (td.mode !== "play") { close(); return; }
-      var row = el("td-exit-row");
-      row.innerHTML = '<span>' + t("dict_exit_confirm") + '</span>' +
-        '<button type="button" class="dict-link" id="td-exit-yes">' + t("dict_exit_yes") + '</button>' +
-        '<button type="button" class="dict-link" id="td-exit-no">' + t("dict_exit_no") + '</button>';
-      el("td-exit-yes").addEventListener("click", close);
-      el("td-exit-no").addEventListener("click", resetExitRow);
-      el("td-exit-no").focus();
+      showExitDialog(el("td-modal"), close);
     }
 
     function renderItem() {
