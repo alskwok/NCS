@@ -1145,7 +1145,7 @@
           "ko": "농담을 듣고 모두 **호탕하게 웃었다**.",
           "ur": "لطیفہ سن کر سب نے **دل کھول کر ہنسا**۔"
         },
-        "image": null,
+        "image": "images/380.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hoi1waai4daai6siu3_word.mp3",
@@ -1181,7 +1181,7 @@
           "ko": "바다 속 세계는 아주 **다채로워서** 매력적이다.",
           "ur": "سمندر کی دنیا بہت **رنگا رنگ** اور دلکش ہے۔"
         },
-        "image": null,
+        "image": "images/381.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/do1zi1do1coi2_word.mp3",
@@ -1215,7 +1215,7 @@
           "ko": "바다 밑에는 아름다운 **식물**이 많다.",
           "ur": "سمندر کی تہہ میں بہت سے خوبصورت **پودے** ہیں۔"
         },
-        "image": null,
+        "image": "images/382.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zik6mat6_word.mp3",
@@ -1249,7 +1249,7 @@
           "ko": "바닷속 물고기들은 **각양각색인** 모습으로 헤엄쳐 다닌다.",
           "ur": "سمندر کی مچھلیاں **مختلف انداز** میں تیرتی پھرتی ہیں۔"
         },
-        "image": null,
+        "image": "images/383.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cin1zi1baak3taai3_word.mp3",
@@ -1283,7 +1283,7 @@
           "ko": "작은 물고기가 물속에서 **아주 빠르게** 헤엄친다.",
           "ur": "چھوٹی مچھلی پانی میں **بہت تیز** تیرتی ہے۔"
         },
-        "image": null,
+        "image": "images/384.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fei1faai3_word.mp3",
@@ -1317,7 +1317,7 @@
           "ko": "해초가 물살에 따라 **흔들린다**.",
           "ur": "سمندری گھاس پانی کے بہاؤ کے ساتھ **جھومتی** ہے۔"
         },
-        "image": null,
+        "image": "images/385.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jiu4baai2_word.mp3",
@@ -1351,7 +1351,7 @@
           "ko": "해마는 꼬리로 해초를 **감는다**.",
           "ur": "سمندری گھوڑا اپنی دم سمندری گھاس کے گرد **لپیٹ لیتا** ہے۔"
         },
-        "image": null,
+        "image": "images/386.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ngau1_word.mp3",
@@ -1385,7 +1385,7 @@
           "ko": "바닷속 **초원**에는 해초가 가득하다.",
           "ur": "زیرِ آب **چراگاہ** سمندری گھاس سے بھری ہوئی ہے۔"
         },
-        "image": null,
+        "image": "images/387.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cou2jyun4_word.mp3",
@@ -1419,7 +1419,7 @@
           "ko": "가자미는 모래 위에 **엎드리는** 것을 좋아한다.",
           "ur": "چپٹی مچھلی ریت پر **پیٹ کے بل لیٹنا** پسند کرتی ہے۔"
         },
-        "image": null,
+        "image": "images/388.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/paa1_word.mp3",
@@ -1453,7 +1453,7 @@
           "ko": "우리는 일요일에 **해변**에 가서 놀았다.",
           "ur": "ہم اتوار کے دن **ساحل** پر کھیلنے جاتے ہیں۔"
         },
-        "image": null,
+        "image": "images/389.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/saa1taan1_word.mp3",
@@ -1487,7 +1487,7 @@
           "ko": "진진은 물고기에게 왜 그렇게 빨리 헤엄치는지 **캐물었다**.",
           "ur": "جینی مچھلی سے **باز پرس کرتی ہے** کہ وہ اتنی تیز کیوں تیرتی ہے۔"
         },
-        "image": null,
+        "image": "images/390.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zeoi1man6_word.mp3",
@@ -1521,7 +1521,7 @@
           "ko": "작은 물고기는 계속 엄마 **곁**에서 헤엄친다.",
           "ur": "چھوٹی مچھلی ہمیشہ اپنی ماں کے **پاس** تیرتی رہتی ہے۔"
         },
-        "image": null,
+        "image": "images/391.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/san1bin1_word.mp3",
@@ -1557,7 +1557,7 @@
           "ko": "호수 위에 **돛단배** 한 척이 지나가고 있다.",
           "ur": "جھیل پر ایک **بادبانی کشتی** چل رہی ہے۔"
         },
-        "image": null,
+        "image": "images/392.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/faan4syun4_word.mp3",
@@ -1591,7 +1591,7 @@
           "ko": "돛단배가 호수 위를 천천히 **운행한다**.",
           "ur": "بادبانی کشتی جھیل پر آہستہ آہستہ **چلتی** ہے۔"
         },
-        "image": null,
+        "image": "images/393.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hang4sai2_word.mp3",
@@ -1625,7 +1625,7 @@
           "ko": "나뭇잎이 바람을 타고 강으로 **떠다닌다**.",
           "ur": "پتہ ہوا کے ساتھ **اڑتا** ہوا دریا میں چلا جاتا ہے۔"
         },
-        "image": null,
+        "image": "images/394.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/piu1_word.mp3",
@@ -1659,7 +1659,7 @@
           "ko": "풀이 바람 속에서 **춤**을 추기 시작한다.",
           "ur": "گھاس ہوا میں **رقص** کرنے لگتی ہے۔"
         },
-        "image": null,
+        "image": "images/395.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/mou5dou6_word.mp3",
@@ -1693,7 +1693,7 @@
           "ko": "바람이 호수 물에 **물결을 일으켰다**.",
           "ur": "ہوا نے جھیل کے پانی پر **لہریں پیدا کر دیں**۔"
         },
-        "image": null,
+        "image": "images/396.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ceoi1zau3_word.mp3",
@@ -1727,7 +1727,7 @@
           "ko": "시냇물이 아주 **맑다**.",
           "ur": "ندی کا پانی بہت **صاف** ہے۔"
         },
-        "image": null,
+        "image": "images/397.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cing1_word.mp3",
@@ -1761,7 +1761,7 @@
           "ko": "작은 배가 물 위에서 **흔들거린다**.",
           "ur": "چھوٹی کشتی پانی پر **ہلتی** ہے۔"
         },
-        "image": null,
+        "image": "images/398.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jiu4fong2_word.mp3",
@@ -1795,7 +1795,7 @@
           "ko": "언니는 음악회에서 새 노래를 **연주했다**.",
           "ur": "باجی نے کنسرٹ میں ایک نیا گانا **بجایا**۔"
         },
-        "image": null,
+        "image": "images/399.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zau3_word.mp3",
@@ -1829,7 +1829,7 @@
           "ko": "동생은 교과서를 **펼치고** 복습을 시작한다.",
           "ur": "چھوٹا بھائی کتاب **کھول کر** دہرائی شروع کرتا ہے۔"
         },
-        "image": null,
+        "image": "images/400.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/faan1hoi1_word.mp3",
@@ -1863,7 +1863,7 @@
           "ko": "반 친구들이 깃발을 **휘두르며** 선수들을 응원한다.",
           "ur": "ساتھی طلبہ کھلاڑیوں کی حوصلہ افزائی کے لیے جھنڈے **لہراتے** ہیں۔"
         },
-        "image": null,
+        "image": "images/401.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fai1dung6_word.mp3",
@@ -1899,7 +1899,7 @@
           "ko": "진진은 새 학교로 막 전학해서 모든 것이 **낯설게** 느껴진다.",
           "ur": "جینی نے نئے سکول میں داخلہ لیا ہے اور اسے سب کچھ **اجنبی** لگتا ہے۔"
         },
-        "image": null,
+        "image": "images/402.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/mak6sang1_word.mp3",
@@ -1933,7 +1933,7 @@
           "ko": "진진은 곧 **자연스럽게** 행동하기 시작했다.",
           "ur": "جینی جلد ہی **فطری** انداز میں برتاؤ کرنے لگی۔"
         },
-        "image": null,
+        "image": "images/403.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zi6jin4_word.mp3",
@@ -1967,7 +1967,7 @@
           "ko": "반 친구들은 진진에게 아주 **다정하다**.",
           "ur": "ساتھی طلبہ جینی کے ساتھ بہت **دوستانہ** ہیں۔"
         },
-        "image": null,
+        "image": "images/404.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jau5sin6_word.mp3",
@@ -2001,7 +2001,7 @@
           "ko": "반 친구들은 **서로**를 존중한다.",
           "ur": "ساتھی طلبہ **ایک دوسرے** کا احترام کرتے ہیں۔"
         },
-        "image": null,
+        "image": "images/405.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/wu6soeng1_word.mp3",
@@ -2035,7 +2035,7 @@
           "ko": "반 친구들은 새로 온 진진을 자발적으로 **도와주었다**.",
           "ur": "ساتھی طلبہ نے از خود نئی آنے والی جینی کی **مدد کی**۔"
         },
-        "image": null,
+        "image": "images/406.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/bong1zo6_word.mp3",
@@ -2069,7 +2069,7 @@
           "ko": "그는 **진실하게** 선생님께 감사를 드렸다.",
           "ur": "اس نے **مخلصانہ** انداز میں استاد کا شکریہ ادا کیا۔"
         },
-        "image": null,
+        "image": "images/407.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zan1sing4_word.mp3",
@@ -2103,7 +2103,7 @@
           "ko": "반 친구들이 진진을 **둘러싸고** 이야기를 나눈다.",
           "ur": "ساتھی طلبہ جینی کو **گھیر کر** اس سے باتیں کرتے ہیں۔"
         },
-        "image": null,
+        "image": "images/408.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/baau1wai4_word.mp3",
@@ -2137,7 +2137,7 @@
           "ko": "선생님은 본문을 아주 **분명하게** 설명해 주셨다.",
           "ur": "استاد نے سبق کو نہایت **واضح** انداز میں سمجھایا۔"
         },
-        "image": null,
+        "image": "images/409.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cing1co2_word.mp3",
@@ -2171,7 +2171,7 @@
           "ko": "모두의 시선이 새로 전학 온 친구에게 **향했다**.",
           "ur": "سب کی نظریں نئے آنے والے ساتھی کی طرف **ڈل گئیں**۔"
         },
-        "image": null,
+        "image": "images/410.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/tau4hoeng3_word.mp3",
@@ -2205,7 +2205,7 @@
           "ko": "진진은 친구들의 다정한 **시선**을 느꼈다.",
           "ur": "جینی نے ساتھیوں کی دوستانہ **نظر** کو محسوس کیا۔"
         },
-        "image": null,
+        "image": "images/411.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/muk6gwong1_word.mp3",
@@ -2239,7 +2239,7 @@
           "ko": "두 반 친구들은 아주 **우호적으로** 지낸다.",
           "ur": "دونوں کلاسوں کے طلبہ بہت **ملنسار** انداز میں رہتے ہیں۔"
         },
-        "image": null,
+        "image": "images/412.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jau5hou2_word.mp3",
@@ -2273,7 +2273,7 @@
           "ko": "반 친구들은 **열정적으로** 진진을 맞이했다.",
           "ur": "ساتھی طلبہ نے جینی کا **پرجوش** استقبال کیا۔"
         },
-        "image": null,
+        "image": "images/413.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jit6cing4_word.mp3",
@@ -2309,7 +2309,7 @@
           "ko": "동생은 언니가 사탕 하나 더 먹었다고 화를 냈다, 정말 **속이 좁다**.",
           "ur": "بھائی صرف اس بات پر ناراض ہو گیا کہ باجی نے ایک ٹافی زیادہ کھا لی، واقعی **تنگ نظر** ہے۔"
         },
-        "image": null,
+        "image": "images/414.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/siu2sam1ngaan5_word.mp3",
@@ -2343,7 +2343,7 @@
           "ko": "나는 문 앞에서 엄마가 퇴근하기를 **기다린다**.",
           "ur": "میں دروازے پر امی کے دفتر سے واپس آنے کا **انتظار کرتا** ہوں۔"
         },
-        "image": null,
+        "image": "images/415.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/dang2_word.mp3",
@@ -2377,7 +2377,7 @@
           "ko": "동생은 문 뒤에 **숨어서** 엄마를 놀래키려고 한다.",
           "ur": "بھائی دروازے کے پیچھے **چھپ جاتا ہے** تاکہ امی کو ڈرا سکے۔"
         },
-        "image": null,
+        "image": "images/416.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/do2_word.mp3",
@@ -2411,7 +2411,7 @@
           "ko": "이 상자는 아주 **신비롭게** 보인다.",
           "ur": "یہ ڈبہ بہت **پراسرار** نظر آتا ہے۔"
         },
-        "image": null,
+        "image": "images/417.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/san4bei3_word.mp3",
@@ -2445,7 +2445,7 @@
           "ko": "오해를 받아서 마음이 아주 **괴롭다**.",
           "ur": "غلط سمجھے جانے پر دل بہت **بے چین** ہے۔"
         },
-        "image": null,
+        "image": "images/418.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/naan4sau6_word.mp3",
@@ -2479,7 +2479,7 @@
           "ko": "동생은 **복도**에서 이리저리 뛰어다닌다.",
           "ur": "بھائی **راہداری** میں اِدھر اُدھر بھاگتا ہے۔"
         },
-        "image": null,
+        "image": "images/419.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zau2long4_word.mp3",
@@ -2513,7 +2513,7 @@
           "ko": "오빠는 재미있는 게임을 **설계했다**.",
           "ur": "بھائی نے ایک دلچسپ کھیل **ڈیزائن کیا**۔"
         },
-        "image": null,
+        "image": "images/420.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cit3gai3_word.mp3",
@@ -2547,7 +2547,7 @@
           "ko": "나는 복습을 하지 않아서 시험 후에 아주 **후회했다**.",
           "ur": "میں نے دہرائی نہیں کی اور امتحان کے بعد بہت **پچھتایا**۔"
         },
-        "image": null,
+        "image": "images/421.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hau6fui3_word.mp3",
@@ -2581,7 +2581,7 @@
           "ko": "엄마는 동생을 **잘못 탓하셨다가**, 진실을 알고 나서 사과하셨다.",
           "ur": "امی نے بھائی کو **غلط الزام دیا**، بعد میں سچ جان کر معافی مانگ لی۔"
         },
-        "image": null,
+        "image": "images/422.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/co3gwaai3_word.mp3",
@@ -2615,7 +2615,7 @@
           "ko": "그녀의 이야기를 듣고 모두 아주 **감동했다**.",
           "ur": "اس کی کہانی سن کر سب بہت **متاثر ہوئے**۔"
         },
-        "image": null,
+        "image": "images/423.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gam2dung6_word.mp3",
@@ -2649,7 +2649,7 @@
           "ko": "동생은 잘못을 해서 **연달아** 미안하다고 말했다.",
           "ur": "بھائی نے غلطی کی اور **بار بار** معافی مانگی۔"
         },
-        "image": null,
+        "image": "images/424.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/lin4sing1_word.mp3",
@@ -2685,7 +2685,7 @@
           "ko": "오빠는 여동생을 돌보는 것을 **책임진다**.",
           "ur": "بھائی چھوٹی بہن کی دیکھ بھال کا **ذمہ دار** ہے۔"
         },
-        "image": null,
+        "image": "images/425.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fu6zaak3_word.mp3",
@@ -2719,7 +2719,7 @@
           "ko": "소명이는 **자발적으로** 교실 청소를 돕는다.",
           "ur": "سیو منگ **خود سے** کلاس روم کی صفائی میں مدد کرتا ہے۔"
         },
-        "image": null,
+        "image": "images/426.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zyu2dung6_word.mp3",
@@ -2753,7 +2753,7 @@
           "ko": "나는 숙제를 선생님께 **건네드렸다**.",
           "ur": "میں نے اپنا کام استاد کے ہاتھ میں **تھما دیا**۔"
         },
-        "image": null,
+        "image": "images/427.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/dai6_word.mp3",
@@ -2787,7 +2787,7 @@
           "ko": "나는 걸으면서 사야 할 물건들을 **되뇌며** 간다.",
           "ur": "میں چلتے ہوئے خریدنی والی چیزیں **پڑھتا** جاتا ہوں۔"
         },
-        "image": null,
+        "image": "images/428.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/nim6_word.mp3",
@@ -2821,7 +2821,7 @@
           "ko": "나는 **용기**를 내어 주인에게 가격을 물었다.",
           "ur": "میں نے **ہمت** جمع کر کے دکاندار سے قیمت پوچھی۔"
         },
-        "image": null,
+        "image": "images/429.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jung5hei3_word.mp3",
@@ -2855,7 +2855,7 @@
           "ko": "엄마의 부름을 듣고 동생은 **황급히** 집으로 뛰어갔다.",
           "ur": "امی کی آواز سن کر بھائی **گھبراہٹ میں** گھر کی طرف بھاگا۔"
         },
-        "image": null,
+        "image": "images/430.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fong1mong4_word.mp3",
@@ -2889,7 +2889,7 @@
           "ko": "나는 실수로 책상에 **부딪혔다**.",
           "ur": "مجھ سے غلطی سے میز سے **ٹکرا گیا**۔"
         },
-        "image": null,
+        "image": "images/431.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zong6_word.mp3",
@@ -2923,7 +2923,7 @@
           "ko": "엄마는 **안심해도** 된다고, 여동생을 돌봐 주겠다고 하셨다.",
           "ur": "امی نے کہا کہ **بے فکر** رہو، وہ چھوٹی بہن کا خیال رکھیں گی۔"
         },
-        "image": null,
+        "image": "images/432.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fong3sam1_word.mp3",
@@ -2957,7 +2957,7 @@
           "ko": "동생은 **조용히** 방으로 들어갔다.",
           "ur": "بھائی **خاموشی سے** کمرے میں داخل ہوا۔"
         },
-        "image": null,
+        "image": "images/433.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ciu2ciu2_word.mp3",
@@ -2991,7 +2991,7 @@
           "ko": "선생님은 오늘 나의 **행동**을 칭찬해 주셨다.",
           "ur": "استاد نے آج میری **کارکردگی** کی تعریف کی۔"
         },
-        "image": null,
+        "image": "images/434.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/biu2jin6_word.mp3",
@@ -3025,7 +3025,7 @@
           "ko": "이번 물건을 산 **경험**은 아주 특별했다.",
           "ur": "اس بار چیزیں خریدنے کا **تجربہ** بہت خاص تھا۔"
         },
-        "image": null,
+        "image": "images/435.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ging1lik6_word.mp3",
@@ -3059,7 +3059,7 @@
           "ko": "나는 **힘을 써서** 상자를 밀어 열었다.",
           "ur": "میں نے **زور لگا کر** ڈبہ کھول دیا۔"
         },
-        "image": null,
+        "image": "images/436.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/sai2ging6_word.mp3",
@@ -3095,7 +3095,7 @@
           "ko": "나는 이미 일찍 일어나 학교에 가는 것에 **익숙해졌다**.",
           "ur": "مجھے سکول کے لیے صبح جلدی اٹھنے کی **عادت** ہو گئی ہے۔"
         },
-        "image": null,
+        "image": "images/437.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zaap6gwaan3_word.mp3",
@@ -3129,7 +3129,7 @@
           "ko": "한밤중의 소리는 아주 **이상하게** 들린다.",
           "ur": "آدھی رات کی آواز بہت **عجیب** لگتی ہے۔"
         },
-        "image": null,
+        "image": "images/438.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gu2gwaai3_word.mp3",
@@ -3163,7 +3163,7 @@
           "ko": "깊은 밤의 교정은 아주 **고요하다**.",
           "ur": "رات گئے سکول کا میدان بہت **خاموش** ہوتا ہے۔"
         },
-        "image": null,
+        "image": "images/439.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zik6zing6_word.mp3",
@@ -3197,7 +3197,7 @@
           "ko": "이 이야기의 줄거리는 아주 **무섭다**.",
           "ur": "اس کہانی کا پلاٹ بہت **خوفناک** ہے۔"
         },
-        "image": null,
+        "image": "images/440.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hung2bou3_word.mp3",
@@ -3231,7 +3231,7 @@
           "ko": "동생은 혼자 집에 있어서 아주 **두려워한다**.",
           "ur": "بھائی گھر میں تنہا ہے اور بہت **ڈرتا ہے**۔"
         },
-        "image": null,
+        "image": "images/441.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hoi6paa3_word.mp3",
@@ -3265,7 +3265,7 @@
           "ko": "동생은 너무 무서워서 몸을 **움츠려** 웅크렸다.",
           "ur": "بھائی اتنا ڈر گیا کہ اپنا جسم **سکڑا کر** گٹھڑی بنا لیا۔"
         },
-        "image": null,
+        "image": "images/442.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/suk1_word.mp3",
@@ -3299,7 +3299,7 @@
           "ko": "나는 눈을 **감고** 천천히 잠이 들었다.",
           "ur": "میں نے آنکھیں **بند کیں** اور آہستہ آہستہ سو گیا۔"
         },
-        "image": null,
+        "image": "images/443.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/bai3_word.mp3",
@@ -3333,7 +3333,7 @@
           "ko": "동생은 손가락으로 귀를 **막았다**.",
           "ur": "بھائی نے انگلیوں سے کان **ٹھونس لیے**۔"
         },
-        "image": null,
+        "image": "images/444.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/sak1_word.mp3",
@@ -3367,7 +3367,7 @@
           "ko": "친구들 앞에서 넘어지는 것은 정말 **부끄럽다**.",
           "ur": "ساتھیوں کے سامنے گرنا واقعی **شرمناک** ہے۔"
         },
-        "image": null,
+        "image": "images/445.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/diu1jan4_word.mp3",
@@ -3401,7 +3401,7 @@
           "ko": "엄마는 **부드러운** 목소리로 나에게 노래를 불러 주신다.",
           "ur": "امی **نرم** آواز میں مجھے گانا سناتی ہیں۔"
         },
-        "image": null,
+        "image": "images/446.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hing1jau4_word.mp3",
@@ -3435,7 +3435,7 @@
           "ko": "부드러운 음악은 사람을 **재우는** 효과가 있다.",
           "ur": "نرم موسیقی میں **نیند دلانے** کا اثر ہوتا ہے۔"
         },
-        "image": null,
+        "image": "images/447.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ceoi1min4_word.mp3",
@@ -3469,7 +3469,7 @@
           "ko": "나는 오늘 밤 아주 **달게** 잤다.",
           "ur": "میں آج رات بہت **پرسکون** سویا۔"
         },
-        "image": null,
+        "image": "images/448.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hoeng1_word.mp3",
@@ -3505,7 +3505,7 @@
           "ko": "나는 **힘**을 써서 이 의자를 들어 올렸다.",
           "ur": "میں نے **طاقت** لگا کر یہ کرسی اٹھائی۔"
         },
-        "image": null,
+        "image": "images/449.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/lik6hei3_word.mp3",
@@ -3539,7 +3539,7 @@
           "ko": "엄마는 여동생을 울지 말라고 **달랬다**.",
           "ur": "امی نے چھوٹی بہن کو رونے سے **بہلایا**۔"
         },
-        "image": null,
+        "image": "images/450.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hung3_word.mp3",
@@ -3573,7 +3573,7 @@
           "ko": "남동생은 채소를 좋아하지 않아서 엄마도 **억지로 시키지** 않는다.",
           "ur": "چھوٹا بھائی سبزی کھانا پسند نہیں کرتا، امی بھی اسے **زبردستی نہیں کرتیں**۔"
         },
-        "image": null,
+        "image": "images/451.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/min5koeng5_word.mp3",
@@ -3607,7 +3607,7 @@
           "ko": "하늘이 **점점** 어두워졌다.",
           "ur": "آسمان **آہستہ آہستہ** تاریک ہونے لگا۔"
         },
-        "image": null,
+        "image": "images/452.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zim6zim6_word.mp3",
@@ -3641,7 +3641,7 @@
           "ko": "선생님이 오늘 숙제를 **설명하셨다**.",
           "ur": "استاد نے آج کا کام **وضاحت سے سمجھایا**۔"
         },
-        "image": null,
+        "image": "images/453.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gong2gaai2_word.mp3",
@@ -3675,7 +3675,7 @@
           "ko": "일찍 자고 일찍 일어나는 것은 좋은 **습관**이다.",
           "ur": "جلدی سونا اور جلدی اٹھنا ایک اچھی **عادت** ہے۔"
         },
-        "image": null,
+        "image": "images/454.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zaap6gwaan3_word.mp3",
@@ -3709,7 +3709,7 @@
           "ko": "채소를 많이 먹는 것은 몸에 **이점**이 있다.",
           "ur": "زیادہ سبزیاں کھانا جسم کے لیے **فائدہ** مند ہے۔"
         },
-        "image": null,
+        "image": "images/455.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hou2cyu3_word.mp3",
@@ -3743,7 +3743,7 @@
           "ko": "형은 매일 아침 몸을 **단련한다**.",
           "ur": "بھائی ہر صبح جسم کی **ورزش کرتا ہے**۔"
         },
-        "image": null,
+        "image": "images/456.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/dyun3lin6_word.mp3",
@@ -3777,7 +3777,7 @@
           "ko": "간식을 자주 먹으면 **비만해질** 수 있다.",
           "ur": "زیادہ ناشتہ کھانے سے انسان **موٹا** ہو جاتا ہے۔"
         },
-        "image": null,
+        "image": "images/457.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fei4bun6_word.mp3",
@@ -3811,7 +3811,7 @@
           "ko": "잠을 너무 적게 자면 건강에 **영향을 준다**.",
           "ur": "بہت کم سونا صحت پر **اثر ڈال** سکتا ہے۔"
         },
-        "image": null,
+        "image": "images/458.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jing2hoeng2_word.mp3",
@@ -3845,7 +3845,7 @@
           "ko": "학부모 모임이 **끝난** 후에야 엄마는 집에 돌아갔다.",
           "ur": "والدین کا اجلاس **ختم ہونے** کے بعد ہی امی گھر گئیں۔"
         },
-        "image": null,
+        "image": "images/459.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/saan3wui2_word.mp3",
@@ -3879,7 +3879,7 @@
           "ko": "할아버지는 매일 **아침**마다 공원에서 산책하신다.",
           "ur": "دادا ہر **صبح** پارک میں سیر کرتے ہیں۔"
         },
-        "image": null,
+        "image": "images/460.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ziu1_word.mp3",
@@ -3915,7 +3915,7 @@
           "ko": "여동생이 바닥을 **쓰는** 것을 도왔다.",
           "ur": "چھوٹی بہن نے فرش **جھاڑو دینے** میں مدد کی۔"
         },
-        "image": null,
+        "image": "images/461.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/sou3_word.mp3",
@@ -3949,7 +3949,7 @@
           "ko": "장난감은 **장** 안에 보관되어 있다.",
           "ur": "کھلونے **الماری** کے اندر رکھے ہیں۔"
         },
-        "image": null,
+        "image": "images/462.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gwai6_word.mp3",
@@ -3983,7 +3983,7 @@
           "ko": "남동생은 매일 자기 책상을 **정리한다**.",
           "ur": "چھوٹا بھائی ہر روز اپنی میز **ترتیب دیتا ہے**۔"
         },
-        "image": null,
+        "image": "images/463.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zing2lei5_word.mp3",
@@ -4017,7 +4017,7 @@
           "ko": "어젯밤 나는 이상한 **꿈**을 꾸었다.",
           "ur": "کل رات مجھے ایک عجیب **خواب** آیا۔"
         },
-        "image": null,
+        "image": "images/464.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/mung6_word.mp3",
@@ -4051,7 +4051,7 @@
           "ko": "형이 꽃병을 깨서 엄마는 조금 **화가 났다**.",
           "ur": "بھائی نے گلدان توڑ دیا، امی تھوڑی **ناراض** ہوئیں۔"
         },
-        "image": null,
+        "image": "images/465.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/sang1hei3_word.mp3",
@@ -4085,7 +4085,7 @@
           "ko": "나는 힘껏 대문을 **밀어** 열었다.",
           "ur": "میں نے زور سے دروازہ **دھکیل** کر کھولا۔"
         },
-        "image": null,
+        "image": "images/466.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/teoi1_word.mp3",
@@ -4119,7 +4119,7 @@
           "ko": "달리기를 끝낸 후 나는 매우 **피곤했다**.",
           "ur": "دوڑنے کے بعد میں بہت **تھکا** محسوس ہوا۔"
         },
-        "image": null,
+        "image": "images/467.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/leoi6_word.mp3",
@@ -4153,7 +4153,7 @@
           "ko": "늦을 것 같아서 나는 **서둘러** 교복을 입었다.",
           "ur": "دیر ہونے والی تھی، میں نے **جلدی سے** یونیفارم پہنا۔"
         },
-        "image": null,
+        "image": "images/468.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gon2faai3_word.mp3",
@@ -4187,7 +4187,7 @@
           "ko": "남동생은 너무 피곤해서 집에 오자마자 **누워서** 쉬었다.",
           "ur": "چھوٹا بھائی بہت تھکا تھا اور گھر آتے ہی **لیٹ کر** آرام کرنے لگا۔"
         },
-        "image": null,
+        "image": "images/469.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/tong2haa6_word.mp3",
@@ -4221,7 +4221,7 @@
           "ko": "우리는 **즐거운** 방학을 보냈다.",
           "ur": "ہم نے ایک **خوشگوار** چھٹی گزاری۔"
         },
-        "image": null,
+        "image": "images/470.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jyu4faai3_word.mp3",
@@ -4257,7 +4257,7 @@
           "ko": "강아지와 수탉은 **짝을 지어** 함께 먼 길을 떠났다.",
           "ur": "کتا اور مرغا **ساتھ ہو کر** سفر پر نکلے۔"
         },
-        "image": null,
+        "image": "images/471.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/git3bun6_word.mp3",
@@ -4291,7 +4291,7 @@
           "ko": "그들은 길을 가는 동안 **이야기하며 웃으면서** 매우 즐거워했다.",
           "ur": "وہ راستے میں **باتیں کرکے ہنستے** ہوئے بہت خوش تھے۔"
         },
-        "image": null,
+        "image": "images/472.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/syut3syut3siu3siu3_word.mp3",
@@ -4325,7 +4325,7 @@
           "ko": "강아지는 길을 걸으며 **팔짝팔짝 뛰었다**.",
           "ur": "کتا راستے پر **اچھلتا کودتا** چل رہا تھا۔"
         },
-        "image": null,
+        "image": "images/473.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/bang1bang1tiu3tiu3_word.mp3",
@@ -4359,7 +4359,7 @@
           "ko": "수탉은 매일 새벽마다 **운다**.",
           "ur": "مرغا ہر روز صبح سویرے **بولتا ہے**۔"
         },
-        "image": null,
+        "image": "images/474.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/tai4giu3_word.mp3",
@@ -4393,7 +4393,7 @@
           "ko": "여우는 숲속을 **떠돌아다녔다**.",
           "ur": "لومڑی جنگل میں **بھٹک رہی تھی**۔"
         },
-        "image": null,
+        "image": "images/475.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jau4dong6_word.mp3",
@@ -4427,7 +4427,7 @@
           "ko": "여우는 수탉에게 **공손하게** 인사했다.",
           "ur": "لومڑی نے مرغے کو **باادب** انداز میں سلام کیا۔"
         },
-        "image": null,
+        "image": "images/476.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/gung1ging3_word.mp3",
@@ -4461,7 +4461,7 @@
           "ko": "수탉의 노랫소리는 매우 **아름다웠다**.",
           "ur": "مرغے کی آواز بہت **خوبصورت** تھی۔"
         },
-        "image": null,
+        "image": "images/477.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/mei5miu6_word.mp3",
@@ -4495,7 +4495,7 @@
           "ko": "강아지는 계속 **경계하며** 주변을 살폈다.",
           "ur": "کتا ہر وقت **چوکس** رہا اور اردگرد دیکھتا رہا۔"
         },
-        "image": null,
+        "image": "images/478.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ging2gok3_word.mp3",
@@ -4529,7 +4529,7 @@
           "ko": "수탉의 울음소리가 모두를 **깨웠다**.",
           "ur": "مرغے کی آواز نے سب کو **جگا دیا**۔"
         },
-        "image": null,
+        "image": "images/479.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/sing2_word.mp3",
@@ -4563,7 +4563,7 @@
           "ko": "강아지는 친구를 지키기 위해 **노력했다**.",
           "ur": "کتے نے دوست کی حفاظت کے لیے **کوشش کی**۔"
         },
-        "image": null,
+        "image": "images/480.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/nou5lik6_word.mp3",
@@ -4597,7 +4597,7 @@
           "ko": "여우를 마주하고도 수탉은 매우 **침착했다**.",
           "ur": "لومڑی کے سامنے مرغا بہت **پرسکون** رہا۔"
         },
-        "image": null,
+        "image": "images/481.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zan3ding6_word.mp3",
@@ -4631,7 +4631,7 @@
           "ko": "여우는 강아지를 보자마자 바로 **도망갔다**.",
           "ur": "لومڑی کتے کو دیکھ کر فوراً **بھاگ گئی**۔"
         },
-        "image": null,
+        "image": "images/482.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/tou4paau2_word.mp3",
@@ -4667,7 +4667,7 @@
           "ko": "오늘 날씨는 매우 **춥다**.",
           "ur": "آج موسم بہت **سرد** ہے۔"
         },
-        "image": null,
+        "image": "images/483.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hon4laang5_word.mp3",
@@ -4701,7 +4701,7 @@
           "ko": "노새는 길가에 서서 주위를 **둘러보았다**.",
           "ur": "خچر راستے کے کنارے کھڑا ہو کر **ادھر ادھر دیکھ رہا تھا**۔"
         },
-        "image": null,
+        "image": "images/484.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/zoeng1mong6_word.mp3",
@@ -4735,7 +4735,7 @@
           "ko": "오랫동안 걸은 뒤 노새는 멈춰서 **쉬었다**.",
           "ur": "کافی دیر چلنے کے بعد خچر رک کر **آرام کرنے لگا**۔"
         },
-        "image": null,
+        "image": "images/485.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hit3sik1_word.mp3",
@@ -4769,7 +4769,7 @@
           "ko": "바닥이 매우 미끄러워서 노새는 거의 **넘어질** 뻔했다.",
           "ur": "زمین بہت پھسلن والی تھی، خچر تقریباً **گر گیا**۔"
         },
-        "image": null,
+        "image": "images/486.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/seot1dou2_word.mp3",
@@ -4803,7 +4803,7 @@
           "ko": "어른께 말할 때는 **예의**가 있어야 한다.",
           "ur": "بڑوں سے بات کرتے وقت **تمیز** ہونی چاہیے۔"
         },
-        "image": null,
+        "image": "images/487.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/lai5maau6_word.mp3",
@@ -4837,7 +4837,7 @@
           "ko": "그 사람은 말투가 매우 **무례하다**.",
           "ur": "وہ شخص بہت **بدتمیز** طریقے سے بات کرتا ہے۔"
         },
-        "image": null,
+        "image": "images/488.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cou1lou5_word.mp3",
@@ -4871,7 +4871,7 @@
           "ko": "남동생은 크게 **하품**을 했다.",
           "ur": "چھوٹے بھائی نے بڑی **جماہی** لی۔"
         },
-        "image": null,
+        "image": "images/489.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ho1him3_word.mp3",
@@ -4905,7 +4905,7 @@
           "ko": "해가 뜬 뒤 얼음이 점점 **녹았다**.",
           "ur": "سورج نکلنے کے بعد برف آہستہ آہستہ **پگھل گئی**۔"
         },
-        "image": null,
+        "image": "images/490.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jung4faa3_word.mp3",
@@ -4939,7 +4939,7 @@
           "ko": "얼음 표면이 갑자기 **갈라졌다**.",
           "ur": "برف کی سطح اچانک **ٹوٹ گئی**۔"
         },
-        "image": null,
+        "image": "images/491.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/po3lit6_word.mp3",
@@ -4973,7 +4973,7 @@
           "ko": "강물이 **차가워서** 노새는 감히 들어가지 못했다.",
           "ur": "دریا کا پانی **برف جیسا ٹھنڈا** تھا، خچر نیچے جانے کی ہمت نہ کر سکا۔"
         },
-        "image": null,
+        "image": "images/492.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/bing1laang5_word.mp3",
@@ -5007,7 +5007,7 @@
           "ko": "우리는 선생님의 충고를 **순종해야** 한다.",
           "ur": "ہمیں استاد کی نصیحت **ماننی** چاہیے۔"
         },
-        "image": null,
+        "image": "images/493.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/ting1cung4_word.mp3",
@@ -5041,7 +5041,7 @@
           "ko": "엄마는 나에게 사탕을 너무 많이 먹지 말라고 **권고하셨다**.",
           "ur": "امی نے مجھے زیادہ کینڈی نہ کھانے کی **نصیحت کی**۔"
         },
-        "image": null,
+        "image": "images/494.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/hyun3gou3_word.mp3",
@@ -5077,7 +5077,7 @@
           "ko": "크리스마스 파티의 프로그램은 매우 **풍부했다**.",
           "ur": "کرسمس پارٹی کے پروگرام بہت **بھرپور** تھے۔"
         },
-        "image": null,
+        "image": "images/495.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fung1fu3_word.mp3",
@@ -5111,7 +5111,7 @@
           "ko": "우리는 파티에서 많은 **게임**을 했다.",
           "ur": "ہم نے پارٹی میں بہت سے **کھیل** کھیلے۔"
         },
-        "image": null,
+        "image": "images/496.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/jau4hei3_word.mp3",
@@ -5145,7 +5145,7 @@
           "ko": "방울 소리는 **맑고 또렷하며** 듣기 좋았다.",
           "ur": "گھنٹی کی آواز **صاف اور کھنکتی** ہوئی تھی۔"
         },
-        "image": null,
+        "image": "images/497.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/cing1ceoi3_word.mp3",
@@ -5179,7 +5179,7 @@
           "ko": "반 친구들은 산타클로스를 보자 모두 **환호했다**.",
           "ur": "کلاس کے بچے سانتا کلاز کو دیکھ کر **خوشی سے چیخ** اٹھے۔"
         },
-        "image": null,
+        "image": "images/498.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/fun1fu1_word.mp3",
@@ -5213,7 +5213,7 @@
           "ko": "산타클로스는 빨간 모자를 **쓰고** 있었다.",
           "ur": "سانتا کلاز نے سرخ ٹوپی **پہنی** ہوئی تھی۔"
         },
-        "image": null,
+        "image": "images/499.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/daai3_word.mp3",
@@ -5247,7 +5247,7 @@
           "ko": "산타클로스는 가벼운 발걸음으로 **밟으며** 들어왔다.",
           "ur": "سانتا کلاز خوشی سے ہلکے قدم **رکھتے** ہوئے اندر آیا۔"
         },
-        "image": null,
+        "image": "images/500.png",
         "audio": null,
         "exampleAudio": null,
         "wordAudioAuto": "audio/auto/daap6_word.mp3",
