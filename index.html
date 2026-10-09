@@ -612,6 +612,10 @@
     z-index: 999;
     cursor: wait;
   }
+  .audio-loading-overlay[hidden] { display: none; }
+  /* 最初載入資料嗰陣：用紙色底，唔好成個黑遮罩 */
+  .audio-loading-overlay.boot { background: var(--paper); }
+  .audio-loading-overlay.boot .spinner { border-color: rgba(47, 76, 122, .22); border-top-color: var(--brand); }
   .audio-loading-overlay .spinner {
     width: 46px; height: 46px;
     border: 4px solid rgba(255, 255, 255, 0.35);
@@ -1731,7 +1735,7 @@
   </div>
 </div>
 
-<div class="audio-loading-overlay" id="audio-loading-overlay" hidden aria-live="polite" data-i18n-label="aria_loading" aria-label="錄音載入緊">
+<div class="audio-loading-overlay boot" id="audio-loading-overlay" role="status" aria-live="polite" aria-busy="true" data-i18n-label="aria_loading" aria-label="載入緊">
   <div class="spinner" aria-hidden="true"></div>
 </div>
 
@@ -1935,7 +1939,7 @@
     aria_say_example_tr: { zh: "播放例句翻譯讀音", en: "Play example translation" },
     aria_say_meaning: { zh: "播放{lang}讀音", en: "Play {lang} pronunciation" },
     aria_say_extrans: { zh: "播放例句{lang}翻譯讀音", en: "Play example {lang} translation" },
-    aria_loading: { zh: "錄音載入緊", en: "Loading audio" },
+    aria_loading: { zh: "載入緊", en: "Loading" },
     replay_stroke: { zh: "🔁 重播筆順", en: "🔁 Replay strokes" },
     words_count: { zh: "{n} 個詞語", en: "{n} words" },
     empty_lesson: { zh: "呢一課仲未有詞語資料。", en: "This lesson has no words yet." },
@@ -2953,7 +2957,9 @@
   // 每次開新詞語都由頭砌返個圖片/GIF/影片嘅DOM，唔好靠住舊嗰個<img>／<video>
   // 節點一直留喺度——如果上一個詞語冇圖（觸發咗fallback文字），嗰個節點會
   // 俾fallback嘅innerHTML洗咗，跟住嗰個有圖嘅詞語就會搵唔返個元素。
+  var modalImgRelease = null; // 關閉視窗時，放走仲等緊嘅圖片載入遮罩
   function renderModalMedia(w, wrapImg) {
+    if (modalImgRelease) modalImgRelease();
     var url = w.image;
     var hero = el("word-hero");
     if (hero) hero.classList.remove("no-img");
@@ -2969,13 +2975,18 @@
     } else {
       wrapImg.innerHTML = '<img id="modal-image" alt="">';
       var img = el("modal-image");
-      img.onerror = function () { showImageFallback(wrapImg); };
+      var endImgBusy = null;
+      function imgDone() { if (endImgBusy) { endImgBusy(); endImgBusy = null; } if (modalImgRelease === imgDone) modalImgRelease = null; }
+      img.onerror = function () { imgDone(); showImageFallback(wrapImg); };
+      img.onload = imgDone;
       img.src = url;
+      if (!img.complete) { endImgBusy = beginBusy(10000); modalImgRelease = imgDone; }
       img.alt = t("alt_word", { w: w.word });
     }
   }
 
   function closeModal() {
+    if (modalImgRelease) modalImgRelease();
     stopLoop();
     if ("speechSynthesis" in window) speechSynthesis.cancel();
     if (activeClipAudio) { try { activeClipAudio.pause(); } catch (e) {} activeClipAudio = null; }
@@ -3136,19 +3147,51 @@
   // 用token機制：如果用戶手快連續撳幾下，淨係最新嗰次先有權收返個遮罩，
   // 咁就唔會俾舊嗰次嘅完成事件搶住收咗、but個新請求其實都仲未load完。
   var audioLoadToken = 0;
+  var audioLoadActive = false; // 有錄音仲喺度載入
+  var extraBusy = 1;           // 其他載入（一開始 =1：最初載入資料；之後係圖片等）
+  // 遮罩顯示與否：錄音或者其他載入任何一樣未完成，就一直擋住個畫面
+  function refreshOverlay() {
+    var overlay = el("audio-loading-overlay");
+    if (!overlay) return;
+    var busy = audioLoadActive || extraBusy > 0;
+    overlay.hidden = !busy;
+    overlay.setAttribute("aria-busy", busy ? "true" : "false");
+    if (!busy) overlay.classList.remove("boot");
+  }
+  // 非錄音嘅載入（圖片等）：開始時 beginBusy()，完成時再叫返回傳嗰個 function；
+  // 有保險時限，唔會因為某個檔案一直冇回應而永遠擋住個畫面。
+  function beginBusy(maxMs) {
+    extraBusy++;
+    refreshOverlay();
+    var done = false;
+    function end() {
+      if (done) return;
+      done = true;
+      extraBusy = Math.max(0, extraBusy - 1);
+      refreshOverlay();
+    }
+    setTimeout(end, maxMs || 12000);
+    return end;
+  }
   function showAudioLoading() {
     audioLoadToken++;
     var token = audioLoadToken;
-    var overlay = el("audio-loading-overlay");
-    if (overlay) overlay.hidden = false;
-    // 保險網：萬一啲事件（playing/error）冇一個觸發到（好罕見），都唔好一直擋住個畫面
-    setTimeout(function () { hideAudioLoading(token); }, 6000);
+    audioLoadActive = true;
+    refreshOverlay();
+    // 保險網：萬一啲事件（playing/error）冇一個觸發到（好罕見），都唔好一直擋住個畫面。
+    // 錄音bundle每個大約2MB，網絡慢嘅時候要等耐啲，所以放寬到30秒。
+    setTimeout(function () { hideAudioLoading(token); }, 30000);
     return token;
   }
   function hideAudioLoading(token) {
     if (token !== audioLoadToken) return;
-    var overlay = el("audio-loading-overlay");
-    if (overlay) overlay.hidden = true;
+    audioLoadActive = false;
+    refreshOverlay();
+  }
+  function forceHideAudioLoading() {
+    audioLoadToken++;
+    audioLoadActive = false;
+    refreshOverlay();
   }
 
   // batch生成嘅錄音打包做兩層：每個詞語嘅所有句子先合併做一個mp3，再將
@@ -3581,9 +3624,7 @@
       if ("speechSynthesis" in window) speechSynthesis.cancel();
       if (activeClipAudio) { try { activeClipAudio.pause(); } catch (e) {} activeClipAudio = null; }
       stopClipKaraoke();
-      audioLoadToken++;
-      var ov = el("audio-loading-overlay");
-      if (ov) ov.hidden = true;
+      forceHideAudioLoading();
     }
 
     function showMode(m) {
@@ -3997,9 +4038,7 @@
     if (textAudio) { try { textAudio.pause(); } catch (e) {} }
     activeClipAudio = null;
     stopClipKaraoke();
-    audioLoadToken++;
-    var ov = el("audio-loading-overlay");
-    if (ov) ov.hidden = true;
+    forceHideAudioLoading();
   }
 
   function speakTextEx(text, statusEl, spans, rate, onEnd) {
@@ -4631,6 +4670,18 @@
     renderGrades();
   }
 
+  // 最初載入嘅遮罩：資料同字體都載好（字體最多等 4 秒）先放行
+  function endInitialLoad() {
+    if (!bootBusyOpen) return;
+    bootBusyOpen = false;
+    extraBusy = Math.max(0, extraBusy - 1);
+    refreshOverlay();
+  }
+  var bootBusyOpen = true;
+  var fontsReady = (document.fonts && document.fonts.ready)
+    ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 4000); })]).catch(function () {})
+    : Promise.resolve();
+
   Promise.all([
     fetch("data.json").then(function (r) { return r.json(); }),
     fetch("strokes.json").then(function (r) { return r.json(); }),
@@ -4643,8 +4694,10 @@
       results[0].markNames = results[4].markNames || {};
     }
     boot(results[0], results[1], results[2], results[3]);
-  }).catch(function (err) {
+    return fontsReady;
+  }).then(endInitialLoad).catch(function (err) {
     el("grid-grade").innerHTML = '<p class="empty-note">' + t("load_fail") + '</p>';
+    endInitialLoad();
     console.error(err);
   });
 })();
