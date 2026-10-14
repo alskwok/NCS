@@ -25665,6 +25665,246 @@
         }
       }
     ],
+    "小四|||四上一冊|||單元一 自主閱讀：小記者和大記者": [
+      {
+        "word": "採訪",
+        "pos": "動詞",
+        "meanings": {
+          "zh": "訪問取材",
+          "en": "cover (news)",
+          "ko": "취재하다",
+          "ur": "رپورٹنگ کرنا"
+        },
+        "jyutping": "coi2 fong2",
+        "audioId": "coi2fong2",
+        "example": "我長大以後想當新聞記者，到世界各地採訪重要消息。",
+        "exampleTranslations": {
+          "en": "When I grow up, I want to be a news reporter and travel around the world to **cover** important news.",
+          "ko": "나는 커서 기자가 되어 세계 곳곳을 다니며 중요한 소식을 **취재하고** 싶다.",
+          "ur": "بڑا ہو کر میں صحافی بننا چاہتا ہوں اور دنیا بھر میں جا کر اہم خبروں کی **رپورٹنگ کرنا** چاہتا ہوں۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/coi2fong2_word.mp3",
+        "exampleAudioAuto": "audio/auto/coi2fong2_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/coi2fong2_meaning_zh.mp3",
+          "en": "audio/auto/coi2fong2_meaning_en.mp3",
+          "ko": "audio/auto/coi2fong2_meaning_ko.mp3",
+          "ur": "audio/auto/coi2fong2_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/coi2fong2_extrans_en.mp3",
+          "ko": "audio/auto/coi2fong2_extrans_ko.mp3",
+          "ur": "audio/auto/coi2fong2_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "刻苦",
+        "pos": "形容詞",
+        "meanings": {
+          "zh": "不怕辛苦",
+          "en": "hardworking",
+          "ko": "근면하다",
+          "ur": "محنتی"
+        },
+        "jyutping": "haak1 fu2",
+        "audioId": "haak1fu2",
+        "example": "林先生雖然平時過着刻苦的生活，但是對於社會公益的事情，總是十分熱衷的。",
+        "exampleTranslations": {
+          "en": "Although Mr. Lam usually lives a **hardworking** and simple life, he is always very enthusiastic about public welfare matters.",
+          "ko": "림 선생님은 평소 **근면하고 소박한** 생활을 하지만, 사회 공익 활동에는 언제나 매우 열정적이다.",
+          "ur": "اگرچہ مسٹر لِن عام طور پر **محنتی** اور سادہ زندگی گزارتے ہیں، لیکن وہ عوامی فلاح کے کاموں میں ہمیشہ بہت دلچسپی لیتے ہیں۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/haak1fu2_word.mp3",
+        "exampleAudioAuto": "audio/auto/haak1fu2_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/haak1fu2_meaning_zh.mp3",
+          "en": "audio/auto/haak1fu2_meaning_en.mp3",
+          "ko": "audio/auto/haak1fu2_meaning_ko.mp3",
+          "ur": "audio/auto/haak1fu2_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/haak1fu2_extrans_en.mp3",
+          "ko": "audio/auto/haak1fu2_extrans_ko.mp3",
+          "ur": "audio/auto/haak1fu2_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "靈機一動",
+        "pos": "成語",
+        "meanings": {
+          "zh": "突然想到辦法",
+          "en": "have a sudden bright idea",
+          "ko": "번뜩 좋은 생각이 떠오르다",
+          "ur": "اچانک ترکیب سوجھنا"
+        },
+        "jyutping": "ling4 gei1 jat1 dung6",
+        "audioId": "ling4gei1jat1dung6-2",
+        "example": "大文知道前面已沒有可以躲藏的地方，突然靈機一動，倒地裝死，躲過了敵軍的眼目。",
+        "exampleTranslations": {
+          "en": "Daman knew there was nowhere left to hide ahead, so he suddenly **had a bright idea**, fell to the ground and played dead, and slipped past the enemy soldiers.",
+          "ko": "다이만은 앞에 더 이상 숨을 곳이 없다는 것을 알고, 갑자기 **번뜩 묘안이 떠올라** 바닥에 쓰러져 죽은 척하여 적군의 눈을 피했다.",
+          "ur": "ڈائی مَن جان گیا کہ آگے چھپنے کی کوئی جگہ نہیں رہی، تو اچانک اسے **ایک ترکیب سوجھی**؛ وہ زمین پر گر کر مرنے کا بہانہ کرنے لگا اور دشمن کی نظروں سے بچ گیا۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/ling4gei1jat1dung6_word.mp3",
+        "exampleAudioAuto": "audio/auto/ling4gei1jat1dung6_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/ling4gei1jat1dung6_meaning_zh.mp3",
+          "en": "audio/auto/ling4gei1jat1dung6_meaning_en.mp3",
+          "ko": "audio/auto/ling4gei1jat1dung6_meaning_ko.mp3",
+          "ur": "audio/auto/ling4gei1jat1dung6_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/ling4gei1jat1dung6_extrans_en.mp3",
+          "ko": "audio/auto/ling4gei1jat1dung6_extrans_ko.mp3",
+          "ur": "audio/auto/ling4gei1jat1dung6_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "印刷",
+        "pos": "動詞",
+        "meanings": {
+          "zh": "印製",
+          "en": "print",
+          "ko": "인쇄하다",
+          "ur": "چھپائی"
+        },
+        "jyutping": "jan3 caat3",
+        "audioId": "jan3caat3",
+        "example": "昨天，我們在視藝課上學會了絲網印刷技術，還設計了獨一無二的汗衫。",
+        "exampleTranslations": {
+          "en": "Yesterday in art class we learned silk-screen **printing** and also designed one-of-a-kind T-shirts.",
+          "ko": "어제 미술 시간에 우리는 실크스크린 **인쇄** 기술을 배우고, 세상에 하나뿐인 티셔츠도 디자인했다.",
+          "ur": "کل آرٹ کی کلاس میں ہم نے سلک اسکرین **چھپائی** کی تکنیک سیکھی اور بالکل منفرد ٹی شرٹس بھی ڈیزائن کیں۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/jan3caat3_word.mp3",
+        "exampleAudioAuto": "audio/auto/jan3caat3_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/jan3caat3_meaning_zh.mp3",
+          "en": "audio/auto/jan3caat3_meaning_en.mp3",
+          "ko": "audio/auto/jan3caat3_meaning_ko.mp3",
+          "ur": "audio/auto/jan3caat3_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/jan3caat3_extrans_en.mp3",
+          "ko": "audio/auto/jan3caat3_extrans_ko.mp3",
+          "ur": "audio/auto/jan3caat3_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "編輯",
+        "pos": "名詞",
+        "meanings": {
+          "zh": "整理稿件的人",
+          "en": "editor",
+          "ko": "편집자",
+          "ur": "ایڈیٹر"
+        },
+        "jyutping": "pin1 cap1",
+        "audioId": "pin1cap1",
+        "example": "叔叔在報社擔任文字編輯的工作，每天都過得緊張而忙碌。",
+        "exampleTranslations": {
+          "en": "My uncle works as a text **editor** at a newspaper office, and every day is tense and busy.",
+          "ko": "삼촌은 신문사에서 **편집자**로 일하시는데, 매일 긴장되고 바쁘게 지내신다.",
+          "ur": "میرے چچا اخبار کے دفتر میں متن کے **ایڈیٹر** کے طور پر کام کرتے ہیں، اور ان کا ہر دن مصروف اور بھاگ دوڑ والا گزرتا ہے۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/pin1cap1_word.mp3",
+        "exampleAudioAuto": "audio/auto/pin1cap1_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/pin1cap1_meaning_zh.mp3",
+          "en": "audio/auto/pin1cap1_meaning_en.mp3",
+          "ko": "audio/auto/pin1cap1_meaning_ko.mp3",
+          "ur": "audio/auto/pin1cap1_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/pin1cap1_extrans_en.mp3",
+          "ko": "audio/auto/pin1cap1_extrans_ko.mp3",
+          "ur": "audio/auto/pin1cap1_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "大開眼界",
+        "pos": "成語",
+        "meanings": {
+          "zh": "增加見識",
+          "en": "broaden one's horizons",
+          "ko": "견문을 넓히다",
+          "ur": "نظر اور معلومات وسیع کرنا"
+        },
+        "jyutping": "daai6 hoi1 ngaan5 gaai3",
+        "audioId": "daai6hoi1ngaan5gaai3-2",
+        "example": "這次山區探訪之旅令舅舅大開眼界，是一次很好的體驗。",
+        "exampleTranslations": {
+          "en": "This visit to the mountain area **greatly broadened my uncle's horizons**; it was a very good experience.",
+          "ko": "이번 산간 지역 방문 여행은 외삼촌의 **견문을 크게 넓혀 주었으며**, 아주 좋은 경험이었다.",
+          "ur": "پہاڑی علاقے کے اس دورے نے ماموں کی **نظر اور معلومات کو وسیع کر دیا**، یہ ایک بہت اچھا تجربہ تھا۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/daai6hoi1ngaan5gaai3_word.mp3",
+        "exampleAudioAuto": "audio/auto/daai6hoi1ngaan5gaai3_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/daai6hoi1ngaan5gaai3_meaning_zh.mp3",
+          "en": "audio/auto/daai6hoi1ngaan5gaai3_meaning_en.mp3",
+          "ko": "audio/auto/daai6hoi1ngaan5gaai3_meaning_ko.mp3",
+          "ur": "audio/auto/daai6hoi1ngaan5gaai3_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/daai6hoi1ngaan5gaai3_extrans_en.mp3",
+          "ko": "audio/auto/daai6hoi1ngaan5gaai3_extrans_ko.mp3",
+          "ur": "audio/auto/daai6hoi1ngaan5gaai3_extrans_ur.mp3"
+        }
+      },
+      {
+        "word": "凝聚",
+        "pos": "動詞",
+        "meanings": {
+          "zh": "聚集",
+          "en": "gather",
+          "ko": "모이다",
+          "ur": "جمع ہونا"
+        },
+        "jyutping": "jing4 zeoi6",
+        "audioId": "jing4zeoi6",
+        "example": "清晨濃霧剛剛散去，凝聚在樹葉上的小水珠在陽光下閃閃發光，十分美麗。",
+        "exampleTranslations": {
+          "en": "Just after the morning fog had cleared, the little water droplets that had **gathered** on the leaves sparkled in the sunlight, very beautiful.",
+          "ko": "이른 아침 짙은 안개가 막 걷히자, 나뭇잎 위에 **모인** 작은 물방울들이 햇빛 아래 반짝반짝 빛나 매우 아름다웠다.",
+          "ur": "صبح سویرے گہری دھند ابھی چھٹی ہی تھی کہ پتوں پر **جمع ہونے والی** چھوٹی چھوٹی بوندیں دھوپ میں چمک رہی تھیں، بہت خوبصورت۔"
+        },
+        "image": null,
+        "audio": null,
+        "exampleAudio": null,
+        "wordAudioAuto": "audio/auto/jing4zeoi6_word.mp3",
+        "exampleAudioAuto": "audio/auto/jing4zeoi6_example.mp3",
+        "meaningAudioAuto": {
+          "zh": "audio/auto/jing4zeoi6_meaning_zh.mp3",
+          "en": "audio/auto/jing4zeoi6_meaning_en.mp3",
+          "ko": "audio/auto/jing4zeoi6_meaning_ko.mp3",
+          "ur": "audio/auto/jing4zeoi6_meaning_ur.mp3"
+        },
+        "exampleTranslationAudioAuto": {
+          "en": "audio/auto/jing4zeoi6_extrans_en.mp3",
+          "ko": "audio/auto/jing4zeoi6_extrans_ko.mp3",
+          "ur": "audio/auto/jing4zeoi6_extrans_ur.mp3"
+        }
+      }
+    ],
     "小四|||四上二冊|||第9課 迷人的天涯海角": [
       {
         "word": "映襯",

@@ -29,7 +29,7 @@
     --success: #3F8F5F;
     --mark-red: #D6362B;
     --shadow: 0 10px 30px -12px rgba(43, 42, 40, 0.28);
-    --font-ui: "Noto Sans TC", "Noto Sans HK", "PingFang HK", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ui: "DaMengXiuKai", "Noto Sans TC", "Noto Sans HK", "PingFang HK", "PingFang TC", "Microsoft JhengHei", "Heiti TC", system-ui, -apple-system, "Segoe UI", sans-serif;
     --success-soft: #E3F1E8;
     --hl-yellow: rgba(255, 214, 64, .55);
     --hl-yellow-soft: rgba(255, 214, 64, .26);
@@ -911,7 +911,8 @@
   :root[data-theme="dark"] .pos-e { --pb: #4A2A3A; --pf: #F2A6C6; }
   :root[data-theme="dark"] .pos-x { --pb: #403C33; --pf: #CFC7B6; }
 
-  /* ---- 字體分工：介面用黑體，課文／詞語主字保留楷體 ---- */
+  /* ---- 字體分工：中文字有大萌秀楷嘅字就用楷體（--font-ui 第一個就係佢，只管中文字同全形標點），
+     字體入面冇嘅字（例如「咅」「衞」）或者英文／數字先用黑體 ---- */
   body, button, input, select, textarea { font-family: var(--font-ui); }
   h1, h2, h3, h4 { font-family: var(--font-ui); }
   .lesson-heading h2, .td-lesson-name, #tr-title, .word-title, .word-tile .glyph, .example-text,
@@ -1573,6 +1574,102 @@
   .b-picker { margin-top: 20px; }
   .b-picker-hint { font-size: 14px; color: var(--ink-soft); margin: 0 2px 10px; line-height: 1.5; }
   .lesson-grid .option-btn:disabled { opacity: .4; box-shadow: none; background: var(--seg-track); cursor: not-allowed; }
+
+  /* =====================================================================
+     評估範圍（第一次評估等）：橫幅、評估頁、小測驗
+     ===================================================================== */
+  .assess-banner {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    margin: 0 0 16px; padding: 14px 16px; text-align: left;
+    background: var(--surface); color: var(--ink);
+    border: 2px solid var(--ghost-line); border-radius: 16px;
+    box-shadow: 0 4px 0 var(--edge), var(--card-shadow);
+    font-family: var(--font-ui); cursor: pointer;
+    transition: transform .08s, box-shadow .08s;
+  }
+  .assess-banner[hidden] { display: none; }
+  .assess-banner:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--edge), var(--card-shadow); }
+  .assess-banner-ic { font-size: 28px; line-height: 1; flex: none; }
+  .assess-banner-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .assess-banner-main strong { font-size: 17px; font-weight: 800; }
+  .assess-banner-main small { font-size: 14px; color: var(--ink-soft); }
+  .assess-banner-days {
+    flex: none; padding: 4px 10px; border-radius: 999px; font-size: 14px; font-weight: 800;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .assess-banner-go { flex: none; font-size: 22px; color: var(--ink-faint); }
+
+  .as-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 4px 0 16px; font-family: var(--font-ui); }
+  .as-date { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .as-days { padding: 3px 10px; border-radius: 999px; font-size: 14px; font-weight: 800; background: var(--accent-soft); color: var(--accent); }
+  .as-list { display: flex; flex-direction: column; gap: 14px; }
+  .as-card {
+    background: var(--surface); border-radius: 18px; padding: 16px 16px 14px;
+    box-shadow: var(--card-shadow); border: 1px solid var(--paper-line);
+  }
+  .as-card-title { font-family: var(--font-ui); font-size: 18px; font-weight: 800; color: var(--ink); }
+  .as-card-desc { margin-top: 4px; font-family: var(--font-ui); font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  .as-block { margin-top: 12px; }
+  .as-h { font-family: var(--font-ui); font-size: 14px; font-weight: 800; color: var(--brand); margin-bottom: 4px; letter-spacing: .02em; }
+  .as-t { font-size: 17px; line-height: 1.7; color: var(--ink); }
+  .as-big {
+    font-size: 22px; font-weight: 700; color: var(--brand-strong); background: var(--brand-soft);
+    border-radius: 12px; padding: 10px 14px; text-align: center;
+  }
+  .as-ex { display: flex; flex-direction: column; gap: 6px; }
+  .as-ex p { margin: 0; font-size: 18px; line-height: 1.6; padding: 8px 12px; background: var(--paper); border-radius: 10px; }
+  .as-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .as-chip { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--brand-soft); border-radius: 12px; }
+  .as-chip b { font-size: 24px; line-height: 1; color: var(--brand-strong); min-width: 1.2em; text-align: center; }
+  .as-chip span { font-family: var(--font-ui); font-size: 13px; color: var(--ink-soft); line-height: 1.35; }
+  .as-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .as-actions .dict-btn { flex: 1 1 140px; min-height: 46px; }
+  .as-empty { font-family: var(--font-ui); color: var(--ink-soft); padding: 12px 0; }
+
+  .quiz-modal { max-width: 560px; display: flex; flex-direction: column; }
+  .qz-head { padding-right: 40px; font-family: var(--font-ui); }
+  .qz-head h3 { font-size: 18px; font-weight: 800; }
+  .qz-progress { margin-top: 6px; height: 8px; border-radius: 999px; background: var(--seg-track); overflow: hidden; }
+  .qz-progress i { display: block; height: 100%; width: 0; background: var(--brand); border-radius: 999px; transition: width .25s; }
+  .qz-sub { margin-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .qz-count { font-size: 13px; color: var(--ink-soft); }
+  .qz-auto { min-height: 32px; padding: 3px 12px; font-size: 13px; }
+  .qz-promptrow { display: flex; align-items: flex-start; gap: 10px; margin: 6px 0 14px; }
+  .qz-promptrow .qz-prompt { margin: 0; flex: 1; min-width: 0; }
+  .qz-promptrow .say-btn { flex: none; }
+  .as-pool { margin-top: 10px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-faint); }
+  .qz-body { margin-top: 12px; overflow-y: auto; -webkit-overflow-scrolling: touch; max-height: calc(92dvh - 130px); padding-bottom: 4px; }
+  .qz-prompt { font-size: 21px; line-height: 1.75; color: var(--ink); margin: 6px 0 14px; }
+  .qz-prompt .ro-tok.ro-unread { opacity: .3; }
+  .qz-prompt .ro-tok.ro-cur { box-shadow: inset 0 -.34em 0 rgba(59, 102, 245, .24); border-radius: 3px; }
+  .qz-blank { display: inline-block; min-width: 2.4em; text-align: center; border-bottom: 3px solid var(--brand); color: var(--brand); font-weight: 700; }
+  .qz-blank.is-right { color: var(--success-strong); border-color: var(--success); }
+  .qz-opts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .qz-opt {
+    width: 100%; min-height: 50px; padding: 10px 14px; text-align: left;
+    font-family: inherit; font-size: 19px; line-height: 1.5; color: var(--ink);
+    background: var(--surface); border: 2px solid var(--edge); border-radius: 14px;
+    box-shadow: 0 3px 0 var(--edge); cursor: pointer;
+  }
+  .qz-optrow { display: flex; align-items: center; gap: 8px; padding-right: 4px; }
+  .qz-optrow .qz-opt { flex: 1; min-width: 0; }
+  .qz-optrow .say-btn { flex: none; }
+  .qz-optrow.is-speaking .say-btn { outline: 3px solid var(--brand); outline-offset: 1px; }
+  .qz-opt:active:not([disabled]) { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge); }
+  .qz-opt[disabled] { cursor: default; }
+  .qz-opt.is-right { background: var(--success-soft); border-color: var(--success); box-shadow: 0 3px 0 var(--success); color: var(--success-strong); font-weight: 700; }
+  .qz-opt.is-wrong { background: var(--accent-soft); border-color: var(--accent); box-shadow: 0 3px 0 var(--accent); color: var(--accent); }
+  .qz-fb { margin-top: 14px; padding: 12px 14px; border-radius: 14px; font-family: var(--font-ui); font-size: 16px; line-height: 1.55; }
+  .qz-fb.is-right { background: var(--success-soft); color: var(--success-strong); }
+  .qz-fb.is-wrong { background: var(--accent-soft); color: var(--accent); }
+  .qz-fb strong { display: block; font-size: 17px; margin-bottom: 2px; }
+  .qz-next { margin-top: 14px; width: 100%; min-height: 48px; }
+  .qz-result { text-align: center; padding: 18px 8px 6px; font-family: var(--font-ui); }
+  .qz-score { font-size: 44px; font-weight: 800; color: var(--brand-strong); line-height: 1.1; }
+  .qz-score small { font-size: 20px; color: var(--ink-soft); font-weight: 700; }
+  .qz-msg { margin-top: 8px; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .qz-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .qz-actions .dict-btn { min-height: 48px; }
 </style>
 </head>
 <body>
@@ -1606,6 +1703,12 @@
       <button type="button" class="back-btn" data-back="home"><span aria-hidden="true">‹</span><span data-i18n="back">返回</span></button>
       <h2 class="screen-title" id="mode-title"></h2>
     </div>
+    <button type="button" class="assess-banner" id="assess-banner" hidden>
+      <span class="assess-banner-ic" aria-hidden="true">📝</span>
+      <span class="assess-banner-main"><strong id="assess-banner-title"></strong><small id="assess-banner-sub"></small></span>
+      <span class="assess-banner-days" id="assess-banner-days"></span>
+      <span class="assess-banner-go" aria-hidden="true">›</span>
+    </button>
     <div class="mode-grid">
       <button type="button" class="mode-card mode-card--a" id="mode-a">
         <span class="mode-ic" aria-hidden="true">📖</span>
@@ -1618,6 +1721,16 @@
         <small data-i18n="mode_b_sub">詞語默書、課文默書</small>
       </button>
     </div>
+  </section>
+
+  <!-- 畫面：評估範圍 -->
+  <section class="screen" id="screen-assess" hidden>
+    <div class="screen-head">
+      <button type="button" class="back-btn" data-back="mode"><span aria-hidden="true">‹</span><span data-i18n="back">返回</span></button>
+      <h2 class="screen-title" id="assess-title"></h2>
+    </div>
+    <div class="as-meta" id="assess-meta"></div>
+    <div class="as-list" id="assess-list"></div>
   </section>
 
   <!-- 畫面 3a：課文及詞語 -->
@@ -1737,6 +1850,18 @@
 
 <div class="audio-loading-overlay boot" id="audio-loading-overlay" role="status" aria-live="polite" aria-busy="true" data-i18n-label="aria_loading" aria-label="載入緊">
   <div class="spinner" aria-hidden="true"></div>
+</div>
+
+<div class="scrim" id="quiz-scrim" hidden>
+  <div class="modal quiz-modal" id="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+    <button class="modal-close" id="quiz-close" data-i18n-label="close" aria-label="關閉">✕</button>
+    <div class="qz-head">
+      <h3 id="quiz-title"></h3>
+      <div class="qz-progress" aria-hidden="true"><i id="quiz-bar"></i></div>
+      <div class="qz-sub"><span class="qz-count" id="quiz-count"></span><button type="button" class="dict-chip qz-auto" id="quiz-auto" aria-pressed="true"><span data-i18n="qz_auto">🔊 自動朗讀</span></button></div>
+    </div>
+    <div class="qz-body" id="quiz-body"></div>
+  </div>
 </div>
 
 <div class="scrim" id="install-scrim" hidden>
@@ -1940,6 +2065,35 @@
     aria_say_meaning: { zh: "播放{lang}讀音", en: "Play {lang} pronunciation" },
     aria_say_extrans: { zh: "播放例句{lang}翻譯讀音", en: "Play example {lang} translation" },
     aria_loading: { zh: "載入緊", en: "Loading" },
+    as_banner_sub: { zh: "{subject} · {date}（{wd}）", en: "{subject} · {date} ({wd})" },
+    as_banner_sub_nodate: { zh: "{subject} · 日期待定", en: "{subject} · date to be confirmed" },
+    as_in_days: { zh: "仲有 {n} 日", en: "{n} days left" },
+    as_today: { zh: "就係今日", en: "Today" },
+    as_tomorrow: { zh: "聽日", en: "Tomorrow" },
+    as_title: { zh: "{name}", en: "{name}" },
+    as_review: { zh: "📖 温習詞語", en: "📖 Review words" },
+    as_cloze: { zh: "✏️ 句子填充練習", en: "✏️ Fill-in-the-blank" },
+    as_practice: { zh: "✏️ 做練習", en: "✏️ Practice" },
+    as_none: { zh: "暫時未有評估資料。", en: "No assessment info yet." },
+    qz_auto: { zh: "🔊 自動朗讀", en: "🔊 Auto read" },
+    as_pool: { zh: "題庫 {total} 題，每次隨機抽 {n} 題", en: "{total} questions in the bank, {n} random ones each time" },
+    aria_say_q: { zh: "朗讀題目", en: "Read the question aloud" },
+    aria_say_opt: { zh: "朗讀答案", en: "Read this answer aloud" },
+    qz_count: { zh: "第 {i} / {n} 題", en: "Question {i} of {n}" },
+    qz_right: { zh: "答啱喇！", en: "Correct!" },
+    qz_wrong: { zh: "再諗諗", en: "Not quite" },
+    qz_answer: { zh: "正確答案：{a}", en: "Answer: {a}" },
+    qz_next: { zh: "下一題 ▶", en: "Next ▶" },
+    qz_finish: { zh: "睇結果", en: "See result" },
+    qz_done: { zh: "練習完成", en: "Practice finished" },
+    qz_msg_top: { zh: "好叻！全部答啱", en: "Perfect!" },
+    qz_msg_good: { zh: "做得好，再試一次會更好", en: "Good job! Try again to do even better" },
+    qz_msg_low: { zh: "再睇多次內容，然後再試", en: "Review the notes, then try again" },
+    qz_again: { zh: "再做一次", en: "Try again" },
+    qz_back: { zh: "返回評估範圍", en: "Back to assessment" },
+    qz_cloze_title: { zh: "句子填充", en: "Fill in the blank" },
+    wd0: { zh: "星期日", en: "Sun" }, wd1: { zh: "星期一", en: "Mon" }, wd2: { zh: "星期二", en: "Tue" },
+    wd3: { zh: "星期三", en: "Wed" }, wd4: { zh: "星期四", en: "Thu" }, wd5: { zh: "星期五", en: "Fri" }, wd6: { zh: "星期六", en: "Sat" },
     replay_stroke: { zh: "🔁 重播筆順", en: "🔁 Replay strokes" },
     words_count: { zh: "{n} 個詞語", en: "{n} words" },
     empty_lesson: { zh: "呢一課仲未有詞語資料。", en: "This lesson has no words yet." },
@@ -2361,6 +2515,8 @@
       el("a-title").textContent = state.grade + " · " + t("mode_a_title");
       el("b-title").textContent = state.grade + " · " + t("mode_b_title");
     }
+    refreshAssessBanner();
+    if (state.screen === "assess") renderAssess();
   }
 
   function syncTopbarH() {
@@ -2372,13 +2528,14 @@
   function showScreen(name) {
     state.screen = name;
     syncTopbarH();
-    ["home", "mode", "a", "b"].forEach(function (n) { el("screen-" + n).hidden = n !== name; });
+    ["home", "mode", "a", "b", "assess"].forEach(function (n) { el("screen-" + n).hidden = n !== name; });
     if (name === "a") el("picker-a").appendChild(el("picker-body"));
     refreshScreens();
     window.scrollTo({ top: 0 });
   }
 
   function selectGrade(g) {
+    state.fromAssess = false;
     state.grade = g;
     state.book = null;
     state.lesson = null;
@@ -2390,6 +2547,14 @@
   }
 
   function goBack(to) {
+    // 由「評估範圍」跳去温習詞語之後撳返回：返回評估頁，而唔係揀功能頁
+    if (to === "mode" && state.screen === "a" && state.fromAssess) {
+      state.fromAssess = false;
+      el("words-wrap").hidden = true;
+      showScreen("assess");
+      return;
+    }
+    state.fromAssess = false;
     state.book = null;
     state.lesson = null;
     el("words-wrap").hidden = true;
@@ -3522,6 +3687,8 @@
       else renderWords();
     }
     if (currentWord) refreshModalForLanguage();
+    refreshAssessBanner();
+    if (state.screen === "assess") renderAssess();
   }
 
   document.querySelectorAll(".site-lang-btn").forEach(function (btn) {
@@ -4662,6 +4829,534 @@
 
   /* ---------------- Boot ---------------- */
 
+
+  /* ---------------- 評估範圍 ---------------- */
+  var ASSESS = null;
+
+  function assessFor(g) { return ASSESS && g && ASSESS[g] ? ASSESS[g] : null; }
+
+  function parseYmd(str) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str || "");
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  // 距離評估仲有幾多日（今日 = 0；過咗 = 負數）
+  function daysUntil(str) {
+    var d = parseYmd(str);
+    if (!d) return null;
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((d - today) / 86400000);
+  }
+  function daysLabel(n) {
+    if (n === 0) return t("as_today");
+    if (n === 1) return t("as_tomorrow");
+    return t("as_in_days", { n: n });
+  }
+  function dateLabel(str) {
+    var d = parseYmd(str);
+    if (siteLang === "en") return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    return (d.getMonth() + 1) + "月" + d.getDate() + "日";
+  }
+  function weekdayLabel(str) { return t("wd" + parseYmd(str).getDay()); }
+
+  function refreshAssessBanner() {
+    var b = el("assess-banner");
+    if (!b) return;
+    var a = assessFor(state.grade);
+    var hasDate = !!(a && parseYmd(a.date));
+    var n = hasDate ? daysUntil(a.date) : null;
+    // 評估當日之後就唔再顯示；未有日期就照顯示（日期待定）
+    if (!a || (hasDate && n < 0)) { b.hidden = true; return; }
+    b.hidden = false;
+    el("assess-banner-title").textContent = a.name;
+    el("assess-banner-sub").textContent = hasDate
+      ? t("as_banner_sub", { subject: a.subject, date: dateLabel(a.date), wd: weekdayLabel(a.date) })
+      : t("as_banner_sub_nodate", { subject: a.subject });
+    el("assess-banner-days").textContent = hasDate ? daysLabel(n) : "";
+    el("assess-banner-days").style.display = hasDate ? "" : "none";
+  }
+
+  function mk(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function renderAssess() {
+    var a = assessFor(state.grade);
+    var meta = el("assess-meta"), list = el("assess-list");
+    meta.innerHTML = ""; list.innerHTML = "";
+    if (!a) { list.appendChild(mk("p", "as-empty", t("as_none"))); return; }
+    el("assess-title").textContent = state.grade + " · " + a.name + " · " + a.subject;
+    var n = daysUntil(a.date);
+    if (parseYmd(a.date)) meta.appendChild(mk("span", "as-date", "📅 " + dateLabel(a.date) + "（" + weekdayLabel(a.date) + "）"));
+    if (n !== null && n >= 0) meta.appendChild(mk("span", "as-days", daysLabel(n)));
+
+    (a.items || []).forEach(function (it) {
+      var card = mk("div", "as-card");
+      card.appendChild(mk("div", "as-card-title", it.title));
+      if (it.desc) card.appendChild(mk("div", "as-card-desc", it.desc));
+      (it.blocks || []).forEach(function (bl) {
+        var box = mk("div", "as-block");
+        if (bl.h) box.appendChild(mk("div", "as-h", bl.h));
+        if (bl.t) box.appendChild(mk("div", "as-t", bl.t));
+        if (bl.big) box.appendChild(mk("div", "as-big", bl.big));
+        if (bl.ex) {
+          var ex = mk("div", "as-ex");
+          bl.ex.forEach(function (x) { ex.appendChild(mk("p", null, x)); });
+          box.appendChild(ex);
+        }
+        if (bl.chips) {
+          var cs = mk("div", "as-chips");
+          bl.chips.forEach(function (c) {
+            var chip = mk("div", "as-chip");
+            chip.appendChild(mk("b", null, c[0]));
+            chip.appendChild(mk("span", null, c[1]));
+            cs.appendChild(chip);
+          });
+          box.appendChild(cs);
+        }
+        card.appendChild(box);
+      });
+      var acts = mk("div", "as-actions");
+      if (it.type === "cloze") {
+        var r = mk("button", "dict-btn", t("as_review")); r.type = "button";
+        r.addEventListener("click", function () { jumpToLesson(it.book, it.lesson); });
+        var c = mk("button", "dict-btn dict-btn--primary", t("as_cloze")); c.type = "button";
+        var pool = buildClozePool(state.grade, it);
+        c.addEventListener("click", function () { startQuiz(it.title, pool, { id: it.id, n: it.n }); });
+        card.appendChild(mk("div", "as-pool", t("as_pool", { total: pool.length, n: Math.min(it.n || 10, pool.length) })));
+        acts.appendChild(r); acts.appendChild(c);
+      } else if (it.quiz && it.quiz.length) {
+        var q = mk("button", "dict-btn dict-btn--primary", t("as_practice")); q.type = "button";
+        q.addEventListener("click", function () { startQuiz(it.title, it.quiz, { id: it.id, n: it.n }); });
+        card.appendChild(mk("div", "as-pool", t("as_pool", { total: it.quiz.length, n: Math.min(it.n || 10, it.quiz.length) })));
+        acts.appendChild(q);
+      }
+      if (acts.childNodes.length) card.appendChild(acts);
+      list.appendChild(card);
+    });
+  }
+
+  function openAssess() { if (assessFor(state.grade)) showScreen("assess"); }
+  el("assess-banner").addEventListener("click", openAssess);
+
+  // 由評估頁直接跳去某課嘅詞語温習
+  function jumpToLesson(book, lesson) {
+    state.mode = "a";
+    state.fromAssess = true;
+    buildBooks();
+    showScreen("a");
+    chooseBook(book);
+    chooseLesson(lesson);
+  }
+
+  /* ---------------- 小測驗（選擇題） ---------------- */
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var x = a[i]; a[i] = a[j]; a[j] = x;
+    }
+    return a;
+  }
+
+  // 簡單雜湊（FNV-1a，逐個 UTF-16 單位）：用嚟配對「題目文字 → 預先生成嘅朗讀錄音檔」。
+  // generate_quiz_audio.py 用同一個算法，所以兩邊算出嚟嘅檔名一樣。
+  function fnv(str) {
+    var h = 0x811c9dc5;
+    for (var k = 0; k < str.length; k++) {
+      h ^= str.charCodeAt(k);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return ("00000000" + h.toString(16)).slice(-8);
+  }
+
+  // 填充題題庫：該課每個詞語嘅課本例句 + assessments.json 入面額外寫嘅句子，
+  // 每句將詞語挖空，選項（同課其他詞語）每次出題時重新隨機配搭。
+  // avoid：兩個詞語意思太近、填入同一句都說得通，就唔好放喺同一題。
+  function buildClozePool(g, it) {
+    var all = DATA.words[wordKey(g, it.book, it.lesson)] || [];
+    function clash(a, b) {
+      return (it.avoid || []).some(function (p) {
+        return (p[0] === a && p[1] === b) || (p[0] === b && p[1] === a);
+      });
+    }
+    var pool = [];
+    all.forEach(function (w) {
+      var sents = [];
+      if (w.example) sents.push(w.example);
+      ((it.extra || {})[w.word] || []).forEach(function (x) { sents.push(x); });
+      sents.forEach(function (sen) {
+        if (sen.indexOf(w.word) < 0) return;
+        pool.push({
+          p: sen.replace(w.word, "＿＿"),
+          g: w.word,
+          a: 0,
+          why: w.word + "：" + (w.meanings && w.meanings.zh ? w.meanings.zh : ""),
+          mk: function () {
+            var others = all.filter(function (x) { return x.word !== w.word && !clash(x.word, w.word); });
+            return [w.word].concat(shuffle(others).slice(0, 3).map(function (x) { return x.word; }));
+          }
+        });
+      });
+    });
+    return pool;
+  }
+
+  // 由題庫抽 n 題：優先抽「做過先未見過」嘅題目，同一個詞語盡量唔重複，
+  // 咁每次做都係唔同嘅題目；題庫用晒就由頭再輪。記錄只存喺呢部機。
+  function questionId(q) { return fnv(q.p + "|" + (q.o ? q.o.join("") : q.g || "")); }
+  function loadSeen(id) {
+    try { return JSON.parse(localStorage.getItem("vocabQuizSeen:" + id) || "[]") || []; } catch (e) { return []; }
+  }
+  function saveSeen(id, arr) {
+    try { localStorage.setItem("vocabQuizSeen:" + id, JSON.stringify(arr.slice(-400))); } catch (e) {}
+  }
+  function pickQuestions(id, pool, n) {
+    n = Math.min(n || 10, pool.length);
+    var seen = id ? loadSeen(id) : [];
+    var seenSet = {};
+    seen.forEach(function (k) { seenSet[k] = true; });
+    var fresh = pool.filter(function (q) { return !seenSet[questionId(q)]; });
+    var chosen = [];
+    // 未見過嘅題目唔夠 n 題：全部攞晒，記錄清零，再由其餘題目補
+    if (fresh.length < n) {
+      chosen = shuffle(fresh);
+      seen = [];
+      var rest = pool.filter(function (q) { return chosen.indexOf(q) < 0; });
+      fresh = shuffle(rest);
+    } else {
+      fresh = shuffle(fresh);
+    }
+    var usedG = {};
+    chosen.forEach(function (q) { if (q.g) usedG[q.g] = true; });
+    // 第一輪：同一個詞語只抽一題
+    fresh.forEach(function (q) {
+      if (chosen.length >= n) return;
+      if (q.g && usedG[q.g]) return;
+      if (q.g) usedG[q.g] = true;
+      chosen.push(q);
+    });
+    // 第二輪：仲唔夠就補返
+    fresh.forEach(function (q) {
+      if (chosen.length >= n || chosen.indexOf(q) >= 0) return;
+      chosen.push(q);
+    });
+    if (id) {
+      chosen.forEach(function (q) { seen.push(questionId(q)); });
+      saveSeen(id, seen);
+    }
+    return shuffle(chosen);
+  }
+
+  /* ---- 題目朗讀：有預先生成嘅錄音就播錄音，冇就用裝置語音 ---- */
+  var quizAudioMap = null;   // audio/quiz/manifest.json：{ 雜湊: 檔名 }
+  var quizClip = null, quizClipTimer = null;
+  var quizStatusDummy = document.createElement("span");
+  quizStatusDummy.hidden = true;
+  function quizAutoOn() {
+    try { return localStorage.getItem("vocabQuizAuto") !== "0"; } catch (e) { return true; }
+  }
+  var quizSpans = null; // 而家著緊色嘅題目 span（停咗朗讀就要將佢哋回復正常）
+  var quizClipPrev = null;
+  var quizTok = 0;      // 每次停止／重新朗讀就加一，舊嘅回調見到唔同就唔再行
+  var beepCtx = null, beepTimer = null;
+  function stopQuizAudio() {
+    quizTok++;
+    if (quizClipTimer) { clearTimeout(quizClipTimer); quizClipTimer = null; }
+    if (beepTimer) { clearTimeout(beepTimer); beepTimer = null; }
+    stopClipKaraoke();
+    if (quizClip) { try { quizClip.pause(); } catch (e) {} quizClip = null; forceHideAudioLoading(); }
+    if (activeClipAudio && activeClipAudio === quizClipPrev) activeClipAudio = null;
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+    if (quizSpans) { karaokeComplete(quizSpans); quizSpans = null; }
+    Array.prototype.forEach.call(document.querySelectorAll(".qz-optrow.is-speaking"), function (r) { r.classList.remove("is-speaking"); });
+  }
+  // 有冇真正要讀嘅字（淨係標點嘅一段唔讀）。generate_quiz_audio.py 入面有一樣嘅判斷。
+  // 答案如果係「氵（三點水）」呢種寫法，就讀括號入面嗰part（部首符號本身冇讀音）。
+  function optSay(txt) { var m = /^[^（]+（(.+)）$/.exec(txt); return m ? m[1] : txt; }
+  function hasSpeech(s) { return /[㐀-鿿A-Za-z0-9\ud800-\udfff]/.test(s); }
+
+  // 空格位播一下「嘟」聲（用瀏覽器合成，唔使檔案）。播完先繼續讀下一段。
+  function playBeep(blankEl, onDone, tok) {
+    if (blankEl) { blankEl.classList.remove("ro-unread"); blankEl.classList.add("ro-cur"); }
+    var dur = 0.5;
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) {
+        if (!beepCtx) beepCtx = new AC();
+        if (beepCtx.state === "suspended") beepCtx.resume();
+        var now = beepCtx.currentTime, g = beepCtx.createGain();
+        [740, 1480].forEach(function (f, k) {
+          var o = beepCtx.createOscillator(), og = beepCtx.createGain();
+          o.type = "sine"; o.frequency.value = f; og.gain.value = k ? 0.12 : 1;
+          o.connect(og); og.connect(g); o.start(now); o.stop(now + dur + 0.05);
+        });
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.exponentialRampToValueAtTime(0.35, now + 0.03);
+        g.gain.setValueAtTime(0.35, now + dur - 0.1);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+        g.connect(beepCtx.destination);
+      }
+    } catch (e) {}
+    beepTimer = setTimeout(function () {
+      beepTimer = null;
+      if (blankEl) blankEl.classList.remove("ro-cur");
+      if (tok === quizTok && onDone) onDone();
+    }, dur * 1000 + 150);
+  }
+
+  // 朗讀一段文字：有預先生成嘅錄音就播錄音（有逐字時間標記就精準著色，冇就按時間比例估計），
+  // 冇錄音就用裝置語音（裝置有提供讀到邊度嘅事件就著色）。讀完（自然播完）會call onDone。
+  function playQuizSeg(text, spans, onDone, tok0) {
+    var key = fnv(text);
+    var ent = quizAudioMap && quizAudioMap[key];
+    function finishSeg() { if (onDone && tok0 === quizTok) onDone(); }
+    if (ent) {
+      var file = typeof ent === "string" ? ent : ent.f;
+      var marks = ent && typeof ent === "object" && ent.m && ent.m.length ? ent.m : null;
+      var a = new Audio("audio/quiz/" + file);
+      quizClip = a;
+      var tok = null;
+      // 錄音好細，通常一下就播；超過 0.25 秒仲未播先出轉圈圈遮罩
+      quizClipTimer = setTimeout(function () { quizClipTimer = null; if (quizClip === a) tok = showAudioLoading(); }, 250);
+      var finished = false;
+      function done() {
+        if (quizClipTimer) { clearTimeout(quizClipTimer); quizClipTimer = null; }
+        if (tok != null) { hideAudioLoading(tok); tok = null; }
+      }
+      function fallback() {
+        done();
+        if (finished || quizClip !== a) return;
+        finished = true; quizClip = null;
+        speakDevice(text, spans, finishSeg);
+      }
+      a.addEventListener("playing", function () {
+        done();
+        if (quizClip !== a || !spans) return;
+        activeClipAudio = a; quizClipPrev = a;
+        var dur = isFinite(a.duration) && a.duration > 0 ? a.duration : (marks ? marks[marks.length - 1][1] + 1.5 : 3);
+        runClipKaraoke(a, dur, spans, text.length, marks, null, 1, 0);
+      }, { once: true });
+      a.addEventListener("ended", function () {
+        if (quizClip !== a) return;
+        finished = true; quizClip = null;
+        if (spans) { stopClipKaraoke(); karaokeComplete(spans); }
+        finishSeg();
+      }, { once: true });
+      a.addEventListener("error", fallback, { once: true });
+      var pr = a.play();
+      if (pr && pr.catch) pr.catch(fallback);
+      return;
+    }
+    speakDevice(text, spans, finishSeg);
+  }
+  function speakQuiz(text, spans) {
+    stopQuizAudio();
+    quizSpans = spans || null;
+    playQuizSeg(text, spans, null, quizTok);
+  }
+  // 一連串：文字段落同「嘟」聲交替。items = [{text, spans} | {beep:true, el}]
+  function speakQuizSeq(items, allSpans) {
+    stopQuizAudio();
+    quizSpans = allSpans || null;
+    var tok = quizTok, i = 0;
+    karaokeReset(allSpans);
+    (function next() {
+      if (tok !== quizTok) return;
+      if (i >= items.length) { karaokeComplete(allSpans); return; }
+      var it = items[i++];
+      if (it.beep) playBeep(it.el, next, tok);
+      else playQuizSeg(it.text, it.spans, next, tok);
+    })();
+  }
+  function speakDevice(text, spans, onDone) {
+    speakTextEx(text, quizStatusDummy, spans, 0.85, function () {
+      if (spans) karaokeComplete(spans);
+      if (onDone) onDone();
+    });
+  }
+  // 未答嘅題目：空格位讀做「嘟」聲（唔係讀「空格」兩個字）
+  function speakQuestion(q, spans) {
+    if (q.p.indexOf("＿＿") < 0) { speakQuiz(q.p, spans); return; }
+    var parts = q.p.split("＿＿");
+    var blanks = spans.filter(function (s) { return s.blank; });
+    var items = [];
+    parts.forEach(function (part, i) {
+      if (hasSpeech(part)) items.push({ text: part, spans: spans.filter(function (s) { return s.seg === i && !s.blank; }) });
+      if (i < parts.length - 1) items.push({ beep: true, el: blanks[i] && blanks[i].el });
+    });
+    speakQuizSeq(items, spans);
+  }
+  // 撳答案旁邊嘅 🔊：讀呢個答案（有錄音播錄音，冇就用裝置語音）
+  function speakOption(txt, row) {
+    stopQuizAudio();
+    quizSpans = null;
+    row.classList.add("is-speaking");
+    playQuizSeg(txt, null, function () { row.classList.remove("is-speaking"); }, quizTok);
+  }
+  function sayFullText(q, ans) { return q.p.replace("＿＿", ans); }
+
+  var qz = null;
+  function startQuiz(title, pool, opt) {
+    if (!pool || !pool.length) return;
+    opt = opt || {};
+    var picked = pickQuestions(opt.id, pool, opt.n || 10).map(function (q) {
+      var c = { p: q.p, a: q.a || 0, why: q.why, g: q.g };
+      c.o = q.mk ? q.mk() : q.o.slice();
+      return c;
+    });
+    qz = { title: title, pool: pool, opt: opt, list: picked, i: 0, score: 0, answered: false };
+    el("quiz-title").textContent = title;
+    var au = el("quiz-auto");
+    au.setAttribute("aria-pressed", quizAutoOn() ? "true" : "false");
+    el("quiz-scrim").hidden = false;
+    document.body.style.overflow = "hidden";
+    renderQuestion();
+  }
+  function closeQuiz() {
+    stopQuizAudio();
+    el("quiz-scrim").hidden = true;
+    document.body.style.overflow = "";
+    qz = null;
+  }
+  el("quiz-close").addEventListener("click", closeQuiz);
+  el("quiz-auto").addEventListener("click", function () {
+    var on = !quizAutoOn();
+    try { localStorage.setItem("vocabQuizAuto", on ? "1" : "0"); } catch (e) {}
+    this.setAttribute("aria-pressed", on ? "true" : "false");
+    if (!on) stopQuizAudio();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && qz && !el("quiz-scrim").hidden) closeQuiz();
+  });
+
+  // 將題目逐字砌成可以著色嘅 span。span 嘅 start 係朗讀文字入面嘅字位置：
+  // 未答之前：空格（＿＿）位播「嘟」聲，前後兩段分開讀，所以每段嘅字位置各自由 0 起計
+  // （span.seg ＝第幾段；span.blank ＝空格本身）。填咗答案之後就成句連續計。
+  function paintPrompt(prompt, q, fill) {
+    prompt.innerHTML = "";
+    var spans = [], pos = 0;
+    var parts = q.p.split("＿＿");
+    parts.forEach(function (part, idx) {
+      for (var k = 0; k < part.length; k++) {
+        var e = mk("span", "ro-tok", part.charAt(k));
+        prompt.appendChild(e);
+        spans.push({ el: e, start: pos, seg: idx });
+        pos++;
+      }
+      if (idx < parts.length - 1) {
+        var b = mk("span", "ro-tok qz-blank" + (fill ? " is-right" : ""), fill || "\u00A0");
+        prompt.appendChild(b);
+        spans.push({ el: b, start: pos, seg: idx, blank: true });
+        if (fill) pos += fill.length; else pos = 0;
+      }
+    });
+    return spans;
+  }
+
+  function renderQuestion() {
+    var q = qz.list[qz.i], n = qz.list.length, body = el("quiz-body");
+    qz.answered = false;
+    body.innerHTML = "";
+    body.scrollTop = 0;
+    el("quiz-bar").style.width = (qz.i / n * 100) + "%";
+    el("quiz-count").textContent = t("qz_count", { i: qz.i + 1, n: n });
+
+    var prompt = mk("div", "qz-prompt");
+    var cur = { q: q, answer: null, spans: paintPrompt(prompt, q, null) };
+    qz.cur = cur;
+    var row = mk("div", "qz-promptrow");
+    var say = mk("button", "say-btn say-btn--sm", "🔊"); say.type = "button";
+    say.setAttribute("aria-label", t("aria_say_q"));
+    // 答咗之後（填充題）再撳，就讀填好答案嘅完整句子
+    say.addEventListener("click", function () {
+      if (cur.answer != null) speakQuiz(sayFullText(q, cur.answer), cur.spans);
+      else speakQuestion(q, cur.spans);
+    });
+    row.appendChild(say);
+    row.appendChild(prompt);
+    body.appendChild(row);
+    if (quizAutoOn()) speakQuestion(q, cur.spans);
+
+    // 選項打亂次序，但記住邊個先係正確答案
+    var opts = shuffle(q.o.map(function (txt, k) { return { txt: txt, ok: k === q.a }; }));
+    var wrap = mk("div", "qz-opts");
+    opts.forEach(function (o) {
+      var orow = mk("div", "qz-optrow");
+      var b = mk("button", "qz-opt", o.txt); b.type = "button";
+      b.addEventListener("click", function () { answerQuestion(o, b, opts, wrap, prompt, q); });
+      orow.appendChild(b);
+      if (hasSpeech(optSay(o.txt))) {
+        var osay = mk("button", "say-btn say-btn--sm", "🔊"); osay.type = "button";
+        osay.setAttribute("aria-label", t("aria_say_opt"));
+        osay.addEventListener("click", function () { speakOption(optSay(o.txt), orow); });
+        orow.appendChild(osay);
+      }
+      wrap.appendChild(orow);
+      o.btn = b;
+    });
+    body.appendChild(wrap);
+  }
+
+  function answerQuestion(o, btn, opts, wrap, prompt, q) {
+    if (qz.answered) return;
+    qz.answered = true;
+    if (o.ok) qz.score++;
+    opts.forEach(function (x) {
+      x.btn.disabled = true;
+      if (x.ok) x.btn.classList.add("is-right");
+    });
+    if (!o.ok) btn.classList.add("is-wrong");
+    var right = opts.filter(function (x) { return x.ok; })[0];
+    var blank = prompt.querySelector(".qz-blank");
+    if (blank) {
+      // 將答案填入空格，再讀一次完整句子（逐字著色）
+      stopQuizAudio();
+      qz.cur.answer = right.txt;
+      qz.cur.spans = paintPrompt(prompt, q, right.txt);
+      if (quizAutoOn()) speakQuiz(sayFullText(q, right.txt), qz.cur.spans);
+    }
+    var fb = mk("div", "qz-fb " + (o.ok ? "is-right" : "is-wrong"));
+    fb.appendChild(mk("strong", null, o.ok ? t("qz_right") : t("qz_wrong")));
+    var line = (o.ok ? "" : t("qz_answer", { a: right.txt }) + "　") + (q.why || "");
+    fb.appendChild(document.createTextNode(line));
+    var body = el("quiz-body");
+    body.appendChild(fb);
+    var last = qz.i === qz.list.length - 1;
+    var next = mk("button", "dict-btn dict-btn--primary qz-next", last ? t("qz_finish") : t("qz_next"));
+    next.type = "button";
+    next.addEventListener("click", function () {
+      if (last) renderResult(); else { qz.i++; renderQuestion(); }
+    });
+    body.appendChild(next);
+    next.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  function renderResult() {
+    stopQuizAudio();
+    var n = qz.list.length, body = el("quiz-body");
+    body.innerHTML = "";
+    el("quiz-bar").style.width = "100%";
+    el("quiz-count").textContent = t("qz_done");
+    var res = mk("div", "qz-result");
+    var sc = mk("div", "qz-score", String(qz.score));
+    sc.appendChild(mk("small", null, " / " + n));
+    res.appendChild(sc);
+    var ratio = qz.score / n;
+    res.appendChild(mk("div", "qz-msg", ratio === 1 ? t("qz_msg_top") : ratio >= 0.7 ? t("qz_msg_good") : t("qz_msg_low")));
+    var acts = mk("div", "qz-actions");
+    var again = mk("button", "dict-btn dict-btn--primary", t("qz_again")); again.type = "button";
+    again.addEventListener("click", function () { startQuiz(qz.title, qz.pool, qz.opt); });
+    var back = mk("button", "dict-btn", t("qz_back")); back.type = "button";
+    back.addEventListener("click", closeQuiz);
+    acts.appendChild(again); acts.appendChild(back);
+    res.appendChild(acts);
+    body.appendChild(res);
+  }
+
   function boot(data, strokes, manifest, tManifest) {
     DATA = data;
     STROKES = strokes;
@@ -4687,12 +5382,16 @@
     fetch("strokes.json").then(function (r) { return r.json(); }),
     fetch("audio/bundles/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
     fetch("audio/text/manifest.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
-    fetch("texts.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    fetch("texts.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    fetch("assessments.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    fetch("audio/quiz/manifest.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
   ]).then(function (results) {
     if (results[4] && results[4].texts) {
       results[0].texts = results[4].texts;
       results[0].markNames = results[4].markNames || {};
     }
+    ASSESS = results[5] || null;
+    quizAudioMap = results[6] || null;
     boot(results[0], results[1], results[2], results[3]);
     return fontsReady;
   }).then(endInitialLoad).catch(function (err) {
