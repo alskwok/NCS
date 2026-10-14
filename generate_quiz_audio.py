@@ -7,7 +7,8 @@
   • 題目朗讀：題目入面嘅空格（＿＿）唔讀字，網站會喺嗰度播一下「嘟」聲效，
     所以錄音係將題目喺空格前後切開，兩段分開錄；
   • 答題後嘅完整句子（只有填充題先有）；
-  • 每個答案（撳答案旁邊嘅 🔊 就會讀）。
+  • 每個答案（撳答案旁邊嘅 🔊 就會讀）；
+  • 「睇提示」入面嘅短句、例句、小卡（撳 🔊 或者小卡就會讀）。
 錄音放喺 audio/quiz/ （每段一個 .mp3），同埋 audio/quiz/manifest.json（對照表，
 入面包括每個字讀到嘅時間，網站用嚟做「讀到邊個字就著色邊個字」）。
 網站會自動用呢啲錄音；冇錄音嘅題目就用裝置內置語音朗讀，所以先後次序唔緊要。
@@ -90,6 +91,30 @@ def question_segments(p):
     return [seg for seg in p.split("＿＿") if _SPEECH.search(seg)]
 
 
+def chip_say(c):
+    """提示入面細卡（部首、嘆詞等）撳落去讀嘅字（要同 index.html 入面 chipSay 一致）。"""
+    return c[1].replace("・", "，") if "・" in c[1] else c[0] + "，" + c[1]
+
+
+def fig_say(f):
+    """字型結構小卡撳落去讀嘅字（要同 index.html 入面 figSay 一致）。"""
+    return f[0].replace("：", "，") + "，例如" + f[2]
+
+
+def tip_texts(it):
+    """「睇提示」入面可以撳 🔊 聽嘅文字（要同 index.html 入面 renderAssess 一致）。"""
+    out = []
+    for bl in it.get("blocks", []) or []:
+        if bl.get("t"):
+            out.append(bl["t"])
+        if bl.get("big"):
+            out.append(bl["big"])
+        out.extend(bl.get("ex") or [])
+        out.extend(chip_say(c) for c in bl.get("chips") or [])
+        out.extend(fig_say(f) for f in bl.get("figs") or [])
+    return [x for x in out if _SPEECH.search(x)]
+
+
 def collect_texts():
     """列出所有要朗讀嘅字串（要同 index.html 入面 speakQuestion / sayFullText 一致）。"""
     assess = json.load(open(ASSESS_PATH, encoding="utf-8"))
@@ -110,6 +135,7 @@ def collect_texts():
                             continue
                         texts.update(question_segments(s.replace(w["word"], "＿＿", 1)))
                         texts.add(s)
+            texts.update(tip_texts(it))
             for q in it.get("quiz", []) or []:
                 texts.update(question_segments(q["p"]))
                 for opt in q["o"]:          # 每個答案旁邊嘅 🔊

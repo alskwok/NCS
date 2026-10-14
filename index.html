@@ -1609,6 +1609,42 @@
   }
   .as-card-title { font-family: var(--font-ui); font-size: 18px; font-weight: 800; color: var(--ink); }
   .as-card-desc { margin-top: 4px; font-family: var(--font-ui); font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  .as-card-head { display: flex; align-items: center; gap: 12px; }
+  .as-card-head > div:last-child { min-width: 0; }
+  .as-ico { flex: none; width: 50px; height: 50px; border-radius: 15px; background: var(--brand-soft); display: flex; align-items: center; justify-content: center; font-size: 28px; line-height: 1; }
+  .as-card-desc { margin-top: 2px; }
+  .as-tip { margin-top: 10px; border-top: 1px dashed var(--paper-line); padding-top: 4px; }
+  .as-tip > summary { list-style: none; cursor: pointer; display: flex; align-items: center; min-height: 44px; font-family: var(--font-ui); font-size: 16px; font-weight: 800; color: var(--brand); }
+  .as-tip > summary::-webkit-details-marker { display: none; }
+  .as-tip > summary::after { content: "▾"; margin-left: 6px; transition: transform .15s; }
+  .as-tip[open] > summary::after { transform: rotate(180deg); }
+  .as-row { display: flex; align-items: center; gap: 8px; }
+  .as-row > :first-child { flex: 1; min-width: 0; }
+  .as-ex .as-row { padding: 0; }
+  .as-ex .as-row p { flex: 1; min-width: 0; }
+  .as-chip, .as-figcard { border: 0; font: inherit; text-align: left; cursor: pointer; position: relative; color: inherit; }
+  .as-chip:active, .as-figcard:active { transform: translateY(1px); }
+  .as-chip { padding-right: 24px; }
+  .as-chip span .nm { display: block; font-size: 15px; font-weight: 800; color: var(--ink); }
+  .qz-opt.is-right .fig i { background: var(--success-strong); }
+  .qz-opt.is-right .fig b { border-color: var(--success-strong); }
+  .qz-opt.is-wrong .fig i { background: var(--accent); }
+  .qz-opt.is-wrong .fig b { border-color: var(--accent); }
+  .as-sayico { position: absolute; top: 4px; right: 6px; font-size: 12px; opacity: .55; }
+  .as-figs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .as-figcard { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 8px 8px; background: var(--paper); border-radius: 14px; text-align: center; }
+  .as-figcard strong { font-family: var(--font-ui); font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.3; }
+  .as-figcard em { font-style: normal; font-size: 18px; letter-spacing: .08em; color: var(--brand-strong); }
+  .as-figcard small { font-family: var(--font-ui); font-size: 12px; color: var(--ink-soft); line-height: 1.3; }
+  .fig { position: relative; display: inline-block; flex: none; width: 52px; height: 52px; }
+  .fig i { position: absolute; background: var(--brand); opacity: .85; border-radius: 3px; }
+  .fig b { position: absolute; box-sizing: border-box; border: 0 solid var(--brand); border-radius: 4px; }
+  .qz-opt.has-fig { display: flex; align-items: center; gap: 12px; }
+  .qz-opt .fig { width: 38px; height: 38px; }
+  .qz-fb.has-fig { display: flex; align-items: center; gap: 12px; }
+  .qz-fb .fig { width: 56px; height: 56px; }
+  .qz-fb .fig i { background: currentColor; }
+  .qz-fb .fig b { border-color: currentColor; }
   .as-block { margin-top: 12px; }
   .as-h { font-family: var(--font-ui); font-size: 14px; font-weight: 800; color: var(--brand); margin-bottom: 4px; letter-spacing: .02em; }
   .as-t { font-size: 17px; line-height: 1.7; color: var(--ink); }
@@ -1622,8 +1658,9 @@
   .as-chip { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--brand-soft); border-radius: 12px; }
   .as-chip b { font-size: 24px; line-height: 1; color: var(--brand-strong); min-width: 1.2em; text-align: center; }
   .as-chip span { font-family: var(--font-ui); font-size: 13px; color: var(--ink-soft); line-height: 1.35; }
-  .as-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .as-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
   .as-actions .dict-btn { flex: 1 1 140px; min-height: 46px; }
+  .as-actions .dict-btn--primary { flex: 2 1 200px; min-height: 56px; font-size: 19px; order: -1; }
   .as-empty { font-family: var(--font-ui); color: var(--ink-soft); padding: 12px 0; }
 
   .quiz-modal { max-width: 560px; display: flex; flex-direction: column; }
@@ -1858,7 +1895,7 @@
     <div class="qz-head">
       <h3 id="quiz-title"></h3>
       <div class="qz-progress" aria-hidden="true"><i id="quiz-bar"></i></div>
-      <div class="qz-sub"><span class="qz-count" id="quiz-count"></span><button type="button" class="dict-chip qz-auto" id="quiz-auto" aria-pressed="true"><span data-i18n="qz_auto">🔊 自動朗讀</span></button></div>
+      <div class="qz-sub"><span class="qz-count" id="quiz-count"></span><button type="button" class="dict-chip qz-auto" id="quiz-auto" aria-pressed="false"><span data-i18n="qz_auto">🔊 自動朗讀</span></button></div>
     </div>
     <div class="qz-body" id="quiz-body"></div>
   </div>
@@ -2072,16 +2109,18 @@
     as_tomorrow: { zh: "聽日", en: "Tomorrow" },
     as_title: { zh: "{name}", en: "{name}" },
     as_review: { zh: "📖 温習詞語", en: "📖 Review words" },
-    as_cloze: { zh: "✏️ 句子填充練習", en: "✏️ Fill-in-the-blank" },
-    as_practice: { zh: "✏️ 做練習", en: "✏️ Practice" },
+    as_cloze: { zh: "✏️ 開始練習", en: "✏️ Start" },
+    as_tip: { zh: "💡 睇提示", en: "💡 Show tips" },
+    aria_say_tip: { zh: "朗讀", en: "Read aloud" },
+    as_practice: { zh: "✏️ 開始練習", en: "✏️ Start" },
     as_none: { zh: "暫時未有評估資料。", en: "No assessment info yet." },
     qz_auto: { zh: "🔊 自動朗讀", en: "🔊 Auto read" },
     as_pool: { zh: "題庫 {total} 題，每次隨機抽 {n} 題", en: "{total} questions in the bank, {n} random ones each time" },
     aria_say_q: { zh: "朗讀題目", en: "Read the question aloud" },
     aria_say_opt: { zh: "朗讀答案", en: "Read this answer aloud" },
     qz_count: { zh: "第 {i} / {n} 題", en: "Question {i} of {n}" },
-    qz_right: { zh: "答啱喇！", en: "Correct!" },
-    qz_wrong: { zh: "再諗諗", en: "Not quite" },
+    qz_right: { zh: "✅ 答啱喇！", en: "✅ Correct!" },
+    qz_wrong: { zh: "💪 再諗諗", en: "💪 Not quite" },
     qz_answer: { zh: "正確答案：{a}", en: "Answer: {a}" },
     qz_next: { zh: "下一題 ▶", en: "Next ▶" },
     qz_finish: { zh: "睇結果", en: "See result" },
@@ -2526,6 +2565,8 @@
   window.addEventListener("resize", syncTopbarH);
 
   function showScreen(name) {
+    var prevScreen = state.screen;
+    if (prevScreen === "assess" && name !== "assess") stopQuizAudio();
     state.screen = name;
     syncTopbarH();
     ["home", "mode", "a", "b", "assess"].forEach(function (n) { el("screen-" + n).hidden = n !== name; });
@@ -4895,48 +4936,127 @@
 
     (a.items || []).forEach(function (it) {
       var card = mk("div", "as-card");
-      card.appendChild(mk("div", "as-card-title", it.title));
-      if (it.desc) card.appendChild(mk("div", "as-card-desc", it.desc));
-      (it.blocks || []).forEach(function (bl) {
-        var box = mk("div", "as-block");
-        if (bl.h) box.appendChild(mk("div", "as-h", bl.h));
-        if (bl.t) box.appendChild(mk("div", "as-t", bl.t));
-        if (bl.big) box.appendChild(mk("div", "as-big", bl.big));
-        if (bl.ex) {
-          var ex = mk("div", "as-ex");
-          bl.ex.forEach(function (x) { ex.appendChild(mk("p", null, x)); });
-          box.appendChild(ex);
-        }
-        if (bl.chips) {
-          var cs = mk("div", "as-chips");
-          bl.chips.forEach(function (c) {
-            var chip = mk("div", "as-chip");
-            chip.appendChild(mk("b", null, c[0]));
-            chip.appendChild(mk("span", null, c[1]));
-            cs.appendChild(chip);
-          });
-          box.appendChild(cs);
-        }
-        card.appendChild(box);
-      });
+      var head = mk("div", "as-card-head");
+      head.appendChild(mk("div", "as-ico", it.icon || "📘"));
+      var hb = mk("div");
+      hb.appendChild(mk("div", "as-card-title", it.title));
+      if (it.desc) hb.appendChild(mk("div", "as-card-desc", it.desc));
+      head.appendChild(hb);
+      card.appendChild(head);
+
       var acts = mk("div", "as-actions");
       if (it.type === "cloze") {
+        var pool = buildClozePool(state.grade, it);
+        var c = mk("button", "dict-btn dict-btn--primary", t("as_cloze")); c.type = "button";
+        c.addEventListener("click", function () { startQuiz(it.title, pool, { id: it.id, n: it.n }); });
         var r = mk("button", "dict-btn", t("as_review")); r.type = "button";
         r.addEventListener("click", function () { jumpToLesson(it.book, it.lesson); });
-        var c = mk("button", "dict-btn dict-btn--primary", t("as_cloze")); c.type = "button";
-        var pool = buildClozePool(state.grade, it);
-        c.addEventListener("click", function () { startQuiz(it.title, pool, { id: it.id, n: it.n }); });
-        card.appendChild(mk("div", "as-pool", t("as_pool", { total: pool.length, n: Math.min(it.n || 10, pool.length) })));
-        acts.appendChild(r); acts.appendChild(c);
+        acts.appendChild(c); acts.appendChild(r);
       } else if (it.quiz && it.quiz.length) {
         var q = mk("button", "dict-btn dict-btn--primary", t("as_practice")); q.type = "button";
         q.addEventListener("click", function () { startQuiz(it.title, it.quiz, { id: it.id, n: it.n }); });
-        card.appendChild(mk("div", "as-pool", t("as_pool", { total: it.quiz.length, n: Math.min(it.n || 10, it.quiz.length) })));
         acts.appendChild(q);
       }
       if (acts.childNodes.length) card.appendChild(acts);
+
+      // 提示（預設收埋）：短句、例字、圖示，撳 🔊 可以聽
+      if (it.blocks && it.blocks.length) {
+        var tip = mk("details", "as-tip");
+        tip.appendChild(mk("summary", null, t("as_tip")));
+        it.blocks.forEach(function (bl) {
+          var box = mk("div", "as-block");
+          if (bl.h) box.appendChild(mk("div", "as-h", bl.h));
+          if (bl.t) box.appendChild(tipRow(mk("div", "as-t", bl.t), bl.t));
+          if (bl.big) box.appendChild(tipRow(mk("div", "as-big", bl.big), bl.big));
+          if (bl.ex) {
+            var ex = mk("div", "as-ex");
+            bl.ex.forEach(function (x) { ex.appendChild(tipRow(mk("p", null, x), x)); });
+            box.appendChild(ex);
+          }
+          if (bl.chips) {
+            var cs = mk("div", "as-chips");
+            bl.chips.forEach(function (c) {
+              var chip = mk("button", "as-chip"); chip.type = "button";
+              chip.appendChild(mk("b", null, c[0]));
+              var dp = c[1].split("・");
+              var cd = mk("span");
+              if (dp.length > 1) { cd.appendChild(mk("span", "nm", dp[0])); cd.appendChild(document.createTextNode(dp.slice(1).join("・"))); }
+              else cd.textContent = c[1];
+              chip.appendChild(cd);
+              chip.appendChild(mk("span", "as-sayico", "🔊"));
+              chip.addEventListener("click", function () { speakQuiz(chipSay(c), null); });
+              cs.appendChild(chip);
+            });
+            box.appendChild(cs);
+          }
+          if (bl.figs) {
+            var fg = mk("div", "as-figs");
+            bl.figs.forEach(function (f) {
+              var fc = mk("button", "as-figcard"); fc.type = "button";
+              fc.appendChild(figEl(f[1]));
+              fc.appendChild(mk("strong", null, f[0]));
+              fc.appendChild(mk("em", null, f[2]));
+              if (f[3]) fc.appendChild(mk("small", null, f[3]));
+              fc.appendChild(mk("span", "as-sayico", "🔊"));
+              fc.addEventListener("click", function () { speakQuiz(figSay(f), null); });
+              fg.appendChild(fc);
+            });
+            box.appendChild(fg);
+          }
+          tip.appendChild(box);
+        });
+        card.appendChild(tip);
+      }
       list.appendChild(card);
     });
+  }
+
+  // ---- 提示入面嘅朗讀文字（generate_quiz_audio.py 入面有一樣嘅 tip_texts，要保持一致）----
+  function chipSay(c) { return c[1].indexOf("・") >= 0 ? c[1].replace("・", "，") : c[0] + "，" + c[1]; }
+  function figSay(f) { return f[0].replace("：", "，") + "，例如" + f[2]; }
+  function tipRow(node, text) {
+    var row = mk("div", "as-row");
+    row.appendChild(node);
+    if (hasSpeech(text)) {
+      var b = mk("button", "say-btn say-btn--sm", "🔊"); b.type = "button";
+      b.setAttribute("aria-label", t("aria_say_tip"));
+      b.addEventListener("click", function () { speakQuiz(text, null); });
+      row.appendChild(b);
+    }
+    return row;
+  }
+
+  // ---- 字型結構小圖示（用 CSS 砌，唔使圖片）----
+  var STRUCT_FIGS = {
+    "獨體字": "solo", "上下結構：上大下小": "t-big", "上下結構：上小下大": "t-small", "上下結構：上下相等": "t-eq",
+    "左右結構：左小右大": "l-small", "左右結構：左大右小": "l-big", "左右結構：左右相等": "l-eq",
+    "全包圍結構": "full", "左上右包圍結構": "lur", "左下包圍結構": "ll", "左上包圍結構": "ul", "品字結構": "pin"
+  };
+  var FIG_SHAPES = {
+    "solo": [["i", 22, 8, 56, 84]],
+    "t-big": [["i", 6, 6, 88, 54], ["i", 24, 68, 52, 26]],
+    "t-small": [["i", 24, 6, 52, 26], ["i", 6, 40, 88, 54]],
+    "t-eq": [["i", 6, 6, 88, 40], ["i", 6, 54, 88, 40]],
+    "l-small": [["i", 6, 6, 30, 88], ["i", 44, 6, 50, 88]],
+    "l-big": [["i", 6, 6, 50, 88], ["i", 64, 6, 30, 88]],
+    "l-eq": [["i", 6, 6, 40, 88], ["i", 54, 6, 40, 88]],
+    "full": [["b", 6, 6, 88, 88, "4px"], ["i", 34, 34, 32, 32]],
+    "lur": [["b", 6, 6, 88, 88, "4px 4px 0 4px"], ["i", 32, 44, 36, 44]],
+    "ll": [["b", 6, 6, 88, 88, "0 0 4px 4px"], ["i", 38, 10, 50, 56]],
+    "ul": [["b", 6, 6, 88, 88, "4px 0 0 4px"], ["i", 38, 38, 50, 50]],
+    "pin": [["i", 30, 6, 40, 40], ["i", 6, 54, 40, 40], ["i", 54, 54, 40, 40]]
+  };
+  function figEl(key) {
+    var f = mk("span", "fig");
+    f.setAttribute("aria-hidden", "true");
+    (FIG_SHAPES[key] || []).forEach(function (sh) {
+      var e = document.createElement(sh[0]);
+      e.style.left = sh[1] + "%"; e.style.top = sh[2] + "%";
+      e.style.width = sh[3] + "%"; e.style.height = sh[4] + "%";
+      if (sh[5]) e.style.borderWidth = sh[5];
+      f.appendChild(e);
+    });
+    return f;
   }
 
   function openAssess() { if (assessFor(state.grade)) showScreen("assess"); }
@@ -5057,7 +5177,7 @@
   var quizStatusDummy = document.createElement("span");
   quizStatusDummy.hidden = true;
   function quizAutoOn() {
-    try { return localStorage.getItem("vocabQuizAuto") !== "0"; } catch (e) { return true; }
+    try { return localStorage.getItem("vocabQuizAuto") === "1"; } catch (e) { return false; }
   }
   var quizSpans = null; // 而家著緊色嘅題目 span（停咗朗讀就要將佢哋回復正常）
   var quizClipPrev = null;
@@ -5204,7 +5324,7 @@
     if (!pool || !pool.length) return;
     opt = opt || {};
     var picked = pickQuestions(opt.id, pool, opt.n || 10).map(function (q) {
-      var c = { p: q.p, a: q.a || 0, why: q.why, g: q.g };
+      var c = { p: q.p, a: q.a || 0, why: q.why, g: q.g, fig: q.fig };
       c.o = q.mk ? q.mk() : q.o.slice();
       return c;
     });
@@ -5287,6 +5407,11 @@
     opts.forEach(function (o) {
       var orow = mk("div", "qz-optrow");
       var b = mk("button", "qz-opt", o.txt); b.type = "button";
+      if (STRUCT_FIGS[o.txt]) {
+        b.textContent = ""; b.classList.add("has-fig");
+        b.appendChild(figEl(STRUCT_FIGS[o.txt]));
+        b.appendChild(mk("span", null, o.txt));
+      }
       b.addEventListener("click", function () { answerQuestion(o, b, opts, wrap, prompt, q); });
       orow.appendChild(b);
       if (hasSpeech(optSay(o.txt))) {
@@ -5320,9 +5445,12 @@
       if (quizAutoOn()) speakQuiz(sayFullText(q, right.txt), qz.cur.spans);
     }
     var fb = mk("div", "qz-fb " + (o.ok ? "is-right" : "is-wrong"));
-    fb.appendChild(mk("strong", null, o.ok ? t("qz_right") : t("qz_wrong")));
+    var fbMain = mk("div");
+    fbMain.appendChild(mk("strong", null, o.ok ? t("qz_right") : t("qz_wrong")));
     var line = (o.ok ? "" : t("qz_answer", { a: right.txt }) + "　") + (q.why || "");
-    fb.appendChild(document.createTextNode(line));
+    fbMain.appendChild(document.createTextNode(line));
+    if (q.fig && FIG_SHAPES[q.fig]) { fb.classList.add("has-fig"); fb.appendChild(figEl(q.fig)); }
+    fb.appendChild(fbMain);
     var body = el("quiz-body");
     body.appendChild(fb);
     var last = qz.i === qz.list.length - 1;
